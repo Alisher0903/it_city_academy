@@ -1,19 +1,13 @@
 /*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| 
- | |_| | | | | |_) || |  / / | | |  \| | | | | || | 
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___|
+  ___   
+ |_ _| 
+  | | 
+  | |
+ |___|
                                                                                                                                                                                                                                                                                                                                        
 =========================================================
-* Horizon UI - v1.1.0
+
 =========================================================
-
-* Product Page: https://www.horizon-ui.com/
-* Copyright 2023 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
 =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -70,7 +64,7 @@ export default function Marketplace() {
         <Flex
           flexDirection='column'
           gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
-          <Banner />
+          {/* <Banner /> */}
           <Flex direction='column'>
             <Flex
               mt='45px'
@@ -79,7 +73,7 @@ export default function Marketplace() {
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}>
               <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
-                Trending NFTs
+                Category
               </Text>
               <Flex
                 align='center'
@@ -232,7 +226,7 @@ export default function Marketplace() {
             </SimpleGrid>
           </Flex>
         </Flex>
-        <Flex
+        {/* <Flex
           flexDirection='column'
           gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}>
           <Card px='0px' mb='20px'>
@@ -297,7 +291,7 @@ export default function Marketplace() {
               price='0.91 ETH'
             />
           </Card>
-        </Flex>
+        </Flex> */}
       </Grid>
       {/* Delete Product */}
     </Box>
