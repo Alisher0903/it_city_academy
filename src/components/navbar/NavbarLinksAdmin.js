@@ -105,7 +105,7 @@ export default function HeaderLinks(props) {
 				</MenuList>
 			</Menu>
 
-      <Menu>
+      {/* <Menu>
         <MenuButton p='0px'>
           <Icon
             mt='6px'
@@ -162,7 +162,7 @@ export default function HeaderLinks(props) {
             </Link>
           </Flex>
         </MenuList>
-      </Menu>
+      </Menu> */}
 
 			<ThemeEditor navbarIcon={navbarIcon} />
 

@@ -2,11 +2,11 @@ import React from "react";
 
 import { Icon } from "@chakra-ui/react";
 import {
-  MdBarChart,
-  MdPerson,
+  MdMessage,
+  MdPeople,
   MdHome,
-  MdLock,
-  MdOutlineShoppingCart,
+  MdPerson3,
+  MdOutlineMenuBook,
 } from "react-icons/md";
 
 // Admin Imports
@@ -28,12 +28,12 @@ const routes = [
     component: MainDashboard,
   },
   {
-    name: "NFT Marketplace",
+    name: "Category",
     layout: "/admin",
     path: "/nft-marketplace",
     icon: (
       <Icon
-        as={MdOutlineShoppingCart}
+        as={MdOutlineMenuBook}
         width='20px'
         height='20px'
         color='inherit'
@@ -43,24 +43,24 @@ const routes = [
     secondary: true,
   },
   {
-    name: "Data Tables",
+    name: "Message",
     layout: "/admin",
-    icon: <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={MdMessage} width='20px' height='20px' color='inherit' />,
     path: "/data-tables",
     component: DataTables,
   },
   {
-    name: "Profile",
+    name: "Group",
     layout: "/admin",
     path: "/profile",
-    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={MdPeople} width='20px' height='20px' color='inherit' />,
     component: Profile,
   },
   {
-    name: "Sign In",
+    name: "Student",
     layout: "/auth",
     path: "/sign-in",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,
     component: SignInCentered,
   }
 ];
