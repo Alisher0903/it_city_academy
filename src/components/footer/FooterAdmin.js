@@ -67,7 +67,7 @@ export default function Footer() {
           <Link
             fontWeight='500'
             color={textColor}
-            href='https://t.me/itcity_academy'>
+            href='https://t.me/itcity_academy' target="_blank">
             <Icon icon="logos:telegram" width="20" className="d-inline-block me-1" />
             Telegram
           </Link>
@@ -76,7 +76,7 @@ export default function Footer() {
           <Link
             fontWeight='500'
             color={textColor}
-            href='https://www.instagram.com/itcity_academy/'>
+            href='https://www.instagram.com/itcity_academy/' target="_blank">
             <Icon icon="skill-icons:instagram" width="20" className="d-inline-block me-1" />
             Instagram
           </Link>

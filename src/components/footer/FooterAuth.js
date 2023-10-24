@@ -8,6 +8,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { Icon } from "@iconify/react";
 
 export default function Footer() {
   let textColor = useColorModeValue("gray.400", "white");
@@ -67,7 +68,7 @@ export default function Footer() {
             base: "20px",
             md: "44px",
           }}>
-            Ijtimoiy tarmoqlar:
+          Ijtimoiy tarmoqlar:
           {/* <Link
             fontWeight='500'
             color={linkColor}
@@ -84,6 +85,7 @@ export default function Footer() {
             fontWeight='500'
             color={linkColor}
             href='https://t.me/itcity_academy'>
+            <Icon icon="logos:telegram" width="20" className="d-inline-block me-1" />
             Telegram
           </Link>
         </ListItem>
@@ -92,6 +94,7 @@ export default function Footer() {
             fontWeight='500'
             color={linkColor}
             href='https://www.instagram.com/itcity_academy/'>
+            <Icon icon="skill-icons:instagram" width="20" className="d-inline-block me-1" />
             Instagram
           </Link>
         </ListItem>
