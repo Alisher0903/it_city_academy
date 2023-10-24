@@ -1,22 +1,4 @@
-/*!
-  ___   
- |_ _| 
-  | | 
-  | |
- |___|
-                                                                                                                                                                                                                                                                                                                                       
-=========================================================
-
-=========================================================
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import React from "react";
-
-// Chakra imports
 import {
   Box,
   Button,
@@ -85,146 +67,63 @@ export default function Marketplace() {
                   fontWeight='500'
                   me={{ base: "34px", md: "44px" }}
                   to='#art'>
-                  Art
+                  All
                 </Link>
                 <Link
                   color={textColorBrand}
                   fontWeight='500'
                   me={{ base: "34px", md: "44px" }}
                   to='#music'>
-                  Music
+                  Front End
                 </Link>
                 <Link
                   color={textColorBrand}
                   fontWeight='500'
                   me={{ base: "34px", md: "44px" }}
                   to='#collectibles'>
-                  Collectibles
+                  Back End
                 </Link>
                 <Link color={textColorBrand} fontWeight='500' to='#sports'>
-                  Sports
+                  3D Max
                 </Link>
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
+
+              {/* cards */}
               <NFT
                 name='Abstract Colors'
-                author='By Esthera Jackson'
+                // author='By Esthera Jackson'
                 bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
+                  // Avatar1,
+                  // Avatar2,
+                  // Avatar3,
+                  // Avatar4,
+                  // Avatar1,
+                  // Avatar1,
+                  // Avatar1,
+                  // Avatar1,
                 ]}
                 image={Nft1}
-                currentbid='0.91 ETH'
-                download='#'
+                // currentbid='0.91 ETH'
+                download='frontend'
               />
               <NFT
-                name='ETH AI Brain'
-                author='By Nick Wilson'
+                name='Abstract Colors'
+                // author='By Esthera Jackson'
                 bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
+                  // Avatar1,
+                  // Avatar2,
+                  // Avatar3,
+                  // Avatar4,
+                  // Avatar1,
+                  // Avatar1,
+                  // Avatar1,
+                  // Avatar1,
                 ]}
-                image={Nft2}
-                currentbid='0.91 ETH'
-                download='#'
-              />
-              <NFT
-                name='Mesh Gradients '
-                author='By Will Smith'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft3}
-                currentbid='0.91 ETH'
-                download='#'
-              />
-              <NFT
-                name='Mesh Gradients '
-                author='By Will Smith'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft3}
-                currentbid='0.91 ETH'
-                download='#'
-              />
-              <NFT
-                name='Mesh Gradients '
-                author='By Will Smith'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft3}
-                currentbid='0.91 ETH'
-                download='#'
-              />
-              <NFT
-                name='Mesh Gradients '
-                author='By Will Smith'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft3}
-                currentbid='0.91 ETH'
-                download='#'
-              />
-              <NFT
-                name='Mesh Gradients '
-                author='By Will Smith'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft3}
-                currentbid='0.91 ETH'
-                download='#'
+                image={Nft1}
+                // currentbid='0.91 ETH'
+                download='frontend'
               />
             </SimpleGrid>
             {/* <Text
