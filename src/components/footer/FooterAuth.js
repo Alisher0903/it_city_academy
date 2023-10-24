@@ -38,10 +38,11 @@ export default function Footer() {
         <Text as='span' fontWeight='500' ms='4px'>
           It City Academy. O'qishga marhamat
           {/* Horizon UI. All Rights Reserved. Made with love by
+>>>>>>> a7d3d23ca972fcf66adc3da8f4832b84408f2399
           <Link
             mx='3px'
             color={textColor}
-            href='https://www.simmmple.com?ref=horizon-chakra-free'
+            href=''
             target='_blank'
             fontWeight='700'>
             Simmmple!

@@ -63,7 +63,7 @@ export default function Marketplace() {
         display={{ base: "block", xl: "grid" }}>
         <Flex
           flexDirection='column'
-          gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
+          gridArea={{ xl: "1 / 1 / 2 / 4", "2xl": "1 / 1 / 2 / 3" }}>
           {/* <Banner /> */}
           <Flex direction='column'>
             <Flex
@@ -106,7 +106,7 @@ export default function Marketplace() {
                 </Link>
               </Flex>
             </Flex>
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
+            <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
               <NFT
                 name='Abstract Colors'
                 author='By Esthera Jackson'
@@ -138,6 +138,74 @@ export default function Marketplace() {
                   Avatar1,
                 ]}
                 image={Nft2}
+                currentbid='0.91 ETH'
+                download='#'
+              />
+              <NFT
+                name='Mesh Gradients '
+                author='By Will Smith'
+                bidders={[
+                  Avatar1,
+                  Avatar2,
+                  Avatar3,
+                  Avatar4,
+                  Avatar1,
+                  Avatar1,
+                  Avatar1,
+                  Avatar1,
+                ]}
+                image={Nft3}
+                currentbid='0.91 ETH'
+                download='#'
+              />
+              <NFT
+                name='Mesh Gradients '
+                author='By Will Smith'
+                bidders={[
+                  Avatar1,
+                  Avatar2,
+                  Avatar3,
+                  Avatar4,
+                  Avatar1,
+                  Avatar1,
+                  Avatar1,
+                  Avatar1,
+                ]}
+                image={Nft3}
+                currentbid='0.91 ETH'
+                download='#'
+              />
+              <NFT
+                name='Mesh Gradients '
+                author='By Will Smith'
+                bidders={[
+                  Avatar1,
+                  Avatar2,
+                  Avatar3,
+                  Avatar4,
+                  Avatar1,
+                  Avatar1,
+                  Avatar1,
+                  Avatar1,
+                ]}
+                image={Nft3}
+                currentbid='0.91 ETH'
+                download='#'
+              />
+              <NFT
+                name='Mesh Gradients '
+                author='By Will Smith'
+                bidders={[
+                  Avatar1,
+                  Avatar2,
+                  Avatar3,
+                  Avatar4,
+                  Avatar1,
+                  Avatar1,
+                  Avatar1,
+                  Avatar1,
+                ]}
+                image={Nft3}
                 currentbid='0.91 ETH'
                 download='#'
               />
