@@ -36,7 +36,9 @@ export default function Footer() {
         {" "}
         &copy; {1900 + new Date().getYear()}
         <Text as='span' fontWeight='500' ms='4px'>
-          IT CITY ACADEMY. All Rights Reserved. Made with 
+          It City Academy. O'qishga marhamat
+          {/* Horizon UI. All Rights Reserved. Made with love by
+>>>>>>> a7d3d23ca972fcf66adc3da8f4832b84408f2399
           <Link
             mx='3px'
             color={textColor}
@@ -44,11 +46,11 @@ export default function Footer() {
             target='_blank'
             fontWeight='700'>
             Simmmple!
-          </Link>
+          </Link> */}
         </Text>
       </Text>
       <List display='flex'>
-        <ListItem
+        {/* <ListItem
           me={{
             base: "20px",
             md: "44px",
@@ -59,18 +61,19 @@ export default function Footer() {
             href='mailto:hello@simmmple.com?ref=horizon-chakra-free'>
             Support
           </Link>
-        </ListItem>
+        </ListItem> */}
         <ListItem
           me={{
             base: "20px",
             md: "44px",
           }}>
-          <Link
+            Ijtimoiy tarmoqlar:
+          {/* <Link
             fontWeight='500'
             color={linkColor}
             href='https://www.simmmple.com/licenses?ref=horizon-chakra-free'>
             License
-          </Link>
+          </Link> */}
         </ListItem>
         <ListItem
           me={{
@@ -80,16 +83,16 @@ export default function Footer() {
           <Link
             fontWeight='500'
             color={linkColor}
-            href='https://simmmple.com/terms-of-service?ref=horizon-chakra-free'>
-            Terms of Use
+            href='https://t.me/itcity_academy'>
+            Telegram
           </Link>
         </ListItem>
         <ListItem>
           <Link
             fontWeight='500'
             color={linkColor}
-            href='https://www.blog.simmmple.com/?ref=horizon-chakra-free'>
-            Blog
+            href='https://www.instagram.com/itcity_academy/'>
+            Instagram
           </Link>
         </ListItem>
       </List>
