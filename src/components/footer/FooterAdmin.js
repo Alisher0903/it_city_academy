@@ -10,6 +10,7 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { Icon } from "@iconify/react";
 
 export default function Footer() {
   const textColor = useColorModeValue("gray.400", "white");
@@ -38,7 +39,7 @@ export default function Footer() {
         {" "}
         &copy; {1900 + new Date().getYear()}
         <Text as='span' fontWeight='500' ms='4px'>
-          It City Academy. O'qishga marhamat
+          <span className="ms-2">It City Academy. O'qishga marhamat!</span>
           {/* Horizon UI. All Rights Reserved. Made with love by
           <Link
             mx='3px'
@@ -51,28 +52,12 @@ export default function Footer() {
         </Text>
       </Text>
       <List display='flex'>
-        {/* <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}>
-          <Link
-            fontWeight='500'
-            color={textColor}
-            href='mailto:hello@simmmple.com'>
-            Support
-          </Link>
-        </ListItem> */}
         <ListItem
           me={{
             base: "20px",
             md: "44px",
           }}>
-            Ijtimoiy tarmoqlar:
-          {/* <Link
-            fontWeight='500'
-            color={textColor} >
-          </Link> */}
+          Ijtimoiy tarmoqlar:
         </ListItem>
         <ListItem
           me={{
@@ -83,6 +68,7 @@ export default function Footer() {
             fontWeight='500'
             color={textColor}
             href='https://t.me/itcity_academy'>
+            <Icon icon="logos:telegram" width="20" className="d-inline-block me-1" />
             Telegram
           </Link>
         </ListItem>
@@ -91,6 +77,7 @@ export default function Footer() {
             fontWeight='500'
             color={textColor}
             href='https://www.instagram.com/itcity_academy/'>
+            <Icon icon="skill-icons:instagram" width="20" className="d-inline-block me-1" />
             Instagram
           </Link>
         </ListItem>
