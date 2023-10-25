@@ -108,7 +108,7 @@ export default function DashboardHome(props) {
 						toggleSidebar,
 						setToggleSidebar
 					}}>
-					<Sidebar routes={routes} display='none' {...rest} />
+					{/* <Sidebar routes={routes} display='none' {...rest} /> */}
 					<Box
 						float='right'
 						minHeight='100vh'
