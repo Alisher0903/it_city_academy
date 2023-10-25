@@ -1,5 +1,4 @@
 {
-  "homepage": "https://horizon-ui.com/horizon-ui-chakra",
   "name": "it_city_academy",
   "version": "1.0.1",
   "private": true,
@@ -21,6 +20,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "bootstrap": "^5.3.2",
+    "browser-router": "^0.2.0",
     "framer-motion": "^4.1.17",
     "react": "17.0.2",
     "react-apexcharts": "1.4.0",
@@ -30,7 +30,7 @@
     "react-dropzone": "^12.0.4",
     "react-icons": "^4.3.1",
     "react-is": "^18.0.0",
-    "react-router-dom": "^5.3.0",
+    "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.0",
     "react-table": "^7.7.0",
     "reactstrap": "^9.2.0",
