@@ -1,0 +1,32 @@
+.home_main {
+    background-color: #1902e592;
+
+    .home_nav-brend {
+        color: white;
+        letter-spacing: 1px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        transition: all .3s;
+
+        &:hover {
+            color: #fbfb1efd;
+        }
+    }
+
+    // .nav_toggler {
+    //     background-color: white;
+    //     color: #1902e592;
+    // }
+
+    // .nav_collapse {
+    //     display: flex;
+    //     justify-content: right;
+    // }
+}
+
+@media (max-width: 576px) {
+    .home_nav-brend {
+        letter-spacing: .3px !important;
+        font-size: 1.3rem !important;
+    }
+}

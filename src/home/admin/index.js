@@ -8,13 +8,14 @@ import { SidebarContext } from '../contexts/SidebarContext';
 import React, { useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import routes from '../routes.js';
+import DestopNavbar from 'home/navbar/destopNavbar/DestopNavbar';
 
 // Custom Chakra theme
 export default function DashboardHome(props) {
 	const { ...rest } = props;
 	// states and functions
-	const [ fixed ] = useState(false);
-	const [ toggleSidebar, setToggleSidebar ] = useState(false);
+	const [fixed] = useState(false);
+	const [toggleSidebar, setToggleSidebar] = useState(false);
 	// functions for changing the states from components
 	const getRoute = () => {
 		return window.location.pathname !== '/Home/full-screen-maps';
@@ -116,23 +117,24 @@ export default function DashboardHome(props) {
 						overflow='auto'
 						position='relative'
 						maxHeight='100%'
-						w={{ base: '100%', xl: 'calc( 100% - 290px )' }}
-						maxWidth={{ base: '100%', xl: 'calc( 100% - 290px )' }}
+						w={{ base: '100%' }}
+						maxWidth={{ base: '100%' }}
 						transition='all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)'
 						transitionDuration='.2s, .2s, .35s'
 						transitionProperty='top, bottom, width'
 						transitionTimingFunction='linear, linear, ease'>
 						<Portal>
 							<Box>
-								<Navbar
+								<DestopNavbar />
+								{/* <Navbar
 									onOpen={onOpen}
-									logoText={'Horizon UI Dashboard PRO'}
+									// logoText={'Horizon UI Dashboard PRO'}
 									brandText={getActiveRoute(routes)}
 									secondary={getActiveNavbar(routes)}
 									message={getActiveNavbarText(routes)}
 									fixed={fixed}
 									{...rest}
-								/>
+								/> */}
 							</Box>
 						</Portal>
 
