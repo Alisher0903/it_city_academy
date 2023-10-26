@@ -12,6 +12,7 @@ import DestopNavbar from 'home/navbar/destopNavbar/DestopNavbar';
 import "./homeStyle.scss";
 import banner from "../../assets/img/homeImage/banner.png"
 import { Button, Col, Container, Row } from 'reactstrap';
+import { Icon } from '@iconify/react';
 
 // Custom Chakra theme
 export default function DashboardHome(props) {
@@ -148,7 +149,7 @@ export default function DashboardHome(props) {
 									<div className='homePage__main'>
 										<Container>
 											<Row className='w-100'>
-												<Col className='col-12 col-md-5 home__box-content'>
+												<Col className='col-12 col-lg-5 home__box-content'>
 													<h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta,
 														qui.</h3>
 													<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde id
@@ -158,10 +159,11 @@ export default function DashboardHome(props) {
 														color='warning'
 														outline
 														className='rounded-0 px-5 py-2 fs-5 fw-bolder'>
-														Batfsil
+														Kirish
+														<Icon className='d-inline ms-2' icon="lucide:move-right" />
 													</Button>
 												</Col>
-												<Col className='col-12 col-md-7 home__box-banner'>
+												<Col className='col-12 col-lg-7 mt-5 mt-lg-0 home__box-banner'>
 													<img src={banner} className='w-75' alt="bannerImg" />
 												</Col>
 											</Row>
