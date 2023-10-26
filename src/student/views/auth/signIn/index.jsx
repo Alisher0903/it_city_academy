@@ -28,10 +28,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
-import { HSeparator } from "components/separator/Separator";
-import DefaultAuth from "layouts/auth/Default";
+import { HSeparator } from "../../../components/separator/Separator";
+import DefaultAuth from "../../../layouts/auth/Default";
 // Assets
-import itcity from "assets/img/auth/itcity.png";
+import itcity from "../../../assets/img/auth/itcity.png";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";

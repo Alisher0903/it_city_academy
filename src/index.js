@@ -9,6 +9,8 @@ import { ChakraProvider } from '@chakra-ui/react';
 import theme from 'theme/theme';
 import { ThemeEditorProvider } from '@hypertheme-editor/chakra-ui';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import DashboardT from 'teacher/layouts/admin';
+import DashboardS from 'student/layouts/admin';
 
 ReactDOM.render(
 	<ChakraProvider theme={theme}>
@@ -19,6 +21,8 @@ ReactDOM.render(
 						<Route path={`/auth`} component={AuthLayout} />
 						<Route path={`/admin`} component={AdminLayout} />
 						<Route path={`/Home`} component={DashboardHome} />
+						<Route path={`/Teacher`} component={DashboardT} />
+						<Route path={`/Student`} component={DashboardS} />
 						<Redirect from='/' to='/Home' />
 					</Switch>
 				</HashRouter>
