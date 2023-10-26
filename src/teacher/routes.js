@@ -9,27 +9,27 @@ import {
   MdOutlineMenuBook,
 } from "react-icons/md";
 
-// Admin Imports
-import MainDashboard from "views/admin/default";
-import NFTMarketplace from "views/admin/marketplace";
-import Profile from "views/admin/profile";
-import DataTables from "views/admin/dataTables";
+// Teacher Imports
+import MainDashboard from "./views/admin/default";
+import NFTMarketplace from "./views/admin/marketplace";
+import Profile from "./views/admin/profile";
+import DataTables from "./views/admin/dataTables";
 // import RTL from "views/admin/rtl";
 
 // Auth Imports
-import SignInCentered from "views/auth/signIn";
+import SignInCentered from "../views/auth/signIn";
 
 const routes = [
   {
     name: "Main Dashboard",
-    layout: "/admin",
+    layout: "/Teacher",
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
   },
   {
     name: "Category",
-    layout: "/admin",
+    layout: "/Teacher",
     path: "/nft-marketplace",
     icon: (
       <Icon
@@ -44,14 +44,14 @@ const routes = [
   },
   {
     name: "Message",
-    layout: "/admin",
+    layout: "/Teacher",
     icon: <Icon as={MdMessage} width='20px' height='20px' color='inherit' />,
     path: "/data-tables",
     component: DataTables,
   },
   {
     name: "Group",
-    layout: "/admin",
+    layout: "/Teacher",
     path: "/profile",
     icon: <Icon as={MdPeople} width='20px' height='20px' color='inherit' />,
     component: Profile,

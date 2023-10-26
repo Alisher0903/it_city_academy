@@ -1,23 +1,23 @@
 // Chakra imports
 import { Portal, Box, useDisclosure, Text, Button, Link } from '@chakra-ui/react';
-import Footer from 'components/footer/FooterAdmin.js';
+import Footer from '../../components/footer/FooterAdmin';
 // Layout components
-import Navbar from 'components/navbar/NavbarAdmin.js';
-import Sidebar from 'components/sidebar/Sidebar.js';
-import { SidebarContext } from 'contexts/SidebarContext';
+import Navbar from '../../components/navbar/NavbarAdmin';
+import Sidebar from '../../components/sidebar/Sidebar.js';
+import { SidebarContext } from '../../contexts/SidebarContext';
 import React, { useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import routes from 'routes.js';
+import routes from '../../routes';
 
 // Custom Chakra theme
-export default function Dashboard(props) {
+export default function DashboardS(props) {
 	const { ...rest } = props;
 	// states and functions
 	const [ fixed ] = useState(false);
 	const [ toggleSidebar, setToggleSidebar ] = useState(false);
 	// functions for changing the states from components
 	const getRoute = () => {
-		return window.location.pathname !== '/admin/full-screen-maps';
+		return window.location.pathname !== '/Student/full-screen-maps';
 	};
 	const getActiveRoute = (routes) => {
 		let activeRoute = 'Default Brand Text';
@@ -84,7 +84,7 @@ export default function Dashboard(props) {
 	};
 	const getRoutes = (routes) => {
 		return routes.map((prop, key) => {
-			if (prop.layout === '/admin') {
+			if (prop.layout === '/Student') {
 				return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
 			}
 			if (prop.collapse) {
@@ -126,7 +126,7 @@ export default function Dashboard(props) {
 							<Box>
 								<Navbar
 									onOpen={onOpen}
-									logoText={'Horizon UI Dashboard PRO'}
+									logoText={'IT CITY ACADEMY'}
 									brandText={getActiveRoute(routes)}
 									secondary={getActiveNavbar(routes)}
 									message={getActiveNavbarText(routes)}
@@ -140,7 +140,7 @@ export default function Dashboard(props) {
 							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
 								<Switch>
 									{getRoutes(routes)}
-									<Redirect from='/' to='/admin/default' />
+									<Redirect from='/' to='/Student/default' />
 								</Switch>
 							</Box>
 						) : null}
