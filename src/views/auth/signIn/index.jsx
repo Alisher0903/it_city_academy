@@ -131,7 +131,7 @@ function SignIn() {
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='number'
-              placeholder='+998972220790'
+              placeholder='+998993393300'
               mb='24px'
               fontWeight='500'
               size='lg'
@@ -164,7 +164,7 @@ function SignIn() {
               </InputRightElement>
             </InputGroup>
             <Flex justifyContent='space-between' align='center' mb='24px'>
-              <FormControl display='flex' alignItems='center'>
+              {/* <FormControl display='flex' alignItems='center'>
                 <Checkbox
                   id='remember-login'
                   colorScheme='brandScheme'
@@ -178,7 +178,7 @@ function SignIn() {
                   fontSize='sm'>
                   Keep me logged in
                 </FormLabel>
-              </FormControl>
+              </FormControl> */}
               {/* <NavLink to='/auth/forgot-password'>
                 <Text
                   color={textColorBrand}
@@ -192,7 +192,7 @@ function SignIn() {
             <Button
               fontSize='sm'
               variant='brand'
-              fontWeight='500'
+              fontWeight='700'
               w='100%'
               h='50'
               mb='24px'>
