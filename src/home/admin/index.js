@@ -148,13 +148,15 @@ export default function DashboardHome(props) {
 									<div className='homePage__main'>
 										<Container>
 											<Row className='w-100'>
-												<Col className='col-12 col-md-5'>
+												<Col className='col-12 col-md-5 home__box-content'>
 													<h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta,
 														qui.</h3>
 													<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde id
 														sunt adipisci aperiam aspernatur vel cum, reprehenderit similique
 														suscipit qui!</p>
-													<Button color='warning' outline
+													<Button
+														color='warning'
+														outline
 														className='rounded-0 px-5 py-2 fs-5 fw-bolder'>
 														Batfsil
 													</Button>
