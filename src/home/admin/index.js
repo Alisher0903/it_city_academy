@@ -4,11 +4,15 @@ import Footer from 'components/footer/FooterAdmin.js';
 // Layout components
 import Navbar from '../navbar/NavbarAdmin';
 import Sidebar from '../sidebar/Sidebar';
+import routes from '../routes.js';
 import { SidebarContext } from '../contexts/SidebarContext';
 import React, { useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import routes from '../routes.js';
 import DestopNavbar from 'home/navbar/destopNavbar/DestopNavbar';
+import "./homeStyle.scss";
+import banner from "../../assets/img/homeImage/banner.png"
+import { Button, Col, Container, Row } from 'reactstrap';
+import { Icon } from '@iconify/react';
 
 // Custom Chakra theme
 export default function DashboardHome(props) {
@@ -139,9 +143,34 @@ export default function DashboardHome(props) {
 						</Portal>
 
 						{getRoute() ? (
-							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
+							<Box>
 								<Switch>
-									{getRoutes(routes)}
+									{/* {getRoutes(routes)} */}
+									<div className='homePage__main'>
+										<Container>
+											<Row className='w-100'>
+												<Col className='col-12 col-lg-5 home__box-content'>
+													<h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta,
+														qui.</h3>
+													<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde id
+														sunt adipisci aperiam aspernatur vel cum, reprehenderit similique
+														suscipit qui!</p>
+													<Button
+														color='warning'
+														outline
+														className='rounded-0 px-5 py-2 fs-5 fw-bolder'>
+														Kirish
+														<Icon className='d-inline ms-2' icon="lucide:move-right" />
+													</Button>
+												</Col>
+												<Col className='col-12 col-lg-7 mt-5 mt-lg-0 home__box-banner'>
+													<img src={banner} className='w-75' alt="bannerImg" />
+												</Col>
+											</Row>
+										</Container>
+									</div>
+
+
 									<Redirect from='/' to='/Home/default' />
 								</Switch>
 							</Box>
