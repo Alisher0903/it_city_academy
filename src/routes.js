@@ -18,7 +18,7 @@ import Profile from "views/admin/profile";
 // import RTL from "views/admin/rtl";
 
 // Auth Imports
-import SignInCentered from "views/auth/signIn";
+import SignIn from "views/auth/signIn";
 
 const routes = [
   {
@@ -63,7 +63,15 @@ const routes = [
     path: "/profile",
     icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
     component: Profile,
+  },
+  {
+    // name: "Group",
+    layout: "/auth",
+    path: "/sign-in",
+    icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
+    component: SignIn
   }
+
 ];
 
 export default routes;
