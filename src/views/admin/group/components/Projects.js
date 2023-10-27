@@ -7,7 +7,7 @@ import Project3 from "assets/img/profile/Project3.png";
 // Custom components
 import Card from "components/card/Card.js";
 import React from "react";
-import Project from "views/admin/profile/components/Project";
+import Project from "./Project";
 
 export default function Projects(props) {
   // Chakra Color Mode
@@ -24,22 +24,21 @@ export default function Projects(props) {
         fontWeight='bold'
         fontSize='2xl'
         mt='10px'
-        mb='4px'>
+        mb='10px'>
         Group
       </Text>
-      <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
+      {/* <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
         Here you can find more details about your projects. Keep you user
         engaged by providing meaningful information.
-      </Text>
+      </Text> */}
       <Project
         boxShadow={cardShadow}
         mb='20px'
         image={Project1}
-        ranking='1'
-        link='#'
-        title='Technology behind the Blockchain'
+        ranking='10'
+        title='Front End'
       />
-      <Project
+      {/* <Project
         boxShadow={cardShadow}
         mb='20px'
         image={Project2}
@@ -53,7 +52,7 @@ export default function Projects(props) {
         ranking='3'
         link='#'
         title='Most essential tips for Burnout'
-      />
+      /> */}
     </Card>
   );
 }
