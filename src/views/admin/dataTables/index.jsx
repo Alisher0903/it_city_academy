@@ -22,6 +22,7 @@ import tableDataCheck from "views/admin/dataTables/variables/tableDataCheck.json
 import tableDataColumns from "views/admin/dataTables/variables/tableDataColumns.json";
 import tableDataComplex from "views/admin/dataTables/variables/tableDataComplex.json";
 import React from "react";
+import { SearchBar } from "components/message/searchBar/SearchBar";
 
 export default function Settings() {
   // Chakra Color Mode
@@ -32,6 +33,7 @@ export default function Settings() {
         columns={{ sm: 1, md: 1 }}
         spacing={{ base: "20px", xl: "20px" }}>
         <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
+      
       </SimpleGrid>
     </Box>
   );
