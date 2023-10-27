@@ -9,8 +9,11 @@ import {
   Thead,
   Tr,
   useColorModeValue,
+  Radio,
+  RadioGroup,
+  Stack,
 } from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   useGlobalFilter,
   usePagination,
@@ -23,6 +26,8 @@ import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
 export default function CheckTable(props) {
   const { columnsData, tableData } = props;
+
+  const [value, setValue] = useState('1')
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -47,6 +52,12 @@ export default function CheckTable(props) {
   } = tableInstance;
   initialState.pageSize = 11;
 
+  const [checkedItems, setCheckedItems] = React.useState([false, false])
+
+  const allChecked = checkedItems.every(Boolean)
+  const isIndeterminate = checkedItems.some(Boolean) && !allChecked
+
+
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   return (
@@ -61,9 +72,15 @@ export default function CheckTable(props) {
           fontSize='22px'
           fontWeight='700'
           lineHeight='100%'>
-          Check Table
+          Message
         </Text>
-        <Menu />
+        <Checkbox
+          isChecked={allChecked}
+          isIndeterminate={isIndeterminate}
+          onChange={(e) => setCheckedItems([e.target.checked, e.target.checked])}
+        >
+          All
+        </Checkbox>
       </Flex>
       <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
         <Thead>
@@ -91,23 +108,26 @@ export default function CheckTable(props) {
           {page.map((row, index) => {
             prepareRow(row);
             return (
+              // <Stack pl={6} mt={1} spacing={1}>
               <Tr {...row.getRowProps()} key={index}>
+               
                 {row.cells.map((cell, index) => {
                   let data = "";
                   if (cell.column.Header === "NAME") {
                     data = (
                       <Flex align='center'>
-                        <Checkbox
-                          defaultChecked={cell.value[1]}
-                          colorScheme='brandScheme'
-                          me='10px'
-                        />
+                          <Checkbox
+                            value={index+1}
+                            colorScheme='brandScheme'
+                            me='10px'
+                            
+                          />
                         <Text color={textColor} fontSize='sm' fontWeight='700'>
                           {cell.value[0]}
                         </Text>
                       </Flex>
                     );
-                  }  else if (cell.column.Header === "QUANTITY") {
+                  } else if (cell.column.Header === "QUANTITY") {
                     data = (
                       <Text color={textColor} fontSize='sm' fontWeight='700'>
                         {cell.value}
@@ -120,6 +140,7 @@ export default function CheckTable(props) {
                       </Text>
                     );
                   }
+              
                   return (
                     <Td
                       {...cell.getCellProps()}
@@ -132,6 +153,7 @@ export default function CheckTable(props) {
                   );
                 })}
               </Tr>
+                    // {/* </Stack> */}
             );
           })}
         </Tbody>
