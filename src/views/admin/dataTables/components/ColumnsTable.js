@@ -15,8 +15,6 @@ import {
 
 // Custom components
 import Card from "components/card/Card";
-import { Button } from "reactstrap";
-import { EmailIcon } from "@chakra-ui/icons";
 import { IoSendOutline } from "react-icons/io5";
 // import Menu from "components/menu/MainMenu";
 export default function ColumnsTable(props) {
@@ -47,6 +45,7 @@ export default function ColumnsTable(props) {
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+  const inputText = useColorModeValue("gray.700", "gray.100");
   return (
     <Card
       direction='column'
@@ -55,10 +54,12 @@ export default function ColumnsTable(props) {
       overflowX={{ sm: "scroll", lg: "hidden" }}>
       <InputGroup size='md' >
         <Input
+        color={inputText}
+
           pr='4.5rem'
           placeholder='Write message'
         />
-        <InputRightElement width='4rem'>
+        <InputRightElement width='2.5rem'>
           <IconButton
             variant='outline'
             colorScheme='teal'
