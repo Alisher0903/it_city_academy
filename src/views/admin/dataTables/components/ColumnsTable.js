@@ -45,17 +45,12 @@ export default function ColumnsTable(props) {
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
-	let navbarBg = useColorModeValue('rgba(244, 247, 254, 0.2)', 'rgba(11,20,55,0.5)');
-	let navbarBackdrop = 'blur(20px)';
-	let navbarPosition = 'fixed';
   const inputText = useColorModeValue("gray.700", "gray.100");
   return (
     <Card
       direction='column'
       w='100%'
       px='30px'
-      bg={navbarBg}
-			backdropFilter={navbarBackdrop}
       overflowX={{ sm: "scroll", lg: "hidden" }}>
       <InputGroup size='md' >
         <Input
