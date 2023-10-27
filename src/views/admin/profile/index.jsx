@@ -32,7 +32,7 @@ export default function Overview() {
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
-      <Grid
+      {/* <Grid
         templateColumns={{
           base: "1fr",
           lg: "1.34fr 1fr 1.62fr",
@@ -66,7 +66,7 @@ export default function Overview() {
           pe='20px'
           pb={{ base: "100px", lg: "20px" }}
         />
-      </Grid>
+      </Grid> */}
       <Grid
         mb='20px'
         templateColumns={{
@@ -90,12 +90,12 @@ export default function Overview() {
           followers='9.7k'
           following='274'
         />
-        <General
+        {/* <General
           gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
           minH='365px'
           pe='20px'
-        />
-        <Notifications
+        /> */}
+        {/* <Notifications
           used={25.6}
           total={50}
           gridArea={{
@@ -103,7 +103,7 @@ export default function Overview() {
             lg: "2 / 1 / 3 / 3",
             "2xl": "1 / 3 / 2 / 4",
           }}
-        />
+        /> */}
       </Grid>
     </Box>
   );
