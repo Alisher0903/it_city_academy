@@ -58,19 +58,12 @@ const routes = [
     component: Group,
   },
   {
-    name: "Student",
-    layout: "/auth",
-    path: "/sign-in",
-    icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,
-    component: SignInCentered,
-  },
-  // {
-  //   // name: "Group",
-  //   layout: "/admin",
-  //   path: "/profile",
-  //   icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
-  //   component: Profile,
-  // }
+    // name: "Group",
+    layout: "/admin",
+    path: "/profile",
+    icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
+    component: Profile,
+  }
 ];
 
 export default routes;
