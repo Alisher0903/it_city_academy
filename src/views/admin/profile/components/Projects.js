@@ -24,22 +24,22 @@ export default function Projects(props) {
         fontWeight='bold'
         fontSize='2xl'
         mt='10px'
-        mb='10px'>
-        Groups
+        mb='4px'>
+        All projects
       </Text>
-      {/* <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
+      <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
         Here you can find more details about your projects. Keep you user
         engaged by providing meaningful information.
-      </Text> */}
+      </Text>
       <Project
         boxShadow={cardShadow}
         mb='20px'
         image={Project1}
         ranking='1'
-        // link='#'
+        link='#'
         title='Technology behind the Blockchain'
       />
-      {/* <Project
+      <Project
         boxShadow={cardShadow}
         mb='20px'
         image={Project2}
@@ -53,7 +53,7 @@ export default function Projects(props) {
         ranking='3'
         link='#'
         title='Most essential tips for Burnout'
-      /> */}
+      />
     </Card>
   );
 }
