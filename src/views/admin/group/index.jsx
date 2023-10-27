@@ -75,9 +75,7 @@ export default function Group() {
           pb={{ base: "100px", lg: "20px" }}
         /> */}
       {/* </Grid> */}
-      <Grid
-        // mb='20px'
-        gap={{ base: "20px", xl: "20px" }}>
+      <Grid>
         <Projects
           gridArea='1 / 2 / 2 / 2'
           banner={banner}
