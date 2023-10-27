@@ -35,6 +35,8 @@ import itcity from "assets/img/auth/itcity.png";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import axios from 'axios';
+import { api } from "api/api";
 
 function SignIn() {
   // Chakra color mode
@@ -45,16 +47,29 @@ function SignIn() {
   const brandStars = useColorModeValue("brand.500", "brand.400");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
   const googleText = useColorModeValue("navy.700", "white");
+
   const googleHover = useColorModeValue(
     { bg: "gray.200" },
     { bg: "whiteAlpha.300" }
   );
+
   const googleActive = useColorModeValue(
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.200" }
   );
+
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+
+  function logIn() {
+    let phoneNumber = document.getElementById('number').value;
+    let password = document.getElementById('password').value;
+    axios.post(api + "auth/login", { phoneNumber, password }).then(res => {
+      sessionStorage.setItem('jwtTokin', res.data.body);
+      console.log(res.data.message);
+    })
+  }
+
   return (
     <DefaultAuth illustrationBackground={itcity} image={itcity}>
       <Flex
@@ -135,6 +150,7 @@ function SignIn() {
               mb='24px'
               fontWeight='500'
               size='lg'
+              id="number"
             />
             <FormLabel
               ms='4px'
@@ -153,6 +169,7 @@ function SignIn() {
                 size='lg'
                 type={show ? "text" : "password"}
                 variant='auth'
+                id="password"
               />
               <InputRightElement display='flex' alignItems='center' mt='4px'>
                 <Icon
@@ -195,7 +212,8 @@ function SignIn() {
               fontWeight='700'
               w='100%'
               h='50'
-              mb='24px'>
+              mb='24px'
+              onClick={logIn}>
               Log In
             </Button>
           </FormControl>
