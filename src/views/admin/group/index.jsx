@@ -1,8 +1,14 @@
-/*!
-  _
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+/*
+   _________________  __________________________        __________________  _________________  __________________________ ____          ____     
+  |_____     ______| |__________      _________|       |   ______________| |_____      _____| |__________      _________| \   \        |   |
+        |   |                  |     |               |    |                      |    |                 |     |            \   \      |   |
+        |   |                  |     |              |    |                       |    |                 |     |             \   \    |   |
+        |   |                  |     |             |    |                        |    |                 |     |              \   \  |   |
+        |   |                  |     |             |    |                        |    |                 |     |               \   \|   |
+        |   |                  |     |             \    \                        |    |                 |     |                \      |
+        |   |                  |     |              \    \                       |    |                 |     |                 \     |
+   _____|   |________          |     |               \    \_______________  _____|    |_______          |     |                 \     |
+  |_________________|          |_____|                 \_________________| |_________________|          |_____|                 \_____|
 
 */
 
@@ -13,9 +19,9 @@ import { Box, Grid } from "@chakra-ui/react";
 import Banner from "views/admin/profile/components/Banner";
 import General from "views/admin/profile/components/General";
 import Notifications from "views/admin/profile/components/Notifications";
-import Projects from "./components/Projects";
 import Storage from "views/admin/profile/components/Storage";
 import Upload from "views/admin/profile/components/Upload";
+import Projects from "./components/Projects";
 
 // Assets
 import banner from "assets/img/auth/banner.png";
@@ -36,7 +42,7 @@ export default function Group() {
           lg: "1fr",
         }}
         gap={{ base: "20px", xl: "20px" }}> */}
-        {/* <Banner
+      {/* <Banner
           gridArea='1 / 1 / 2 / 2'
           banner={banner}
           avatar={avatar}
@@ -51,7 +57,7 @@ export default function Group() {
           used={25.6}
           total={50}
         /> */}
-        {/* <Upload
+      {/* <Upload
           gridArea={{
             base: "3 / 1 / 4 / 2",
             lg: "1 / 3 / 2 / 4",
