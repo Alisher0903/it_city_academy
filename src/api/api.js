@@ -1,1 +1,1 @@
-export const api = "http://142.93.209.179/swagger-ui/index.html/"
+export const api = "http://142.93.209.179:8080/swagger-ui/index.html/"
