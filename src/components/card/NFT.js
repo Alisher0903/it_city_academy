@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   Flex,
-  Icon,
   Image,
   Link,
   Text,
@@ -16,6 +15,7 @@ import Card from "components/card/Card.js";
 // Assets
 import React, { useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import { Icon } from '@iconify/react';
 
 export default function NFT(props) {
   const { image, name, author, bidders, download, currentbid } = props;
@@ -32,7 +32,9 @@ export default function NFT(props) {
             h={{ base: "100%", "3xl": "100%" }}
             borderRadius='20px'
           />
-          <Button
+
+          {/* category like btn */}
+          {/* <Button
             position='absolute'
             bg='white'
             _hover={{ bg: "whiteAlpha.900" }}
@@ -54,7 +56,7 @@ export default function NFT(props) {
               as={like ? IoHeart : IoHeartOutline}
               color='brand.500'
             />
-          </Button>
+          </Button> */}
         </Box>
         <Flex flexDirection='column' justify='space-between' h='100%'>
           <Flex
@@ -120,10 +122,10 @@ export default function NFT(props) {
               xl: "column",
               "2xl": "row",
             }}
-            mt='25px'>
-            <Text fontWeight='700' fontSize='sm' color={textColorBid}>
+            mt='5px'>
+            {/* <Text fontWeight='700' fontSize='sm' color={textColorBid}>
               Current Bid: {currentbid}
-            </Text>
+            </Text> */}
             <Link
               href={download}
               mt={{
@@ -141,7 +143,8 @@ export default function NFT(props) {
                 borderRadius='70px'
                 px='24px'
                 py='5px'>
-                Place Bid
+                O'tish
+                <Icon icon="mingcute:right-line" />
               </Button>
             </Link>
           </Flex>

@@ -11,7 +11,7 @@ import { ThemeEditorProvider } from '@hypertheme-editor/chakra-ui';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DashboardT from 'teacher/layouts/admin';
 import DashboardS from 'student/layouts/admin';
-import Profile from "./views/admin/profile/index";
+// import Profile from "./views/admin/profile/index";
 
 ReactDOM.render(
 	<ChakraProvider theme={theme}>
@@ -24,7 +24,7 @@ ReactDOM.render(
 						<Route path={`/Home`} component={DashboardHome} />
 						<Route path={`/Teacher`} component={DashboardT} />
 						<Route path={`/Student`} component={DashboardS} />
-						<Route path={`/profile#/admin/profile`} component={Profile} />
+						{/* <Route path="/profile#/admin/profile" component={Profile} /> */}
 						<Redirect from='/' to='/Home' />
 					</Switch>
 				</HashRouter>

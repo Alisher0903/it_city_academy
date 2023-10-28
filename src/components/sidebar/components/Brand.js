@@ -1,4 +1,5 @@
 import React from "react";
+import "./brand.scss";
 
 // Chakra imports
 import { Flex, Link, useColorModeValue } from "@chakra-ui/react";
@@ -16,8 +17,11 @@ export function SidebarBrand() {
 
   return (
     <Flex align='center' direction='column'>
-      <Link href="/">
-        <img src={logo} alt="img" className="mb-3" />
+      <Link href="/#/admin/default">
+        {/* <img src={logo} alt="img" className="mb-3" /> */}
+        <p className="text-center mb-3 it__logo">
+          IT CITY <br /> ACADEMY
+        </p>
       </Link>
       {/* <HorizonLogo h='26px' w='175px' my='32px' color={logo} /> */}
       <HSeparator mb='20px' />

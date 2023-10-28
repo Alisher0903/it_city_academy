@@ -55,31 +55,30 @@ export default function Project(props) {
             <p className="fw-medium" color={brandColor}>O'qituvchi: Teshayev Ketmon</p>
           </Text>
         </Box>
-        {/* <Link
-          ms="auto"> */}
-        <Link
-          onClick={() => {
-            openEditModal();
-          }}
-          href={link}
-          variant='no-hover'
-          ms='0px'
-          me="25px"
-          p='0px !important'>
-          <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' />
-        </Link>
-        <Link
-          onClick={() => {
-            openDeleteModal();
-          }}
-          href={link}
-          variant='no-hover'
-          me='25px'
-          ms='0px'
-          p='0px !important'>
-          <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px' />
-        </Link>
-        {/* </Link> */}
+        <Box ms="auto">
+          <Link
+            onClick={() => {
+              openEditModal();
+            }}
+            href={link}
+            variant='no-hover'
+            ms='0px'
+            me="25px"
+            p='0px !important'>
+            <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' />
+          </Link>
+          <Link
+            onClick={() => {
+              openDeleteModal();
+            }}
+            href={link}
+            variant='no-hover'
+            me='25px'
+            ms='0px'
+            p='0px !important'>
+            <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px' />
+          </Link>
+        </Box>
       </Flex>
 
 
@@ -92,10 +91,23 @@ export default function Project(props) {
           <Input type="text" placeholder="O'qituvchi: FIO" />
         </ModalBody>
         <ModalFooter>
-          <Button onClick={openEditModal}>Orqaga</Button>
+          <Button onClick={openEditModal} color="dark">Orqaga</Button>
           <Button color="success">Saqlash</Button>
         </ModalFooter>
       </Modal>
+
+      {/* delete modal */}
+      <Modal isOpen={deleteModal} centered className="group__modals">
+        <ModalHeader toggle={openDeleteModal} className="group__modal-head">Group Delete</ModalHeader>
+        <ModalBody className="group__modal-body">
+          <p>Bu guruhni o'chirmoqchimisiz?</p>
+        </ModalBody>
+        <ModalFooter>
+          <Button onClick={openDeleteModal} color="dark">Orqaga</Button>
+          <Button color="danger">Ha</Button>
+        </ModalFooter>
+      </Modal>
+
     </Card>
   );
 }
