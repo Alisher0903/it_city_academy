@@ -13,7 +13,7 @@ import Card from "components/card/Card.js";
 import React, { useState } from "react";
 // Assets
 import { MdDelete, MdEdit } from "react-icons/md";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "./scss/group.scss";
 
 export default function Project(props) {
@@ -86,8 +86,10 @@ export default function Project(props) {
       {/* modals */}
       <Modal isOpen={editModal} centered size="lg" className="group__modals">
         <ModalHeader toggle={openEditModal} className="group__modal-head">Group Edit</ModalHeader>
-        <ModalBody>
-          tcygvhbjkn
+        <ModalBody className="group__modal-body">
+          <Input type="file" />
+          <Input type="number" placeholder="O'quvchilar soni" />
+          <Input type="text" placeholder="O'qituvchi: FIO" />
         </ModalBody>
         <ModalFooter>
           <Button onClick={openEditModal}>Orqaga</Button>
