@@ -1,17 +1,4 @@
-/* eslint-disable */
-/*!
-                                                                                                                                                                                                                                                                                 
-
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-// Chakra imports
 import {
   Box,
   Button,
@@ -28,28 +15,45 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-// Custom components
+
 import { HSeparator } from "components/separator/Separator";
-import DefaultAuth from "layouts/auth/Default";
-// Assets
-import itcity from "assets/img/auth/itcity.png";
 import { FcGoogle } from "react-icons/fc";
+
+import DefaultAuth from "layouts/auth/Default";
+import itcity from "assets/img/auth/itcity.png";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import axios from 'axios';
 import { api } from "api/api";
+import "../../loginBtn/style.scss";
 
 function SignIn() {
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
+  const brandStars = useColorModeValue("brand.500", "brand.400");
+
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  const brandStars = useColorModeValue("brand.500", "brand.400");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
   const googleText = useColorModeValue("navy.700", "white");
 
   const [role, setRole] = useState('/#/auth')
+  const [show, setShow] = React.useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isValidated, setIsValidated] = useState(false);
+  const handleClick = () => setShow(!show);
+
+  const handleClickBtn = () => {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+      setIsValidated(true);
+      setTimeout(() => {
+        setIsValidated(false);
+      }, 100000);
+    }, 200);
+  };
 
   const googleHover = useColorModeValue(
     { bg: "gray.200" },
@@ -61,15 +65,12 @@ function SignIn() {
     { bg: "whiteAlpha.200" }
   );
 
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
-
   function logIn() {
     let phoneNumber = document.getElementById('number').value;
     let password = document.getElementById('password').value;
     axios.post(api + "auth/login", { phoneNumber, password }).then(res => {
       sessionStorage.setItem('jwtTokin', res.data.body);
-      console.log(res.data.message);
+      // console.log(res.data.message);
 
       if (res.data.message == "ROLE_USER") {
         setRole('/#/Student/default')
@@ -81,13 +82,9 @@ function SignIn() {
 
       document.getElementById('link').click()
 
-    }).catch(err => console.log(err))
-
-
+    })
+    // .catch(err => console.log(err))
   }
-
-
-
 
   return (
     <DefaultAuth illustrationBackground={itcity} image={itcity}>
@@ -227,7 +224,19 @@ function SignIn() {
                 </Text>
               </NavLink> */}
             </Flex>
-              <Button
+
+            {/* login btn */}
+            <button
+              id="button"
+              onClick={() => {
+                handleClickBtn();
+                logIn();
+              }}
+              className={`${isClicked ? 'onclic' : ''} ${isValidated ? 'validate' : ''}`}>
+              {isValidated ? 'Loading...' : 'Log In'}
+            </button>
+
+            {/* <Button
                 fontSize='sm'
                 variant='brand'
                 fontWeight='700'
@@ -236,8 +245,7 @@ function SignIn() {
                 mb='24px'
                 onClick={logIn}>
                 Log In
-              </Button>
-
+              </Button> */}
           </FormControl>
         </Flex>
       </Flex>
