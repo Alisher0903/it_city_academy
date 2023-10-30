@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -33,20 +33,28 @@ import { tableColumnsTopCreators } from "views/admin/marketplace/variables/table
 import axios from "axios";
 import { api } from "api/api";
 import { useState } from "react";
+import { imgUrl } from "api/api";
 
 export default function Marketplace() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  const [category, setCategory] = useState([])
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    getCategory();
+  }, []);
 
   function getCategory() {
-    axios.post(api + "/category").then(res => {
-      sessionStorage.setItem('jwtTokin', res.data.body);
-      console.log(res.data00);
-  }).catch(err => console.log(err))
-}
-getCategory()
+    axios.get(api + "category")
+      .then(res => {
+        setCategory(res.data.body)
+      })
+      .catch(err => console.log(err))
+  }
+
+  console.log(category);
+
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
@@ -102,20 +110,16 @@ getCategory()
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
 
-              <NFT
-                name='Abstra'
-                bidders={[
-                ]}
-                image={Nft1}
-                download='frontend'
-              />
-              <NFT
-                name='Abstract Colors'
-                bidders={[
-                ]}
-                image={Nft1}
-                download='frontend'
-              />
+              {category.length && category.map((item, i) =>
+                <NFT
+                  name={item.name}
+                  bidders={[
+                  ]}
+                  image={imgUrl + item.attachmentId}
+                  download='frontend'
+                />
+              )}
+
             </SimpleGrid>
           </Flex>
         </Flex>
