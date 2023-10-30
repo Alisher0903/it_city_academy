@@ -41,12 +41,13 @@ export default function Marketplace() {
   const [category, setCategory] = useState([])
 
   function getCategory() {
-    axios.post(api + "/category").then(res => {
+    axios.post(api + "category").then(res => {
       sessionStorage.setItem('jwtTokin', res.data.body);
-      console.log(res.data00);
+      console.log(res.data);
   }).catch(err => console.log(err))
 }
 getCategory()
+
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
