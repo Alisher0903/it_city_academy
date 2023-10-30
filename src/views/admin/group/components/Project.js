@@ -81,7 +81,6 @@ export default function Project(props) {
         </Box>
       </Flex>
 
-
       {/* modals */}
       <Modal isOpen={editModal} centered size="lg" className="group__modals">
         <ModalHeader toggle={openEditModal} className="group__modal-head">Group Edit</ModalHeader>

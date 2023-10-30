@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import {
   Box,
-  Button,
   Flex,
   Grid,
-  Link,
   Text,
   useColorModeValue,
   SimpleGrid,
@@ -14,8 +12,9 @@ import {
 import Banner from "views/admin/marketplace/components/Banner";
 import TableTopCreators from "views/admin/marketplace/components/TableTopCreators";
 import HistoryItem from "views/admin/marketplace/components/HistoryItem";
-import NFT from "components/card/NFT";
 import Card from "components/card/Card.js";
+
+import NFT from "components/card/NFT";
 
 // Assets
 import Nft1 from "assets/img/nfts/Nft1.png";
@@ -30,16 +29,21 @@ import Avatar3 from "assets/img/avatars/avatar3.png";
 import Avatar4 from "assets/img/avatars/avatar4.png";
 import tableDataTopCreators from "views/admin/marketplace/variables/tableDataTopCreators.json";
 import { tableColumnsTopCreators } from "views/admin/marketplace/variables/tableColumnsTopCreators";
+
 import axios from "axios";
 import { api } from "api/api";
 import { useState } from "react";
 import { imgUrl } from "api/api";
+import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function Marketplace() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const [category, setCategory] = useState([]);
+  const [addModal, setAddModal] = useState(false);
+
+  const openAddModal = () => setAddModal(!addModal);
 
   useEffect(() => {
     getCategory();
@@ -50,7 +54,7 @@ export default function Marketplace() {
       .then(res => {
         setCategory(res.data.body)
       })
-      .catch(err => console.log(err))
+    // .catch(err => console.log(err))
   }
 
   return (
@@ -80,7 +84,27 @@ export default function Marketplace() {
                 me='20px'
                 ms={{ base: "24px", md: "0px" }}
                 mt={{ base: "20px", md: "0px" }}>
-                <Link
+                <Button
+                  onClick={() => {
+                    openAddModal();
+                  }}
+                  color="primary"
+                  className="px-4 py-2 fw-medium rounded-5">
+                  Add Category
+                </Button>
+                <Modal isOpen={addModal} centered size="lg">
+                  <ModalHeader toggle={openAddModal}>Add Category</ModalHeader>
+                  <ModalBody>
+                    <Input type="file" />
+                    <Input placeholder="title" />
+                    <Input type="number" placeholder="category id" />
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="dark" outline onClick={openAddModal}>Orqaga</Button>
+                    <Button color="success" outline>Saqlash</Button>
+                  </ModalFooter>
+                </Modal>
+                {/* <Link
                   color={textColorBrand}
                   fontWeight='500'
                   me={{ base: "34px", md: "44px" }}
@@ -103,7 +127,7 @@ export default function Marketplace() {
                 </Link>
                 <Link color={textColorBrand} fontWeight='500' to='#sports'>
                   3D Max
-                </Link>
+                </Link> */}
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
@@ -111,10 +135,9 @@ export default function Marketplace() {
               {category.length && category.map((item, i) =>
                 <NFT
                   name={item.name}
-                  bidders={[
-                  ]}
+                  bidders={[]}
                   image={imgUrl + item.attachmentId}
-                  download='frontend'
+                // download='frontend'
                 />
               )}
 

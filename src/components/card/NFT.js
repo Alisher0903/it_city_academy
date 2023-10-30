@@ -3,25 +3,32 @@ import {
   AvatarGroup,
   Avatar,
   Box,
-  Button,
   Flex,
   Image,
-  Link,
   Text,
   useColorModeValue,
+  Link,
+  Icon,
 } from "@chakra-ui/react";
-// Custom components
 import Card from "components/card/Card.js";
-// Assets
 import React, { useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
-import { Icon } from '@iconify/react';
+import { MdDelete, MdEdit } from "react-icons/md";
+import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function NFT(props) {
   const { image, name, author, bidders, download, currentbid } = props;
   const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
+
+  // modals
+  const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const openEditModal = () => setEditModal(!editModal);
+  const openDeleteModal = () => setDeleteModal(!deleteModal);
+
   return (
     <Card p='20px'>
       <Flex direction={{ base: "column" }} justify='center'>
@@ -123,10 +130,58 @@ export default function NFT(props) {
               "2xl": "row",
             }}
             mt='5px'>
+            <Box ms="auto">
+              <Link
+                onClick={() => {
+                  openEditModal();
+                }}
+                variant='no-hover'
+                ms='0px'
+                me="25px"
+                p='0px !important'>
+                <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' />
+              </Link>
+              <Link
+                onClick={() => {
+                  openDeleteModal();
+                }}
+                variant='no-hover'
+                me='25px'
+                ms='0px'
+                p='0px !important'>
+                <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px' />
+              </Link>
+            </Box>
+
+            {/* modals */}
+            <Modal isOpen={editModal} centered size="lg" className="group__modals">
+              <ModalHeader toggle={openEditModal} className="group__modal-head">Edit Category</ModalHeader>
+              <ModalBody className="group__modal-body">
+                <Input type="file" />
+                <Input type="text" placeholder="title" />
+                <Input type="number" placeholder="category id" />
+              </ModalBody>
+              <ModalFooter>
+                <Button onClick={openEditModal} color="dark" outline>Orqaga</Button>
+                <Button color="success" outline>Saqlash</Button>
+              </ModalFooter>
+            </Modal>
+
+            {/* delete modal */}
+            <Modal isOpen={deleteModal} centered className="group__modals">
+              <ModalHeader toggle={openDeleteModal} className="group__modal-head">Delete Category</ModalHeader>
+              <ModalBody className="group__modal-body">
+                <p>Bu categoryni o'chirmoqchimisiz?</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button onClick={openDeleteModal} color="dark" outline>Orqaga</Button>
+                <Button color="danger" outline>Ha</Button>
+              </ModalFooter>
+            </Modal>
             {/* <Text fontWeight='700' fontSize='sm' color={textColorBid}>
               Current Bid: {currentbid}
             </Text> */}
-            <Link
+            {/* <Link
               href={download}
               mt={{
                 base: "0px",
@@ -146,7 +201,7 @@ export default function NFT(props) {
                 O'tish
                 <Icon icon="mingcute:right-line" />
               </Button>
-            </Link>
+            </Link> */}
           </Flex>
         </Flex>
       </Flex>
