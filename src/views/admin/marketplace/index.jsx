@@ -126,15 +126,6 @@ export default function Marketplace() {
                 download='frontend'
               />
             </SimpleGrid>
-            {/* <Text
-              mt='45px'
-              mb='36px'
-              color={textColor}
-              fontSize='2xl'
-              ms='24px'
-              fontWeight='700'>
-              
-            </Text> */}
           </Flex>
         </Flex>
         {/* <Flex
