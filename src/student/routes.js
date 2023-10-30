@@ -43,7 +43,7 @@ const routes = [
     secondary: true,
   },
   {
-    name: "Message",
+    name: "Notification",
     layout: "/Student",
     icon: <Icon as={MdMessage} width='20px' height='20px' color='inherit' />,
     path: "/data-tables",
@@ -57,7 +57,7 @@ const routes = [
     component: Profile,
   },
   {
-    name: "Student",
+    name: "",
     layout: "/auth",
     path: "/sign-in",
     icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,

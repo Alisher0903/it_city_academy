@@ -53,8 +53,6 @@ export default function Marketplace() {
       .catch(err => console.log(err))
   }
 
-  console.log(category);
-
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}

@@ -58,14 +58,14 @@ const routes = [
     component: Group,
   },
   {
-    // name: "Group",
+    name: "",
     layout: "/admin",
     path: "/profile",
     icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
     component: Profile,
   },
   {
-    // name: "Group",
+    name: "",
     layout: "/auth",
     path: "/sign-in",
     icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
