@@ -24,6 +24,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Link,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -61,17 +62,42 @@ function SignIn() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
+  let role = ""
   function logIn() {
     let phoneNumber = document.getElementById('number').value;
     let password = document.getElementById('password').value;
     axios.post(api + "auth/login", { phoneNumber, password }).then(res => {
       sessionStorage.setItem('jwtTokin', res.data.body);
-      console.log(res.data.message);
+
+      if (res.data.message === "ROLE_USER") {
+        role = "/#/Student"
+      } else if (res.data.message === "ROLE_SUPER_ADMIN") {
+        role = "/#/admin"
+      } else if (res.data.message === "ROLE_TEACHER") {
+        role = "/#/Teacher"
+      } else {
+        role = "/"
+      }
+
+      // res.data.message === "ROLE_SUPER_ADMIN"
+      //   ? <Link to="/#/admin"></Link>
+      //   : res.data.message === "ROLE_TEACHER"
+      //     ? <Link to="/#/Teacher"></Link>
+      //     : res.data.message === "ROLE_USER"
+      //       ? <Link to="/#/Student"></Link>
+      //       : <Link to="/#/auth"></Link>
+        
+      //       console.log(res.data.message);
     })
+
   }
+
+
+  const goLoginS = () => document.getElementById("goLoginS").click();
 
   return (
     <DefaultAuth illustrationBackground={itcity} image={itcity}>
+      <Link to={role} id="goLoginS"></Link>
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
         w='100%'
@@ -213,7 +239,10 @@ function SignIn() {
               w='100%'
               h='50'
               mb='24px'
-              onClick={logIn}>
+              onClick={() => {
+                logIn();
+                goLoginS();
+              }}>
               Log In
             </Button>
           </FormControl>
