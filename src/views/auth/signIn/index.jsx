@@ -1,17 +1,4 @@
-/* eslint-disable */
-/*!
-                                                                                                                                                                                                                                                                                 
-
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-import React from "react";
-import { NavLink } from "react-router-dom";
-// Chakra imports
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -28,26 +15,45 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-// Custom components
+
 import { HSeparator } from "components/separator/Separator";
-import DefaultAuth from "layouts/auth/Default";
-// Assets
-import itcity from "assets/img/auth/itcity.png";
 import { FcGoogle } from "react-icons/fc";
+
+import DefaultAuth from "layouts/auth/Default";
+import itcity from "assets/img/auth/itcity.png";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import axios from 'axios';
 import { api } from "api/api";
+import "../../loginBtn/style.scss";
 
 function SignIn() {
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
+  const brandStars = useColorModeValue("brand.500", "brand.400");
+
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  const brandStars = useColorModeValue("brand.500", "brand.400");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
   const googleText = useColorModeValue("navy.700", "white");
+
+  const [role, setRole] = useState('/#/auth')
+  const [show, setShow] = React.useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isValidated, setIsValidated] = useState(false);
+  const handleClick = () => setShow(!show);
+
+  const handleClickBtn = () => {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+      setIsValidated(true);
+      setTimeout(() => {
+        setIsValidated(false);
+      }, 100000);
+    }, 200);
+  };
 
   const googleHover = useColorModeValue(
     { bg: "gray.200" },
@@ -59,45 +65,31 @@ function SignIn() {
     { bg: "whiteAlpha.200" }
   );
 
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
-
-  let role = ""
   function logIn() {
     let phoneNumber = document.getElementById('number').value;
     let password = document.getElementById('password').value;
     axios.post(api + "auth/login", { phoneNumber, password }).then(res => {
       sessionStorage.setItem('jwtTokin', res.data.body);
+      // console.log(res.data.message);
 
-      if (res.data.message === "ROLE_USER") {
-        role = "/#/Student"
-      } else if (res.data.message === "ROLE_SUPER_ADMIN") {
-        role = "/#/admin"
-      } else if (res.data.message === "ROLE_TEACHER") {
-        role = "/#/Teacher"
-      } else {
-        role = "/"
+      if (res.data.message == "ROLE_USER") {
+        setRole('/#/Student/default')
+      } else if (res.data.message == "ROLE_SUPER_ADMIN") {
+        setRole('/#/admin/default')
+      } else if (res.data.message == "ROLE_TEACHER") {
+        setRole('/#/Teacher/default')
       }
 
-      // res.data.message === "ROLE_SUPER_ADMIN"
-      //   ? <Link to="/#/admin"></Link>
-      //   : res.data.message === "ROLE_TEACHER"
-      //     ? <Link to="/#/Teacher"></Link>
-      //     : res.data.message === "ROLE_USER"
-      //       ? <Link to="/#/Student"></Link>
-      //       : <Link to="/#/auth"></Link>
-        
-      //       console.log(res.data.message);
+      document.getElementById('link').click()
+
     })
-
+    // .catch(err => console.log(err))
   }
-
-
-  const goLoginS = () => document.getElementById("goLoginS").click();
 
   return (
     <DefaultAuth illustrationBackground={itcity} image={itcity}>
-      <Link to={role} id="goLoginS"></Link>
+      <Link id="link" to={role} href={role}></Link>
+
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
         w='100%'
@@ -172,7 +164,7 @@ function SignIn() {
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='number'
-              placeholder='+998993393300'
+              placeholder='993393300'
               mb='24px'
               fontWeight='500'
               size='lg'
@@ -190,7 +182,7 @@ function SignIn() {
               <Input
                 isRequired={true}
                 fontSize='sm'
-                placeholder='Min. 8 characters'
+                placeholder='Enter password'
                 mb='24px'
                 size='lg'
                 type={show ? "text" : "password"}
@@ -232,19 +224,28 @@ function SignIn() {
                 </Text>
               </NavLink> */}
             </Flex>
-            <Button
-              fontSize='sm'
-              variant='brand'
-              fontWeight='700'
-              w='100%'
-              h='50'
-              mb='24px'
+
+            {/* login btn */}
+            <button
+              id="button"
               onClick={() => {
+                handleClickBtn();
                 logIn();
-                goLoginS();
-              }}>
-              Log In
-            </Button>
+              }}
+              className={`${isClicked ? 'onclic' : ''} ${isValidated ? 'validate' : ''}`}>
+              {isValidated ? 'Loading...' : 'Log In'}
+            </button>
+
+            {/* <Button
+                fontSize='sm'
+                variant='brand'
+                fontWeight='700'
+                w='100%'
+                h='50'
+                mb='24px'
+                onClick={logIn}>
+                Log In
+              </Button> */}
           </FormControl>
         </Flex>
       </Flex>

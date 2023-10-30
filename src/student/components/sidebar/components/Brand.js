@@ -16,7 +16,7 @@ export function SidebarBrand() {
 
   return (
     <Flex align='center' direction='column'>
-      <Link href="/">
+      <Link href="/#/Student/default">
         <img src={logo} alt="img" className="mb-3" />
       </Link>
       {/* <HorizonLogo h='26px' w='175px' my='32px' color={logo} /> */}
