@@ -9,7 +9,7 @@
 
 */
 
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 // Chakra imports
 import {
@@ -49,6 +49,8 @@ function SignIn() {
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
   const googleText = useColorModeValue("navy.700", "white");
 
+  const [role, setRole] = useState('/#/auth')
+
   const googleHover = useColorModeValue(
     { bg: "gray.200" },
     { bg: "whiteAlpha.300" }
@@ -62,42 +64,35 @@ function SignIn() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
-  let role = ""
   function logIn() {
     let phoneNumber = document.getElementById('number').value;
     let password = document.getElementById('password').value;
     axios.post(api + "auth/login", { phoneNumber, password }).then(res => {
       sessionStorage.setItem('jwtTokin', res.data.body);
+      console.log(res.data.message);
 
-      if (res.data.message === "ROLE_USER") {
-        role = "/#/Student"
-      } else if (res.data.message === "ROLE_SUPER_ADMIN") {
-        role = "/#/admin"
-      } else if (res.data.message === "ROLE_TEACHER") {
-        role = "/#/Teacher"
-      } else {
-        role = "/"
+      if (res.data.message == "ROLE_USER") {
+        setRole('/#/Student/default')
+      } else if (res.data.message == "ROLE_SUPER_ADMIN") {
+        setRole('/#/admin/default')
+      } else if (res.data.message == "ROLE_TEACHER") {
+        setRole('/#/Teacher/default')
       }
 
-      // res.data.message === "ROLE_SUPER_ADMIN"
-      //   ? <Link to="/#/admin"></Link>
-      //   : res.data.message === "ROLE_TEACHER"
-      //     ? <Link to="/#/Teacher"></Link>
-      //     : res.data.message === "ROLE_USER"
-      //       ? <Link to="/#/Student"></Link>
-      //       : <Link to="/#/auth"></Link>
-        
-      //       console.log(res.data.message);
-    })
+      document.getElementById('link').click()
+
+    }).catch(err => console.log(err))
+
 
   }
 
 
-  const goLoginS = () => document.getElementById("goLoginS").click();
+
 
   return (
     <DefaultAuth illustrationBackground={itcity} image={itcity}>
-      <Link to={role} id="goLoginS"></Link>
+      <Link id="link" to={role} href={role}></Link>
+
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
         w='100%'
@@ -172,7 +167,7 @@ function SignIn() {
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='number'
-              placeholder='+998993393300'
+              placeholder='993393300'
               mb='24px'
               fontWeight='500'
               size='lg'
@@ -190,7 +185,7 @@ function SignIn() {
               <Input
                 isRequired={true}
                 fontSize='sm'
-                placeholder='Min. 8 characters'
+                placeholder='Enter password'
                 mb='24px'
                 size='lg'
                 type={show ? "text" : "password"}
@@ -232,19 +227,17 @@ function SignIn() {
                 </Text>
               </NavLink> */}
             </Flex>
-            <Button
-              fontSize='sm'
-              variant='brand'
-              fontWeight='700'
-              w='100%'
-              h='50'
-              mb='24px'
-              onClick={() => {
-                logIn();
-                goLoginS();
-              }}>
-              Log In
-            </Button>
+              <Button
+                fontSize='sm'
+                variant='brand'
+                fontWeight='700'
+                w='100%'
+                h='50'
+                mb='24px'
+                onClick={logIn}>
+                Log In
+              </Button>
+
           </FormControl>
         </Flex>
       </Flex>

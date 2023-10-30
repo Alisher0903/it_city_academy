@@ -30,11 +30,23 @@ import Avatar3 from "assets/img/avatars/avatar3.png";
 import Avatar4 from "assets/img/avatars/avatar4.png";
 import tableDataTopCreators from "views/admin/marketplace/variables/tableDataTopCreators.json";
 import { tableColumnsTopCreators } from "views/admin/marketplace/variables/tableColumnsTopCreators";
+import axios from "axios";
+import { api } from "api/api";
+import { useState } from "react";
 
 export default function Marketplace() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
+  const [category, setCategory] = useState([])
+
+  function getCategory() {
+    axios.post(api + "/category").then(res => {
+      sessionStorage.setItem('jwtTokin', res.data.body);
+      console.log(res.data00);
+  }).catch(err => console.log(err))
+}
+getCategory()
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
@@ -90,112 +102,24 @@ export default function Marketplace() {
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
 
-              {/* cards */}
               <NFT
-                name='Abstract Colors'
-                // author='By Esthera Jackson'
+                name='Abstra'
                 bidders={[
-                  // Avatar1,
-                  // Avatar2,
-                  // Avatar3,
-                  // Avatar4,
-                  // Avatar1,
-                  // Avatar1,
-                  // Avatar1,
-                  // Avatar1,
                 ]}
                 image={Nft1}
-                // currentbid='0.91 ETH'
                 download='frontend'
               />
               <NFT
                 name='Abstract Colors'
-                // author='By Esthera Jackson'
                 bidders={[
-                  // Avatar1,
-                  // Avatar2,
-                  // Avatar3,
-                  // Avatar4,
-                  // Avatar1,
-                  // Avatar1,
-                  // Avatar1,
-                  // Avatar1,
                 ]}
                 image={Nft1}
-                // currentbid='0.91 ETH'
                 download='frontend'
               />
             </SimpleGrid>
           </Flex>
         </Flex>
-        {/* <Flex
-          flexDirection='column'
-          gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}>
-          <Card px='0px' mb='20px'>
-            <TableTopCreators
-              tableData={tableDataTopCreators}
-              columnsData={tableColumnsTopCreators}
-            />
-          </Card>
-          <Card p='0px'>
-            <Flex
-              align={{ sm: "flex-start", lg: "center" }}
-              justify='space-between'
-              w='100%'
-              px='22px'
-              py='18px'>
-              <Text color={textColor} fontSize='xl' fontWeight='600'>
-                History
-              </Text>
-              <Button variant='action'>See all</Button>
-            </Flex>
-
-            <HistoryItem
-              name='Colorful Heaven'
-              author='By Mark Benjamin'
-              date='30s ago'
-              image={Nft5}
-              price='0.91 ETH'
-            />
-            <HistoryItem
-              name='Abstract Colors'
-              author='By Esthera Jackson'
-              date='58s ago'
-              image={Nft1}
-              price='0.91 ETH'
-            />
-            <HistoryItem
-              name='ETH AI Brain'
-              author='By Nick Wilson'
-              date='1m ago'
-              image={Nft2}
-              price='0.91 ETH'
-            />
-            <HistoryItem
-              name='Swipe Circles'
-              author='By Peter Will'
-              date='1m ago'
-              image={Nft4}
-              price='0.91 ETH'
-            />
-            <HistoryItem
-              name='Mesh Gradients '
-              author='By Will Smith'
-              date='2m ago'
-              image={Nft3}
-              price='0.91 ETH'
-            />
-            <HistoryItem
-              name='3D Cubes Art'
-              author='By Manny Gates'
-              date='3m ago'
-              image={Nft6}
-              price='0.91 ETH'
-            />
-          </Card>
-        </Flex> */}
       </Grid>
-      {/* Delete Product */}
     </Box>
   );
 }
