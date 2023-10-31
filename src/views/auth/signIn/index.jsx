@@ -69,7 +69,7 @@ function SignIn() {
     let phoneNumber = document.getElementById('number').value;
     let password = document.getElementById('password').value;
     axios.post(api + "auth/login", { phoneNumber, password }).then(res => {
-      sessionStorage.setItem('jwtTokin', res.data.body);
+      sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
       // console.log(res.data.message);
 
       if (res.data.message == "ROLE_USER") {

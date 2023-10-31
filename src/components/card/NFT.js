@@ -16,10 +16,11 @@ import Card from "components/card/Card.js";
 import React, { useEffect, useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { toast } from "react-toastify";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function NFT(props) {
-  const { image, name, author, bidders, download, currentbid, categoryIdIn } = props;
+  const { image, name, author, bidders, download, currentbid, categoryIdIn, getCategory } = props;
   const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
@@ -45,27 +46,39 @@ export default function NFT(props) {
     const categoryObj = new FormData();
     categoryObj.append("image", document.getElementById("categoryImg").files[0]);
     categoryObj.append("name", document.getElementById("categoryTitle").value);
-    categoryObj.append("attachmentId", document.getElementById("attachmentId").value);
-    categoryObj.append("categoryId", document.getElementById("categoryId").value);
+    // categoryObj.append("attachmentId", document.getElementById("attachmentId").value);
+    // categoryObj.append("categoryId", document.getElementById("categoryId").value);
   }
 
   // edit category
-  const editcategory = () => {
+  const editCategory = () => {
     axios.put(api + categoryEdit, addcategoryObj, config)
+      .then(() => {
+        openEditModal();
+        toast.success("successfully saved category!")
+      }).catch(err => {
+        toast.error("error")
+        openEditModal();
+        console.log(err);
+      })
   }
 
   // delete category
   const deleteCategory = () => {
     console.log(categoryIdIn.id);
-    axios.delete(api + categoryDelete + categoryIdIn.id, config)
+    axios.delete(api + categoryDelete + categoryId.id, config)
       .then(() => {
         openDeleteModal();
+        toast.success("successfully saved category!")
+        getCategory();
       }).catch(err => {
         openDeleteModal();
+        toast.error("error");
         console.log(err);
       })
   }
 
+  console.log(categoryId.id);
 
   return (
     <Card p='20px'>
@@ -200,12 +213,12 @@ export default function NFT(props) {
               <ModalBody className="group__modal-body">
                 <Input type="file" id="categoryImg" />
                 <Input type="text" id="categoryTitle" placeholder="name" />
-                <Input type="number" id="attachmentId" placeholder="image_id" />
-                <Input type="number" id="categoryId" placeholder="category_id" />
+                {/* <Input type="number" id="attachmentId" placeholder="image_id" />
+                <Input type="number" id="categoryId" placeholder="category_id" /> */}
               </ModalBody>
               <ModalFooter>
                 <Button onClick={openEditModal} color="dark" outline>Orqaga</Button>
-                <Button color="success" outline>Saqlash</Button>
+                <Button color="success" outline onClick={editCategory}>Saqlash</Button>
               </ModalFooter>
             </Modal>
 
