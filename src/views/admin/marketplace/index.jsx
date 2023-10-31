@@ -54,7 +54,7 @@ export default function Marketplace() {
       .then(res => {
         setCategory(res.data.body)
       })
-    // .catch(err => console.log(err))
+    // .catch(err => consol e.log(err))
   }
 
   return (

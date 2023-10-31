@@ -13,7 +13,7 @@ import {
   RadioGroup,
   Stack,
 } from "@chakra-ui/react";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   useGlobalFilter,
   usePagination,
@@ -24,6 +24,8 @@ import {
 // Custom components
 import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
+import axios from "axios";
+import { api } from "api/api";
 export default function CheckTable(props) {
   const { columnsData, tableData } = props;
 
@@ -60,6 +62,30 @@ export default function CheckTable(props) {
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+  const [group, setGroup] = useState([]);
+
+
+
+  useEffect(() => {
+    getGroup();
+    postMessage();
+  }, []);
+
+  function getGroup() {
+    axios.get(api + "group")
+      .then(res => {
+        setGroup(res.data.body)
+      })
+    .catch(err => console.log(err))
+  }
+
+  function postMessage() {
+    axios.post(api + "group")
+      .then(res => {
+        setGroup(res.data.body)
+      })
+    .catch(err => console.log(err))
+  }
   return (
     <Card
       direction='column'
@@ -82,80 +108,57 @@ export default function CheckTable(props) {
           All
         </Checkbox>
       </Flex>
-      <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
+      <Table variant='simple' color='gray.500' mb='24px'>
         <Thead>
-          {headerGroups.map((headerGroup, index) => (
-            <Tr {...headerGroup.getHeaderGroupProps()} key={index}>
-              {headerGroup.headers.map((column, index) => (
-                <Th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
+            <Tr>
+                <Th  
                   pe='10px'
-                  key={index}
                   borderColor={borderColor}>
                   <Flex
                     justify='space-between'
                     align='center'
                     fontSize={{ sm: "10px", lg: "12px" }}
                     color='gray.400'>
-                    {column.render("Header")}
+                      Group name
                   </Flex>
                 </Th>
-              ))}
+                <Th  
+                  pe='10px'
+                  borderColor={borderColor}>
+                  <Flex
+                    justify='space-between'
+                    align='center'
+                    fontSize={{ sm: "10px", lg: "12px" }}
+                    color='gray.400'>
+                      Teacher name
+                  </Flex>
+                </Th>
             </Tr>
-          ))}
         </Thead>
-        <Tbody {...getTableBodyProps()}>
-          {page.map((row, index) => {
-            prepareRow(row);
-            return (
-              // <Stack pl={6} mt={1} spacing={1}>
-              <Tr {...row.getRowProps()} key={index}>
-               
-                {row.cells.map((cell, index) => {
-                  let data = "";
-                  if (cell.column.Header === "NAME") {
-                    data = (
+        <Tbody >
+              <Tr>
+                {group.length && group.map((item, i) => {
                       <Flex align='center'>
                           <Checkbox
-                            value={index+1}
+                            value={i+1}
                             colorScheme='brandScheme'
                             me='10px'
-                            
                           />
                         <Text color={textColor} fontSize='sm' fontWeight='700'>
-                          {cell.value[0]}
+                          {item.value[0]}
                         </Text>
                       </Flex>
-                    );
-                  } else if (cell.column.Header === "QUANTITY") {
-                    data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
-                    );
-                  } else if (cell.column.Header === "DATE") {
-                    data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
-                    );
-                  }
-              
                   return (
                     <Td
-                      {...cell.getCellProps()}
-                      key={index}
+                      key={i}
                       fontSize={{ sm: "14px" }}
                       minW={{ sm: "150px", md: "200px", lg: "auto" }}
                       borderColor='transparent'>
-                      {data}
+                        {item.name}
                     </Td>
                   );
                 })}
               </Tr>
-                    // {/* </Stack> */}
-            );
-          })}
         </Tbody>
       </Table>
     </Card>
