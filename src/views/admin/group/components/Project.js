@@ -32,6 +32,9 @@ export default function Project(props) {
   // modals
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+
+  const openAddModal = () => setAddModal(!addModal);
 
   const openEditModal = () => setEditModal(!editModal);
   const openDeleteModal = () => setDeleteModal(!deleteModal);
@@ -43,18 +46,19 @@ export default function Project(props) {
   }, []);
 
   function getGroup() {
-    axios.get(api + "group", config)
+    axios.get(api + "group")
       .then(res => {
-        setGroup(res.data)
+        setGroup(res.data.body)
+        console.log();
       })
       .catch(err => console.log(err))
   }
 
   return (
     <>
-    {group.length && group.map((item, i) => {
-    <Card bg={bg} key={i} p='14px'>
-      <Flex align='center' direction={{ base: "column", md: "row" }}>
+    {group.length && group.map((item, i) => 
+    <Card bg={bg} p='14px'>
+      <Flex align='center' key={i} direction={{ base: "column", md: "row" }}>
         <Image h='80px' w='80px' src="" borderRadius='8px' me='20px' />
         <Box mt={{ base: "10px", md: "0" }}>
           <Text
@@ -62,7 +66,7 @@ export default function Project(props) {
             fontWeight='500'
             fontSize='md'
             mb='4px'>
-            {item.name}
+            {item.name}tfyguhi
           </Text>
           <Text
             fontWeight='500'
@@ -126,7 +130,7 @@ export default function Project(props) {
       </Modal>
 
     </Card>
-    } )}
+    )}
     </>
 
 
