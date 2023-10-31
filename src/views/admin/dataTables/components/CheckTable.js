@@ -137,19 +137,21 @@ export default function CheckTable(props) {
       })}
 
       <Modal isOpen={editModal} centered size="lg" className="group__modals">
-        <ModalHeader toggle={openEditModal} className="group__modal-head">Group Edit</ModalHeader>
-        <ModalBody className="group__modal-body">
-          <Textarea  placeholder="Write message" style={{border: "1px solid black"}}/>
-          <Select icon={<MdArrowDropDown />} w="50%" style={{border: "1px solid black"}} display="inline-block" >
+        <ModalHeader toggle={openEditModal} className="group__modal-head">Send message</ModalHeader>
+        <ModalBody className="group__modal-body"> 
+        <Box display="flex" flexWrap="wrap">
+          <Textarea  placeholder="Write message" style={{border: "1px solid black"}} mb="20px"/>
+          <Select icon={<MdArrowDropDown />} w="50%" style={{border: "1px solid black"}}>
             <option selected disabled>select group</option>
           {group.length && group.map((item, i) => 
             <option value={i} key={i}>{item.name}</option>
           )} 
           </Select>
-          <Flex w="50%" display="flex" >
-            <Checkbox color="black"></Checkbox>
-            <Text>Send to all members of the group</Text>
+          <Flex w="50%">
+            <Checkbox color="black" border="black" ms="30px" me="5px"></Checkbox>
+            <Text mt="8px">Select all</Text>
           </Flex>
+        </Box>
         </ModalBody>
         <ModalFooter>
           <Button onClick={openEditModal} color="dark">Back</Button>
