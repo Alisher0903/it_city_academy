@@ -82,7 +82,7 @@ export default function CheckTable(props) {
   }, []);
 
   function getGroup() {
-    axios.get(api + "group?page=0&size=10", config)
+    axios.get(api + "message", config)
       .then(res => {
         setGroup(res.data.body.object)
       })
@@ -130,7 +130,7 @@ export default function CheckTable(props) {
             mb="20px"
             borderColor='transparent'>
             <Text color={textColor} fontSize='17px' fontWeight='700'>
-              {item.name}
+              {item.description}
             </Text>
           </Card>
         );
