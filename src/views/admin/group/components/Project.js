@@ -49,86 +49,84 @@ export default function Project(props) {
     axios.get(api + "group?page=0&size=10", config)
       .then(res => {
         setGroup(res.data.body.object)
-        console.log();
       })
       .catch(err => console.log(err))
   }
 
   return (
     <>
-    {group.length && group.map((item, i) => 
-    <Card bg={bg} p='14px' mb="10px">
-      <Flex align='center' key={i} direction={{ base: "column", md: "row" }}>
-        <Image h='80px' w='80px' src="" borderRadius='8px' me='20px' />
-        <Box mt={{ base: "10px", md: "0" }}>
-          <Text
-            color={textColorPrimary}
-            fontWeight='500'
-            fontSize='md'
-            mb='4px'>
-            {item.name}
-          </Text>
-          <Text
-            fontWeight='500'
-            color={textColorSecondary}
-            fontSize='sm'
-            me='4px'>
-            O'quvchilar soni: 12 {" "}
-            <p className="fw-medium" color={brandColor}>O'qituvchi: Teshayev Ketmon</p>
-          </Text>
-        </Box>
-        <Box ms="auto">
-          <Link
-            onClick={() => {
-              openEditModal();
-            }}
-            variant='no-hover'
-            ms='0px'
-            me="25px"
-            p='0px !important'>
-            <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' />
-          </Link>
-          <Link
-            onClick={() => {
-              openDeleteModal();
-            }}
-            variant='no-hover'
-            me='25px'
-            ms='0px'
-            p='0px !important'>
-            <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px' />
-          </Link>
-        </Box>
-      </Flex>
+      {group.length && group.map((item, i) =>
+        <Card bg={bg} p='14px' mb="10px">
+          <Flex align='center' key={i} direction={{ base: "column", md: "row" }}>
+            <Image h='80px' w='80px' src="" borderRadius='8px' me='20px' />
+            <Box mt={{ base: "10px", md: "0" }}>
+              <Text
+                color={textColorPrimary}
+                fontWeight='500'
+                fontSize='md'
+                mb='4px'>
+                {item.name}
+              </Text>
+              <Text
+                fontWeight='500'
+                color={textColorSecondary}
+                fontSize='sm'
+                me='4px'>
+                <p className="fw-medium" color={brandColor}>O'qituvchi: Teshayev Ketmon</p>
+              </Text>
+            </Box>
+            <Box ms="auto">
+              <Link
+                onClick={() => {
+                  openEditModal();
+                }}
+                variant='no-hover'
+                ms='0px'
+                me="25px"
+                p='0px !important'>
+                <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' />
+              </Link>
+              <Link
+                onClick={() => {
+                  openDeleteModal();
+                }}
+                variant='no-hover'
+                me='25px'
+                ms='0px'
+                p='0px !important'>
+                <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px' />
+              </Link>
+            </Box>
+          </Flex>
 
-      {/* modals */}
-      <Modal isOpen={editModal} centered size="lg" className="group__modals">
-        <ModalHeader toggle={openEditModal} className="group__modal-head">Group Edit</ModalHeader>
-        <ModalBody className="group__modal-body">
-          <Input type="file" />
-          <Input type="number" placeholder="O'quvchilar soni" />
-          <Input type="text" placeholder="O'qituvchi: FIO" />
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={openEditModal} color="dark">Orqaga</Button>
-          <Button color="success">Saqlash</Button>
-        </ModalFooter>
-      </Modal>
+          {/* modals */}
+          <Modal isOpen={editModal} centered size="lg" className="group__modals">
+            <ModalHeader toggle={openEditModal} className="group__modal-head">Group Edit</ModalHeader>
+            <ModalBody className="group__modal-body">
+              <Input type="file" />
+              <Input type="number" placeholder="O'quvchilar soni" />
+              <Input type="text" placeholder="O'qituvchi: FIO" />
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={openEditModal} color="dark">Orqaga</Button>
+              <Button color="success">Saqlash</Button>
+            </ModalFooter>
+          </Modal>
 
-      {/* delete modal */}
-      <Modal isOpen={deleteModal} centered className="group__modals">
-        <ModalHeader toggle={openDeleteModal} className="group__modal-head">Group Delete</ModalHeader>
-        <ModalBody className="group__modal-body">
-          <p>Bu guruhni o'chirmoqchimisiz?</p>
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={openDeleteModal} color="dark">Orqaga</Button>
-          <Button color="danger">Ha</Button>
-        </ModalFooter>
-      </Modal>
+          {/* delete modal */}
+          <Modal isOpen={deleteModal} centered className="group__modals">
+            <ModalHeader toggle={openDeleteModal} className="group__modal-head">Group Delete</ModalHeader>
+            <ModalBody className="group__modal-body">
+              <p>Bu guruhni o'chirmoqchimisiz?</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={openDeleteModal} color="dark">Orqaga</Button>
+              <Button color="danger">Ha</Button>
+            </ModalFooter>
+          </Modal>
 
-    </Card>
-    )}
+        </Card>
+      )}
     </>
 
 
