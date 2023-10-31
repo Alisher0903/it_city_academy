@@ -42,24 +42,28 @@ export default function NFT(props) {
   }, []);
 
   // categoryObj
-  const addcategoryObj = () => {
-    const categoryObj = new FormData();
-    categoryObj.append("image", document.getElementById("categoryImg").files[0]);
-    categoryObj.append("name", document.getElementById("categoryTitle").value);
-    // categoryObj.append("attachmentId", document.getElementById("attachmentId").value);
-    // categoryObj.append("categoryId", document.getElementById("categoryId").value);
-  }
+  // const addcategoryObj = () => {
+  //   const categoryObj = new FormData();
+  //   categoryObj.append("image", document.getElementById("categoryImg").files[0]);
+  //   categoryObj.append("name", document.getElementById("categoryTitle").value);
+  //   // categoryObj.append("attachmentId", document.getElementById("attachmentId").value);
+  //   // categoryObj.append("categoryId", document.getElementById("categoryId").value);
+  //   return categoryObj;
+  // }
 
   // edit category
   const editCategory = () => {
-    axios.put(api + categoryEdit, addcategoryObj, config)
+    axios.put(api + categoryEdit + categoryId.id,
+      {
+        name: document.getElementById("categoryTitle").value,
+        attachmentId: 0,
+        categoryId: 0
+      },
+      config)
       .then(() => {
         openEditModal();
+        getCategory();
         toast.success("successfully saved category!")
-      }).catch(err => {
-        toast.error("error")
-        openEditModal();
-        console.log(err);
       })
   }
 
@@ -71,14 +75,8 @@ export default function NFT(props) {
         openDeleteModal();
         toast.success("successfully saved category!")
         getCategory();
-      }).catch(err => {
-        openDeleteModal();
-        toast.error("error");
-        console.log(err);
       })
   }
-
-  console.log(categoryId.id);
 
   return (
     <Card p='20px'>
@@ -187,6 +185,7 @@ export default function NFT(props) {
               <Link
                 onClick={() => {
                   openEditModal();
+                  setCategoryId(categoryIdIn);
                 }}
                 variant='no-hover'
                 ms='0px'

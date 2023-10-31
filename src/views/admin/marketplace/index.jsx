@@ -35,6 +35,8 @@ import { api } from "api/api";
 import { useState } from "react";
 import { imgUrl } from "api/api";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { categoryAdd } from "api/api";
+import { config } from "api/api";
 
 export default function Marketplace() {
   // Chakra Color Mode
@@ -58,7 +60,18 @@ export default function Marketplace() {
   }
 
   const addCategory = () => {
-    const 
+
+    axios.post(api + categoryAdd,
+      {
+        name: document.getElementById("title").value,
+        attachmentId: 0,
+        categoryId: 0
+      },
+      config)
+      .then(() => {
+        openAddModal();
+        getCategory();
+      })
   }
 
   return (
@@ -105,7 +118,7 @@ export default function Marketplace() {
                   </ModalBody>
                   <ModalFooter>
                     <Button color="dark" outline onClick={openAddModal}>Orqaga</Button>
-                    <Button color="success" outline>Saqlash</Button>
+                    <Button color="success" outline onClick={addCategory}>Saqlash</Button>
                   </ModalFooter>
                 </Modal>
                 {/* <Link
