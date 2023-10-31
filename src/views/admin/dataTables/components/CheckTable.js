@@ -78,6 +78,8 @@ export default function CheckTable(props) {
       .catch(err => console.log(err))
   }
 
+  console.log(group);
+
   return (
     <Card
       direction='column'
