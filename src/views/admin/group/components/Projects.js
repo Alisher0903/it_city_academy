@@ -2,8 +2,6 @@
 import { Text, useColorModeValue } from "@chakra-ui/react";
 // Assets
 import Project1 from "assets/img/profile/Project1.png";
-import Project2 from "assets/img/profile/Project2.png";
-import Project3 from "assets/img/profile/Project3.png";
 // Custom components
 import Card from "components/card/Card.js";
 import React from "react";
@@ -27,10 +25,7 @@ export default function Projects(props) {
         mb='10px'>
         Group
       </Text>
-      {/* <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
-        Here you can find more details about your projects. Keep you user
-        engaged by providing meaningful information.
-      </Text> */}
+     
       <Project
         boxShadow={cardShadow}
         mb='20px'
@@ -38,21 +33,7 @@ export default function Projects(props) {
         ranking='10'
         title='Front End'
       />
-      {/* <Project
-        boxShadow={cardShadow}
-        mb='20px'
-        image={Project2}
-        ranking='2'
-        link='#'
-        title='Greatest way to a good Economy'
-      />
-      <Project
-        boxShadow={cardShadow}
-        image={Project3}
-        ranking='3'
-        link='#'
-        title='Most essential tips for Burnout'
-      /> */}
+      
     </Card>
   );
 }
