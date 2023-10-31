@@ -15,6 +15,10 @@ import React, { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "./scss/group.scss";
+import axios from "axios";
+import { api } from "api/api";
+import { useEffect } from "react";
+import { config } from "api/api";
 
 export default function Project(props) {
 
@@ -31,27 +35,41 @@ export default function Project(props) {
 
   const openEditModal = () => setEditModal(!editModal);
   const openDeleteModal = () => setDeleteModal(!deleteModal);
+  const [group, setGroup] = useState([]);
+
+
+  useEffect(() => {
+    getGroup();
+  }, []);
+
+  function getGroup() {
+    axios.get(api + "group", config)
+      .then(res => {
+        setGroup(res.data)
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
-    <Card bg={bg} {...rest} p='14px'>
+    <>
+    {group.length && group.map((item, i) => {
+    <Card bg={bg} key={i} p='14px'>
       <Flex align='center' direction={{ base: "column", md: "row" }}>
-        <Image h='80px' w='80px' src={image} borderRadius='8px' me='20px' />
+        <Image h='80px' w='80px' src="" borderRadius='8px' me='20px' />
         <Box mt={{ base: "10px", md: "0" }}>
           <Text
             color={textColorPrimary}
             fontWeight='500'
             fontSize='md'
             mb='4px'>
-            {title}
+            {item.name}
           </Text>
           <Text
             fontWeight='500'
             color={textColorSecondary}
             fontSize='sm'
             me='4px'>
-            O'quvchilar soni: {ranking} {" "}
-            {/* <Link className="ms-2" fontWeight='500' color={brandColor} href={link} fontSize='sm'> */}
-            {/* </Link> */}
+            O'quvchilar soni: 12 {" "}
             <p className="fw-medium" color={brandColor}>O'qituvchi: Teshayev Ketmon</p>
           </Text>
         </Box>
@@ -60,7 +78,7 @@ export default function Project(props) {
             onClick={() => {
               openEditModal();
             }}
-            href={link}
+            href=""
             variant='no-hover'
             ms='0px'
             me="25px"
@@ -71,7 +89,7 @@ export default function Project(props) {
             onClick={() => {
               openDeleteModal();
             }}
-            href={link}
+            href=""
             variant='no-hover'
             me='25px'
             ms='0px'
@@ -108,5 +126,9 @@ export default function Project(props) {
       </Modal>
 
     </Card>
+    } )}
+    </>
+
+
   );
 }

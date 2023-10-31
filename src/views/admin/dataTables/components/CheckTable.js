@@ -26,6 +26,7 @@ import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
 import axios from "axios";
 import { api } from "api/api";
+import { config } from "api/api";
 export default function CheckTable(props) {
   const { columnsData, tableData } = props;
 
@@ -65,10 +66,8 @@ export default function CheckTable(props) {
   const [group, setGroup] = useState([]);
 
 
-
   useEffect(() => {
     getGroup();
-    postMessage();
   }, []);
 
   function getGroup() {
@@ -76,16 +75,9 @@ export default function CheckTable(props) {
       .then(res => {
         setGroup(res.data.body)
       })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
 
-  function postMessage() {
-    axios.post(api + "group")
-      .then(res => {
-        setGroup(res.data.body)
-      })
-    .catch(err => console.log(err))
-  }
   return (
     <Card
       direction='column'
@@ -110,55 +102,57 @@ export default function CheckTable(props) {
       </Flex>
       <Table variant='simple' color='gray.500' mb='24px'>
         <Thead>
-            <Tr>
-                <Th  
-                  pe='10px'
-                  borderColor={borderColor}>
-                  <Flex
-                    justify='space-between'
-                    align='center'
-                    fontSize={{ sm: "10px", lg: "12px" }}
-                    color='gray.400'>
-                      Group name
-                  </Flex>
-                </Th>
-                <Th  
-                  pe='10px'
-                  borderColor={borderColor}>
-                  <Flex
-                    justify='space-between'
-                    align='center'
-                    fontSize={{ sm: "10px", lg: "12px" }}
-                    color='gray.400'>
-                      Teacher name
-                  </Flex>
-                </Th>
-            </Tr>
+          <Tr>
+            <Th
+              pe='10px'
+              borderColor={borderColor}>
+              <Flex
+                justify='space-between'
+                align='center'
+                fontSize={{ sm: "10px", lg: "12px" }}
+                color='gray.400'>
+                Group name
+              </Flex>
+            </Th>
+            <Th
+              pe='10px'
+              borderColor={borderColor}>
+              <Flex
+                justify='space-between'
+                align='center'
+                fontSize={{ sm: "10px", lg: "12px" }}
+                color='gray.400'>
+                Teacher name
+              </Flex>
+            </Th>
+          </Tr>
         </Thead>
         <Tbody >
-              <Tr>
-                {group.length && group.map((item, i) => {
-                      <Flex align='center'>
-                          <Checkbox
-                            value={i+1}
-                            colorScheme='brandScheme'
-                            me='10px'
-                          />
-                        <Text color={textColor} fontSize='sm' fontWeight='700'>
-                          {item.value[0]}
-                        </Text>
-                      </Flex>
-                  return (
-                    <Td
-                      key={i}
-                      fontSize={{ sm: "14px" }}
-                      minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                      borderColor='transparent'>
-                        {item.name}
-                    </Td>
-                  );
-                })}
-              </Tr>
+          <Tr>
+            {group.length && group.map((item, i) => {
+              // <Flex align='center'>
+              //   <Checkbox
+              //     value={i + 1}
+              //     colorScheme='brandScheme'
+              //     me='10px'
+              //   />
+              //   <Text color={textColor} fontSize='sm' fontWeight='700'>
+              //     {item.value[0]}
+              //   </Text>
+              // </Flex>
+              // return (
+                <Td
+                  key={i}
+                  fontSize={{ sm: "14px" }}
+                  minW={{ sm: "150px", md: "200px", lg: "auto" }}
+                  borderColor='transparent'>
+                  <Text color={textColor} fontSize='sm' fontWeight='700'>
+                    {item.name}
+                  </Text>
+                </Td>
+              // );
+            })}
+          </Tr>
         </Tbody>
       </Table>
     </Card>
