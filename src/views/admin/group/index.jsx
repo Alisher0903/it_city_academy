@@ -21,26 +21,15 @@
   |___|            \___\
 */
 
-// Chakra imports
-import { Box, Grid } from "@chakra-ui/react";
-
-// Custom components
-import Banner from "views/admin/profile/components/Banner";
-import General from "views/admin/profile/components/General";
-import Notifications from "views/admin/profile/components/Notifications";
-import Storage from "views/admin/profile/components/Storage";
-import Upload from "views/admin/profile/components/Upload";
-import Projects from "./components/Projects";
-
-// Assets
 import React from "react";
+import { Box, Grid } from "@chakra-ui/react";
+import Projects from "./components/Projects";
 
 export default function Group() {
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }} maxH={{base: "100px"}}>
+    <Box pt={{ base: "130px", md: "80px", xl: "80px" }} maxH={{ base: "100px" }}>
       <Grid>
         <Projects />
-       
       </Grid>
     </Box>
   );
