@@ -35,6 +35,7 @@ import { api } from "api/api";
 import { useState } from "react";
 import { imgUrl } from "api/api";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { config } from "api/api";
 
 export default function Marketplace() {
   // Chakra Color Mode
@@ -50,7 +51,7 @@ export default function Marketplace() {
   }, []);
 
   function getCategory() {
-    axios.get(api + "category")
+    axios.get(api + "category", config)
       .then(res => {
         setCategory(res.data.body)
       })
@@ -58,7 +59,7 @@ export default function Marketplace() {
   }
 
   const addCategory = () => {
-    const 
+    // const 
   }
 
   return (

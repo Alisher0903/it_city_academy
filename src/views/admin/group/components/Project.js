@@ -46,9 +46,9 @@ export default function Project(props) {
   }, []);
 
   function getGroup() {
-    axios.get(api + "group")
+    axios.get(api + "group?page=0&size=10", config)
       .then(res => {
-        setGroup(res.data.body)
+        setGroup(res.data.body.object)
         console.log();
       })
       .catch(err => console.log(err))
@@ -57,7 +57,7 @@ export default function Project(props) {
   return (
     <>
     {group.length && group.map((item, i) => 
-    <Card bg={bg} p='14px'>
+    <Card bg={bg} p='14px' mb="10px">
       <Flex align='center' key={i} direction={{ base: "column", md: "row" }}>
         <Image h='80px' w='80px' src="" borderRadius='8px' me='20px' />
         <Box mt={{ base: "10px", md: "0" }}>
@@ -66,7 +66,7 @@ export default function Project(props) {
             fontWeight='500'
             fontSize='md'
             mb='4px'>
-            {item.name}tfyguhi
+            {item.name}
           </Text>
           <Text
             fontWeight='500'
@@ -82,7 +82,6 @@ export default function Project(props) {
             onClick={() => {
               openEditModal();
             }}
-            href=""
             variant='no-hover'
             ms='0px'
             me="25px"
@@ -93,7 +92,6 @@ export default function Project(props) {
             onClick={() => {
               openDeleteModal();
             }}
-            href=""
             variant='no-hover'
             me='25px'
             ms='0px'

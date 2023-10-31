@@ -26,10 +26,10 @@ export default function Settings() {
         columns={{ sm: 1, md: 1 }}
         spacing={{ base: "20px", xl: "20px" }}>
         <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
-        <ColumnsTable
+        {/* <ColumnsTable
           columnsData={columnsDataColumns}
           tableData={tableDataColumns}
-        />
+        /> */}
       </SimpleGrid>
     </Box>
   );
