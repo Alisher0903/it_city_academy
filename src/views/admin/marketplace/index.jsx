@@ -57,6 +57,10 @@ export default function Marketplace() {
     // .catch(err => consol e.log(err))
   }
 
+  const addCategory = () => {
+    const 
+  }
+
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
@@ -92,12 +96,12 @@ export default function Marketplace() {
                   className="px-4 py-2 fw-medium rounded-5">
                   Add Category
                 </Button>
-                <Modal isOpen={addModal} centered size="lg">
-                  <ModalHeader toggle={openAddModal}>Add Category</ModalHeader>
-                  <ModalBody>
+                <Modal isOpen={addModal} className="group__modals" centered size="lg">
+                  <ModalHeader toggle={openAddModal} className="group__modal-head">Add Category</ModalHeader>
+                  <ModalBody className="group__modal-body">
                     <Input type="file" />
-                    <Input placeholder="title" />
-                    <Input type="number" placeholder="category id" />
+                    <Input placeholder="title" id="title" />
+                    {/* <Input type="number" placeholder="category id" /> */}
                   </ModalBody>
                   <ModalFooter>
                     <Button color="dark" outline onClick={openAddModal}>Orqaga</Button>
@@ -134,6 +138,9 @@ export default function Marketplace() {
 
               {category.length && category.map((item, i) =>
                 <NFT
+                  categoryIdIn={item}
+                  getCategory={getCategory}
+                  key={i}
                   name={item.name}
                   bidders={[]}
                   image={imgUrl + item.attachmentId}
