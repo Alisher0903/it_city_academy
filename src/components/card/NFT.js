@@ -10,14 +10,16 @@ import {
   Link,
   Icon,
 } from "@chakra-ui/react";
+import { categoryDelete, categoryEdit, config, api } from "api/api";
+import axios from "axios";
 import Card from "components/card/Card.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function NFT(props) {
-  const { image, name, author, bidders, download, currentbid } = props;
+  const { image, name, author, bidders, download, currentbid, categoryIdIn } = props;
   const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
@@ -25,9 +27,45 @@ export default function NFT(props) {
   // modals
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [category, setCategory] = useState([]);
+  const [categoryId, setCategoryId] = useState("");
 
   const openEditModal = () => setEditModal(!editModal);
   const openDeleteModal = () => setDeleteModal(!deleteModal);
+
+  useEffect(() => {
+    axios.get(api + "category")
+      .then(res => {
+        setCategory(res.data.body)
+      })
+  }, []);
+
+  // categoryObj
+  const addcategoryObj = () => {
+    const categoryObj = new FormData();
+    categoryObj.append("image", document.getElementById("categoryImg").files[0]);
+    categoryObj.append("name", document.getElementById("categoryTitle").value);
+    categoryObj.append("attachmentId", document.getElementById("attachmentId").value);
+    categoryObj.append("categoryId", document.getElementById("categoryId").value);
+  }
+
+  // edit category
+  const editcategory = () => {
+    axios.put(api + categoryEdit, addcategoryObj, config)
+  }
+
+  // delete category
+  const deleteCategory = () => {
+    console.log(categoryIdIn.id);
+    axios.delete(api + categoryDelete + categoryIdIn.id, config)
+      .then(() => {
+        openDeleteModal();
+      }).catch(err => {
+        openDeleteModal();
+        console.log(err);
+      })
+  }
+
 
   return (
     <Card p='20px'>
@@ -130,6 +168,8 @@ export default function NFT(props) {
               "2xl": "row",
             }}
             mt='5px'>
+
+            {/* edit delete category link */}
             <Box ms="auto">
               <Link
                 onClick={() => {
@@ -144,6 +184,7 @@ export default function NFT(props) {
               <Link
                 onClick={() => {
                   openDeleteModal();
+                  setCategoryId(categoryIdIn);
                 }}
                 variant='no-hover'
                 me='25px'
@@ -157,9 +198,10 @@ export default function NFT(props) {
             <Modal isOpen={editModal} centered size="lg" className="group__modals">
               <ModalHeader toggle={openEditModal} className="group__modal-head">Edit Category</ModalHeader>
               <ModalBody className="group__modal-body">
-                <Input type="file" />
-                <Input type="text" placeholder="title" />
-                <Input type="number" placeholder="category id" />
+                <Input type="file" id="categoryImg" />
+                <Input type="text" id="categoryTitle" placeholder="name" />
+                <Input type="number" id="attachmentId" placeholder="image_id" />
+                <Input type="number" id="categoryId" placeholder="category_id" />
               </ModalBody>
               <ModalFooter>
                 <Button onClick={openEditModal} color="dark" outline>Orqaga</Button>
@@ -175,7 +217,7 @@ export default function NFT(props) {
               </ModalBody>
               <ModalFooter>
                 <Button onClick={openDeleteModal} color="dark" outline>Orqaga</Button>
-                <Button color="danger" outline>Ha</Button>
+                <Button color="danger" outline onClick={deleteCategory}>Ha</Button>
               </ModalFooter>
             </Modal>
             {/* <Text fontWeight='700' fontSize='sm' color={textColorBid}>
