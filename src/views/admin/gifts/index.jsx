@@ -8,6 +8,7 @@ import NFT from "components/card/NFT";
 import axios from "axios";
 import {addImage, api, config, giftAdd, imgUrl} from "api/api";
 import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import Gift from "components/card/Gift";
 
 export default function Gifts() {
     // Chakra Color Mode
@@ -108,7 +109,7 @@ export default function Gifts() {
                         <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
 
                             {gift.length && gift.map((item, i) =>
-                                <NFT
+                                <Gift
                                     giftIdIn={item}
                                     getGifts={getGifts}
                                     key={i}
