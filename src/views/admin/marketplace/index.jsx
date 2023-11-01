@@ -21,6 +21,7 @@ import { imgUrl } from "api/api";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { categoryAdd } from "api/api";
 import { config } from "api/api";
+import { addImage } from "api/api";
 
 export default function Marketplace() {
   // Chakra Color Mode
@@ -45,7 +46,10 @@ export default function Marketplace() {
 
   const addCategory = () => {
     // const 
+    const img = new FormData();
 
+    img.append('file', document.getElementById('img').files[0]);
+    addImage(img)
     axios.post(api + categoryAdd,
       {
         name: document.getElementById("title").value,
@@ -97,7 +101,7 @@ export default function Marketplace() {
                 <Modal isOpen={addModal} className="group__modals" centered size="lg">
                   <ModalHeader toggle={openAddModal} className="group__modal-head">Add Category</ModalHeader>
                   <ModalBody className="group__modal-body">
-                    <Input type="file" />
+                    <Input type="file" id="img" />
                     <Input placeholder="title" id="title" />
                     {/* <Input type="number" placeholder="category id" /> */}
                   </ModalBody>

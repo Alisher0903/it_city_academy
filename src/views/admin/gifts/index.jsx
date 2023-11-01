@@ -22,6 +22,7 @@ import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "react
 import { categoryAdd } from "api/api";
 import { config } from "api/api";
 import { giftAdd } from "api/api";
+import { addImage } from "api/api";
 
 export default function Gifts() {
   // Chakra Color Mode
@@ -44,9 +45,12 @@ export default function Gifts() {
     // .catch(err => consol e.log(err))
   }
 
-  const addCategory = () => {
-    // const 
+  const addGift = () => {
+    // const  
+    const img = new FormData();
 
+    img.append('file', document.getElementById('img').files[0]);
+    addImage(img)
     axios.post(api + giftAdd,
       {
         name: document.getElementById("title").value,
@@ -99,7 +103,7 @@ export default function Gifts() {
                   <ModalHeader toggle={openAddModal} className="group__modal-head">Add gift</ModalHeader>
                   <ModalBody className="group__modal-body">
                     <Box>
-                      <Input type="file" />
+                      <Input type="file" id="img" />
                       <Input placeholder="name" id="title" />
                       <Input placeholder="description" id="description" />
                       <Input placeholder="rate" id="rate" />
@@ -108,7 +112,7 @@ export default function Gifts() {
                   </ModalBody>
                   <ModalFooter>
                     <Button color="dark" outline onClick={openAddModal}>Back</Button>
-                    <Button color="success" outline onClick={addCategory}>Save</Button>
+                    <Button color="success" outline onClick={addGift}>Save</Button>
                   </ModalFooter>
                 </Modal>
               </Flex>
