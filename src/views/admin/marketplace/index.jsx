@@ -7,13 +7,7 @@ import {
   useColorModeValue,
   SimpleGrid,
 } from "@chakra-ui/react";
-
-// Custom components
-
 import NFT from "components/card/NFT";
-
-// Assets
-
 import axios from "axios";
 import { api } from "api/api";
 import { useState } from "react";
@@ -28,6 +22,7 @@ export default function Marketplace() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const [category, setCategory] = useState([]);
+  const [imageId, setImageId] = useState(0);
   const [addModal, setAddModal] = useState(false);
 
   const openAddModal = () => setAddModal(!addModal);
@@ -36,27 +31,26 @@ export default function Marketplace() {
     getCategory();
   }, []);
 
+  // get category
   function getCategory() {
     axios.get(api + "category", config)
       .then(res => {
         setCategory(res.data.body)
       })
-    // .catch(err => consol e.log(err))
   }
 
-  const addCategory = () => {
-    // const 
+  // add category
+  const addCategory = async () => {
     const img = new FormData();
 
     img.append('file', document.getElementById('img').files[0]);
-    addImage(img)
-    axios.post(api + categoryAdd,
-      {
-        name: document.getElementById("title").value,
-        attachmentId: 0,
-        categoryId: 0
-      },
-      config)
+    await addImage(img, setImageId);
+    let dataCategory = {
+      name: document.getElementById("title").value,
+      attachmentId: imageId,
+      categoryId: 0
+    }
+    await axios.post(api + categoryAdd, dataCategory, config)
       .then(() => {
         openAddModal();
         getCategory();
@@ -65,7 +59,6 @@ export default function Marketplace() {
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-      {/* Main Fields */}
       <Grid
         mb='20px'
         gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
@@ -74,7 +67,6 @@ export default function Marketplace() {
         <Flex
           flexDirection='column'
           gridArea={{ xl: "1 / 1 / 2 / 4", "2xl": "1 / 1 / 2 / 3" }}>
-          {/* <Banner /> */}
           <Flex direction='column'>
             <Flex
               mt='45px'
@@ -103,41 +95,15 @@ export default function Marketplace() {
                   <ModalBody className="group__modal-body">
                     <Input type="file" id="img" />
                     <Input placeholder="title" id="title" />
-                    {/* <Input type="number" placeholder="category id" /> */}
                   </ModalBody>
                   <ModalFooter>
-                    <Button color="dark" outline onClick={openAddModal}>Orqaga</Button>
-                    <Button color="success" outline onClick={addCategory}>Saqlash</Button>
+                    <Button color="dark" outline onClick={openAddModal}>Close</Button>
+                    <Button color="success" outline onClick={addCategory}>Save</Button>
                   </ModalFooter>
                 </Modal>
-                {/* <Link
-                  color={textColorBrand}
-                  fontWeight='500'
-                  me={{ base: "34px", md: "44px" }}
-                  to='#art'>
-                  All
-                </Link>
-                <Link
-                  color={textColorBrand}
-                  fontWeight='500'
-                  me={{ base: "34px", md: "44px" }}
-                  to='#music'>
-                  Front End
-                </Link>
-                <Link
-                  color={textColorBrand}
-                  fontWeight='500'
-                  me={{ base: "34px", md: "44px" }}
-                  to='#collectibles'>
-                  Back End
-                </Link>
-                <Link color={textColorBrand} fontWeight='500' to='#sports'>
-                  3D Max
-                </Link> */}
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
-
               {category.length && category.map((item, i) =>
                 <NFT
                   categoryIdIn={item}
@@ -149,7 +115,6 @@ export default function Marketplace() {
                 // download='frontend'
                 />
               )}
-
             </SimpleGrid>
           </Flex>
         </Flex>

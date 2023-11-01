@@ -41,16 +41,6 @@ export default function NFT(props) {
       })
   }, []);
 
-  // categoryObj
-  // const addcategoryObj = () => {
-  //   const categoryObj = new FormData();
-  //   categoryObj.append("image", document.getElementById("categoryImg").files[0]);
-  //   categoryObj.append("name", document.getElementById("categoryTitle").value);
-  //   // categoryObj.append("attachmentId", document.getElementById("attachmentId").value);
-  //   // categoryObj.append("categoryId", document.getElementById("categoryId").value);
-  //   return categoryObj;
-  // }
-
   // edit category
   const editCategory = () => {
     axios.put(api + categoryEdit + categoryId.id,
@@ -88,7 +78,6 @@ export default function NFT(props) {
             h={{ base: "100%", "3xl": "100%" }}
             borderRadius='20px'
           />
-
           {/* category like btn */}
           {/* <Button
             position='absolute'
