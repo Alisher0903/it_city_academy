@@ -42,9 +42,9 @@ export default function Marketplace() {
   // add category
   const addCategory = async () => {
     const img = new FormData();
-
     img.append('file', document.getElementById('img').files[0]);
     await addImage(img, setImageId);
+    console.log("attachment-id: " + imageId)
     let dataCategory = {
       name: document.getElementById("title").value,
       attachmentId: imageId,
@@ -56,6 +56,26 @@ export default function Marketplace() {
         getCategory();
       })
   }
+  // async function addGift() {
+  //   const img = new FormData();
+  //   img.append('file', document.getElementById('img').files[0]);
+
+  //   axios.post(api + "attachment/upload", img, config)
+  //     .then(res => {
+  //       console.log(res.data.body)
+  //       axios.post(api + giftAdd, {
+  //         name: document.getElementById("title").value,
+  //         attachmentId: res.data.body,
+  //         categoryId: 0,
+  //         description: document.getElementById('description').value,
+  //         rate: document.getElementById('rate').value
+  //       }, config)
+  //         .then(() => {
+  //           openAddModal();
+  //           getGifts();
+  //         });
+  //     });
+  // }
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
