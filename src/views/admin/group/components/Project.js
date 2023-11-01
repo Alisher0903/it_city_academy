@@ -32,19 +32,24 @@ export default function Project(props) {
   // modals
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [addModal, setAddModal] = useState(false);
-
-  const openAddModal = () => setAddModal(!addModal);
+  const [group, setGroup] = useState([]);
+  const [category, setCategory] = useState([]);
 
   const openEditModal = () => setEditModal(!editModal);
   const openDeleteModal = () => setDeleteModal(!deleteModal);
-  const [group, setGroup] = useState([]);
 
 
   useEffect(() => {
     getGroup();
+    getCategory();
   }, []);
 
+  // get category
+  const getCategory = () => {
+    axios.get(api + "category").then(res => setCategory(res.data.body));
+  }
+
+  // get group
   function getGroup() {
     axios.get(api + "group?page=0&size=10", config)
       .then(res => {
@@ -99,29 +104,37 @@ export default function Project(props) {
             </Box>
           </Flex>
 
-          {/* modals */}
+          {/* edit modal */}
           <Modal isOpen={editModal} centered size="lg" className="group__modals">
-            <ModalHeader toggle={openEditModal} className="group__modal-head">Group Edit</ModalHeader>
+            <ModalHeader className="group__modal-head" toggle={openEditModal}>Edit Group</ModalHeader>
             <ModalBody className="group__modal-body">
-              <Input type="file" />
-              <Input type="number" placeholder="O'quvchilar soni" />
-              <Input type="text" placeholder="O'qituvchi: FIO" />
+              <Input id="groupFile" type="file" />
+              <Input id="groupName" type="number" placeholder="Group name" />
+              <Input id="groupFIO" type="text" placeholder="Teacher: FIO" />
+              <select className="form-select" id="groupCategory">
+                <option selected disabled>Category</option>
+                {
+                  category.map((item, i) =>
+                    <option key={i} value={item.id}>{item.name}</option>
+                  )
+                }
+              </select>
             </ModalBody>
             <ModalFooter>
-              <Button onClick={openEditModal} color="dark">Orqaga</Button>
-              <Button color="success">Saqlash</Button>
+              <Button color="dark" onClick={openEditModal} outline>Close</Button>
+              <Button color="success" outline>Save</Button>
             </ModalFooter>
           </Modal>
 
           {/* delete modal */}
           <Modal isOpen={deleteModal} centered className="group__modals">
-            <ModalHeader toggle={openDeleteModal} className="group__modal-head">Group Delete</ModalHeader>
+            <ModalHeader toggle={openDeleteModal} className="group__modal-head">Delete Group</ModalHeader>
             <ModalBody className="group__modal-body">
               <p>Bu guruhni o'chirmoqchimisiz?</p>
             </ModalBody>
             <ModalFooter>
-              <Button onClick={openDeleteModal} color="dark">Orqaga</Button>
-              <Button color="danger">Ha</Button>
+              <Button onClick={openDeleteModal} color="dark">Close</Button>
+              <Button color="danger">Ok</Button>
             </ModalFooter>
           </Modal>
 
