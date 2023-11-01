@@ -14,6 +14,7 @@ import "./homeStyle.scss";
 import banner from "../../assets/img/homeImage/banner.png"
 import { Button, Col, Container, Row } from 'reactstrap';
 import { Icon } from '@iconify/react';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 // Custom Chakra theme
 export default function DashboardHome(props) {
@@ -25,6 +26,8 @@ export default function DashboardHome(props) {
 	const getRoute = () => {
 		return window.location.pathname !== '/Home/full-screen-maps';
 	};
+	const login = () => document.getElementById("login").click();
+
 	const getActiveRoute = (routes) => {
 		let activeRoute = 'Default Brand Text';
 		for (let i = 0; i < routes.length; i++) {
@@ -160,13 +163,16 @@ export default function DashboardHome(props) {
 														<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde id
 															sunt adipisci aperiam aspernatur vel cum, reprehenderit similique
 															suscipit qui!</p>
-														<button
-															color='warning'
-															outline
-															className=' px-5 py-2 fs-5 btn btn-outline-primary'>
-															Kirish
-															<Icon className='d-inline ms-2' icon="lucide:move-right" />
-														</button>
+														<Link to="/auth" id='login'></Link>
+															<button
+																color='warning'
+																outline
+																onClick={login}
+																className=' px-5 py-2 fs-5 btn btn-outline-primary'>
+																Kirish
+																<Icon className='d-inline ms-2' icon="lucide:move-right" />
+															</button>
+														
 													</Col>
 													<Col className='col-12 col-lg-7 mt-5 mt-lg-0 home__box-banner'>
 														<img src={banner} className='w-75' alt="bannerImg" />
@@ -207,9 +213,9 @@ export default function DashboardHome(props) {
 																<p>Lorem, ipsum dolor.</p>
 															</div>
 														</div>
-														
-														
-														
+
+
+
 													</div>
 												</div>
 											</Container>

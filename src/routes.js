@@ -7,6 +7,7 @@ import {
   MdHome,
   MdPerson3,
   MdOutlineMenuBook,
+  MdCardGiftcard,
 } from "react-icons/md";
 
 // Admin Imports
@@ -19,6 +20,7 @@ import Profile from "views/admin/profile";
 
 // Auth Imports
 import SignIn from "views/auth/signIn";
+import Gifts from "views/admin/gifts";
 
 const routes = [
   {
@@ -70,6 +72,13 @@ const routes = [
     path: "/sign-in",
     icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
     component: SignIn
+  },
+  {
+    name: "Gifts",
+    layout: "/admin",
+    path: "/gifts",
+    icon: <Icon as={MdCardGiftcard} width='20px' height='20px' color='inherit' />,
+    component: Gifts
   }
 
 ];

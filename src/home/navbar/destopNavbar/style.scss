@@ -11,6 +11,8 @@
         &:hover {
             color: #fbfb1efd;
         }
+
+        
     }
 
     // .nav_toggler {
@@ -22,6 +24,10 @@
     //     display: flex;
     //     justify-content: right;
     // }
+    .bttn {
+        
+        border-radius: 10px !important;
+    }
 }
 
 @media (max-width: 576px) {
