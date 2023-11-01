@@ -21,24 +21,25 @@ import { imgUrl } from "api/api";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { categoryAdd } from "api/api";
 import { config } from "api/api";
+import { giftAdd } from "api/api";
 
-export default function Marketplace() {
+export default function Gifts() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  const [category, setCategory] = useState([]);
+  const [gift, setGift] = useState([]);
   const [addModal, setAddModal] = useState(false);
 
   const openAddModal = () => setAddModal(!addModal);
 
   useEffect(() => {
-    getCategory();
+    getGifts();
   }, []);
 
-  function getCategory() {
-    axios.get(api + "category", config)
+  function getGifts() {
+    axios.get(api + "gift", config)
       .then(res => {
-        setCategory(res.data.body)
+        setGift(res.data.body.object)
       })
     // .catch(err => consol e.log(err))
   }
@@ -46,7 +47,7 @@ export default function Marketplace() {
   const addCategory = () => {
     // const 
 
-    axios.post(api + categoryAdd,
+    axios.post(api + giftAdd,
       {
         name: document.getElementById("title").value,
         attachmentId: 0,
@@ -55,7 +56,7 @@ export default function Marketplace() {
       config)
       .then(() => {
         openAddModal();
-        getCategory();
+        getGifts();
       })
   }
 
@@ -79,7 +80,7 @@ export default function Marketplace() {
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}>
               <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
-                Category
+                All gifts
               </Text>
               <Flex
                 align='center'
@@ -92,54 +93,36 @@ export default function Marketplace() {
                   }}
                   color="primary"
                   className="px-4 py-2 fw-medium rounded-5">
-                  Add Category
+                  Add gifts
                 </Button>
                 <Modal isOpen={addModal} className="group__modals" centered size="lg">
-                  <ModalHeader toggle={openAddModal} className="group__modal-head">Add Category</ModalHeader>
+                  <ModalHeader toggle={openAddModal} className="group__modal-head">Add gift</ModalHeader>
                   <ModalBody className="group__modal-body">
-                    <Input type="file" />
-                    <Input placeholder="title" id="title" />
+                    <Box>
+                      <Input type="file" />
+                      <Input placeholder="name" id="title" />
+                      <Input placeholder="description" id="description" />
+                      <Input placeholder="rate" id="rate" />
+                    </Box>
                     {/* <Input type="number" placeholder="category id" /> */}
                   </ModalBody>
                   <ModalFooter>
-                    <Button color="dark" outline onClick={openAddModal}>Orqaga</Button>
-                    <Button color="success" outline onClick={addCategory}>Saqlash</Button>
+                    <Button color="dark" outline onClick={openAddModal}>Back</Button>
+                    <Button color="success" outline onClick={addCategory}>Save</Button>
                   </ModalFooter>
                 </Modal>
-                {/* <Link
-                  color={textColorBrand}
-                  fontWeight='500'
-                  me={{ base: "34px", md: "44px" }}
-                  to='#art'>
-                  All
-                </Link>
-                <Link
-                  color={textColorBrand}
-                  fontWeight='500'
-                  me={{ base: "34px", md: "44px" }}
-                  to='#music'>
-                  Front End
-                </Link>
-                <Link
-                  color={textColorBrand}
-                  fontWeight='500'
-                  me={{ base: "34px", md: "44px" }}
-                  to='#collectibles'>
-                  Back End
-                </Link>
-                <Link color={textColorBrand} fontWeight='500' to='#sports'>
-                  3D Max
-                </Link> */}
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
 
-              {category.length && category.map((item, i) =>
+              {gift.length && gift.map((item, i) =>
                 <NFT
-                  categoryIdIn={item}
-                  getCategory={getCategory}
+                  giftIdIn={item}
+                  getGifts={getGifts}
                   key={i}
                   name={item.name}
+                  description={item.description}
+                  rate={item.rate}
                   bidders={[]}
                   image={imgUrl + item.attachmentId}
                 // download='frontend'

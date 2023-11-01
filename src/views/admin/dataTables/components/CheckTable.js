@@ -17,9 +17,9 @@ import {
   EditableTextarea,
   Textarea,
   Select
-  
+
 } from "@chakra-ui/react";
-import {  Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   useGlobalFilter,
@@ -35,6 +35,7 @@ import axios from "axios";
 import { api } from "api/api";
 import { config } from "api/api";
 import { MdArrowDropDown } from "react-icons/md";
+import { messageAdd } from "api/api";
 export default function CheckTable(props) {
   const { columnsData, tableData } = props;
 
@@ -75,21 +76,45 @@ export default function CheckTable(props) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   const [group, setGroup] = useState([]);
+  const [message, setMessage] = useState([]);
 
 
   useEffect(() => {
     getGroup();
+    getMessage()
   }, []);
 
   function getGroup() {
-    axios.get(api + "message", config)
+    axios.get(api + "group", config)
       .then(res => {
         setGroup(res.data.body.object)
       })
       .catch(err => console.log(err))
   }
 
-  console.log(group);
+  function getMessage() {
+    axios.get(api + "message", config)
+      .then(res => {
+        setMessage(res.data.body.object)
+      })
+      .catch(err => console.log(err))
+  }
+
+  const sendMessage = () => {
+    let groupId = document.getElementById('groupId').value;
+
+    axios.post(api + messageAdd,
+      {
+        description: document.getElementById("messageId").value,
+        groupId: groupId
+
+      },
+      config)
+      .then(() => {
+        openEditModal();
+        getMessage()
+      })
+  }
 
   return (
     <Box
@@ -118,7 +143,7 @@ export default function CheckTable(props) {
           Send message
         </Button>
       </Flex>
-      {group.length && group.map((item, i) => {
+      {message.length && message.map((item, i) => {
 
         return (
 
@@ -138,24 +163,24 @@ export default function CheckTable(props) {
 
       <Modal isOpen={editModal} centered size="lg" className="group__modals">
         <ModalHeader toggle={openEditModal} className="group__modal-head">Send message</ModalHeader>
-        <ModalBody className="group__modal-body"> 
-        <Box display="flex" flexWrap="wrap">
-          <Textarea  placeholder="Write message" style={{border: "1px solid black"}} mb="20px"/>
-          <Select icon={<MdArrowDropDown />} w="50%" style={{border: "1px solid black"}}>
-            <option selected disabled>select group</option>
-          {group.length && group.map((item, i) => 
-            <option value={i} key={i}>{item.name}</option>
-          )} 
-          </Select>
-          <Flex w="50%">
-            <Checkbox color="black" border="black" ms="30px" me="5px"></Checkbox>
-            <Text mt="8px">Select all</Text>
-          </Flex>
-        </Box>
+        <ModalBody className="group__modal-body">
+          <Box display="flex" flexWrap="wrap">
+            <Textarea placeholder="Write message" id="messageId" style={{ border: "1px solid black" }} mb="20px" />
+            <Select icon={<MdArrowDropDown />} w="50%" style={{ border: "1px solid black" }}>
+              <option selected disabled>select group</option>
+              {group.length && group.map((item, i) =>
+                <option id="groupId" value={item.id} key={i}>{item.name}</option>
+              )}
+            </Select>
+            <Flex w="50%">
+              <Checkbox color="black" border="black" ms="30px" me="5px"></Checkbox>
+              <Text mt="8px">Select all</Text>
+            </Flex>
+          </Box>
         </ModalBody>
         <ModalFooter>
           <Button onClick={openEditModal} color="dark">Back</Button>
-          <Button color="success">Send</Button>
+          <Button color="success" onClick={sendMessage}>Send</Button>
         </ModalFooter>
       </Modal>
     </Box>
