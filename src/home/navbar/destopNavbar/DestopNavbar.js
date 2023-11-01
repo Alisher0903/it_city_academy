@@ -34,7 +34,7 @@ function DestopNavbar() {
                 {/* <Collapse className='nav_collapse' isOpen={isOpen} navbar> */}
                 <NavbarText>
                     {/* <ThemeEditor /> */}
-                    <Button onClick={goLogin} className='px-4 fw-bolder rounded-0' color='warning' outline>LogIn</Button>
+                    <Button onClick={goLogin} className='px-4 bttn  rounded-0' color='light' outline>LogIn</Button>
                 </NavbarText>
                 {/* </Collapse> */}
             </Navbar>
