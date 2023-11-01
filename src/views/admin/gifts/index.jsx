@@ -8,6 +8,7 @@ import NFT from "components/card/NFT";
 import axios from "axios";
 import {addImage, api, config, giftAdd, imgUrl} from "api/api";
 import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import Gift from "components/card/Gift";
 
 export default function Gifts() {
     // Chakra Color Mode
@@ -33,21 +34,22 @@ export default function Gifts() {
 
     async function addGift() {
         const img = new FormData();
-
         img.append('file', document.getElementById('img').files[0]);
-        await addImage(img, setImageId)
-        console.log("attachment-id: " + imageId)
-        let data = {
-            name: document.getElementById("title").value,
-            attachmentId: imageId,
-            categoryId: 0,
-            description: document.getElementById('description').value,
-            rate: document.getElementById('rate').value
-        };
-        await axios.post(api + giftAdd, data, config)
-            .then(() => {
-                openAddModal();
-                getGifts();
+
+        axios.post(api + "attachment/upload", img, config)
+            .then(res => {
+                console.log(res.data.body)
+                axios.post(api + giftAdd, {
+                    name: document.getElementById("title").value,
+                    attachmentId: res.data.body,
+                    categoryId: 0,
+                    description: document.getElementById('description').value,
+                    rate: document.getElementById('rate').value
+                }, config)
+                    .then(() => {
+                        openAddModal();
+                        getGifts();
+                    });
             });
     }
 
@@ -108,7 +110,7 @@ export default function Gifts() {
                         <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
 
                             {gift.length && gift.map((item, i) =>
-                                <NFT
+                                <Gift
                                     giftIdIn={item}
                                     getGifts={getGifts}
                                     key={i}
