@@ -23,15 +23,10 @@ export const groupDelete = "group/isactive";
 
 // autinficatsiya jwt tokin
 export const config = {
-    headers: { Authorization: sessionStorage.getItem('jwtTokin') }
+    headers: {Authorization: sessionStorage.getItem('jwtTokin')}
 };
 
-export function addImage(image) {
-    axios.post(api + "attachment/upload", {file: image}, config)
-        .then(res => {
-            console.log(res);
-            console.log("ha keldi rasim shu kk midi");
-        }).catch(err => {
-            console.log("kelmadi");
-        })
+export async function addImage(image, setImageId) {
+    axios.post(api + "attachment/upload", image, config)
+        .then(res => setImageId(res.data.body));
 }
