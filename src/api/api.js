@@ -7,6 +7,8 @@ export const messageAdd = "message/save";
 
 // gidts url
 export const giftAdd = "gift/save";
+export const giftDelete = "gift/delete";
+export const giftEdit = "gift/update";
 
 // file url
 export const imgUrl = api + "attachment/getFile/";

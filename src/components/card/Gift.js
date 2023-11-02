@@ -10,6 +10,8 @@ import {
   Link,
   Icon,
 } from "@chakra-ui/react";
+import { giftEdit } from "api/api";
+import { giftDelete } from "api/api";
 import { categoryDelete, categoryEdit, config, api } from "api/api";
 import axios from "axios";
 import Card from "components/card/Card.js";
@@ -20,7 +22,7 @@ import { toast } from "react-toastify";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function Gift(props) {
-  const { image, name, description, bidders, categoryIdIn, getCategory, rate } = props;
+  const { image, name, description, bidders, giftIdIn, getGifts, rate } = props;
   const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
@@ -35,7 +37,7 @@ export default function Gift(props) {
   const openDeleteModal = () => setDeleteModal(!deleteModal);
 
   useEffect(() => {
-    axios.get(api + "category")
+    axios.get(api + "gift")
       .then(res => {
         setCategory(res.data.body)
       })
@@ -53,7 +55,7 @@ export default function Gift(props) {
 
   // edit category
   const editCategory = () => {
-    axios.put(api + categoryEdit + categoryId.id,
+    axios.put(api + giftEdit + categoryId.id,
       {
         name: document.getElementById("categoryTitle").value,
         attachmentId: 0,
@@ -62,19 +64,19 @@ export default function Gift(props) {
       config)
       .then(() => {
         openEditModal();
-        getCategory();
+        getGifts();
         toast.success("successfully saved category!")
       })
   }
 
   // delete category
   const deleteGift = () => {
-    console.log(categoryIdIn.id);
-    axios.delete(api + categoryDelete + categoryId.id, config)
+    console.log(giftIdIn.id);
+    axios.delete(api + giftDelete + categoryId.id, config)
       .then(() => {
         openDeleteModal();
         toast.success("successfully saved category!")
-        getCategory();
+        getGifts();
       })
   }
 
@@ -181,7 +183,7 @@ export default function Gift(props) {
               <Link
                 onClick={() => {
                   openEditModal();
-                  setCategoryId(categoryIdIn);
+                  setCategoryId(giftIdIn);
                 }}
                 variant='no-hover'
                 ms="75px"
@@ -192,7 +194,7 @@ export default function Gift(props) {
               <Link
                 onClick={() => {
                   openDeleteModal();
-                  setCategoryId(categoryIdIn);
+                  setCategoryId(giftIdIn);
                 }}
                 variant='no-hover'
                 me='25px'

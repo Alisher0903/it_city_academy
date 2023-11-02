@@ -63,7 +63,7 @@ export default function NFT(props) {
     axios.delete(api + categoryDelete + categoryId.id, config)
       .then(() => {
         openDeleteModal();
-        toast.success("successfully saved category!")
+        toast.success("successfully delete category!")
         getCategory();
       })
   }
