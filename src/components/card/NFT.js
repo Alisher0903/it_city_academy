@@ -16,7 +16,9 @@ import Card from "components/card/Card.js";
 import React, { useEffect, useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { toast } from "react-toastify";
+// toast
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function NFT(props) {
@@ -56,36 +58,10 @@ export default function NFT(props) {
           .then(() => {
             openEditModal();
             getCategory();
+            toast.success("Categorya muvaffaqiyatli taxrirlandi✔");
           })
       })
   }
-  //   axios.put(api + categoryEdit + categoryId.id,
-  //     {
-  //     },
-  //     config)
-  //     .then(() => {
-  //       openEditModal();
-  //       getCategory();
-  //       toast.success("successfully saved category!")
-  //     })
-  // }
-  // const addCategory = async () => {
-  //   const img = new FormData();
-  //   img.append('file', document.getElementById('img').files[0]);
-
-  //   axios.post(api + "attachment/upload", img, config)
-  //     .then(res => {
-  //       console.log(res.data.body);
-  //       axios.post(api + categoryAdd, {
-  //         name: document.getElementById("title").value,
-  //         attachmentId: res.data.body,
-  //         categoryId: 0
-  //       }, config)
-  //         .then(() => {
-  //           openAddModal();
-  //           getCategory();
-  //         })
-  //     })
 
   // delete category
   const deleteCategory = () => {
@@ -93,13 +69,14 @@ export default function NFT(props) {
     axios.delete(api + categoryDelete + categoryId.id, config)
       .then(() => {
         openDeleteModal();
-        toast.success("successfully saved category!")
+        toast.success("Categorya muvaffaqiyatli o'chirildi✔")
         getCategory();
       })
   }
 
   return (
     <Card p='20px'>
+      <ToastContainer />
       <Flex direction={{ base: "column" }} justify='center'>
         <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
           <Image

@@ -17,6 +17,10 @@ import { categoryAdd } from "api/api";
 import { config } from "api/api";
 import { addImage } from "api/api";
 
+// toast
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+
 export default function Marketplace() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -54,12 +58,14 @@ export default function Marketplace() {
           .then(() => {
             openAddModal();
             getCategory();
-          })
+            toast.success("Categorya muvaffaqiyatli qo'shildi✔");
+          }).catch(() => toast.error("Xatolik yuz berdi. Buning uchun sizdan uzur suraymiz, beni tez orada bartaraf etamiz!!!"))
       })
   }
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+      <ToastContainer />
       <Grid
         mb='20px'
         gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
