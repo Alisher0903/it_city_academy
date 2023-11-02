@@ -30,8 +30,6 @@ export default function Projects(props) {
     axios.get(api + "category").then(res => setCategory(res.data.body))
   }
 
-  console.log(category);
-
   return (
     <Card mb={{ base: "0px", "2xl": "20px" }}>
       <Text
@@ -50,7 +48,7 @@ export default function Projects(props) {
       <Modal isOpen={addModal} centered size="lg" className="group__modals">
         <ModalHeader toggle={openAddModal} className="group__modal-head">Add Group</ModalHeader>
         <ModalBody className="group__modal-body">
-          <Input id="groupFile" type="file" />
+          {/* <Input id="groupFile" type="file" /> */}
           <Input id="groupName" type="number" placeholder="Group name" />
           <Input id="groupFIO" type="text" placeholder="Teacher: FIO" />
           <select className="form-select" id="groupCategory">

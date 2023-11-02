@@ -17,6 +17,10 @@ import { categoryAdd } from "api/api";
 import { config } from "api/api";
 import { addImage } from "api/api";
 
+// toast
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+
 export default function Marketplace() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -42,23 +46,26 @@ export default function Marketplace() {
   // add category
   const addCategory = async () => {
     const img = new FormData();
-
     img.append('file', document.getElementById('img').files[0]);
-    await addImage(img, setImageId);
-    let dataCategory = {
-      name: document.getElementById("title").value,
-      attachmentId: imageId,
-      categoryId: 0
-    }
-    await axios.post(api + categoryAdd, dataCategory, config)
-      .then(() => {
-        openAddModal();
-        getCategory();
+
+    axios.post(api + "attachment/upload", img, config)
+      .then(res => {
+        axios.post(api + categoryAdd, {
+          name: document.getElementById("title").value,
+          attachmentId: res.data.body,
+          categoryId: 0
+        }, config)
+          .then(() => {
+            openAddModal();
+            getCategory();
+            toast.success("Categorya muvaffaqiyatli qo'shildi✔");
+          }).catch(() => toast.error("Xatolik yuz berdi. Buning uchun sizdan uzur suraymiz, beni tez orada bartaraf etamiz!!!"))
       })
   }
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+      <ToastContainer />
       <Grid
         mb='20px'
         gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}

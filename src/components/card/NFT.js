@@ -16,7 +16,9 @@ import Card from "components/card/Card.js";
 import React, { useEffect, useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { toast } from "react-toastify";
+// toast
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function NFT(props) {
@@ -43,17 +45,21 @@ export default function NFT(props) {
 
   // edit category
   const editCategory = () => {
-    axios.put(api + categoryEdit + categoryId.id,
-      {
-        name: document.getElementById("categoryTitle").value,
-        attachmentId: 0,
-        categoryId: 0
-      },
-      config)
-      .then(() => {
-        openEditModal();
-        getCategory();
-        toast.success("successfully saved category!")
+    const image = new FormData();
+    image.append("file", document.getElementById("categoryImg").files[0]);
+
+    axios.post(api + "attachment/upload", image, config)
+      .then(res => {
+        axios.put(api + categoryEdit + categoryId.id, {
+          name: document.getElementById("categoryTitle").value,
+          attachmentId: res.data.body,
+          categoryId: 0
+        }, config)
+          .then(() => {
+            openEditModal();
+            getCategory();
+            toast.success("Categorya muvaffaqiyatli taxrirlandi✔");
+          })
       })
   }
 
@@ -64,12 +70,14 @@ export default function NFT(props) {
       .then(() => {
         openDeleteModal();
         toast.success("successfully delete category!")
+        toast.success("Categorya muvaffaqiyatli o'chirildi✔")
         getCategory();
       })
   }
 
   return (
     <Card p='20px'>
+      <ToastContainer />
       <Flex direction={{ base: "column" }} justify='center'>
         <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
           <Image
@@ -201,8 +209,6 @@ export default function NFT(props) {
               <ModalBody className="group__modal-body">
                 <Input type="file" id="categoryImg" />
                 <Input type="text" id="categoryTitle" placeholder="name" />
-                {/* <Input type="number" id="attachmentId" placeholder="image_id" />
-                <Input type="number" id="categoryId" placeholder="category_id" /> */}
               </ModalBody>
               <ModalFooter>
                 <Button onClick={openEditModal} color="dark" outline>Orqaga</Button>
