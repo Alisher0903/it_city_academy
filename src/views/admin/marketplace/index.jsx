@@ -43,39 +43,20 @@ export default function Marketplace() {
   const addCategory = async () => {
     const img = new FormData();
     img.append('file', document.getElementById('img').files[0]);
-    await addImage(img, setImageId);
-    console.log("attachment-id: " + imageId)
-    let dataCategory = {
-      name: document.getElementById("title").value,
-      attachmentId: imageId,
-      categoryId: 0
-    }
-    await axios.post(api + categoryAdd, dataCategory, config)
-      .then(() => {
-        openAddModal();
-        getCategory();
+
+    axios.post(api + "attachment/upload", img, config)
+      .then(res => {
+        axios.post(api + categoryAdd, {
+          name: document.getElementById("title").value,
+          attachmentId: res.data.body,
+          categoryId: 0
+        }, config)
+          .then(() => {
+            openAddModal();
+            getCategory();
+          })
       })
   }
-  // async function addGift() {
-  //   const img = new FormData();
-  //   img.append('file', document.getElementById('img').files[0]);
-
-  //   axios.post(api + "attachment/upload", img, config)
-  //     .then(res => {
-  //       console.log(res.data.body)
-  //       axios.post(api + giftAdd, {
-  //         name: document.getElementById("title").value,
-  //         attachmentId: res.data.body,
-  //         categoryId: 0,
-  //         description: document.getElementById('description').value,
-  //         rate: document.getElementById('rate').value
-  //       }, config)
-  //         .then(() => {
-  //           openAddModal();
-  //           getGifts();
-  //         });
-  //     });
-  // }
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>

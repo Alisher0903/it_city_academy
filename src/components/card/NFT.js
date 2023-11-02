@@ -43,19 +43,49 @@ export default function NFT(props) {
 
   // edit category
   const editCategory = () => {
-    axios.put(api + categoryEdit + categoryId.id,
-      {
-        name: document.getElementById("categoryTitle").value,
-        attachmentId: 0,
-        categoryId: 0
-      },
-      config)
-      .then(() => {
-        openEditModal();
-        getCategory();
-        toast.success("successfully saved category!")
+    const image = new FormData();
+    image.append("file", document.getElementById("categoryImg").files[0]);
+
+    axios.post(api + "attachment/upload", image, config)
+      .then(res => {
+        axios.put(api + categoryEdit + categoryId.id, {
+          name: document.getElementById("categoryTitle").value,
+          attachmentId: res.data.body,
+          categoryId: 0
+        }, config)
+          .then(() => {
+            openEditModal();
+            getCategory();
+          })
       })
   }
+  //   axios.put(api + categoryEdit + categoryId.id,
+  //     {
+  //     },
+  //     config)
+  //     .then(() => {
+  //       openEditModal();
+  //       getCategory();
+  //       toast.success("successfully saved category!")
+  //     })
+  // }
+  // const addCategory = async () => {
+  //   const img = new FormData();
+  //   img.append('file', document.getElementById('img').files[0]);
+
+  //   axios.post(api + "attachment/upload", img, config)
+  //     .then(res => {
+  //       console.log(res.data.body);
+  //       axios.post(api + categoryAdd, {
+  //         name: document.getElementById("title").value,
+  //         attachmentId: res.data.body,
+  //         categoryId: 0
+  //       }, config)
+  //         .then(() => {
+  //           openAddModal();
+  //           getCategory();
+  //         })
+  //     })
 
   // delete category
   const deleteCategory = () => {
@@ -201,8 +231,6 @@ export default function NFT(props) {
               <ModalBody className="group__modal-body">
                 <Input type="file" id="categoryImg" />
                 <Input type="text" id="categoryTitle" placeholder="name" />
-                {/* <Input type="number" id="attachmentId" placeholder="image_id" />
-                <Input type="number" id="categoryId" placeholder="category_id" /> */}
               </ModalBody>
               <ModalFooter>
                 <Button onClick={openEditModal} color="dark" outline>Orqaga</Button>
