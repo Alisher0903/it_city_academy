@@ -54,18 +54,24 @@ export default function Gift(props) {
   // }
 
   // edit category
-  const editCategory = () => {
-    axios.put(api + giftEdit + categoryId.id,
-      {
-        name: document.getElementById("categoryTitle").value,
-        attachmentId: 0,
-        categoryId: 0
-      },
-      config)
-      .then(() => {
-        openEditModal();
-        getGifts();
-        toast.success("successfully saved category!")
+  const editGift = () => {
+    const img = new FormData();
+    img.append("file", document.getElementById("img").files[0]);
+
+    axios.post(api + "attachment/upload", img, config)
+      .then(res => {
+        axios.put(api + giftEdit + categoryId.id, {
+          name: document.getElementById("title").value,
+          attachmentId: res.data.body,
+          categoryId: 0,
+          description: document.getElementById('description').value,
+          rate: document.getElementById('rate').value
+        }, config)
+          .then(() => {
+            openEditModal();
+            getGifts();
+            toast.success("succesfully edit Gifts✔");    
+          })
       })
   }
 
@@ -75,7 +81,7 @@ export default function Gift(props) {
     axios.delete(api + giftDelete + categoryId.id, config)
       .then(() => {
         openDeleteModal();
-        toast.success("successfully saved category!")
+        toast.success("successfully saved Gifts!")
         getGifts();
       })
   }
@@ -171,7 +177,7 @@ export default function Gift(props) {
                   color='secondaryGray.600'
                   w="100%"
                   fontSize={{
-                    
+
                     base: "md",
                   }}
                   fontWeight='700'
@@ -208,14 +214,17 @@ export default function Gift(props) {
             <Modal isOpen={editModal} centered size="lg" className="group__modals">
               <ModalHeader toggle={openEditModal} className="group__modal-head">Edit Category</ModalHeader>
               <ModalBody className="group__modal-body">
-                <Input type="file" id="categoryImg" />
-                <Input type="text" id="categoryTitle" placeholder="name" />
-                {/* <Input type="number" id="attachmentId" placeholder="image_id" />
-                <Input type="number" id="categoryId" placeholder="category_id" /> */}
+                <Box>
+                  <Input type="file" id="img" />
+                  <Input placeholder="name" id="title" />
+                  <Input placeholder="description" id="description" />
+                  <Input placeholder="rate" id="rate" type="number" />
+                </Box>
+                {/* <Input type="number" placeholder="category id" /> */}
               </ModalBody>
               <ModalFooter>
                 <Button onClick={openEditModal} color="dark" outline>Orqaga</Button>
-                <Button color="success" outline onClick={editCategory}>Saqlash</Button>
+                <Button color="success" outline onClick={editGift}>Saqlash</Button>
               </ModalFooter>
             </Modal>
 

@@ -29,7 +29,7 @@ export default function Gifts() {
             .then(res => {
                 setGift(res.data.body.object)
             })
-        // .catch(err => consol e.log(err))
+        // .catch(err => consol e.log(err))rate
     }
 
     async function addGift() {
