@@ -65,7 +65,6 @@ export default function NFT(props) {
 
   // delete category
   const deleteCategory = () => {
-    console.log(categoryIdIn.id);
     axios.delete(api + categoryDelete + categoryId.id, config)
       .then(() => {
         openDeleteModal();
