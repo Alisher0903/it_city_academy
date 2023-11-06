@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const api = "http://142.93.209.179:8080/";
+export const api = "http://142.93.209.179/";
 
 // message url
 export const messageAdd = "message/save";

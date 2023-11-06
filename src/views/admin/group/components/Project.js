@@ -11,6 +11,7 @@ import { config } from "api/api";
 import { groupEdit } from "api/api";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
+import { groupDelete } from "api/api";
 
 export default function Project(props) {
 
@@ -25,6 +26,7 @@ export default function Project(props) {
   const [deleteModal, setDeleteModal] = useState(false);
   const [group, setGroup] = useState([]);
   const [category, setCategory] = useState([]);
+  const [teacherId, setTeacherId] = useState([]);
   const [groupId, setGroupId] = useState("");
 
   const openEditModal = () => setEditModal(!editModal);
@@ -34,6 +36,7 @@ export default function Project(props) {
   useEffect(() => {
     getGroup();
     getCategory();
+    getTeacher();
   }, []);
 
   // get category
@@ -41,28 +44,45 @@ export default function Project(props) {
     axios.get(api + "category").then(res => setCategory(res.data.body));
   }
 
+  // get teacher
+  const getTeacher = () => {
+    axios.get(api + "user/teacher", config)
+      .then(res => setTeacherId(res.data.body))
+  }
+
   // get group
   function getGroup() {
     axios.get(api + "group?page=0&size=10", config)
-    .then(res => {
-      setGroup(res.data.body.object)
-    })
+      .then(res => {
+        setGroup(res.data.body.object)
+      })
   }
-  
+
+  console.log(teacherId.teacherId);
+
   // edit group
   const editGroup = () => {
-    let categoryId = document.getElementById("groupCategory").value;
     axios.put(api + groupEdit + groupId.id,
       {
         name: document.getElementById("groupName").value,
-        categoryId: categoryId,
-        teacherId: 0
+        teacherId: document.getElementById("groupTeacher").value,
+        categoryId: document.getElementById("groupCategory").value
       }, config)
       .then(() => {
         openEditModal();
         getGroup();
         toast.success("Group muvaffaqiyatli taxrirlandi✔");
       }).catch(() => toast.error("Xatolik yuz berdi. Buning uchun sizdan uzur suraymiz, beni tez orada bartaraf etamiz!!!"))
+  }
+
+  // delete group
+  const deleteGroup = () => {
+    axios.delete(api + groupDelete + groupId.id, config)
+      .then(() => {
+        openDeleteModal();
+        getGroup();
+        toast.success("Group muvaffaqiyatli o'chirildi❌");
+      })
   }
 
   return (
@@ -85,7 +105,7 @@ export default function Project(props) {
                 color={textColorSecondary}
                 fontSize='sm'
                 me='4px'>
-                <p className="fw-medium" color={brandColor}>O'qituvchi: Teshayev Ketmon</p>
+                <p className="fw-medium" color={brandColor}>O'qituvchi: {group.teacherId}</p>
               </Text>
             </Box>
             <Box ms="auto">
@@ -120,9 +140,15 @@ export default function Project(props) {
       <Modal isOpen={editModal} centered size="lg" className="group__modals">
         <ModalHeader className="group__modal-head" toggle={openEditModal}>Edit Group</ModalHeader>
         <ModalBody className="group__modal-body">
-          {/* <Input id="groupFile" type="file" /> */}
           <Input id="groupName" type="text" defaultValue={groupId && groupId.name} />
-          <Input id="groupFIO" defaultValue={groupId && groupId.teacherId} />
+          <select className="form-select mb-3" id="groupTeacher">
+            <option selected disabled>Teacher name</option>
+            {
+              teacherId.map((item, i) =>
+                <option key={i} value={item.id}>{item.lastName} {item.firstName}</option>
+              )
+            }
+          </select>
           <select className="form-select" id="groupCategory">
             <option selected disabled>Category</option>
             {
@@ -146,7 +172,7 @@ export default function Project(props) {
         </ModalBody>
         <ModalFooter>
           <Button onClick={openDeleteModal} color="dark">Close</Button>
-          <Button color="danger">Ok</Button>
+          <Button color="danger" onClick={deleteGroup}>Ok</Button>
         </ModalFooter>
       </Modal>
     </>
