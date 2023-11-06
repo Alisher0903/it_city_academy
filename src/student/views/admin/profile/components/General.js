@@ -4,6 +4,11 @@ import { SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import React from "react";
 import Information from "../../../../views/admin/profile/components/Information";
+import { useState } from "react";
+import { useEffect } from "react";
+import { api } from "api/api.js";
+import { config } from "api/api.js";
+import axios from "axios";
 
 // Assets
 export default function GeneralInformation(props) {
@@ -15,6 +20,20 @@ export default function GeneralInformation(props) {
     "0px 18px 40px rgba(112, 144, 176, 0.12)",
     "unset"
   );
+  const [info, setInfo] = useState([]);
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  function getProfile() {
+    axios.get(api + "user/getMe", config)
+      .then(res => {
+        setInfo(res.data.body.object)
+        console.log(res.data.body.object);
+      })
+      // .catch(err => consol e.log(err))
+  }
   return (
     <Card mb={{ base: "0px", "2xl": "20px" }} {...rest}>
       <Text

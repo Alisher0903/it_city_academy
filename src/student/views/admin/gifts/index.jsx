@@ -28,6 +28,7 @@ export default function Gifts() {
         axios.get(api + "gift", config)
             .then(res => {
                 setGift(res.data.body.object)
+                
             })
         // .catch(err => consol e.log(err))rate
     }
@@ -38,7 +39,7 @@ export default function Gifts() {
 
         axios.post(api + "attachment/upload", img, config)
             .then(res => {
-                console.log(res.data.body)
+               
                 axios.post(api + giftAdd, {
                     name: document.getElementById("title").value,
                     attachmentId: res.data.body,
