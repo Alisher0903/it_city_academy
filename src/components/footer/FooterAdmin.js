@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React from "react";
+import "./footeradmin.scss";
 import {
   Flex,
   Link,
@@ -11,12 +12,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
+import { from } from 'stylis';
 
 export default function Footer() {
   const textColor = useColorModeValue("gray.400", "white");
   const { toggleColorMode } = useColorMode();
   return (
     <Flex
+    className='footer__main'
       zIndex='3'
       flexDirection={{
         base: "column",
@@ -68,7 +71,7 @@ export default function Footer() {
             fontWeight='500'
             color={textColor}
             href='https://t.me/itcity_academy' target="_blank">
-            <Icon icon="logos:telegram" width="20" className="d-inline-block me-1" />
+            <Icon icon="logos:telegram" width="20"  className="d-inline-block me-1" />
             Telegram
           </Link>
         </ListItem>

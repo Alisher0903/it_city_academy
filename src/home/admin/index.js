@@ -153,6 +153,9 @@ export default function DashboardHome(props) {
 							<Box>
 								<Switch>
 									{/* {getRoutes(routes)} */}
+
+									{/* Ochish */}
+
 									<div className='homePage__main'>
 										<div className='head-section'>
 											<Container className='text-light'>
@@ -164,15 +167,15 @@ export default function DashboardHome(props) {
 															sunt adipisci aperiam aspernatur vel cum, reprehenderit similique
 															suscipit qui!</p>
 														<Link to="/auth" id='login'></Link>
-															<button
-																color='warning'
-																outline
-																onClick={login}
-																className=' px-5 py-2 fs-5 btn btn-outline-primary'>
-																Kirish
-																<Icon className='d-inline ms-2' icon="lucide:move-right" />
-															</button>
-														
+														<button
+															color='warning'
+															outline
+															onClick={login}
+															className=' px-5 py-2 fs-5 btn btn-outline-primary'>
+															Kirish
+															<Icon className='d-inline ms-2' icon="lucide:move-right" />
+														</button>
+
 													</Col>
 													<Col className='col-12 col-lg-7 mt-5 mt-lg-0 home__box-banner'>
 														<img src={banner} className='w-75' alt="bannerImg" />
@@ -181,49 +184,8 @@ export default function DashboardHome(props) {
 											</Container>
 
 										</div>
-										<div className='second-section'>
-											<Container className=''>
-												<div class="container text-center">
-													<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 d-flex justify-content-center">
-														<div class="col my-3 d-flex align-items-center justify-content-center">
-															<i class="fa-solid fa-bomb fs-1 mx-2"></i>
-															<div className=''>
-																<p>Lorem, ipsum dolor.</p>
-																<p>Lorem, ipsum dolor.</p>
-															</div>
-														</div>
-														<div class="col my-3 d-flex align-items-center justify-content-center">
-															<i class="fa-solid fa-bomb fs-1 mx-2"></i>
-															<div className=''>
-																<p>Lorem, ipsum dolor.</p>
-																<p>Lorem, ipsum dolor.</p>
-															</div>
-														</div>
-														<div class="col my-3 d-flex align-items-center justify-content-center">
-															<i class="fa-solid fa-bomb fs-1 mx-2"></i>
-															<div className=''>
-																<p>Lorem, ipsum dolor.</p>
-																<p>Lorem, ipsum dolor.</p>
-															</div>
-														</div>
-														<div class="col my-3 d-flex align-items-center justify-content-center">
-															<i class="fa-solid fa-bomb fs-1 mx-2"></i>
-															<div className=''>
-																<p>Lorem, ipsum dolor.</p>
-																<p>Lorem, ipsum dolor.</p>
-															</div>
-														</div>
-
-
-
-													</div>
-												</div>
-											</Container>
-
-										</div>
-
 										<section className='w-100 pb-5 section-third' initial="hidden" whileFocus="visible">
-											<div className='w-100 pb-5 '>
+											<div className='w-100 pb-5 nimadr'>
 												<h1 className='fs-1 text-center pt-5'> <b>Lorem, ipsum dolor.</b></h1>
 												<p className='fs-2 text-center'>Lorem, ipsum. Lorem, ipsum. Lorem, ipsum dolor.</p>
 											</div>
@@ -283,55 +245,59 @@ export default function DashboardHome(props) {
 											</div>
 										</section>
 										<section className='five-section'>
-											<Container className='five-top px-4 center-center flex-column py-5'>
-												<div className='fs-1'>Lorem ipsum dolor sit, amet consectetur </div>
-												<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta nemo harum velit?</p>
-											</Container>
-											<div className='five-bot py-5'>
-												<div className='second-card'>
-													<div className='py-3'>
-														<i class="fa-solid fa-code fs-1"></i>
-													</div>
-													<b>Lorem, ipsum dolor.</b>
-													<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum natus exercitationem ea blanditiis amet fuga!z</p>
-												</div>
-												<div className='second-card'>
-													<div className='py-3'>
-														<i class="fa-solid fa-code fs-1"></i>
-													</div>
-													<b>Lorem, ipsum dolor.</b>
-													<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum natus exercitationem ea blanditiis amet fuga!z</p>
-												</div>
-												<div className='second-card'>
-													<div className='py-3'>
-														<i class="fa-solid fa-code fs-1"></i>
-													</div>
-													<b>Lorem, ipsum dolor.</b>
-													<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum natus exercitationem ea blanditiis amet fuga!z</p>
-												</div>
-												<div className='second-card'>
-													<div className='py-3'>
-														<i class="fa-solid fa-code fs-1"></i>
-													</div>
-													<b>Lorem, ipsum dolor.</b>
-													<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum natus exercitationem ea blanditiis amet fuga!z</p>
-												</div>
-											</div>
 
+											<div className='last-top'>
+												<Container className='five-top px-4 center-center flex-column py-5'>
+													<div className='fs-1'>Lorem ipsum dolor sit, amet consectetur </div>
+													<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta nemo harum velit?</p>
+												</Container>
+												<div className='five-bot py-5'>
+													<div className='second-card'>
+														<div className='py-3'>
+															<i class="fa-solid fa-code fs-1"></i>
+														</div>
+														<b>Lorem, ipsum dolor.</b>
+														<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum natus exercitationem ea blanditiis amet fuga!z</p>
+													</div>
+													<div className='second-card'>
+														<div className='py-3'>
+															<i class="fa-solid fa-code fs-1"></i>
+														</div>
+														<b>Lorem, ipsum dolor.</b>
+														<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum natus exercitationem ea blanditiis amet fuga!z</p>
+													</div>
+													<div className='second-card'>
+														<div className='py-3'>
+															<i class="fa-solid fa-code fs-1"></i>
+														</div>
+														<b>Lorem, ipsum dolor.</b>
+														<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum natus exercitationem ea blanditiis amet fuga!z</p>
+													</div>
+													<div className='second-card'>
+														<div className='py-3'>
+															<i class="fa-solid fa-code fs-1"></i>
+														</div>
+														<b>Lorem, ipsum dolor.</b>
+														<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum natus exercitationem ea blanditiis amet fuga!z</p>
+													</div>
+												</div>
+												</div>
 										</section>
-									</div>
+									
+								</div>
+								{/* Yopish */}
 
 
-									<Redirect from='/' to='/Home/default' />
-								</Switch>
+								<Redirect from='/' to='/Home/default' />
+							</Switch>
 							</Box>
 						) : null}
-						<Box>
-							<Footer />
-						</Box>
+					<Box>
+						<Footer />
 					</Box>
-				</SidebarContext.Provider>
 			</Box>
-		</Box>
+		</SidebarContext.Provider>
+			</Box >
+		</Box >
 	);
 }
