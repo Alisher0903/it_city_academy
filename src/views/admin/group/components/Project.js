@@ -8,11 +8,11 @@ import axios from "axios";
 import {api, config, groupDelete, groupEdit} from "api/api";
 import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from "react-toastify";
-import {getCategory, getGroup} from "../../../../api/routers";
+import {getCategory, getGroup, getTeacher} from "../../../../api/routers";
 
 export default function Project(props) {
 
-    const {title, ranking, link, image, group, setGroup, ...rest } = props;
+    const {title, ranking, link, image, group, setGroup, ...rest} = props;
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
     const textColorSecondary = "gray.400";
     const brandColor = useColorModeValue("brand.500", "white");
@@ -32,16 +32,8 @@ export default function Project(props) {
     useEffect(() => {
         getGroup(setGroup);
         getCategory(setCategory);
-        getTeacher();
+        getTeacher(setTeacherId);
     }, []);
-
-    // get teacher
-    const getTeacher = () => {
-        axios.get(api + "user/teacher", config)
-            .then(res => setTeacherId(res.data.body))
-    }
-
-    console.log(teacherId.teacherId);
 
     // edit group
     const editGroup = () => {
@@ -68,6 +60,8 @@ export default function Project(props) {
             })
     }
 
+    console.log(group)
+
     return (
         <>
             <ToastContainer/>
@@ -88,7 +82,7 @@ export default function Project(props) {
                                 color={textColorSecondary}
                                 fontSize='sm'
                                 me='4px'>
-                                <p className="fw-medium" color={brandColor}>O'qituvchi: {group.teacherId}</p>
+                                <p className="fw-medium" color={brandColor}>O'qituvchi: {item.teacher}</p>
                             </Text>
                         </Box>
                         <Box ms="auto">

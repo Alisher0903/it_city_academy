@@ -10,7 +10,7 @@ import {api, config, groupAdd} from "api/api";
 // toast
 import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from "react-toastify";
-import {getGroup} from "../../../../api/routers";
+import {getGroup, getTeacher} from "../../../../api/routers";
 
 export default function Projects() {
 
@@ -28,7 +28,7 @@ export default function Projects() {
 
     useEffect(() => {
         getCategory();
-        getTeacher();
+        getTeacher(setTeacherId);
     }, []);
 
     const openAddModal = () => setAddModal(!addModal);
@@ -36,12 +36,6 @@ export default function Projects() {
     // get category
     const getCategory = () => {
         axios.get(api + "category").then(res => setCategory(res.data.body))
-    }
-
-    // get teacher
-    const getTeacher = () => {
-        axios.get(api + "user/teacher", config)
-            .then(res => setTeacherId(res.data.body))
     }
 
     // add group
@@ -110,7 +104,6 @@ export default function Projects() {
                 group={group}
                 setGroup={setGroup}
             />
-
         </Card>
     );
 }
