@@ -22,17 +22,10 @@ export default function GeneralInformation(props) {
         fontWeight='bold'
         fontSize='2xl'
         mt='10px'
-        mb='4px'>
+        mb='15px'>
         General Information
       </Text>
-      <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
-        As we live, our hearts turn colder. Cause pain is what we go through as
-        we become older. We get insulted by others, lose trust for those others.
-        We get back stabbed by friends. It becomes harder for us to give others
-        a hand. We get our heart broken by people we love, even that we give
-        them all...
-      </Text>
-      <SimpleGrid columns='2' gap='20px'>
+      <SimpleGrid columns='1' gap='20px'>
         <Information
           boxShadow={cardShadow}
           title='Education'
@@ -48,21 +41,7 @@ export default function GeneralInformation(props) {
           title='Department'
           value='Product Design'
         />
-        <Information
-          boxShadow={cardShadow}
-          title='Work History'
-          value='Google, Facebook'
-        />
-        <Information
-          boxShadow={cardShadow}
-          title='Organization'
-          value='Simmmple Web LLC'
-        />
-        <Information
-          boxShadow={cardShadow}
-          title='Birthday'
-          value='20 July 1986'
-        />
+        
       </SimpleGrid>
     </Card>
   );

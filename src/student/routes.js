@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 
 // Student Imports
-import MainDashboard from "./views/admin/default/index";
+import Gifts from "./views/admin/gifts";
 import NFTMarketplace from "./views/admin/marketplace/index";
 import Profile from "./views/admin/profile/index";
 import DataTables from "./views/admin/dataTables/index";
@@ -21,14 +21,14 @@ import SignInCentered from "./views/auth/signIn";
 
 const routes = [
   {
-    name: "Main Dashboard",
+    name: "",
     layout: "/Student",
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: MainDashboard,
+    component: Profile,
   },
   {
-    name: "Category",
+    name: "Test",
     layout: "/Student",
     path: "/nft-marketplace",
     icon: (
@@ -43,18 +43,18 @@ const routes = [
     secondary: true,
   },
   {
-    name: "Notification",
+    name: "Message",
     layout: "/Student",
     icon: <Icon as={MdMessage} width='20px' height='20px' color='inherit' />,
     path: "/data-tables",
     component: DataTables,
   },
   {
-    name: "Group",
+    name: "Gift",
     layout: "/Student",
     path: "/profile",
     icon: <Icon as={MdPeople} width='20px' height='20px' color='inherit' />,
-    component: Profile,
+    component: Gifts,
   },
   {
     name: "",

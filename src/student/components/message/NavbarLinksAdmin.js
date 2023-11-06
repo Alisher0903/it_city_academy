@@ -14,16 +14,16 @@ import {
 	useColorModeValue
 } from '@chakra-ui/react';
 // Custom Components
-import { ItemContent } from '../../components/menu/ItemContent';
-import { SearchBar } from '../../components/navbar/searchBar/SearchBar';
-import { SidebarResponsive } from '../../components/sidebar/Sidebar';
+import { ItemContent } from 'components/menu/ItemContent';
+import { SearchBar } from 'components/navbar/searchBar/SearchBar';
+import { SidebarResponsive } from 'components/sidebar/Sidebar';
 import PropTypes from 'prop-types';
 import React from 'react';
 // Assets
-import navImage from '../../assets/img/layout/Navbar.png';
+import navImage from 'assets/img/layout/Navbar.png';
 import { MdNotificationsNone, MdInfoOutline } from 'react-icons/md';
 import { FaEthereum } from 'react-icons/fa';
-import routes from '../../routes';
+import routes from 'routes.js';
 import { ThemeEditor } from './ThemeEditor';
 export default function HeaderLinks(props) {
 	const { secondary } = props;
@@ -190,12 +190,12 @@ export default function HeaderLinks(props) {
 							fontSize="sm"
 							fontWeight="700"
 							color={textColor}>
-							👋&nbsp; Hey, Student
+							👋&nbsp; Hey, Admin
 						</Text>
 					</Flex>
 					<Flex flexDirection="column" p="10px">
 						<MenuItem _hover={{ bg: 'none' }} _focus={{ bg: 'none' }} borderRadius="8px" px="14px">
-							<Link href='/profile#/Student/default'>
+							<Link href='/profile#/admin/profile'>
 								<Text fontSize="sm">Profile Settings</Text>
 							</Link>
 						</MenuItem>
