@@ -1,25 +1,14 @@
-import React, {useEffect} from "react";
-import {
-    Box,
-    Flex,
-    Grid,
-    Text,
-    useColorModeValue,
-    SimpleGrid,
-} from "@chakra-ui/react";
+import React, {useEffect, useState} from "react";
+import {Box, Flex, Grid, SimpleGrid, Text, useColorModeValue,} from "@chakra-ui/react";
 import NFT from "components/card/NFT";
 import axios from "axios";
-import {api} from "api/api";
-import {useState} from "react";
-import {imgUrl} from "api/api";
+import {api, categoryAdd, config, imgUrl} from "api/api";
 import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import {categoryAdd} from "api/api";
-import {config} from "api/api";
-import {addImage} from "api/api";
 
 // toast
 import 'react-toastify/dist/ReactToastify.css';
-import {ToastContainer, toast} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
+import {getCategory} from "../../../api/routers";
 
 export default function Marketplace() {
     // Chakra Color Mode
@@ -32,16 +21,8 @@ export default function Marketplace() {
     const openAddModal = () => setAddModal(!addModal);
 
     useEffect(() => {
-        getCategory();
+        getCategory(setCategory);
     }, []);
-
-    // get category
-    function getCategory() {
-        axios.get(api + "category", config)
-            .then(res => {
-                setCategory(res.data.body)
-            })
-    }
 
     // add category
     const addCategory = async () => {
@@ -57,7 +38,7 @@ export default function Marketplace() {
                 }, config)
                     .then(() => {
                         openAddModal();
-                        getCategory();
+                        getCategory(setCategory);
                         toast.success("Categorya muvaffaqiyatli qo'shildi✔");
                     }).catch(() => toast.error("Xatolik yuz berdi. Buning uchun sizdan uzur suraymiz, beni tez orada bartaraf etamiz!!!"))
             })
@@ -115,7 +96,6 @@ export default function Marketplace() {
                             {category.length && category.map((item, i) =>
                                 <NFT
                                     categoryIdIn={item}
-                                    getCategory={getCategory}
                                     key={i}
                                     name={item.name}
                                     bidders={[]}
