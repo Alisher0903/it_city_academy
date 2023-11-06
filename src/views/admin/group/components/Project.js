@@ -44,11 +44,11 @@ export default function Project(props) {
   // get group
   function getGroup() {
     axios.get(api + "group?page=0&size=10", config)
-      .then(res => {
-        setGroup(res.data.body.object)
-      })
+    .then(res => {
+      setGroup(res.data.body.object)
+    })
   }
-
+  
   // edit group
   const editGroup = () => {
     let categoryId = document.getElementById("groupCategory").value;

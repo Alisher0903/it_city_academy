@@ -6,6 +6,11 @@ import Project from "./Project";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import axios from "axios";
 import { api } from "api/api";
+import { groupAdd } from "api/api";
+import { config } from "api/api";
+// toast
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Projects(props) {
 
@@ -30,8 +35,26 @@ export default function Projects(props) {
     axios.get(api + "category").then(res => setCategory(res.data.body))
   }
 
+  // add group
+  const addGroup = () => {
+    axios.post(api + groupAdd,
+      {
+        name: document.getElementById("groupName").value,
+        categoryId: document.getElementById("groupCategory").value,
+        teacherId: document.getElementById("groupFIO").value
+      }, config)
+      .then(() => {
+        openAddModal();
+        toast.success("save");
+      }).catch(() => {
+        openAddModal();
+        toast.error("err");
+      })
+  }
+
   return (
     <Card mb={{ base: "0px", "2xl": "20px" }}>
+      <ToastContainer />
       <Text
         display="flex"
         justifyContent="space-between"
@@ -49,8 +72,8 @@ export default function Projects(props) {
         <ModalHeader toggle={openAddModal} className="group__modal-head">Add Group</ModalHeader>
         <ModalBody className="group__modal-body">
           {/* <Input id="groupFile" type="file" /> */}
-          <Input id="groupName" type="number" placeholder="Group name" />
-          <Input id="groupFIO" type="text" placeholder="Teacher: FIO" />
+          <Input id="groupName" type="text" placeholder="Group name" />
+          <Input id="groupFIO" placeholder="Teacher: FIO" />
           <select className="form-select" id="groupCategory">
             <option selected disabled>Category</option>
             {
@@ -62,7 +85,7 @@ export default function Projects(props) {
         </ModalBody>
         <ModalFooter>
           <Button color="dark" onClick={openAddModal} outline>Close</Button>
-          <Button color="success" outline>Save</Button>
+          <Button color="success" outline onClick={addGroup}>Save</Button>
         </ModalFooter>
       </Modal>
 
