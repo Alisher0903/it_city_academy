@@ -30,7 +30,7 @@ import {
 
 // Custom components
 import Card from "components/card/Card";
-import Menu from "components/menu/MainMenu";
+// import Menu from "components/menu/MainMenu";
 import axios from "axios";
 import { api } from "api/api";
 import { config } from "api/api";
