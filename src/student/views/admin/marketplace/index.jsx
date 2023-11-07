@@ -1,11 +1,22 @@
-import React from "react";
-import {Box, Flex, Grid, Link, SimpleGrid, Text, useColorModeValue,} from "@chakra-ui/react";
+import React, {useEffect, useState} from "react";
+import {Box, Flex, Grid, Link, Text, useColorModeValue,} from "@chakra-ui/react";
 
 // Custom components
 // Assets
 import {AccordionBody, AccordionHeader, AccordionItem, UncontrolledAccordion} from "reactstrap";
+import {getUserCategory} from "../../../../api/routers";
+import TestList from "./components/TestList";
 
 export default function Marketplace() {
+
+    const [category, setCategory] = useState([]);
+
+    useEffect(() => {
+        getUserCategory(setCategory);
+    }, []);
+
+    console.log(category)
+
     // Chakra Color Mode
     const textColor = useColorModeValue("secondaryGray.900", "white");
     const textColorBrand = useColorModeValue("brand.500", "white");
@@ -66,6 +77,14 @@ export default function Marketplace() {
                         {/*    Accardion */}
                         <section className="d-flex w-100 justify-content-center mt-3">
                             <UncontrolledAccordion className="w-75">
+                                {category.length && category.map((item, i) =>
+                                    <AccordionItem key={i}>
+                                        <AccordionHeader targetId={i + 1}>
+                                            {item.name}
+                                        </AccordionHeader>
+                                        <TestList categoryId={item.id} index={i + 1}/>
+                                    </AccordionItem>
+                                )}
                                 <AccordionItem>
                                     <AccordionHeader targetId="1">
                                         Accordion Item 1
