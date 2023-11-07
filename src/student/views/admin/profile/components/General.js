@@ -20,7 +20,7 @@ export default function GeneralInformation(props) {
     "0px 18px 40px rgba(112, 144, 176, 0.12)",
     "unset"
   );
-  const [info, setInfo] = useState([]);
+  const [info, setInfo] = useState({});
 
   useEffect(() => {
     getProfile();
@@ -29,8 +29,8 @@ export default function GeneralInformation(props) {
   function getProfile() {
     axios.get(api + "user/getMe", config)
       .then(res => {
-        setInfo(res.data.body.object)
-        console.log(res.data.body.object);
+        setInfo(res.data)
+        console.log(res.data);
       })
       // .catch(err => consol e.log(err))
   }
@@ -47,17 +47,17 @@ export default function GeneralInformation(props) {
       <SimpleGrid columns='1' gap='20px'>
         <Information
           boxShadow={cardShadow}
-          title='Education'
-          value='Stanford University'
+          title='Your phone number'
+          value={info.phoneNumber}
         />
         <Information
           boxShadow={cardShadow}
-          title='Languages'
-          value='English, Spanish, Italian'
+          title='Your email'
+          value={info.email}
         />
         <Information
           boxShadow={cardShadow}
-          title='Department'
+          title='Your group'
           value='Product Design'
         />
         

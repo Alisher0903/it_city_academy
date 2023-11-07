@@ -25,6 +25,11 @@ import { MdNotificationsNone, MdInfoOutline } from 'react-icons/md';
 import { FaEthereum } from 'react-icons/fa';
 import routes from '../../routes';
 import { ThemeEditor } from './ThemeEditor';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
+import { config } from 'api/api';
+import { api } from 'api/api';
 export default function HeaderLinks(props) {
 	const { secondary } = props;
 	// Chakra Color Mode
@@ -41,6 +46,21 @@ export default function HeaderLinks(props) {
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.06)'
 	);
 	const borderButton = useColorModeValue('secondaryGray.500', 'whiteAlpha.200');
+
+	const [info, setInfo] = useState({});
+
+	useEffect(() => {
+	  getProfile();
+	}, []);
+  
+	function getProfile() {
+	  axios.get(api + "user/getMe", config)
+		.then(res => {
+		  setInfo(res.data)
+		  console.log(res.data);
+		})
+		// .catch(err => consol e.log(err))
+	}
 	return (
 		<Flex
 			w={{ sm: '100%', md: 'auto' }}
@@ -171,7 +191,7 @@ export default function HeaderLinks(props) {
 					<Avatar
 						_hover={{ cursor: 'pointer' }}
 						color="white"
-						name="Admen Panel"
+						name={info.firstName + " " + info.lastName}
 						bg="#11047A"
 						size="sm"
 						w="40px"
@@ -190,7 +210,7 @@ export default function HeaderLinks(props) {
 							fontSize="sm"
 							fontWeight="700"
 							color={textColor}>
-							👋&nbsp; Hey, Student
+							👋&nbsp; Hey, {info.firstName}
 						</Text>
 					</Flex>
 					<Flex flexDirection="column" p="10px">
