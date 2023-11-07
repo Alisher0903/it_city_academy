@@ -50,15 +50,15 @@ export default function HeaderLinks(props) {
 	const [info, setInfo] = useState({});
 
 	useEffect(() => {
-	  getProfile();
+		getProfile();
 	}, []);
-  
+
 	function getProfile() {
-	  axios.get(api + "user/getMe", config)
-		.then(res => {
-		  setInfo(res.data)
-		  console.log(res.data);
-		})
+		axios.get(api + "user/getMe", config)
+			.then(res => {
+				setInfo(res.data)
+				console.log(res.data);
+			})
 		// .catch(err => consol e.log(err))
 	}
 	return (
@@ -228,7 +228,10 @@ export default function HeaderLinks(props) {
 							color="red.400"
 							borderRadius="8px"
 							px="14px">
-							<Text fontSize="sm">Log out</Text>
+							<Link href='/'>
+
+								<Text fontSize="sm">Log out</Text>
+							</Link>
 						</MenuItem>
 					</Flex>
 				</MenuList>

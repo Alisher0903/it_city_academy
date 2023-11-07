@@ -7,7 +7,7 @@
 
 // Chakra imports
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import CheckTable from "views/admin/dataTables/components/CheckTable";
+import CheckTable from "../../../views/admin/dataTables/components/CheckTable";
 import ColumnsTable from "views/admin/dataTables/components/ColumnsTable";
 import {
   columnsDataCheck,
@@ -25,11 +25,7 @@ export default function Settings() {
         mb='20px'
         columns={{ sm: 1, md: 1 }}
         spacing={{ base: "20px", xl: "20px" }}>
-        <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
-        {/* <ColumnsTable
-          columnsData={columnsDataColumns}
-          tableData={tableDataColumns}
-        /> */}
+         <CheckTable columnsData={columnsDataCheck} />
       </SimpleGrid>
     </Box>
   );
