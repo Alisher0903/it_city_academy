@@ -6,6 +6,7 @@ export const getCategory = (setCategory) => {
     axios.get(api + "category").then(res => setCategory(res.data.body));
 }
 
+// Group
 export function getGroup(setGroup) {
     axios.get(api + "user/teacher", config)
         .then(t => {
@@ -27,7 +28,18 @@ export function getGroup(setGroup) {
         });
 }
 
+// User
 export const getTeacher = (setTeacher) => {
     axios.get(api + "user/teacher", config)
         .then(res => setTeacher(res.data.body));
+}
+
+// Test
+export function getUserCategory(setCategory) {
+    axios.get(api + "test/by/category", config).then(res => setCategory(res.data))
+}
+
+export function getCategoryByTest(setTest, categoryId) {
+    console.log(categoryId)
+    axios.get(api + `test/by/${categoryId}/test`, config).then(res => setTest(res.data))
 }
