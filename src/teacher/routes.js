@@ -2,23 +2,22 @@ import React from "react";
 
 import { Icon } from "@chakra-ui/react";
 import {
-  MdMessage,
-  MdPeople,
   MdHome,
   MdPerson3,
   MdOutlineMenuBook,
   MdGroup,
+  MdCardGiftcard,
+  MdPages,
+  MdTab,
 } from "react-icons/md";
 
-// Teacher Imports
 import MainDashboard from "./views/admin/default";
 import Category from "./views/admin/marketplace";
 import Group from "./views/admin/group";
-import Message from "./views/admin/dataTables";
-// import RTL from "views/admin/rtl";
-
-// Auth Imports
-import SignInCentered from "./views/auth/signIn";
+import Student from "./views/admin/profile";
+import Gifts from "./views/admin/dataTables";
+import Test from "./views/admin/test";
+import TestAnswer from "./views/admin/testAnswer";
 
 const routes = [
   {
@@ -37,13 +36,6 @@ const routes = [
     secondary: true,
   },
   {
-    name: "Message",
-    layout: "/Teacher",
-    icon: <Icon as={MdMessage} width='20px' height='20px' color='inherit' />,
-    path: "/message",
-    component: Message,
-  },
-  {
     name: "Group",
     layout: "/Teacher",
     path: "/group",
@@ -51,12 +43,33 @@ const routes = [
     component: Group,
   },
   {
+    name: "Gifts",
+    layout: "/Teacher",
+    path: "/gifts",
+    icon: <Icon as={MdCardGiftcard} width='20px' height='20px' color='inherit' />,
+    component: Gifts,
+  },
+  {
     name: "Student",
     layout: "/Teacher",
-    path: "/student",
     icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,
-    component: SignInCentered,
-  }
+    path: "/student",
+    component: Student,
+  },
+  {
+    name: "Test",
+    layout: "/Teacher",
+    icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,
+    path: "/test",
+    component: Test,
+  },
+  {
+    name: "Test Answer",
+    layout: "/Teacher",
+    icon: <Icon as={MdTab} width='20px' height='20px' color='inherit' />,
+    path: "/answer",
+    component: TestAnswer,
+  },
 ];
 
 export default routes;
