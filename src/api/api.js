@@ -2,6 +2,9 @@ import axios from "axios";
 
 export const api = "http://142.93.209.179/";
 
+// teacher url
+export const teacherUrl = "group/teacher";
+
 // message url
 export const messageAdd = "message/save";
 

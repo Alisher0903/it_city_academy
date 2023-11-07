@@ -4,6 +4,7 @@ import { SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import React from "react";
 import Information from "../../../../views/admin/profile/components/Information";
+import { Table } from "reactstrap";
 
 // Assets
 export default function GeneralInformation(props) {
@@ -16,24 +17,38 @@ export default function GeneralInformation(props) {
     "unset"
   );
   return (
-    <Card mb={{ base: "0px", "2xl": "20px" }} {...rest}>
+    <Card>
       <Text
+        display="flex"
+        justifyContent="space-between"
         color={textColorPrimary}
         fontWeight='bold'
         fontSize='2xl'
         mt='10px'
-        mb='4px'>
-        General Information
+        mb='15px'>
+        Group Information
+        <select className="form-select w-50 rounded-0" id="selectStudent">
+          <option selected disabled>Select Group</option>
+        </select>
       </Text>
-      <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
-        As we live, our hearts turn colder. Cause pain is what we go through as
-        we become older. We get insulted by others, lose trust for those others.
-        We get back stabbed by friends. It becomes harder for us to give others
-        a hand. We get our heart broken by people we love, even that we give
-        them all...
-      </Text>
-      <SimpleGrid columns='2' gap='20px'>
-        <Information
+      <SimpleGrid>
+        <Table dark hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>FIO</th>
+              <th>PhoneNumber</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Sodiqov Alisher</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </Table>
+        {/* <Information
           boxShadow={cardShadow}
           title='Education'
           value='Stanford University'
@@ -62,7 +77,7 @@ export default function GeneralInformation(props) {
           boxShadow={cardShadow}
           title='Birthday'
           value='20 July 1986'
-        />
+        /> */}
       </SimpleGrid>
     </Card>
   );
