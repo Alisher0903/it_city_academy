@@ -78,7 +78,7 @@ export default function GeneralInformation(props) {
                 </tr>
               ) :
               <tr className="text-center">
-                <td colSpan="4">
+                <td colSpan="5">
                   <h1 className="fs-4">Bu guruhda o'quvchi mavjud emas!</h1>
                 </td>
               </tr>

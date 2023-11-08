@@ -1,41 +1,50 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
-import DevelopmentTable from "views/admin/dataTables/components/DevelopmentTable";
-import CheckTable from "views/admin/dataTables/components/CheckTable";
-import ColumnsTable from "views/admin/dataTables/components/ColumnsTable";
-import ComplexTable from "views/admin/dataTables/components/ComplexTable";
-import {
-  columnsDataDevelopment,
-  columnsDataCheck,
-  columnsDataColumns,
-  columnsDataComplex,
-} from "views/admin/dataTables/variables/columnsData";
-import tableDataDevelopment from "views/admin/dataTables/variables/tableDataDevelopment.json";
-import tableDataCheck from "views/admin/dataTables/variables/tableDataCheck.json";
-import tableDataColumns from "views/admin/dataTables/variables/tableDataColumns.json";
-import tableDataComplex from "views/admin/dataTables/variables/tableDataComplex.json";
 import React from "react";
+import { Box, Flex, Grid, Link, Text, useColorModeValue, SimpleGrid, } from "@chakra-ui/react";
+import NFT from "../../../components/card/NFTGIFTS";
+import Nft1 from "../../../assets/img/nfts/Nft1.png";
+import { Button } from "reactstrap";
 
-export default function Settings() {
+export default function Marketplace() {
+
+  const textColor = useColorModeValue("secondaryGray.900", "white");
+
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <SimpleGrid
+    <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+      <Grid
         mb='20px'
-        columns={{ sm: 1, md: 2 }}
-        spacing={{ base: "20px", xl: "20px" }}>
-        <DevelopmentTable
-          columnsData={columnsDataDevelopment}
-          tableData={tableDataDevelopment}
-        />
-        <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
-        <ColumnsTable
-          columnsData={columnsDataColumns}
-          tableData={tableDataColumns}
-        />
-        <ComplexTable
-          columnsData={columnsDataComplex}
-          tableData={tableDataComplex}
-        />
-      </SimpleGrid>
+        gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
+        gap={{ base: "20px", xl: "20px" }}
+        display={{ base: "block", xl: "grid" }}>
+        <Flex
+          flexDirection='column'
+          gridArea={{ xl: "1 / 1 / 2 / 4", "2xl": "1 / 1 / 2 / 3" }}>
+          <Flex direction='column'>
+            <Flex
+              mt='45px'
+              mb='20px'
+              justifyContent='space-between'
+              direction={{ base: "column", md: "row" }}
+              align={{ base: "start", md: "center" }}>
+              <Text color={textColor} fontSize='2xl' ms='10px' fontWeight='700'>
+                Gifts
+              </Text>
+              <Flex
+                align='center'
+                me='20px'
+                ms={{ base: "24px", md: "0px" }}
+                mt={{ base: "20px", md: "0px" }}>
+              </Flex>
+            </Flex>
+            <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
+              <NFT
+                name='Abstract Colors'
+                bidders={[]}
+                image={Nft1}
+              />
+            </SimpleGrid>
+          </Flex>
+        </Flex>
+      </Grid>
     </Box>
   );
 }
