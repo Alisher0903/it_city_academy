@@ -171,15 +171,15 @@ export default function DashboardHome(props) {
 											<Container className='text-light'>
 												<Row className='w-100'>
 													<Col className='col-12 col-lg-5 home__box-content'>
-														<h3 data-aos="fade-up"
+														<h3 data-aos="fade-right"
 															data-aos-duration="1500">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta,
 															qui.</h3>
-														<p data-aos="fade-up"
-															data-aos-duration="1500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde id
+														<p data-aos="fade-right"
+															data-aos-duration="3500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde id
 															sunt adipisci aperiam aspernatur vel cum, reprehenderit similique
 															suscipit qui!</p>
 														<Link to="/auth" id='login'></Link>
-														<button
+														<button data-aos="fade-right"
 															color='warning'
 															outline
 															onClick={login}
@@ -190,7 +190,9 @@ export default function DashboardHome(props) {
 
 													</Col>
 													<Col className='col-12 col-lg-7 mt-5 mt-lg-0 home__box-banner'>
-														<img src={banner} className='w-75' alt="bannerImg" />
+														<img data-aos="fade-left"
+															data-aos-offset="300"
+															data-aos-easing="ease-in-sine" src={banner} className='w-75' alt="bannerImg" />
 													</Col>
 												</Row>
 											</Container>
@@ -202,7 +204,7 @@ export default function DashboardHome(props) {
 												<p className='fs-2 text-center'>Lorem, ipsum. Lorem, ipsum. Lorem, ipsum dolor.</p>
 											</div>
 											<div data-aos="fade-left" className='flex-card'>
-												<div data-aos="fade-up"
+												<div data-aos="fade-right"
 													data-aos-duration="3000" class="cardd">
 													<div className="card-headd">
 														<div className='card-style center-center'>
@@ -214,7 +216,7 @@ export default function DashboardHome(props) {
 														<p class="card-text"> lead-in to additional content.</p>
 													</div>
 												</div>
-												<div data-aos="fade-up"
+												<div data-aos="fade-right"
 													data-aos-duration="3000" class="cardd">
 													<div className="card-headd">
 														<div className='card-style center-center'>
@@ -226,7 +228,7 @@ export default function DashboardHome(props) {
 														<p class="card-text"> lead-in to additional content.</p>
 													</div>
 												</div>
-												<div data-aos="fade-up"
+												<div data-aos="fade-right"
 													data-aos-duration="3000" class="cardd">
 													<div className="card-headd">
 														<div className='card-style center-center'>
@@ -238,7 +240,7 @@ export default function DashboardHome(props) {
 														<p class="card-text"> lead-in to additional content.</p>
 													</div>
 												</div>
-												<div data-aos="fade-up"
+												<div data-aos="fade-right"
 													data-aos-duration="3000" class="cardd">
 													<div className="card-headd">
 														<div className='card-style center-center'>
@@ -254,7 +256,7 @@ export default function DashboardHome(props) {
 
 										</section>
 										<section className='forth-section center-center'>
-											<div data-aos="zoom-in-down" data-aos-duration="2500" className='forth-in'>
+											<div data-aos="zoom-out" data-aos-duration="1000" className='forth-in'>
 												<h1 className='fs-1 mb-3'>Lorem ipsum dolor sit amet.</h1>
 												<p className='w-75 fs-5 mb-5'>Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur nobis neque repellat earum, adipisci voluptates.</p>
 												<b>Axmad Yassaviy</b>
