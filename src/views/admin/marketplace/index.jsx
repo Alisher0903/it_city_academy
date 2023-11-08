@@ -40,7 +40,7 @@ export default function Marketplace() {
                         openAddModal();
                         getCategory(setCategory);
                         toast.success("Categorya muvaffaqiyatli qo'shildi✔");
-                    }).catch(() => toast.error("Xatolik yuz berdi. Buning uchun sizdan uzur suraymiz, beni tez orada bartaraf etamiz!!!"))
+                    }).catch(() => toast.error("Xatolik yuz berdi. Buning uchun sizdan uzur suraymiz, buni tez orada bartaraf etamiz!!!"))
             })
     }
 

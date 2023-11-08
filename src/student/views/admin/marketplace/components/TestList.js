@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {AccordionBody} from "reactstrap";
 import {getCategoryByTest} from "../../../../../api/routers";
+import '../../../../../assets/css/test.css'
 
 function TestList({categoryId, index}) {
 
@@ -15,9 +16,10 @@ function TestList({categoryId, index}) {
     return (
         <>
             {test.length ? test.map((item, i) =>
-                <AccordionBody accordionId={index} key={i}>
-                    {item.question}
-                    <hr/>
+                <AccordionBody accordionId={index} key={i} className="testb">
+                    <div className="border-top">
+                        {item.question}
+                    </div>
                 </AccordionBody>
             ) : <AccordionBody accordionId={index}>
                 Test not found
