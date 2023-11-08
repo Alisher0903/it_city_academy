@@ -2,6 +2,7 @@
 
 .homePage__main {
   width: 100%;
+  overflow: hidden;
 
   font-family: 'Nunito', sans-serif;
 
@@ -9,6 +10,8 @@
   // font-family: 'Lora', serif;
   // font-family: 'Montserrat', sans-serif;
   // font-family: 'Space Mono', monospace;
+  
+
   .head-section {
     background-image: url('../../assets/img/homeImage/bg-banner.jpg');
     background-position: center;
@@ -40,7 +43,8 @@
     }
 
     button {
-      margin-top: 3rem;
+      margin-left: -9rem;
+      margin-top: 2rem;
     }
   }
 
@@ -185,5 +189,10 @@
     .five-bot {
       padding: 0 20px;
     }
+
+    button {
+      margin-top: 2rem;
+    }
+
   }
 }
