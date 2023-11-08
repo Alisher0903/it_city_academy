@@ -44,9 +44,9 @@ const routes = [
     component: Group,
   },
   {
-    name: "Student",
+    name: "",
     layout: "/Teacher",
-    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={MdPerson} className="d-none" width='20px' height='20px' color='inherit' />,
     path: "/student",
     component: Student,
   },

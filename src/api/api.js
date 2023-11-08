@@ -4,6 +4,7 @@ export const api = "http://142.93.209.179/";
 
 // teacher url
 export const teacherUrl = "group/teacher";
+export const getUserUrl = "group/teacher/one/group/";
 
 // message url
 export const messageAdd = "message/save";
