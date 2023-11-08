@@ -1,12 +1,28 @@
-import React from "react";
-import { Box, Flex, Grid, Link, Text, useColorModeValue, SimpleGrid, } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Box, Flex, Grid, Text, useColorModeValue, SimpleGrid, } from "@chakra-ui/react";
 import NFT from "../../../components/card/NFTGIFTS";
-import Nft1 from "../../../assets/img/nfts/Nft1.png";
-import { Button } from "reactstrap";
+import axios from "axios";
+import { api } from "api/api";
+import { getGeftsTeacher } from "api/api";
+import { imgUrl } from "api/api";
 
 export default function Marketplace() {
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
+
+  const [gifts, setGifts] = useState([]);
+
+  useEffect(() => {
+    getGifts();
+  }, []);
+
+  // get gifts
+  const getGifts = () => {
+    axios.get(api + getGeftsTeacher)
+      .then(res => setGifts(res.data.body.object));
+  }
+
+  console.log(gifts);
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
@@ -36,11 +52,16 @@ export default function Marketplace() {
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
-              <NFT
-                name='Abstract Colors'
-                bidders={[]}
-                image={Nft1}
-              />
+              {gifts.length && gifts.map((item, i) =>
+                <NFT
+                  key={i}
+                  name={item.name}
+                  description={item.description}
+                  rate={item.rate}
+                  bidders={[]}
+                  image={imgUrl + item.attachmentId}
+                />
+              )}
             </SimpleGrid>
           </Flex>
         </Flex>
