@@ -24,7 +24,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function Overview() {
-  const [info, setInfo] = useState([]);
+  const [info, setInfo] = useState({});
 
   useEffect(() => {
     getProfile();
@@ -33,8 +33,8 @@ export default function Overview() {
   function getProfile() {
     axios.get(api + "user/getMe", config)
       .then(res => {
-        setInfo(res.data.body.object)
-        console.log(res.data.body.object);
+        setInfo(res.data)
+        console.log(res.data);
       })
       // .catch(err => consol e.log(err))
   }
@@ -43,7 +43,7 @@ export default function Overview() {
   
 
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}> 
       {/* Main Fields */}
       <Grid
         templateColumns={{
@@ -53,18 +53,17 @@ export default function Overview() {
         }}
 
         gap={{ base: "20px", xl: "20px" }}>
-        {/* {info.map((item, i) => */}
+      
           <Banner
             gridArea='1 / 1 / 2 / 2'
             banner={banner}
             avatar={avatar}
-            name='Adela Parkson'
-            job='Product Designer'
-            posts='17'
-            followers='9.7k'
-            following='274'
+            name={info.firstName}
+            lastName={info.lastName}
+            // job={}
+            posts={info.current_rate}
+            followers={info.used_rate}
           />
-        {/* )} */}
         <General
           gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
           minH='365px'

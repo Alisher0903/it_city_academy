@@ -6,9 +6,10 @@ import {
   MdPerson3,
   MdOutlineMenuBook,
   MdGroup,
-  MdCardGiftcard,
-  MdPages,
-  MdTab,
+  MdEmojiEvents,
+  MdPending,
+  MdOutlinePending,
+  MdPerson,
 } from "react-icons/md";
 
 import MainDashboard from "./views/admin/default";
@@ -18,6 +19,7 @@ import Student from "./views/admin/profile";
 import Gifts from "./views/admin/dataTables";
 import Test from "./views/admin/test";
 import TestAnswer from "./views/admin/testAnswer";
+import Profile from "./views/admin/myProfile";
 
 const routes = [
   {
@@ -46,29 +48,35 @@ const routes = [
     name: "Gifts",
     layout: "/Teacher",
     path: "/gifts",
-    icon: <Icon as={MdCardGiftcard} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={MdEmojiEvents} width='20px' height='20px' color='inherit' />,
     component: Gifts,
-  },
-  {
-    name: "Student",
-    layout: "/Teacher",
-    icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,
-    path: "/student",
-    component: Student,
   },
   {
     name: "Test",
     layout: "/Teacher",
-    icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={MdPending} width='20px' height='20px' color='inherit' />,
     path: "/test",
     component: Test,
   },
   {
     name: "Test Answer",
     layout: "/Teacher",
-    icon: <Icon as={MdTab} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={MdOutlinePending} width='20px' height='20px' color='inherit' />,
     path: "/answer",
     component: TestAnswer,
+  },
+  {
+    name: "",
+    layout: "/Teacher",
+    icon: <Icon as={MdPerson} className="d-none" width='20px' height='20px' color='inherit' />,
+    path: "/student",
+    component: Student,
+  },
+  {
+    name: "",
+    layout: "/Teacher",
+    path: "/profile",
+    component: Profile,
   },
 ];
 
