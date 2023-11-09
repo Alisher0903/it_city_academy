@@ -19,6 +19,7 @@ import Student from "./views/admin/profile";
 import Gifts from "./views/admin/dataTables";
 import Test from "./views/admin/test";
 import TestAnswer from "./views/admin/testAnswer";
+import Profile from "./views/admin/myProfile";
 
 const routes = [
   {
@@ -44,13 +45,6 @@ const routes = [
     component: Group,
   },
   {
-    name: "Student",
-    layout: "/Teacher",
-    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
-    path: "/student",
-    component: Student,
-  },
-  {
     name: "Gifts",
     layout: "/Teacher",
     path: "/gifts",
@@ -70,6 +64,19 @@ const routes = [
     icon: <Icon as={MdOutlinePending} width='20px' height='20px' color='inherit' />,
     path: "/answer",
     component: TestAnswer,
+  },
+  {
+    name: "",
+    layout: "/Teacher",
+    icon: <Icon as={MdPerson} className="d-none" width='20px' height='20px' color='inherit' />,
+    path: "/student",
+    component: Student,
+  },
+  {
+    name: "",
+    layout: "/Teacher",
+    path: "/profile",
+    component: Profile,
   },
 ];
 

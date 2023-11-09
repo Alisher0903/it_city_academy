@@ -10,12 +10,12 @@
 import { Box, Grid } from "@chakra-ui/react";
 
 // Custom components
-import Banner from "../../../views/admin/profile/components/Banner";
-import General from "../../../views/admin/profile/components/General";
-import Notifications from "../../../views/admin/profile/components/Notifications";
-import Projects from "../../../views/admin/profile/components/Projects";
-import Storage from "../../../views/admin/profile/components/Storage";
-import Upload from "../../../views/admin/profile/components/Upload";
+import Banner from "../../../views/admin/test/components/Banner";
+import General from "../../../views/admin/test/components/General";
+import Notifications from "../../../views/admin/test/components/Notifications";
+import Projects from "../../../views/admin/test/components/Projects";
+import Storage from "../../../views/admin/test/components/Storage";
+import Upload from "../../../views/admin/test/components/Upload";
 
 // Assets
 import banner from "../../../assets/img/auth/banner.png";
