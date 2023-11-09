@@ -1,15 +1,5 @@
 /* eslint-disable */
 import {
-  Box,
-  Flex,
-  Progress,
-  Table,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
