@@ -1,78 +1,46 @@
 // Chakra imports
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-// Custom components
+import { Flex } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import React from "react";
-// Assets
-import { MdUpload } from "react-icons/md";
-import Dropzone from "../../../../views/admin/profile/components/Dropzone";
+import Information from "./Information.js";
+import { SimpleGrid, Text, useColorModeValue, phoneNumer, email } from "@chakra-ui/react";
 
 export default function Upload(props) {
-  const { used, total, ...rest } = props;
-  // Chakra Color Mode
+
+  const { used, total, email, phoneNumber, ...rest } = props;
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
-  const brandColor = useColorModeValue("brand.500", "white");
-  const textColorSecondary = "gray.400";
+  const cardShadow = useColorModeValue(
+    "0px 18px 40px rgba(112, 144, 176, 0.12)",
+    "unset"
+  );
+
   return (
     <Card {...rest} mb='20px' align='center' p='20px'>
       <Flex h='100%' direction={{ base: "column", "2xl": "row" }}>
-        {/* <Dropzone
-          w={{ base: "100%", "2xl": "268px" }}
-          me='36px'
-          maxH={{ base: "60%", lg: "50%", "2xl": "100%" }}
-          minH={{ base: "60%", lg: "50%", "2xl": "100%" }}
-          content={
-            <Box>
-              <Icon as={MdUpload} w='80px' h='80px' color={brandColor} />
-              <Flex justify='center' mx='auto' mb='12px'>
-                <Text fontSize='xl' fontWeight='700' color={brandColor}>
-                  Upload Files
-                </Text>
-              </Flex>
-              <Text fontSize='sm' fontWeight='500' color='secondaryGray.500'>
-                PNG, JPG and GIF files are allowed
-              </Text>
-            </Box>
-          }
-        /> */}
-        <Flex direction='column' pe='44px'>
-          <Text
-            color={textColorPrimary}
-            fontWeight='bold'
-            textAlign='start'
-            fontSize='2xl'
-            mt={{ base: "20px", "2xl": "50px" }}>
-            Complete your profile
-          </Text>
-          <Text
-            color={textColorSecondary}
-            fontSize='md'
-            my={{ base: "auto", "2xl": "10px" }}
-            mx='auto'
-            textAlign='start'>
-            Stay on the pulse of distributed projects with an anline whiteboard
-            to plan, coordinate and discuss
-          </Text>
-          <Flex w='100%'>
-            <Button
-              me='100%'
-              mb='50px'
-              w='140px'
-              minW='140px'
-              mt={{ base: "20px", "2xl": "auto" }}
-              variant='brand'
-              fontWeight='500'>
-              Publish now
-            </Button>
-          </Flex>
-        </Flex>
+        <Text
+          color={textColorPrimary}
+          fontWeight='bold'
+          fontSize='2xl'
+          mb='15px'>
+          Teacher Information
+        </Text>
+        <SimpleGrid columns='1' gap='20px'>
+          <Information
+            boxShadow={cardShadow}
+            title='Phone Number'
+            value={phoneNumber}
+          />
+          <Information
+            boxShadow={cardShadow}
+            title='Email'
+            value={email}
+          />
+          <Information
+            boxShadow={cardShadow}
+            title='Direction'
+            value='Front End'
+          />
+        </SimpleGrid>
       </Flex>
     </Card>
   );

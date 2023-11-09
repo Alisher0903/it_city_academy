@@ -12,9 +12,11 @@ import {
 import { SearchBar } from '../../components/navbar/searchBar/SearchBar';
 import { SidebarResponsive } from '../../components/sidebar/Sidebar';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import routes from '../../routes';
 import { ThemeEditor } from './ThemeEditor';
+import axios from 'axios';
+import { api, config } from 'api/api';
 
 export default function HeaderLinks(props) {
 
@@ -27,6 +29,17 @@ export default function HeaderLinks(props) {
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.18)',
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.06)'
 	);
+
+	const [getMeTeacher, setGetMeTeacher] = useState([]);
+
+	useEffect(() => {
+		getMe();
+	}, []);
+
+	const getMe = () => {
+		axios.get(api + "user/getMe", config)
+			.then(res => setGetMeTeacher(res.data));
+	}
 
 	return (
 		<Flex
@@ -46,7 +59,7 @@ export default function HeaderLinks(props) {
 					<Avatar
 						_hover={{ cursor: 'pointer' }}
 						color="white"
-						name="Admen Panel"
+						name={getMeTeacher.firstName + " " + getMeTeacher.lastName}
 						bg="#11047A"
 						size="sm"
 						w="40px"
@@ -65,7 +78,7 @@ export default function HeaderLinks(props) {
 							fontSize="sm"
 							fontWeight="700"
 							color={textColor}>
-							👋&nbsp; Hey, Admin
+							👋 Hey, {getMeTeacher.firstName}
 						</Text>
 					</Flex>
 					<Flex flexDirection="column" p="10px">

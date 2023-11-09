@@ -1,6 +1,6 @@
 import { Box, Flex, Link, Text, useColorModeValue, } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "reactstrap";
 
 export default function Project(props) {
@@ -26,6 +26,7 @@ export default function Project(props) {
           ms='auto'>
           <Button onClick={() => {
             sessionStorage.setItem("groupTeacherId", groupIdIn.id);
+            sessionStorage.setItem("groupTeacherName", title);
           }} className="px-4 rounded-5 fw-bolder" outline color="success">view groups</Button>
         </Link>
       </Flex>

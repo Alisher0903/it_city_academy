@@ -1,7 +1,7 @@
 import { Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import React, { useEffect, useState } from "react";
-import Project from "../../../../views/admin/profile/components/Project";
+import Project from "./Project.js";
 import axios from "axios";
 import { api, teacherUrl, config } from "api/api.js";
 

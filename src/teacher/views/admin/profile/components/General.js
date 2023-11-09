@@ -1,12 +1,10 @@
-import { SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Link, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import axios from "axios";
-import { api } from "api/api.js";
-import { teacherUrl } from "api/api.js";
-import { config } from "api/api.js";
-import { getUserUrl } from "api/api.js";
+import { api, teacherUrl, config, getUserUrl } from "api/api.js";
+import { Icon } from "@iconify/react";
 
 // Assets
 export default function GeneralInformation(props) {
@@ -27,8 +25,9 @@ export default function GeneralInformation(props) {
     axios.get(api + teacherUrl, config).then(res => setTeacher(res.data.body))
   }
 
-  // user id
+  // user id vs name
   let generalId = sessionStorage.getItem("groupTeacherId");
+  let generalName = sessionStorage.getItem("groupTeacherName");
 
   // get student
   const getStudent = () => {
@@ -45,15 +44,22 @@ export default function GeneralInformation(props) {
         fontSize='2xl'
         mt='10px'
         mb='15px'>
-        Group Information
-        <select className="form-select w-50 bg-dark text-light rounded-0" id="selectStudent">
-          <option selected disabled>Select Group</option>
-          {
-            teacher.map((item, i) =>
-              <option className="text-light" key={i} value={item.id}>{item.name}</option>
-            )
-          }
-        </select>
+        {generalName}
+        <Box display="flex" flexDirection="row">
+          <Link
+            href="/#/Teacher/group"
+            className="btn btn-outline-warning d-none d-md-inline rounded-5 me-3 px-4 py-1">
+              <Icon icon="openmoji:left-arrow" width="30" />
+          </Link>
+          <select className="form-select bg-dark text-light rounded-5" id="selectStudent">
+            <option selected disabled>{generalName}</option>
+            {
+              teacher.map((item, i) =>
+                <option className="text-light" key={i} value={item.id}>{item.name}</option>
+              )
+            }
+          </select>
+        </Box>
       </Text>
       <SimpleGrid>
         <Table dark hover className="rounded-5">

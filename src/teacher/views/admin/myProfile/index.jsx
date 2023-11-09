@@ -1,11 +1,29 @@
 import { Box, Grid } from "@chakra-ui/react";
-import Banner from "../../../views/admin/myProfile/components/Banner";
-import Notifications from "../../../views/admin/myProfile/components/Notifications";
-import Upload from "../../../views/admin/myProfile/components/Upload";
+import Banner from "./components/Banner";
+import Upload from "./components/Upload";
 import banner from "../../../assets/img/auth/banner.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { api, config, teacherUrl } from "api/api";
 
 export default function Overview() {
+
+  const [getMeTeacher, setGetMeTeacher] = useState([]);
+  const [itemGroup, setItemGroup] = useState([]);
+
+  useEffect(() => {
+    getMe();
+    axios.get(api + teacherUrl, config).then(res => setItemGroup(res.data.body));
+  }, []);
+
+  const itemLength = itemGroup.length;
+
+  // get me
+  const getMe = () => {
+    axios.get(api + "user/getMe", config)
+      .then(res => setGetMeTeacher(res.data));
+  }
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "100px" }}>
       <Grid
@@ -13,13 +31,13 @@ export default function Overview() {
         <Banner
           gridArea='1 / 1 / 2 / 2'
           banner={banner}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
+          itemLength={itemLength}
+          name={getMeTeacher.firstName}
+          lastName={getMeTeacher.lastName}
         />
         <Upload
+          phoneNumber={getMeTeacher.phoneNumber}
+          email={getMeTeacher.email}
           gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
           minH={{ base: "auto", lg: "420px", "2xl": "365px" }}
           pe='20px'
