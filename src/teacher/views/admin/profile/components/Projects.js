@@ -35,7 +35,7 @@ export default function Projects(props) {
         mb='8px'>
         Teacher Groups
       </Text>
-      {groupTeacher.length && groupTeacher.map((item, i) =>
+      {groupTeacher.map((item, i) =>
         <Project
           key={i}
           groupIdIn={item}
