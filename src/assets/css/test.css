@@ -1,9 +1,18 @@
-.tests {
+.testb .accordion-body {
+    padding: 0;
+}
+
+.test-body {
+    display: flex;
 
 }
 
-.testb .accordion-body {
-    padding: 0;
-    padding-left: 1.25rem;
-    height: 5rem;
+.accordion-item {
+    border: none;
+}
+
+.test-row {
+    outline: 6px solid #F4F7FE;
+    border-radius: 6px;
+    color: #5b5b5b;
 }
