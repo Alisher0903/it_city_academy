@@ -5,7 +5,8 @@ export const api = "http://142.93.209.179/";
 // teacher url
 export const teacherUrl = "group/teacher";
 export const getUserUrl = "group/teacher/one/group/";
-export const getGeftsTeacher = "gift";
+export const getGeftsTeacher = "gift"
+
 
 // message url
 export const messageAdd = "message/save";
@@ -21,7 +22,7 @@ export const imgUrl = api + "attachment/getFile/";
 // category url
 export const categoryAdd = "category/save";
 export const categoryEdit = "category/update/";
-export const categoryDelete = "/category/active/";
+export const categoryDelete = "category/active/";
 
 // group url
 export const groupAdd = "group/save";
