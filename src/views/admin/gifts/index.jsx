@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Box, Flex, Grid, SimpleGrid, Text, useColorModeValue,} from "@chakra-ui/react";
-
 // Custom components
-import NFT from "components/card/NFT";
 
 // Assets
 import axios from "axios";
-import {addImage, api, config, giftAdd, imgUrl} from "api/api";
+import {api, config, giftAdd, imgUrl} from "api/api";
 import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import Gift from "components/card/Gift";
 
