@@ -11,7 +11,7 @@ export const getGeftsTeacher = "gift"
 // message url
 export const messageAdd = "message/save";
 
-// gidts url
+// gifts url
 export const giftAdd = "gift/save";
 export const giftDelete = "gift/delete/";
 export const giftEdit = "gift/update/";
@@ -29,7 +29,7 @@ export const groupAdd = "group/save";
 export const groupEdit = "group/update/";
 export const groupDelete = "group/isactive/";
 
-// autinficatsiya jwt tokin
+// beautification jwt token
 export const config = {
     headers: {Authorization: sessionStorage.getItem('jwtTokin')}
 };
