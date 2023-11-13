@@ -5,15 +5,34 @@ import { Button, Flex, Link, Text, Textarea, useColorModeValue } from "@chakra-u
 
 // Assets
 import banner from "../../../../assets/img/nfts/NftBanner1.png";
+import axios from "axios";
+import { config } from "api/api";
+import { api } from "api/api";
+import { toast } from "react-toastify";
+import { AndroidLogo } from "components/icons/Icons";
 
 export default function Banner() {
 
-  let lern = sessionStorage.getItem("learnId")
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-  // Chakra Color Mode
+
+  let learnIdIn = sessionStorage.getItem("learnId");
+
+  function testCode() {
+    console.log(learnIdIn);
+    axios.post(api + "test/test-code", {
+      testId: learnIdIn,
+      userCode: document.getElementById('code').value
+    }, config)
+      .then(() => {
+        toast.success("succesfull✔");
+      })
+  }
+
+
+  // console.log(learnIdIn);
+
   return (
     <>
-
       <Flex
         direction='column'
         bgImage={banner}
@@ -36,7 +55,7 @@ export default function Banner() {
           }}
           fontWeight='700'
           lineHeight={{ base: "32px", md: "42px" }}>
-          Discover, collect, and sell extraordinary 
+          Discover, collect, and sell extraordinary
         </Text>
         <Text
           fontSize='md'
@@ -85,7 +104,7 @@ export default function Banner() {
         px={{ base: "20px", md: "26px" }}
         borderRadius='30px'>
         <Textarea className="textarea" placeholder="Write your code..."
-         
+          id="code"
           color="#666666"
           padding="1em"
           borderRadius="10px"
@@ -101,7 +120,23 @@ export default function Banner() {
             cursor: "pointer"
           }}
         />
+        <Button
 
+          width="15%"
+          bg='white'
+          color='black'
+          _hover={{ bg: "whiteAlpha.900" }}
+          _active={{ bg: "white" }}
+          _focus={{ bg: "white" }}
+          fontWeight='500'
+          fontSize='14px'
+          py='20px'
+          px='27'
+          mt="20px"
+          ms="80%"
+          onClick={testCode}>
+          Send
+        </Button>
       </Flex>
 
     </>
