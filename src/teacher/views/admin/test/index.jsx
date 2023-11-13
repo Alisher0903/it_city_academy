@@ -1,104 +1,103 @@
-/*!
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// Chakra imports
-import { Box, Grid } from "@chakra-ui/react";
-
-// Custom components
-import Banner from "../../../views/admin/test/components/Banner";
-import General from "../../../views/admin/test/components/General";
-import Notifications from "../../../views/admin/test/components/Notifications";
-import Projects from "../../../views/admin/test/components/Projects";
-import Storage from "../../../views/admin/test/components/Storage";
-import Upload from "../../../views/admin/test/components/Upload";
-
-// Assets
-import banner from "../../../assets/img/auth/banner.png";
-import avatar from "../../../assets/img/avatars/avatar4.png";
 import React from "react";
+import Card from "../../../components/card/Card";
+import {
+  Box,
+  Flex,
+  Icon,
+  Image,
+  Link,
+  SimpleGrid,
+  Text,
+  useColorModeValue
+} from "@chakra-ui/react";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 export default function Overview() {
+  const textColor = useColorModeValue("navy.700", "white");
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      {/* Main Fields */}
-      <Grid
-        templateColumns={{
-          base: "1fr",
-          lg: "1.34fr 1fr 1.62fr",
+      <Text
+        fontSize={{
+          base: "xl",
+          md: "lg",
+          lg: "lg",
+          xl: "lg",
+          "2xl": "md",
+          "3xl": "lg",
         }}
-        templateRows={{
-          base: "repeat(3, 1fr)",
-          lg: "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}>
-        <Banner
-          gridArea='1 / 1 / 2 / 2'
-          banner={banner}
-          avatar={avatar}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
-        />
-        <Storage
-          gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
-          used={25.6}
-          total={50}
-        />
-        <Upload
-          gridArea={{
-            base: "3 / 1 / 4 / 2",
-            lg: "1 / 3 / 2 / 4",
-          }}
-          minH={{ base: "auto", lg: "420px", "2xl": "365px" }}
-          pe='20px'
-          pb={{ base: "100px", lg: "20px" }}
-        />
-      </Grid>
-      <Grid
-        mb='20px'
-        templateColumns={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1.34fr 1.62fr 1fr",
-        }}
-        templateRows={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}>
-        <Projects
-          gridArea='1 / 2 / 2 / 2'
-          banner={banner}
-          avatar={avatar}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
-        />
-        <General
-          gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
-          minH='365px'
-          pe='20px'
-        />
-        <Notifications
-          used={25.6}
-          total={50}
-          gridArea={{
-            base: "3 / 1 / 4 / 2",
-            lg: "2 / 1 / 3 / 3",
-            "2xl": "1 / 3 / 2 / 4",
-          }}
-        />
-      </Grid>
+        color={textColor}>Test</Text>
+      <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
+        <Card p='20px'>
+          <Flex direction={{ base: "column" }} justify='center'>
+            <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
+              <Image
+                src=""
+                w={{ base: "100%", "3xl": "100%" }}
+                h={{ base: "220px", "3xl": "100%" }}
+                borderRadius='20px'
+              />
+            </Box>
+            <Flex flexDirection='column' justify='space-between' h='100%'>
+              <Flex
+                justify='space-between'
+                direction={{
+                  base: "row",
+                  md: "column",
+                  lg: "row",
+                  xl: "column",
+                  "2xl": "row",
+                }}
+                mb='auto'>
+                <Flex direction='column'>
+                  <Text
+                    color={textColor}
+                    fontSize={{
+                      base: "xl",
+                      md: "lg",
+                      lg: "lg",
+                      xl: "lg",
+                      "2xl": "md",
+                      "3xl": "lg",
+                    }}
+                    mb='5px'
+                    fontWeight='bold'
+                    me='14px'>
+                    name
+                  </Text>
+                </Flex>
+              </Flex>
+              <Flex
+                align='start'
+                justify='space-between'
+                direction={{
+                  base: "row",
+                  md: "column",
+                  lg: "row",
+                  xl: "column",
+                  "2xl": "row",
+                }}
+                mt='25px'>
+                <Box ms="auto">
+                  <Link
+                    variant='no-hover'
+                    ms='0px'
+                    me="20px"
+                    p='0px !important'>
+                    <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' />
+                  </Link>
+                  <Link
+                    variant='no-hover'
+                    ms='0px'
+                    p='0px !important'>
+                    <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px' />
+                  </Link>
+                </Box>
+              </Flex>
+            </Flex>
+          </Flex>
+        </Card>
+      </SimpleGrid>
     </Box>
   );
 }
