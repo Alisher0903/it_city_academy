@@ -14,6 +14,7 @@ import Gifts from "./views/admin/gifts";
 import NFTMarketplace from "./views/admin/marketplace/index";
 import Profile from "./views/admin/profile/index";
 import DataTables from "./views/admin/dataTables/index";
+import Banner from "./views/admin/marketplace/components/Banner"
 // import RTL from "views/admin/rtl";
 
 // Auth Imports
@@ -62,6 +63,13 @@ const routes = [
     path: "/sign-in",
     icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,
     component: SignInCentered,
+  },
+  {
+    name: "",
+    layout: "/Student",
+    path: "/test/coding",
+    icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,
+    component: Banner,
   }
 ];
 
