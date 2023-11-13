@@ -22,8 +22,6 @@ export default function Marketplace() {
       .then(res => setGifts(res.data.body.object));
   }
 
-  console.log(gifts);
-
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       <Grid

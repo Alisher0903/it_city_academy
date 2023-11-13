@@ -1,12 +1,13 @@
 import React from "react";
-import { Box, Flex, Grid, Link, Text, useColorModeValue, SimpleGrid, } from "@chakra-ui/react";
+import { Box, Flex, Grid, Text, useColorModeValue, SimpleGrid, } from "@chakra-ui/react";
 import NFT from "../../../components/card/NFT";
 import Nft1 from "../../../assets/img/nfts/Nft1.png";
-import { Button } from "reactstrap";
 
 export default function Marketplace() {
+
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
+  
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       <Grid
