@@ -2,7 +2,7 @@ import axios from "axios";
 import {api, config} from "./api";
 
 // Category
-export const getCategory = (setCategory) => {
+export const   getCategory = (setCategory) => {
     axios.get(api + "category").then(res => setCategory(res.data.body));
 }
 

@@ -15,8 +15,6 @@ export default function Marketplace() {
         getUserCategory(setCategory);
     }, []);
 
-    console.log(category)
-
     // Chakra Color Mode
     const textColor = useColorModeValue("secondaryGray.900", "white");
     const textColorBrand = useColorModeValue("brand.500", "white");
@@ -76,45 +74,15 @@ export default function Marketplace() {
 
                         {/*    Accardion */}
                         <section className="d-flex w-100 justify-content-center mt-3">
-                            <UncontrolledAccordion className="w-75">
+                            <UncontrolledAccordion className="w-75 border-0">
                                 {category.length && category.map((item, i) =>
-                                    <AccordionItem key={i}>
+                                    <AccordionItem key={i} className='border-top'>
                                         <AccordionHeader targetId={i + 1}>
                                             {item.name}
                                         </AccordionHeader>
                                         <TestList categoryId={item.id} index={i + 1}/>
                                     </AccordionItem>
                                 )}
-                                <AccordionItem>
-                                    <AccordionHeader targetId="1">
-                                        Accordion Item 1
-                                    </AccordionHeader>
-                                    <AccordionBody accordionId="1">
-                                        <strong>
-                                            This is the first item's accordion body.
-                                        </strong>
-                                    </AccordionBody>
-                                </AccordionItem>
-                                <AccordionItem>
-                                    <AccordionHeader targetId="2">
-                                        Accordion Item 2
-                                    </AccordionHeader>
-                                    <AccordionBody accordionId="2">
-                                        <strong>
-                                            This is the second item's accordion body.
-                                        </strong>
-                                    </AccordionBody>
-                                </AccordionItem>
-                                <AccordionItem>
-                                    <AccordionHeader targetId="3">
-                                        Accordion Item 3
-                                    </AccordionHeader>
-                                    <AccordionBody accordionId="3">
-                                        <strong>
-                                            This is the third item's accordion body.
-                                        </strong>
-                                    </AccordionBody>
-                                </AccordionItem>
                             </UncontrolledAccordion>
                         </section>
 
