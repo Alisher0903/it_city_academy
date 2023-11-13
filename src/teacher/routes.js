@@ -20,6 +20,7 @@ import Gifts from "./views/admin/dataTables";
 import Test from "./views/admin/test";
 import TestAnswer from "./views/admin/testAnswer";
 import Profile from "./views/admin/myProfile";
+import Detielis from "./views/admin/test/components/Detielis";
 
 const routes = [
   {
@@ -68,7 +69,6 @@ const routes = [
   {
     name: "",
     layout: "/Teacher",
-    icon: <Icon as={MdPerson} className="d-none" width='20px' height='20px' color='inherit' />,
     path: "/student",
     component: Student,
   },
@@ -77,6 +77,12 @@ const routes = [
     layout: "/Teacher",
     path: "/profile",
     component: Profile,
+  },
+  {
+    name: "",
+    layout: "/Teacher",
+    path: "/detielis",
+    component: Detielis,
   },
 ];
 
