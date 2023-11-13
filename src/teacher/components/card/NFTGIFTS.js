@@ -13,7 +13,7 @@ export default function NFT(props) {
         <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
           <Image
             src={image}
-            w={{ base: "100%", "3xl": "100%" }}
+            w={{ "3xl": "100%", base: "100%" }}
             h={{ base: "220px", "3xl": "100%" }}
             borderRadius='20px'
           />
