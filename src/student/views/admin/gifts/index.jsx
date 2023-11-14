@@ -28,7 +28,6 @@ export default function Gifts() {
         axios.get(api + "gift", config)
             .then(res => {
                 setGift(res.data.body.object)
-                
             })
         // .catch(err => consol e.log(err))rate
     }
