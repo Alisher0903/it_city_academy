@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,300;0,400;1,300;1,400&family=Lora:ital@0;1&family=Montserrat:wght@200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&family=Space+Mono:wght@700&display=swap');
+
+// font family
+$fontFamily1: 'Fira Sans', sans-serif;
+$fontFamily2: 'Lora', serif;
+$fontFamily3: 'Montserrat', sans-serif;
+$fontFamily4: 'Nunito', sans-serif;
+$fontFamily5: 'Space Mono', monospace;
+
+// font weight
+$font500: 500;
+$font700: 700;
+$font900: 900;
+
+// font size
+$size-xxl: 3rem;
+$size-xl: 2.5rem;
+$size-lg: 2rem;
+$size-md: 1.5rem;
+$size-sm: 1rem;
+$size-12: 1.2rem;
+
+.addBtn {
+    font-size: $size-12;
+    font-family: $fontFamily5;
+}
+
+.techer__modal-head {
+    color: black;
+    font-family: $fontFamily1;
+    font-weight: $font700;
+    font-size: $size-md;
+    letter-spacing: 1.5px;
+}
+
+.techer__modal-body {
+    input {
+        margin-top: .6rem;
+
+        &::placeholder {
+            font-family: $fontFamily5;
+        }
+    }
+
+    input:nth-child(1) {
+        margin-top: 0;
+    }
+
+    select {
+        margin-top: .6rem;
+        font-family: $fontFamily5;
+    }
+}
+
+.techer__modal-footer {
+    button {
+        font-family: $fontFamily5;
+        letter-spacing: 1px;
+    }
+}
+
+.techer__modal-delete {
+    color: black;
+    font-family: $fontFamily1;
+    font-weight: $font700;
+    font-size: $size-12;
+    letter-spacing: 1.5px;
+}

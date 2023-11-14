@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../../components/card/Card";
+import question from "./question.png";
 import {
   Box,
   Flex,
@@ -11,15 +12,19 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import axios from "axios";
-import { api } from "api/api";
-import { imgUrl } from "api/api";
+import { api, imgUrl, config } from "api/api";
+import "./modal.scss";
+import { byIdIn } from "api/api";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Overview() {
   const textColor = useColorModeValue("navy.700", "white");
 
   const [testPlus, setTestPlus] = useState([]);
+  const [testPlusId, setTestPlusId] = useState("");
   const [addModal, setAddModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -33,12 +38,86 @@ export default function Overview() {
   }, []);
 
   // getTest
-  const getTestTeacher = () => axios.get(api + "test").then(res => setTestPlus(res.data.object));
+  const getTestTeacher = () => axios.get(api + "test?page=0&size=100").then(res => setTestPlus(res.data.object));
 
-  // console.log(testPlus);
+  // addTest
+  const addTeacherTest = () => {
+    const img = new FormData();
+    img.append('file', byIdIn('attachmentId').files[0]);
+    axios.post(api + "attachment/upload", img, config)
+      .then(res => {
+        const addData = {
+          question: byIdIn("question").value,
+          attachmentId: res.data.body,
+          categoryId: byIdIn("categoryId").value == Number ? byIdIn("categoryId").value : 0,
+          answer: "",
+          grade: byIdIn("grade").value,
+          description: byIdIn("description").value,
+          inType: byIdIn("inType").value,
+          outType: byIdIn("outType").value,
+          countNumber: byIdIn("countNumber").value
+        }
+        axios.post(api + "test", addData, config)
+          .then(() => {
+            openAddModal();
+            getTestTeacher();
+            toast.success("Test muvaffaqiyatli qo'shildi")
+          }).catch(() => {
+            toast.error("ketmadi")
+            console.log(addData);
+          })
+      });
+  }
+
+  // editTest
+  const editTeacherTest = () => {
+    const imgEdit = new FormData();
+    imgEdit.append('file', byIdIn('attachmentId').files[0]);
+    axios.post(api + "attachment/upload", imgEdit, config)
+      .then(res => {
+        const editData = {
+          question: byIdIn("question").value,
+          attachmentId: res.data.body,
+          categoryId: byIdIn("categoryId").value == Number ? byIdIn("categoryId").value : 0,
+          answer: "",
+          grade: byIdIn("grade").value,
+          description: byIdIn("description").value,
+          inType: byIdIn("inType").value,
+          outType: byIdIn("outType").value,
+          countNumber: byIdIn("countNumber").value
+        }
+        axios.put(api + "test/" + testPlusId.id, editData, config)
+          .then(() => {
+            toast.success("Test muvaffaqiyatli taxrirlandi")
+            openAddModal();
+            getTestTeacher();
+          }).catch(() => {
+            toast.error("malumot qaytarildi")
+            console.log(editData);
+          })
+      });
+  }
+
+  // geleteTest
+  const deleteTeacherTest = () => {
+    axios.delete(api + "test/" + testPlusId.id, config)
+      .then(() => {
+        toast.success("Test o'chirildi");
+        openDeleteModal();
+        getTestTeacher();
+      }).catch(() => {
+        toast.error("Xatolik yuz berdi!!!");
+      })
+  }
+
+  console.log(testPlusId.id);
+
+  const goPageDetielis = () => document.getElementById("detielis").click();
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+      <Link href="/#/Teacher/detielis" id="detielis"></Link>
+      <ToastContainer />
       <Box
         display="flex"
         justifyContent="space-between">
@@ -51,7 +130,7 @@ export default function Overview() {
         <Button
           onClick={openAddModal}
           color="success"
-          className="rounded-5 px-4 me-2 mb-3 fs-5 fw-bolder"
+          className="rounded-5 px-4 me-2 mb-3 addBtn"
           style={{ letterSpacing: "1px" }}>
           Add Test
         </Button>
@@ -59,13 +138,25 @@ export default function Overview() {
 
       {/* addModal */}
       <Modal centered size="lg" isOpen={addModal}>
-        <ModalHeader toggle={openAddModal}>Add Test</ModalHeader>
-        <ModalBody>
-          add test input
+        <ModalHeader toggle={openAddModal} className="techer__modal-head">Add Test</ModalHeader>
+        <ModalBody className="techer__modal-body">
+          <Input id="attachmentId" type="file" />
+          <Input id="question" placeholder="question" />
+          <Input id="description" placeholder="description" />
+          <Input id="grade" type="number" placeholder="ball" />
+          <Input id="inType" placeholder="inType" />
+          <Input id="outType" placeholder="outType" />
+          <Input id="countNumber" type="number" placeholder="countNumber" />
+          <select id="categoryId" className="form-select">
+            <option selected disabled>Teacher category</option>
+            {/* {teacherCategory && teacherCategory.map((item, i) =>
+              <option key={i} value={item.id}></option>
+            )} */}
+          </select>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter className="techer__modal-footer">
           <Button onClick={openAddModal}>Close</Button>
-          <Button color="success">Save</Button>
+          <Button color="success" onClick={addTeacherTest}>Save</Button>
         </ModalFooter>
       </Modal>
       <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
@@ -74,7 +165,7 @@ export default function Overview() {
             <Flex direction={{ base: "column" }} justify='center'>
               <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
                 <Image
-                  src={imgUrl + item.attachmentId}
+                  src={item.attachmentId !== 0 ? imgUrl + item.attachmentId : question}
                   w={{ base: "100%", "3xl": "100%" }}
                   h={{ base: "220px", "3xl": "100%" }}
                   borderRadius='20px'
@@ -145,16 +236,25 @@ export default function Overview() {
                   <Button
                     color="success"
                     outline
-                    className="rounded-5 fw-medium">More</Button>
+                    className="rounded-5 fw-medium"
+                    onClick={() => {
+                      goPageDetielis();
+                    }}>More</Button>
                   <Box>
                     <Link
-                      onClick={openEditModal}
+                      onClick={() => {
+                        openEditModal();
+                        setTestPlusId(item);
+                      }}
                       variant='no-hover'
                       me="15px">
                       <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' />
                     </Link>
                     <Link
-                      onClick={openDeleteModal}
+                      onClick={() => {
+                        openDeleteModal();
+                        setTestPlusId(item);
+                      }}
                       me="1px"
                       variant='no-hover'>
                       <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px' />
@@ -168,26 +268,38 @@ export default function Overview() {
       </SimpleGrid>
 
       {/* editModal */}
-      <Modal centered size="lg" isOpen={editModal}>
+      <Modal centered size="lg" isOpen={editModal} className="techer__modal-head">
         <ModalHeader toggle={openEditModal}>Edit Test</ModalHeader>
-        <ModalBody>
-          edit test input
+        <ModalBody className="techer__modal-body">
+          <Input id="attachmentId" type="file" />
+          <Input id="question" defaultValue={testPlusId && testPlusId.question} />
+          <Input id="description" defaultValue={testPlusId && testPlusId.description} />
+          <Input id="grade" type="number" defaultValue={testPlusId && testPlusId.grade} />
+          <Input id="inType" defaultValue={testPlusId && testPlusId.inType} />
+          <Input id="outType" defaultValue={testPlusId && testPlusId.outType} />
+          <Input id="countNumber" type="number" defaultValue={testPlusId && testPlusId.countNumber} />
+          <select id="categoryId" className="form-select">
+            <option selected disabled>Teacher category</option>
+            {/* {teacherCategory && teacherCategory.map((item, i) =>
+              <option key={i} value={item.id}></option>
+            )} */}
+          </select>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter className="techer__modal-footer">
           <Button onClick={openEditModal}>Close</Button>
-          <Button color="warning">Edit</Button>
+          <Button color="warning" onClick={editTeacherTest}>Edit</Button>
         </ModalFooter>
       </Modal>
 
       {/* deleteModal */}
-      <Modal centered isOpen={deleteModal}>
-        <ModalHeader toggle={openDeleteModal}>Delete Test</ModalHeader>
-        <ModalBody>
+      <Modal centered size="lg" isOpen={deleteModal}>
+        <ModalHeader toggle={openDeleteModal} className="techer__modal-head">Delete Test</ModalHeader>
+        <ModalBody className="techer__modal-delete">
           Siz bu testni o'chirishga ishonchingiz komilmi?
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter className="techer__modal-footer">
           <Button onClick={openDeleteModal}>Close</Button>
-          <Button color="danger">Delete</Button>
+          <Button color="danger" onClick={deleteTeacherTest}>Delete</Button>
         </ModalFooter>
       </Modal>
     </Box>
