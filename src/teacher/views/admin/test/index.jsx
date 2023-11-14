@@ -98,7 +98,7 @@ export default function Overview() {
       });
   }
 
-  // geleteTest
+  // deleteTest
   const deleteTeacherTest = () => {
     axios.delete(api + "test/" + testPlusId.id, config)
       .then(() => {
@@ -109,8 +109,6 @@ export default function Overview() {
         toast.error("Xatolik yuz berdi!!!");
       })
   }
-
-  console.log(testPlusId.id);
 
   const goPageDetielis = () => document.getElementById("detielis").click();
 
