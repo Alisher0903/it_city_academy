@@ -1,6 +1,7 @@
 import { Box, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "../../../components/card/Card";
 import React from "react";
+import { Button } from "reactstrap";
 
 export default function Overview() {
 
@@ -16,19 +17,20 @@ export default function Overview() {
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <Card>
         <Text
+          display="flex"
+          justifyContent="space-between"
           color={textColorPrimary}
           fontWeight='bold'
           fontSize='2xl'
           mt='10px'
           mb='4px'>
           Test Answer
+          <Button
+            className="rounded-5"
+            color="primary">Add TestAnswer</Button>
         </Text>
-        <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
-          As we live, our hearts turn colder. Cause pain is what we go through as
-          we become older. We get insulted by others, lose trust for those others.
-          We get back stabbed by friends. It becomes harder for us to give others
-          a hand. We get our heart broken by people we love, even that we give
-          them all...
+        <Text color={textColorSecondary} fontSize='md' mt="15px" mb='30px'>
+          <Button color="success">nimadur</Button>
         </Text>
         <SimpleGrid columns='2' gap="25px">
           <Box
