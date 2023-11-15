@@ -14,9 +14,8 @@ import {
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import axios from "axios";
-import { api, imgUrl, config } from "api/api";
+import { api, imgUrl, config, byIdIn } from "api/api";
 import "./modal.scss";
-import { byIdIn } from "api/api";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
 
@@ -37,8 +36,8 @@ export default function Overview() {
     getTestTeacher();
   }, []);
 
-  // getTest
-  const getTestTeacher = () => axios.get(api + "test?page=0&size=100").then(res => setTestPlus(res.data.object));
+  // getTest  url: ?page=0&size=100
+  const getTestTeacher = () => axios.get(api + "test").then(res => setTestPlus(res.data.object));
 
   // addTest
   const addTeacherTest = () => {
@@ -110,7 +109,7 @@ export default function Overview() {
       })
   }
 
-  const goPageDetielis = () => document.getElementById("detielis").click();
+  const goPageDetails = () => document.getElementById("detielis").click();
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
@@ -236,7 +235,8 @@ export default function Overview() {
                     outline
                     className="rounded-5 fw-medium"
                     onClick={() => {
-                      goPageDetielis();
+                      goPageDetails();
+                      sessionStorage.setItem("details", item.id);
                     }}>More</Button>
                   <Box>
                     <Link
