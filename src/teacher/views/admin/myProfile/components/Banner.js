@@ -39,7 +39,7 @@ export default function Banner(props) {
             {itemLength}
           </Text>
           <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
-            Group items
+            Group count
           </Text>
         </Flex>
       </Flex>
