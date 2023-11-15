@@ -1,6 +1,6 @@
 import { Box, Icon, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "../../../components/card/Card";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "../test/modal.scss";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -19,6 +19,7 @@ export default function Overview() {
   );
   const bg = useColorModeValue("white", "navy.700");
 
+  const [testAnswer, setTestAnswer] = useState([]);
   const [testAnswerId, setTestAnswerId] = useState("");
   const [addModal, setAddModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
@@ -27,6 +28,15 @@ export default function Overview() {
   const openAddModal = () => setAddModal(!addModal);
   const openEditModal = () => setEditModal(!editModal);
   const openDeleteModal = () => setDeleteModal(!deleteModal);
+
+  useEffect(() => {
+    getTestAnswer();
+  }, []);
+
+  // getTestAnswer ?page=0&size=10
+  const getTestAnswer = () => {
+    axios.get(api + "test-answer/10", config).then(res => setTestAnswer(res.data.object));
+  }
 
   // add
   const addTestAnswer = () => {
@@ -38,12 +48,10 @@ export default function Overview() {
     axios.post(api + "test-answer", addData, config)
       .then(() => {
         openAddModal();
-        toast.success("successfully saved!")
+        toast.success("successfully saved!");
+        getTestAnswer();
       })
-    // .catch(console.log(addData))
   }
-
-  // edit vs delete larga urldan kn "testAnswerId.id" ni quyish kk
 
   // edit
   const editTestAnswer = () => {
@@ -52,20 +60,21 @@ export default function Overview() {
       answer: byIdIn("answer").value,
       result: byIdIn("result").value
     }
-    axios.put(api + "test-answer", editData, config)
+    axios.put(api + "test-answer/" + testAnswerId.id, editData, config)
       .then(() => {
-        openAddModal();
-        toast.success("successfully saved edit!")
+        openEditModal();
+        toast.success("successfully saved edit!");
+        getTestAnswer();
       })
-      // .catch(console.log(editData))
   }
 
   // delete
   const deleteTestAnswer = () => {
-    axios.delete(api + "test-answer", config)
+    axios.delete(api + "test-answer/" + testAnswerId.id, config)
       .then(() => {
         openDeleteModal();
         toast.success("delete seved!");
+        getTestAnswer();
       })
   }
 
@@ -111,49 +120,52 @@ export default function Overview() {
           <Button color="success">TestId categores btn</Button>
         </Text>
         <SimpleGrid columns='2' gap="20px">
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            boxShadow={cardShadow}
-            bg={bg}
-            p="20px"
-            borderRadius="20px">
-            <Box>
-              <Text color={textColorSecondary} fontWeight='500' fontSize='md'>
-                name
-              </Text>
-              <Text color={textColorPrimary} fontWeight='500' fontSize='md'>
-                description
-              </Text>
+          {testAnswer.map((item, i) =>
+            <Box
+              key={i}
+              display="flex"
+              justifyContent="space-between"
+              boxShadow={cardShadow}
+              bg={bg}
+              p="20px"
+              borderRadius="20px">
+              <Box>
+                <Text color={textColorSecondary} fontWeight='500' fontSize='md'>
+                  answer: {item.answer}
+                </Text>
+                <Text color={textColorPrimary} fontWeight='500' fontSize='md'>
+                  result: {item.result}
+                </Text>
+              </Box>
+              <Box display="flex" flexDirection="column" gap="7px">
+                <Icon
+                  onClick={() => {
+                    openEditModal();
+                    setTestAnswerId(item);
+                  }}
+                  as={MdEdit}
+                  color='secondaryGray.500'
+                  style={{ cursor: "pointer" }}
+                  h='18px' w='18px' />
+                <Icon
+                  onClick={() => {
+                    openDeleteModal();
+                    setTestAnswerId(item);
+                  }}
+                  as={MdDelete}
+                  color='secondaryGray.500'
+                  style={{ cursor: "pointer" }}
+                  h='18px' w='18px' />
+              </Box>
             </Box>
-            <Box display="flex" flexDirection="column" gap="7px">
-              <Icon
-                onClick={() => {
-                  openEditModal();
-                  // setTestAnswerId(item);
-                }}
-                as={MdEdit}
-                color='secondaryGray.500'
-                style={{ cursor: "pointer" }}
-                h='18px' w='18px' />
-              <Icon
-                onClick={() => {
-                  openDeleteModal();
-                  // setTestAnswerId(item);
-                }}
-                as={MdDelete}
-                color='secondaryGray.500'
-                style={{ cursor: "pointer" }}
-                h='18px' w='18px' />
-            </Box>
-          </Box>
+          )}
 
           {/* editModal */}
           <Modal centered size="lg" isOpen={editModal} className="techer__modal-head">
             <ModalHeader toggle={openEditModal}>Edit TestAnswer</ModalHeader>
             <ModalBody className="techer__modal-body">
-              <Input id="answer" placeholder="answer" />
-              <Input id="result" placeholder="result" />
+              <Input id="answer" defaultValue={testAnswerId && testAnswerId.answer} />
+              <Input id="result" defaultValue={testAnswerId && testAnswerId.result} />
               <select id="testId" className="form-select">
                 <option selected disabled>TestId select</option>
                 {/* {teacherCategory && teacherCategory.map((item, i) =>
