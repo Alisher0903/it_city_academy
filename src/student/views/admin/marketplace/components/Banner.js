@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Chakra imports
-import { Button, Flex, Link, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Image, Link, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
 
 // Assets
 import banner from "../../../../assets/img/nfts/NftBanner1.png";
 import axios from "axios";
 import { config } from "api/api";
 import { api } from "api/api";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { AndroidLogo } from "components/icons/Icons";
+import { imgUrl } from "api/api";
 
 export default function Banner() {
 
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
+  const [test, setTest] = useState([]);
+
+  useEffect(() => {
+    getTest();
+}, []);
+
 
   let learnIdIn = sessionStorage.getItem("learnId");
 
   function testCode() {
     console.log(learnIdIn);
     axios.post(api + "test/test-code", {
+      programmingLanguage: "JAVA",
       testId: learnIdIn,
       userCode: document.getElementById('code').value
     }, config)
@@ -28,52 +36,95 @@ export default function Banner() {
       })
   }
 
+  function getTest() {
+    axios.get(api + "test/" + learnIdIn, config).then(res => {
+      setTest(res.data)
+    })
+  }
 
-  // console.log(learnIdIn);
+
+  console.log(test);
 
   return (
     <>
+      <ToastContainer />
       <Flex
         direction='column'
-        bgImage={banner}
+        // bgImage={banner}
+        bgColor="#4314EC"
         bgSize='cover'
         mt="80px"
         py={{ base: "30px", md: "56px" }}
         px={{ base: "30px", md: "64px" }}
         borderRadius='30px'>
-        <Text
-          fontSize={{ base: "24px", md: "34px" }}
-          color='white'
-          mb='14px'
-          maxW={{
-            base: "100%",
-            md: "64%",
-            lg: "46%",
-            xl: "70%",
-            "2xl": "50%",
-            "3xl": "42%",
+        <Grid
+          templateColumns={{
+            base: "1fr",
+            lg: "repeat(2, 1fr)",
+            "2xl": "repeat(2, 1fr)",
           }}
-          fontWeight='700'
-          lineHeight={{ base: "32px", md: "42px" }}>
-          Discover, collect, and sell extraordinary
-        </Text>
-        <Text
-          fontSize='md'
-          color='#E3DAFF'
-          maxW={{
-            base: "100%",
-            md: "64%",
-            lg: "40%",
-            xl: "56%",
-            "2xl": "46%",
-            "3xl": "34%",
-          }}
-          fontWeight='500'
-          mb='40px'
-          lineHeight='28px'>
-          Enter in this creative world. Discover now the latest NFTs or start
-          creating your own!
-        </Text>
+
+          gap={{ base: "20px", xl: "20px" }}>
+          <Box>
+
+            <Text
+              fontSize={{ base: "24px", md: "34px" }}
+              color='white'
+              mb='14px'
+              maxW={{
+                base: "100%",
+                md: "64%",
+                lg: "46%",
+                xl: "70%",
+                "2xl": "50%",
+                "3xl": "42%",
+              }}
+              fontWeight='700'
+              lineHeight={{ base: "32px", md: "42px" }}>
+              {test.question}
+            </Text>
+            <Text
+              fontSize='md'
+              color='#E3DAFF'
+              maxW={{
+                base: "100%",
+                md: "64%",
+                lg: "40%",
+                xl: "56%",
+                "2xl": "46%",
+                "3xl": "34%",
+              }}
+              fontWeight='500'
+              mb='40px'
+              lineHeight='28px'>
+              {test.description}
+            </Text>
+            <Text
+              fontSize={{ base: "20px", md: "30px" }}
+              color='white'
+              mb='14px'
+              maxW={{
+                base: "100%",
+                md: "64%",
+                lg: "46%",
+                xl: "70%",
+                "2xl": "50%",
+                "3xl": "42%",
+              }}
+              fontWeight='700'
+              lineHeight={{ base: "32px", md: "42px" }}>
+                Grade: {test.grade}
+            </Text>
+          </Box>
+          <Box>
+            <Image
+              src={(test.attachmentId != 0) ? imgUrl + test.attachmentId : "https://spendmatters-site.s3.amazonaws.com/uploads/2019/05/foire-questions-automobiles.jpg"}
+              w={{ base: "90%", base: "70%", "3xl": "60%" }}
+              h={{ base: "90%", }}
+              borderRadius='20px'
+            />
+          </Box>
+        </Grid>
         <Flex align='center'>
           {/* <Button
           bg='white'

@@ -1,104 +1,197 @@
-/*!
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// Chakra imports
-import { Box, Grid } from "@chakra-ui/react";
-
-// Custom components
-import Banner from "../../../views/admin/testAnswer/components/Banner";
-import General from "../../../views/admin/testAnswer/components/General";
-import Notifications from "../../../views/admin/testAnswer/components/Notifications";
-import Projects from "../../../views/admin/testAnswer/components/Projects";
-import Storage from "../../../views/admin/testAnswer/components/Storage";
-import Upload from "../../../views/admin/testAnswer/components/Upload";
-
-// Assets
-import banner from "../../../assets/img/auth/banner.png";
-import avatar from "../../../assets/img/avatars/avatar4.png";
-import React from "react";
+import { Box, Icon, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import Card from "../../../components/card/Card";
+import React, { useEffect, useState } from "react";
+import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import "../test/modal.scss";
+import { MdDelete, MdEdit } from "react-icons/md";
+import axios from "axios";
+import { config, byIdIn, api } from "api/api";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Overview() {
+
+  const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
+  const textColorSecondary = "gray.400";
+  const cardShadow = useColorModeValue(
+    "0px 18px 40px rgba(112, 144, 176, 0.12)",
+    "unset"
+  );
+  const bg = useColorModeValue("white", "navy.700");
+
+  const [testAnswer, setTestAnswer] = useState([]);
+  const [testAnswerId, setTestAnswerId] = useState("");
+  const [addModal, setAddModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const openAddModal = () => setAddModal(!addModal);
+  const openEditModal = () => setEditModal(!editModal);
+  const openDeleteModal = () => setDeleteModal(!deleteModal);
+
+  useEffect(() => {
+    getTestAnswer();
+  }, []);
+
+  // getTestAnswer ?page=0&size=10
+  const getTestAnswer = () => {
+    axios.get(api + "test-answer/10", config).then(res => setTestAnswer(res.data.object));
+  }
+
+  // add
+  const addTestAnswer = () => {
+    const addData = {
+      testId: byIdIn("testId").value == Number ? byIdIn("testId").value : 10,
+      answer: byIdIn("answer").value,
+      result: byIdIn("result").value
+    }
+    axios.post(api + "test-answer", addData, config)
+      .then(() => {
+        openAddModal();
+        toast.success("successfully saved!");
+        getTestAnswer();
+      })
+  }
+
+  // edit
+  const editTestAnswer = () => {
+    const editData = {
+      testId: byIdIn("testId").value == Number ? byIdIn("testId").value : 10,
+      answer: byIdIn("answer").value,
+      result: byIdIn("result").value
+    }
+    axios.put(api + "test-answer/" + testAnswerId.id, editData, config)
+      .then(() => {
+        openEditModal();
+        toast.success("successfully saved edit!");
+        getTestAnswer();
+      })
+  }
+
+  // delete
+  const deleteTestAnswer = () => {
+    axios.delete(api + "test-answer/" + testAnswerId.id, config)
+      .then(() => {
+        openDeleteModal();
+        toast.success("delete seved!");
+        getTestAnswer();
+      })
+  }
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      {/* Main Fields */}
-      <Grid
-        templateColumns={{
-          base: "1fr",
-          lg: "1.34fr 1fr 1.62fr",
-        }}
-        templateRows={{
-          base: "repeat(3, 1fr)",
-          lg: "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}>
-        <Banner
-          gridArea='1 / 1 / 2 / 2'
-          banner={banner}
-          avatar={avatar}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
-        />
-        <Storage
-          gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
-          used={25.6}
-          total={50}
-        />
-        <Upload
-          gridArea={{
-            base: "3 / 1 / 4 / 2",
-            lg: "1 / 3 / 2 / 4",
-          }}
-          minH={{ base: "auto", lg: "420px", "2xl": "365px" }}
-          pe='20px'
-          pb={{ base: "100px", lg: "20px" }}
-        />
-      </Grid>
-      <Grid
-        mb='20px'
-        templateColumns={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1.34fr 1.62fr 1fr",
-        }}
-        templateRows={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}>
-        <Projects
-          gridArea='1 / 2 / 2 / 2'
-          banner={banner}
-          avatar={avatar}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
-        />
-        <General
-          gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
-          minH='365px'
-          pe='20px'
-        />
-        <Notifications
-          used={25.6}
-          total={50}
-          gridArea={{
-            base: "3 / 1 / 4 / 2",
-            lg: "2 / 1 / 3 / 3",
-            "2xl": "1 / 3 / 2 / 4",
-          }}
-        />
-      </Grid>
+      <ToastContainer />
+      <Card>
+        <Text
+          display="flex"
+          justifyContent="space-between"
+          color={textColorPrimary}
+          fontWeight='bold'
+          fontSize='2xl'
+          mt='10px'
+          mb='4px'>
+          Test Answer
+          <Button
+            onClick={openAddModal}
+            className="rounded-5 py-2 px-3 answerAddBtn"
+            color="primary">Add TestAnswer</Button>
+        </Text>
+
+        {/* addModal */}
+        <Modal centered size="lg" isOpen={addModal}>
+          <ModalHeader toggle={openAddModal} className="techer__modal-head">Add TestAnswer</ModalHeader>
+          <ModalBody className="techer__modal-body">
+            <Input id="answer" placeholder="answer" />
+            <Input id="result" placeholder="result" />
+            <select id="testId" className="form-select">
+              <option selected disabled>TestId select</option>
+              {/* {teacherCategory && teacherCategory.map((item, i) =>
+              <option key={i} value={item.id}></option>
+            )} */}
+            </select>
+          </ModalBody>
+          <ModalFooter className="techer__modal-footer">
+            <Button onClick={openAddModal}>Close</Button>
+            <Button color="success" onClick={addTestAnswer}>Save</Button>
+          </ModalFooter>
+        </Modal>
+
+        <Text className="testCategoryBtn" color={textColorSecondary} fontSize='md'>
+          <Button color="success">TestId categores btn</Button>
+        </Text>
+        <SimpleGrid columns='2' gap="20px">
+          {testAnswer.map((item, i) =>
+            <Box
+              key={i}
+              display="flex"
+              justifyContent="space-between"
+              boxShadow={cardShadow}
+              bg={bg}
+              p="20px"
+              borderRadius="20px">
+              <Box>
+                <Text color={textColorSecondary} fontWeight='500' fontSize='md'>
+                  answer: {item.answer}
+                </Text>
+                <Text color={textColorPrimary} fontWeight='500' fontSize='md'>
+                  result: {item.result}
+                </Text>
+              </Box>
+              <Box display="flex" flexDirection="column" gap="7px">
+                <Icon
+                  onClick={() => {
+                    openEditModal();
+                    setTestAnswerId(item);
+                  }}
+                  as={MdEdit}
+                  color='secondaryGray.500'
+                  style={{ cursor: "pointer" }}
+                  h='18px' w='18px' />
+                <Icon
+                  onClick={() => {
+                    openDeleteModal();
+                    setTestAnswerId(item);
+                  }}
+                  as={MdDelete}
+                  color='secondaryGray.500'
+                  style={{ cursor: "pointer" }}
+                  h='18px' w='18px' />
+              </Box>
+            </Box>
+          )}
+
+          {/* editModal */}
+          <Modal centered size="lg" isOpen={editModal} className="techer__modal-head">
+            <ModalHeader toggle={openEditModal}>Edit TestAnswer</ModalHeader>
+            <ModalBody className="techer__modal-body">
+              <Input id="answer" defaultValue={testAnswerId && testAnswerId.answer} />
+              <Input id="result" defaultValue={testAnswerId && testAnswerId.result} />
+              <select id="testId" className="form-select">
+                <option selected disabled>TestId select</option>
+                {/* {teacherCategory && teacherCategory.map((item, i) =>
+              <option key={i} value={item.id}></option>
+            )} */}
+              </select>
+            </ModalBody>
+            <ModalFooter className="techer__modal-footer">
+              <Button onClick={openEditModal}>Close</Button>
+              <Button color="warning" onClick={editTestAnswer}>Edit</Button>
+            </ModalFooter>
+          </Modal>
+
+          {/* deleteModal */}
+          <Modal centered size="lg" isOpen={deleteModal}>
+            <ModalHeader toggle={openDeleteModal} className="techer__modal-head">Delete TestAnswer</ModalHeader>
+            <ModalBody className="techer__modal-delete">
+              Siz bu testAnswerni o'chirishga ishonchingiz komilmi?
+            </ModalBody>
+            <ModalFooter className="techer__modal-footer">
+              <Button onClick={openDeleteModal}>Close</Button>
+              <Button color="danger" onClick={deleteTestAnswer}>Delete</Button>
+            </ModalFooter>
+          </Modal>
+        </SimpleGrid>
+      </Card>
     </Box>
   );
 }

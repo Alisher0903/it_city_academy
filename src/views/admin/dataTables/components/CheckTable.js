@@ -8,6 +8,7 @@ import {
   Th,
   Thead,
   Tr,
+  
   useColorModeValue,
   Radio,
   RadioGroup,
@@ -37,33 +38,25 @@ import { config } from "api/api";
 import { MdArrowDropDown } from "react-icons/md";
 import { messageAdd } from "api/api";
 export default function CheckTable(props) {
-  const { columnsData, tableData } = props;
 
   const [value, setValue] = useState('1')
-
-  const columns = useMemo(() => columnsData, [columnsData]);
-  const data = useMemo(() => tableData, [tableData]);
   const openEditModal = () => setEditModal(!editModal);
 
-  const tableInstance = useTable(
-    {
-      columns,
-      data,
-    },
-    useGlobalFilter,
-    useSortBy,
-    usePagination
-  );
+  // const tableInstance = useTable(
+  //   useGlobalFilter,
+  //   useSortBy,
+  //   usePagination
+  // );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    prepareRow,
-    initialState,
-  } = tableInstance;
-  initialState.pageSize = 11;
+  // const {
+  //   getTableProps,
+  //   getTableBodyProps,
+  //   headerGroups,
+  //   page,
+  //   prepareRow,
+  //   initialState,
+  // } = tableInstance;
+  // initialState.pageSize = 11;
 
   const [editModal, setEditModal] = useState(false);
   const [checkedItems, setCheckedItems] = React.useState([false, false])

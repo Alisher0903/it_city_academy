@@ -5,7 +5,8 @@ export const api = "http://142.93.209.179/";
 // teacher url
 export const teacherUrl = "group/teacher";
 export const getUserUrl = "group/teacher/one/group/";
-export const getGeftsTeacher = "gift"
+export const getGeftsTeacher = "gift";
+export const byIdIn = (id) => document.getElementById(id);
 
 
 // message url
@@ -31,7 +32,10 @@ export const groupDelete = "group/isactive/";
 
 // beautification jwt token
 export const config = {
-    headers: {Authorization: sessionStorage.getItem('jwtTokin')}
+    headers: {
+        Authorization: sessionStorage.getItem('jwtTokin'),
+        // 'Content-Type':'application/json'
+    }
 };
 
 export async function addImage(image, setImageId) {

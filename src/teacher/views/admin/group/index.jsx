@@ -1,5 +1,5 @@
 import { Box, Grid } from "@chakra-ui/react";
-import Projects from "../profile/components/Projects";
+import Projects from "./components/Projects";
 import React from "react";
 
 export default function Overview() {

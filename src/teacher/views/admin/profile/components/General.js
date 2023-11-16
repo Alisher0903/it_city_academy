@@ -1,17 +1,26 @@
-import { Box, Link, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  SimpleGrid,
+  Text,
+  useColorModeValue,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Select,
+} from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import React, { useEffect, useState } from "react";
-import { Table } from "reactstrap";
 import axios from "axios";
 import { api, teacherUrl, config, getUserUrl } from "api/api.js";
-import { Icon } from "@iconify/react";
 
 // Assets
 export default function GeneralInformation(props) {
-
-  const { title } = props
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
-
   const [teacher, setTeacher] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -46,51 +55,54 @@ export default function GeneralInformation(props) {
         mb='15px'>
         {generalName}
         <Box display="flex" flexDirection="row">
-          <Link
-            href="/#/Teacher/group"
-            className="btn btn-outline-warning d-none d-md-inline rounded-5 me-3 px-4 py-1">
-              <Icon icon="openmoji:left-arrow" width="30" />
-          </Link>
-          <select className="form-select bg-dark text-light rounded-5" id="selectStudent">
-            <option selected disabled>{generalName}</option>
-            {
-              teacher.map((item, i) =>
-                <option className="text-light" key={i} value={item.id}>{item.name}</option>
-              )
-            }
-          </select>
+          <Select placeholder={generalName}>
+            {teacher.map((item, i) =>
+              <option key={i} value={item.id}>{item.name}</option>
+            )}
+          </Select>
         </Box>
       </Text>
       <SimpleGrid>
-        <Table dark hover className="rounded-5">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Last Name</th>
-              <th>First Name</th>
-              <th>Email</th>
-              <th>PhoneNumber</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.length
-              ? users.map((item, i) =>
-                <tr key={i}>
-                  <th>{i + 1}</th>
-                  <td>{item.lastName}</td>
-                  <td>{item.firstName}</td>
-                  <td>{item.email}</td>
-                  <td>{item.phoneNumber}</td>
-                </tr>
-              ) :
-              <tr className="text-center">
-                <td colSpan="5">
-                  <h1 className="fs-4">Bu guruhda o'quvchi mavjud emas!</h1>
-                </td>
-              </tr>
-            }
-          </tbody>
-        </Table>
+        <TableContainer
+          mt="1rem"
+          pb=".7rem"
+          borderRadius="15px"
+          boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+        >
+          <Table>
+            <TableCaption
+              fontSize="1rem">{generalName} guruh o'quvchilari</TableCaption>
+            <Thead>
+              <Tr>
+                <Th>T/r</Th>
+                <Th>Last Name</Th>
+                <Th>First Name</Th>
+                <Th>Email</Th>
+                <Th>Phone Number</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {users.length > 0
+                ? users.map((item, i) =>
+                  <Tr key={i}>
+                    <Td>{i + 1}</Td>
+                    <Td>{item.lastName}</Td>
+                    <Td>{item.firstName}</Td>
+                    <Td>{item.email}</Td>
+                    <Td>{item.phoneNumber}</Td>
+                  </Tr>
+                ) :
+                <Tr>
+                  <Td colSpan="5">
+                    <h1 className="fs-5 text-center">
+                      {generalName} guruhida hozirgi vaqtda o'quvchi mavjud emas!!!
+                    </h1>
+                  </Td>
+                </Tr>
+              }
+            </Tbody>
+          </Table>
+        </TableContainer>
       </SimpleGrid>
     </Card>
   );

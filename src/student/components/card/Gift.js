@@ -75,16 +75,6 @@ export default function Gift(props) {
       })
   }
 
-  // delete category
-  const deleteGift = () => {
-    console.log(giftIdIn.id);
-    axios.delete(api + giftDelete + categoryId.id, config)
-      .then(() => {
-        openDeleteModal();
-        toast.success("successfully saved Gifts!")
-        getGifts();
-      })
-  }
 
   return (
     <Card p='20px'>
@@ -93,7 +83,7 @@ export default function Gift(props) {
           <Image
             src={image}
             w={{ base: "100%", "3xl": "100%" }}
-            h={{ base: "100%", "3xl": "100%" }}
+            h={{ base: "180px", "3xl": "180px" }}
             borderRadius='20px'
           />
         </Box>
@@ -126,7 +116,6 @@ export default function Gift(props) {
               </Text>
               <Text
                 color='secondaryGray.600'
-                mb="20px"
                 fontSize={{
                   base: "sm",
                 }}
@@ -136,22 +125,7 @@ export default function Gift(props) {
               </Text>
             </Flex>
 
-            <AvatarGroup
-              max={3}
-              color={textColorBid}
-              size='sm'
-              mt={{
-                base: "0px",
-                md: "10px",
-                lg: "0px",
-                xl: "10px",
-                "2xl": "0px",
-              }}
-              fontSize='12px'>
-              {bidders.map((avt, key) => (
-                <Avatar key={key} src={avt} />
-              ))}
-            </AvatarGroup>
+            
           </Flex>
           <Flex
             align='start'
@@ -164,8 +138,7 @@ export default function Gift(props) {
               lg: "row",
               xl: "column",
               "2xl": "row",
-            }}
-            mt='5px'>
+            }}>
             {/* edit delete category link */}
             <Box display="flex"
             w="100%"
