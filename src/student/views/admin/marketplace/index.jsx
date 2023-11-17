@@ -3,7 +3,7 @@ import {Box, Flex, Grid, Link, Text, useColorModeValue,} from "@chakra-ui/react"
 
 // Custom components
 // Assets
-import {AccordionBody, AccordionHeader, AccordionItem, UncontrolledAccordion} from "reactstrap";
+import {AccordionHeader, AccordionItem, UncontrolledAccordion} from "reactstrap";
 import {getUserCategory} from "../../../../api/routers";
 import TestList from "./components/TestList";
 
@@ -18,6 +18,8 @@ export default function Marketplace() {
     // Chakra Color Mode
     const textColor = useColorModeValue("secondaryGray.900", "white");
     const textColorBrand = useColorModeValue("brand.500", "white");
+
+    console.log(category)
     return (
         <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
             {/* Main Fields */}

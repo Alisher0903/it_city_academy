@@ -16,3 +16,10 @@
     border-radius: 6px;
     color: #5b5b5b;
 }
+
+[disabled] {
+    /*background-color: #FAFBFC;*/
+    background-color: #edeff6;
+}
+
+
