@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Card from "../../../components/card/Card";
 import {MdDelete, MdEdit} from "react-icons/md";
-import {Button} from "reactstrap";
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import categoryImg from "./categoryImg.png";
 import axios from "axios";
 import {api, config} from "../../../../api/api";
@@ -23,6 +23,13 @@ export default function Marketplace() {
     const textColor1 = useColorModeValue("navy.700", "white");
 
     const [teacherCategory, setTeacherCategory] = useState([]);
+    const [addModal, setAddModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false);
+
+    const openAddModal = () => setAddModal(!addModal);
+    const openEditModal = () => setEditModal(!editModal);
+    const openDeleteModal = () => setDeleteModal(!deleteModal);
 
     useEffect(() => {
         getTeacherCategory();
@@ -30,8 +37,15 @@ export default function Marketplace() {
 
     // getTeacherCategory
     const getTeacherCategory = () => {
-      axios.get(api + "category/teacher/by/sub/category", config)
-          .then(res => setTeacherCategory(res.data.body));
+        axios.get(api + "category/teacher/by/sub/category", {
+            headers: {
+                method: "GET",
+                Authorization: sessionStorage.getItem('jwtTokin'),
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => setTeacherCategory(res.data.body))
+            .catch(err => console.log(err));
     }
 
     console.log(teacherCategory)
@@ -47,7 +61,18 @@ export default function Marketplace() {
                 <Text color={textColor} fontSize='2xl' ms='10px' fontWeight='700'>
                     Category
                 </Text>
-                <Button className="rounded-5" color="primary">Add Category</Button>
+                <Button className="rounded-5 addBtn" color="primary" onClick={openAddModal}>Add Category</Button>
+                {/*addModal*/}
+                <Modal isOpen={addModal} centered size="lg">
+                    <ModalHeader className="techer__modal-head" toggle={openAddModal}>Add Teacher Category</ModalHeader>
+                    <ModalBody className="techer__modal-body">
+                        addModal
+                    </ModalBody>
+                    <ModalFooter className="techer__modal-footer">
+                        <Button color="dark" onClick={openAddModal}>Close</Button>
+                        <Button color="success">Save</Button>
+                    </ModalFooter>
+                </Modal>
             </Flex>
             <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
                 <Card
@@ -56,6 +81,7 @@ export default function Marketplace() {
                     <Flex direction={{base: "column"}} justify='center'>
                         <Box mb={{base: "20px", "2xl": "20px"}} position='relative'>
                             <Image
+                                objectFit="cover"
                                 src={categoryImg}
                                 alt="img"
                                 w="100%"
@@ -106,7 +132,7 @@ export default function Marketplace() {
                                 <Box ms="auto">
                                     <Link
                                         onClick={() => {
-                                            // openEditModal();
+                                            openEditModal();
                                             // setCategoryId(categoryIdIn);
                                         }}
                                         variant='no-hover'
@@ -117,7 +143,7 @@ export default function Marketplace() {
                                     </Link>
                                     <Link
                                         onClick={() => {
-                                            // openDeleteModal();
+                                            openDeleteModal();
                                             // setCategoryId(categoryIdIn);
                                         }}
                                         variant='no-hover'
@@ -130,6 +156,30 @@ export default function Marketplace() {
                         </Flex>
                     </Flex>
                 </Card>
+
+                {/*editModal*/}
+                <Modal isOpen={editModal} centered size="lg">
+                    <ModalHeader className="techer__modal-head" toggle={openAddModal}>Edit Teacher Category</ModalHeader>
+                    <ModalBody className="techer__modal-body">
+                        editModal
+                    </ModalBody>
+                    <ModalFooter className="techer__modal-footer">
+                        <Button color="dark" onClick={openEditModal}>Close</Button>
+                        <Button color="success">Save</Button>
+                    </ModalFooter>
+                </Modal>
+
+                {/*deleteModal*/}
+                <Modal isOpen={deleteModal} centered>
+                    <ModalHeader className="techer__modal-head" toggle={openDeleteModal}>Delete Teacher Category</ModalHeader>
+                    <ModalBody className="techer__modal-delete">
+                        deleteModal
+                    </ModalBody>
+                    <ModalFooter className="techer__modal-footer">
+                        <Button color="dark" onClick={openDeleteModal}>Close</Button>
+                        <Button color="success">Save</Button>
+                    </ModalFooter>
+                </Modal>
             </SimpleGrid>
         </Box>
     );

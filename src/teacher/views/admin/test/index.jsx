@@ -157,8 +157,9 @@ export default function Overview() {
                             <Box mb={{base: "20px", "2xl": "20px"}} position='relative'>
                                 <Image
                                     src={item.attachmentId !== 0 ? imgUrl + item.attachmentId : question}
-                                    w={{base: "100%", "3xl": "100%"}}
-                                    h={{base: "220px", "3xl": "100%"}}
+                                    w="100%"
+                                    h="200px"
+                                    objectFit="cover"
                                     borderRadius='20px'
                                 />
                             </Box>

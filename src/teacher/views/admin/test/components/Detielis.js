@@ -29,7 +29,7 @@ function Detielis() {
                 <Col className="col-12 col-md-6">
                     <div className="details__img">
                         <img src={detailsInfo.attachmentId !== 0 ? imgUrl + detailsInfo.attachmentId : question}
-                            alt="questionImg" />
+                            alt="questionImg" style={{objectFit: "cover"}} />
                     </div>
                 </Col>
                 <Col className="col-12 col-md-6 mt-5 mt-md-0 text-center details__info">
