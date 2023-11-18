@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Card from "../../../components/card/Card";
-import question from "./question.png";
+import questionImg from "./question.png";
 import {
     Box,
     Flex,
@@ -23,6 +23,7 @@ export default function Overview() {
     const textColor = useColorModeValue("navy.700", "white");
 
     const [testPlus, setTestPlus] = useState([]);
+    const [testCategoryPlus, setTestCategoryPlus] = useState([]);
     const [testPlusId, setTestPlusId] = useState("");
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
@@ -34,10 +35,13 @@ export default function Overview() {
 
     useEffect(() => {
         getTestTeacher();
+        axios.get(api + "category/teacher/by/sub/category", config)
+            .then(res => setTestCategoryPlus(res.data));
     }, []);
 
     // getTest  url: ?page=0&size=100
-    const getTestTeacher = () => axios.get(api + "test?page=0&size=100", config).then(res => setTestPlus(res.data.object));
+    const getTestTeacher = () => axios.get(api + "test?page=0&size=100", config)
+        .then(res => setTestPlus(res.data.object));
 
     // addTest
     const addTeacherTest = async () => {
@@ -45,8 +49,9 @@ export default function Overview() {
         img.append('file', byIdIn('attachmentId').files[0]);
         const addData = {
             question: byIdIn("question").value,
+            // attachmentId: img.get('file') === 'undefined' ? 0 : img.get('file'),
             attachmentId: img.get('file') === 'undefined' ? 0 : img.get('file'),
-            categoryId: byIdIn("categoryId").value === Number ? byIdIn("categoryId").value : 28,
+            categoryId: byIdIn("categoryId").value,
             answer: "",
             grade: byIdIn("grade").value,
             description: byIdIn("description").value,
@@ -56,6 +61,7 @@ export default function Overview() {
         }
 
         if (img.get('file') !== 'undefined')
+            // await axios.post(api + "attachment/upload", img, config).then(res => addData.attachmentId = res.data.body)
             await axios.post(api + "attachment/upload", img, config).then(res => addData.attachmentId = res.data.body)
         await axios.post(api + "test", addData, config)
             .then(() => {
@@ -72,7 +78,7 @@ export default function Overview() {
         const editData = {
             question: byIdIn("question").value,
             attachmentId: imgEdit.get('file') === 'undefined' ? 0 : imgEdit.get('file'),
-            categoryId: byIdIn("categoryId").value === Number ? byIdIn("categoryId").value : 28,
+            categoryId: byIdIn("categoryId").value,
             answer: "",
             grade: byIdIn("grade").value,
             description: byIdIn("description").value,
@@ -98,12 +104,12 @@ export default function Overview() {
                 toast.success("Test o'chirildi");
                 openDeleteModal();
                 getTestTeacher();
-            }).catch(() => {
-            toast.error("Xatolik yuz berdi!!!");
-        })
+            });
     }
 
     const goPageDetails = () => document.getElementById("detielis").click();
+
+    // console.log(testPlus)
 
     return (
         <Box pt={{base: "130px", md: "80px", xl: "80px"}}>
@@ -140,9 +146,9 @@ export default function Overview() {
                     <Input id="countNumber" type="number" placeholder="countNumber"/>
                     <select id="categoryId" className="form-select">
                         <option selected disabled>Teacher category</option>
-                        {/* {teacherCategory && teacherCategory.map((item, i) =>
-              <option key={i} value={item.id}></option>
-            )} */}
+                        {testCategoryPlus && testCategoryPlus.map((item, i) =>
+                            <option key={i} value={item.id}>{item.name}</option>
+                        )}
                     </select>
                 </ModalBody>
                 <ModalFooter className="techer__modal-footer">
@@ -151,12 +157,15 @@ export default function Overview() {
                 </ModalFooter>
             </Modal>
             <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
-                {testPlus && testPlus.map((item, i) =>
+                {testPlus.length && testPlus.map((item, i) =>
                     <Card p='20px' key={i}>
                         <Flex direction={{base: "column"}} justify='center'>
                             <Box mb={{base: "20px", "2xl": "20px"}} position='relative'>
                                 <Image
-                                    src={item.attachmentId !== 0 ? imgUrl + item.attachmentId : question}
+                                    src={item.attachmentId !== 0
+                                        // && item.attachmentId !== "undefined"
+                                        ? imgUrl + item.attachmentId
+                                        : questionImg}
                                     w="100%"
                                     h="200px"
                                     objectFit="cover"
@@ -202,7 +211,7 @@ export default function Overview() {
                                                     "2xl": "md",
                                                     "3xl": "lg",
                                                 }}>
-                                                Max Ball:
+                                                Ball:
                                             </Text>
                                             <Text
                                                 color={textColor}
@@ -273,9 +282,9 @@ export default function Overview() {
                     <Input id="countNumber" type="number" defaultValue={testPlusId && testPlusId.countNumber}/>
                     <select id="categoryId" className="form-select">
                         <option selected disabled>Teacher category</option>
-                        {/* {teacherCategory && teacherCategory.map((item, i) =>
-              <option key={i} value={item.id}></option>
-            )} */}
+                        {testCategoryPlus && testCategoryPlus.map((item, i) =>
+                            <option key={i} value={item.id}>{item.name}</option>
+                        )}
                     </select>
                 </ModalBody>
                 <ModalFooter className="techer__modal-footer">
