@@ -39,16 +39,7 @@ export default function Marketplace() {
     // getTeacherCategory
     const getTeacherCategory = () => {
         axios.get(api + "category/teacher/by/sub/category", config)
-            .then(res => setTeacherCategory(res.data))
-        axios.get(api + "category/teacher/by/sub/category", {
-            headers: {
-                method: "GET",
-                Authorization: sessionStorage.getItem('jwtTokin'),
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => setTeacherCategory(res.data.body))
-            .catch(err => console.log(err));
+            .then(res => setTeacherCategory(res.data));
     }
 
     console.log(teacherCategory)

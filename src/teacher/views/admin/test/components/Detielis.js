@@ -34,8 +34,6 @@ function Detielis() {
                             ? imgUrl + detailsInfo.attachmentId
                             : questionImg}
                              alt="questionImg" style={{objectFit: "cover"}}/>
-                        <img src={detailsInfo.attachmentId !== 0 ? imgUrl + detailsInfo.attachmentId : question}
-                            alt="questionImg" style={{objectFit: "cover"}} />
                     </div>
                 </Col>
                 <Col className="col-12 col-md-6 mt-5 mt-md-0 text-center details__info">
