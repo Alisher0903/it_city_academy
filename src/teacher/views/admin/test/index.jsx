@@ -169,6 +169,7 @@ export default function Overview() {
                                     w="100%"
                                     h="200px"
                                     objectFit="cover"
+                                    borderRadius="25px"
                                 />
                             </Box>
                             <Flex flexDirection='column' justify='space-between' h='100%'>
