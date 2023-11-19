@@ -42,8 +42,6 @@ export default function Marketplace() {
             .then(res => setTeacherCategory(res.data));
     }
 
-    console.log(teacherCategory)
-
     return (
         <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
             <Flex
