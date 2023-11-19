@@ -95,7 +95,7 @@ export default function CheckTable(props) {
 
   const sendMessage = () => {
     let groupId = document.getElementById('groupId').value;
-
+    console.log(groupId);
     axios.post(api + messageAdd,
       {
         description: document.getElementById("messageId").value,
@@ -159,16 +159,13 @@ export default function CheckTable(props) {
         <ModalBody className="group__modal-body">
           <Box display="flex" flexWrap="wrap">
             <Textarea placeholder="Write message" id="messageId" style={{ border: "1px solid black" }} mb="20px" />
-            <Select icon={<MdArrowDropDown />} w="50%" style={{ border: "1px solid black" }}>
-              <option selected disabled>select group</option>
+            <Select id="groupId" icon={<MdArrowDropDown />} w="50%" style={{ border: "1px solid black" }}>
+              <option selected disabled >select group</option>
               {group.length && group.map((item, i) =>
-                <option id="groupId" value={item.id} key={i}>{item.name}</option>
+                <option value={item.id} key={i}>{item.name}</option>
               )}
             </Select>
-            <Flex w="50%">
-              <Checkbox color="black" border="black" ms="30px" me="5px"></Checkbox>
-              <Text mt="8px">Select all</Text>
-            </Flex>
+            
           </Box>
         </ModalBody>
         <ModalFooter>
