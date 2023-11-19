@@ -77,7 +77,7 @@ export default function Gift(props) {
 
   // delete category
   const deleteGift = () => {
-    console.log(giftIdIn.id);
+    // console.log(giftIdIn.id);
     axios.delete(api + giftDelete + categoryId.id, config)
       .then(() => {
         openDeleteModal();

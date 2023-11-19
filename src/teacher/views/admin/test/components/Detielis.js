@@ -16,7 +16,7 @@ function Detielis() {
         axios.get(api + "test", config).then(res => setDetailsInfo(res.data.object.find(d => d.id == detailsItem)))
     }, []);
 
-    console.log(detailsInfo)
+    // console.log(detailsInfo)
 
     return (
         <Box

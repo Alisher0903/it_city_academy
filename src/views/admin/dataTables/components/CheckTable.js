@@ -8,7 +8,7 @@ import {
   Th,
   Thead,
   Tr,
-  
+
   useColorModeValue,
   Radio,
   RadioGroup,
@@ -99,7 +99,8 @@ export default function CheckTable(props) {
     axios.post(api + messageAdd,
       {
         description: document.getElementById("messageId").value,
-        groupId: groupId
+
+        groupId: group.id
 
       },
       config)
@@ -109,6 +110,20 @@ export default function CheckTable(props) {
       })
   }
 
+  const sendAll = () => {
+    let groupId = document.getElementById('groupId').value;
+    console.log(groupId);
+    axios.post(api + messageAdd,
+      {
+        description: document.getElementById("messageId").value,
+        groupId: group.id
+      },
+      config)
+      .then(() => {
+        openEditModal();
+        getMessage()
+      })
+  }
   return (
     <Box
       direction='column'
@@ -137,9 +152,7 @@ export default function CheckTable(props) {
         </Button>
       </Flex>
       {message.length && message.map((item, i) => {
-
         return (
-
           <Card
             key={i}
             fontSize={{ sm: "14px" }}
@@ -153,7 +166,6 @@ export default function CheckTable(props) {
           </Card>
         );
       })}
-
       <Modal isOpen={editModal} centered size="lg" className="group__modals">
         <ModalHeader toggle={openEditModal} className="group__modal-head">Send message</ModalHeader>
         <ModalBody className="group__modal-body">
@@ -161,11 +173,11 @@ export default function CheckTable(props) {
             <Textarea placeholder="Write message" id="messageId" style={{ border: "1px solid black" }} mb="20px" />
             <Select id="groupId" icon={<MdArrowDropDown />} w="50%" style={{ border: "1px solid black" }}>
               <option selected disabled >select group</option>
+              {/* <option onClick={sendAll} >Barcha guruhga yuborish</option> */}
               {group.length && group.map((item, i) =>
                 <option value={item.id} key={i}>{item.name}</option>
               )}
             </Select>
-            
           </Box>
         </ModalBody>
         <ModalFooter>
