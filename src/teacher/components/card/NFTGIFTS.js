@@ -13,9 +13,10 @@ export default function NFT(props) {
         <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
           <Image
             src={image}
-            w={{ "3xl": "100%", base: "100%" }}
-            h={{ base: "220px", "3xl": "100%" }}
+            w="100%"
+            h="200px"
             borderRadius='20px'
+            objectFit="cover"
           />
         </Box>
         <Flex flexDirection='column' justify='space-between' h='100%'>
@@ -58,14 +59,7 @@ export default function NFT(props) {
             }}>
             <Text
               color={textColor}
-              fontSize={{
-                base: "xl",
-                md: "lg",
-                lg: "lg",
-                xl: "lg",
-                "2xl": "md",
-                "3xl": "lg",
-              }} mt="3px" me="5px" letterSpacing=".1px">
+              fontSize=".7rem" mt="4px" me="5px" letterSpacing=".1px">
               <p className="fw-normal">{description}</p>
             </Text>
           </Flex>
