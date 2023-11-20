@@ -208,7 +208,10 @@ export default function HeaderLinks(props) {
 							color="red.400"
 							borderRadius="8px"
 							px="14px">
-							<Text fontSize="sm">Log out</Text>
+							<Link href='/'>
+
+								<Text fontSize="sm">Log out</Text>
+							</Link>
 						</MenuItem>
 					</Flex>
 				</MenuList>
