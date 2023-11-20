@@ -42,7 +42,7 @@ export default function Overview() {
         axios.get(api + "category/teacher/by/sub/category", config)
             .then(res => setTeacherCategory(res.data));
 
-        // test id get
+        // test id get mana shuni tug'rilash kk
         axios.get(api + "test/by/" + testIdSelect + "/test", config)
             .then(res => setTestAnswerPlus(res.data));
 
@@ -103,7 +103,7 @@ export default function Overview() {
     }
 
     // console.log(testIdSelect);
-    // console.log(testPlus);
+    // console.log(testAnswerPlus);
 
     return (
         <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
@@ -131,7 +131,7 @@ export default function Overview() {
                         <Input id="answer" placeholder="answer" />
                         <Input id="result" placeholder="result" />
                         <select
-                            onChange={selectOnClick}
+                            onClick={selectOnClick}
                             id="categoryId"
                             className="form-select">
                             <option selected disabled>CategoryId select</option>
@@ -141,7 +141,7 @@ export default function Overview() {
                         </select>
                         <select id="testId" className="form-select">
                             <option selected disabled>TestId select</option>
-                            {testAnswerPlus && testAnswerPlus.map((item, i) =>
+                            {testAnswerBtn && testAnswerBtn.map((item, i) =>
                                 <option key={i} value={item.id}>{item.question}</option>
                             )}
                         </select>
@@ -221,9 +221,9 @@ export default function Overview() {
                             </select>
                             <select id="testId" className="form-select">
                                 <option selected disabled>TestId select</option>
-                                {/* {testAnswerPlus && testAnswerPlus.map((item, i) =>
+                                {testAnswerBtn && testAnswerBtn.map((item, i) =>
                                     <option key={i} value={item.id}>{item.question}</option>
-                                )} */}
+                                )}
                             </select>
                         </ModalBody>
                         <ModalFooter className="techer__modal-footer">
