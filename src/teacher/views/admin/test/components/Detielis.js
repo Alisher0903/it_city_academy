@@ -28,15 +28,15 @@ function Detielis() {
             p="40px"
             borderRadius="40px">
             <Row className="w-100">
-                <Col className="col-12 col-md-6">
-                    <div className="details__img">
-                        <img src={detailsInfo.attachmentId !== 0 && detailsInfo.attachmentId !== "undefined"
-                            ? imgUrl + detailsInfo.attachmentId
-                            : questionImg}
-                             alt="questionImg" style={{objectFit: "cover"}}/>
-                    </div>
-                </Col>
-                <Col className="col-12 col-md-6 mt-5 mt-md-0 text-center details__info">
+                {/*<Col className="col-12 col-md-6">*/}
+                {/*    <div className="details__img">*/}
+                {/*        <img src={detailsInfo.attachmentId !== 0 && detailsInfo.attachmentId !== "undefined"*/}
+                {/*            ? imgUrl + detailsInfo.attachmentId*/}
+                {/*            : questionImg}*/}
+                {/*             alt="questionImg" style={{objectFit: "cover"}}/>*/}
+                {/*    </div>*/}
+                {/*</Col>*/}
+                <Col className="col-12 text-center details__info">
                     <Text
                         boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
                         borderRadius="20px"
