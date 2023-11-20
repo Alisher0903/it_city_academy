@@ -14,7 +14,7 @@ function TestList({categoryId, index}) {
 
     const goPageStudent = () => document.getElementById("testCoding").click();
 
-    // console.log(test);
+    console.log(test)
 
     return (
         <AccordionBody accordionId={index} className="testb">

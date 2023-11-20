@@ -19,7 +19,8 @@
 
 [disabled] {
     /*background-color: #FAFBFC;*/
-    background-color: #edeff6;
+    background-color: #edeff6!important;
+    cursor: none!important;
 }
 
 
