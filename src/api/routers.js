@@ -40,6 +40,6 @@ export function getUserCategory(setCategory) {
 }
 
 export function getCategoryByTest(setTest, categoryId) {
-    console.log(categoryId)
+    // console.log(categoryId)
     axios.get(api + `test/by/${categoryId}/test`, config).then(res => setTest(res.data))
 }
