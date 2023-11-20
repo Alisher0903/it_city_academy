@@ -8,6 +8,7 @@ import {
   MdPerson3,
   MdOutlineMenuBook,
   MdCardGiftcard,
+  MdPerson2,
 } from "react-icons/md";
 
 // Admin Imports
@@ -16,6 +17,7 @@ import NFTMarketplace from "views/admin/marketplace";
 import Group from "views/admin/group";
 import DataTables from "views/admin/dataTables";
 import Profile from "views/admin/profile";
+import User from "./views/admin/users";
 // import RTL from "views/admin/rtl";
 
 // Auth Imports
@@ -79,7 +81,14 @@ const routes = [
     path: "/gifts",
     icon: <Icon as={MdCardGiftcard} width='20px' height='20px' color='inherit' />,
     component: Gifts
-  }
+  },
+  {
+    name: "User",
+    layout: "/admin",
+    path: "/user",
+    icon: <Icon as={MdPerson2} width='20px' height='20px' color='inherit' />,
+    component: User,
+  },
 
 ];
 
