@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
     SimpleGrid,
     useColorModeValue,
@@ -13,27 +14,25 @@ import {
     Text,
     Button,
 } from "@chakra-ui/react";
-import { config, api } from "api/api";
+import { config, api, byIdIn } from "api/api";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
-import { byIdIn } from "api/api";
 
-function Users() {
+function AddTeachers() {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
 
     // state hooks
-    const [users, setUsers] = useState([]);
+    const [teachers, setTeachers] = useState([]);
     const [groupSelect, setGroupSelect] = useState([]);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
-    const [userGetId, setUserGetId] = useState("");
+    const [teacherGetId, setTeacherGetId] = useState("");
 
     useEffect(() => {
-        getUsers();
+        getTeachers();
         getGroupSelect();
     }, []);
 
@@ -42,18 +41,18 @@ function Users() {
     const openEditModal = () => setEditModal(!editModal);
     const openDeleteModal = () => setDeleteModal(!deleteModal);
 
-    // getUsers
-    const getUsers = () => axios.get(api + "user?page=0&size=100", config)
-        .then(res => setUsers(res.data.body.object));
+    // getTeachers
+    const getTeachers = () => axios.get(api + "user/teacher", config)
+        .then(res => setTeachers(res.data.body));
 
     // getGroupSelect
     const getGroupSelect = () => {
         axios.get(api + "group?page=0&size=100", config)
-            .then(res => setGroupSelect(res.data.body.object))
+            .then(res => setGroupSelect(res.data.body.object));
     }
 
-    // addUser
-    const addUsers = () => {
+    // addTeacher
+    const addTeachers = () => {
         let addData = {
             firstName: byIdIn("firstName").value,
             lastName: byIdIn("lastName").value,
@@ -62,16 +61,16 @@ function Users() {
             phoneNumber: byIdIn("phoneNumber").value,
             groupId: byIdIn("groupId").value
         }
-        axios.post(api + "auth/register?ROLE=ROLE_USER", addData, config)
+        axios.post(api + "auth/register?ROLE=ROLE_TEACHER", addData, config)
             .then(() => {
                 openAddModal();
-                getUsers();
-                toast.success("User muvaffaqiyatli qo'shildi✔");
+                getTeachers();
+                toast.success("Teacher muvaffaqiyatli qo'shildi✔");
             });
     }
 
-    // editUser
-    const editUsers = () => {
+    // editTeacher
+    const editTeachers = () => {
         let editData = {
             firstName: byIdIn("firstName").value,
             lastName: byIdIn("lastName").value,
@@ -80,22 +79,24 @@ function Users() {
             phoneNumber: byIdIn("phoneNumber").value,
             groupId: byIdIn("groupId").value
         }
-        axios.put(api + "user/update/" + userGetId.id, editData, config)
+        axios.put(api + "user/update/" + teacherGetId.id, editData, config)
             .then(() => {
                 openEditModal();
-                getUsers();
-                toast.success("Userning ma'lumotlari o'zgartirildi✔");
+                getTeachers();
+                toast.success("Teacherning ma'lumotlari o'zgartirildi✔");
             });
     }
 
-    // deleteUser
+    // deleteTeacher
     const deleteUsers = () => {
-        axios.delete(api + "user/" + userGetId.id, config)
+        axios.delete(api + "user/" + teacherGetId.id, config)
             .then(() => {
                 openDeleteModal();
-                getUsers();
-                toast.error("Userning ma'lumotlari o'zchirildi!!!");
-            })
+                getTeachers();
+                toast.error("Teacherning ma'lumotlari o'zchirildi!!!");
+            }).catch(() => {
+                toast.error("Xatolik yuz berdi");
+            });
     }
 
     return (
@@ -105,18 +106,18 @@ function Users() {
                 <Box
                     display="flex"
                     justifyContent="space-between">
-                    <Text fontSize="1.5rem" fontWeight="bold" letterSpacing=".5px">Users</Text>
+                    <Text fontSize="1.5rem" fontWeight="bold" letterSpacing=".5px">Teachers</Text>
                     <Button
                         onClick={openAddModal}
                         colorScheme="green" variant="outline"
                         boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
-                        Add Users</Button>
+                        Add Teachers</Button>
 
                     {/* addUserModal */}
                     <Modal isOpen={addModal} centered size="lg">
                         <ModalHeader
                             toggle={openAddModal}
-                            className="text-dark fs-4 fw-bolder">Add Users</ModalHeader>
+                            className="text-dark fs-4 fw-bolder">Add Teachers</ModalHeader>
                         <ModalBody className="techer__modal-body">
                             <Input id="firstName" placeholder="firstName" />
                             <Input id="lastName" placeholder="lastName" />
@@ -138,7 +139,7 @@ function Users() {
                             <Button
                                 colorScheme="green"
                                 boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                                onClick={addUsers}>Save</Button>
+                                onClick={addTeachers}>Save</Button>
                         </ModalFooter>
                     </Modal>
 
@@ -151,7 +152,7 @@ function Users() {
                 >
                     <Table>
                         <TableCaption
-                            fontSize="1rem">Users</TableCaption>
+                            fontSize="1rem">Teachers</TableCaption>
                         <Thead>
                             <Tr>
                                 <Th>T/r</Th>
@@ -163,7 +164,7 @@ function Users() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {users.length && users.map((item, i) =>
+                            {teachers.length && teachers.map((item, i) =>
                                 <Tr key={i}>
                                     <Td>{i + 1}</Td>
                                     <Td>{item.lastName}</Td>
@@ -174,7 +175,7 @@ function Users() {
                                         <Button
                                             onClick={() => {
                                                 openEditModal();
-                                                setUserGetId(item);
+                                                setTeacherGetId(item);
                                             }}
                                             colorScheme="yellow"
                                             variant="outline">Edit</Button>
@@ -183,7 +184,7 @@ function Users() {
                                         <Button
                                             onClick={() => {
                                                 openDeleteModal();
-                                                setUserGetId(item);
+                                                setTeacherGetId(item);
                                             }}
                                             colorScheme="red"
                                             variant="outline">Delete</Button>
@@ -200,13 +201,13 @@ function Users() {
                 <ModalHeader
                     toggle={openEditModal}
                     className="text-dark fs-4 fw-bolder">
-                    Editing data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
+                    Editing data of ({teacherGetId.firstName} {teacherGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="firstName" defaultValue={userGetId && userGetId.firstName} />
-                    <Input id="lastName" defaultValue={userGetId && userGetId.lastName} />
-                    <Input type="email" id="email" defaultValue={userGetId && userGetId.email} />
-                    <Input type="password" id="password" defaultValue={userGetId && userGetId.password} />
-                    <Input type="number" id="phoneNumber" defaultValue={userGetId && userGetId.phoneNumber} />
+                    <Input id="firstName" defaultValue={teacherGetId && teacherGetId.firstName} />
+                    <Input id="lastName" defaultValue={teacherGetId && teacherGetId.lastName} />
+                    <Input type="email" id="email" defaultValue={teacherGetId && teacherGetId.email} />
+                    <Input type="password" id="password" placeholder="password" />
+                    <Input type="number" id="phoneNumber" defaultValue={teacherGetId && teacherGetId.phoneNumber} />
                     <select id="groupId" className="form-select">
                         <option selected disabled>groupName</option>
                         {groupSelect.length && groupSelect.map((item, i) =>
@@ -222,7 +223,7 @@ function Users() {
                     <Button
                         colorScheme="green"
                         boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                        onClick={editUsers}>Save</Button>
+                        onClick={editTeachers}>Save</Button>
                 </ModalFooter>
             </Modal>
 
@@ -231,9 +232,9 @@ function Users() {
                 <ModalHeader
                     toggle={openDeleteModal}
                     className="text-dark fs-4 fw-bolder">
-                    Delete data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
-                <ModalBody className="techer__modal-delete">
-                    Siz {userGetId.firstName} {userGetId.lastName} ma'lumotlarini o'chirib yubormoqchisiz.
+                    Delete data of ({teacherGetId.firstName} {teacherGetId.lastName})</ModalHeader>
+                <ModalBody className="text-dark fs-5 fw-medium" style={{ letterSpacing: ".5px", lineHeight: "22px" }}>
+                    Siz "{teacherGetId.firstName} {teacherGetId.lastName}" ma'lumotlarini o'chirib yubormoqchisiz.
                     Bunga ishonchingiz komilmi?
                 </ModalBody>
                 <ModalFooter>
@@ -251,4 +252,4 @@ function Users() {
     );
 }
 
-export default Users;
+export default AddTeachers;
