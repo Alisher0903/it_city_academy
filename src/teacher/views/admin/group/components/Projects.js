@@ -39,8 +39,9 @@ export default function Projects(props) {
         <Project
           key={i}
           groupIdIn={item}
-          boxShadow={cardShadow}
+          // boxShadow={cardShadow}
           mb='20px'
+          boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px;"
           link='/#/Teacher/student'
           title={item.name}
         />

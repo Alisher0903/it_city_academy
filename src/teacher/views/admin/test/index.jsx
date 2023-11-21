@@ -109,7 +109,7 @@ export default function Overview() {
 
     const goPageDetails = () => document.getElementById("detielis").click();
 
-    // console.log(testPlus)
+    console.log(imgUrl + testPlus.attachmentId)
 
     return (
         <Box pt={{base: "130px", md: "80px", xl: "80px"}}>
@@ -234,15 +234,15 @@ export default function Overview() {
                                     display="flex"
                                     justify='space-between'
                                     mt='15px'>
-                                    <Button
-                                        color="success"
-                                        outline
-                                        className="rounded-5 fw-medium"
-                                        onClick={() => {
-                                            goPageDetails();
-                                            sessionStorage.setItem("details", item.id);
-                                        }}>More</Button>
-                                    <Box>
+                                    {/*<Button*/}
+                                    {/*    color="success"*/}
+                                    {/*    outline*/}
+                                    {/*    className="rounded-5 fw-medium"*/}
+                                    {/*    onClick={() => {*/}
+                                    {/*        goPageDetails();*/}
+                                    {/*        sessionStorage.setItem("details", item.id);*/}
+                                    {/*    }}>More</Button>*/}
+                                    <Box ms="auto">
                                         <Link
                                             onClick={() => {
                                                 openEditModal();
@@ -297,7 +297,7 @@ export default function Overview() {
             <Modal centered size="lg" isOpen={deleteModal}>
                 <ModalHeader toggle={openDeleteModal} className="techer__modal-head">Delete Test</ModalHeader>
                 <ModalBody className="techer__modal-delete">
-                    Siz bu testni o'chirishga ishonchingiz komilmi?
+                    Siz bu "{testPlusId.question}" savolni o'chirishga ishonchingiz komilmi?
                 </ModalBody>
                 <ModalFooter className="techer__modal-footer">
                     <Button onClick={openDeleteModal}>Close</Button>

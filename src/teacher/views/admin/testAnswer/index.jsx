@@ -236,7 +236,7 @@ export default function Overview() {
                     <Modal centered isOpen={deleteModal}>
                         <ModalHeader toggle={openDeleteModal} className="techer__modal-head">Delete TestAnswer</ModalHeader>
                         <ModalBody className="techer__modal-delete">
-                            Siz bu testAnswerni o'chirishga ishonchingiz komilmi?
+                            Siz bu "{testAnswerId.answer}" o'chirishga ishonchingiz komilmi?
                         </ModalBody>
                         <ModalFooter className="techer__modal-footer">
                             <Button onClick={openDeleteModal}>Close</Button>

@@ -53,7 +53,7 @@ export default function Marketplace() {
                 <Text color={textColor} fontSize='2xl' ms='10px' fontWeight='700'>
                     Category
                 </Text>
-                <Button className="rounded-5 addBtn" color="primary" onClick={openAddModal}>Add Category</Button>
+                {/*<Button className="rounded-5 addBtn" color="primary" onClick={openAddModal}>Add Category</Button>*/}
                 {/*addModal*/}
                 <Modal isOpen={addModal} centered size="lg">
                     <ModalHeader className="techer__modal-head" toggle={openAddModal}>Add Teacher Category</ModalHeader>
@@ -124,27 +124,27 @@ export default function Marketplace() {
                                     }}
                                     mt='25px'>
                                     <Box ms="auto">
-                                        <Link
-                                            onClick={() => {
-                                                openEditModal();
-                                                // setCategoryId(categoryIdIn);
-                                            }}
-                                            variant='no-hover'
-                                            ms='0px'
-                                            me="20px"
-                                            p='0px !important'>
-                                            <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px'/>
-                                        </Link>
-                                        <Link
-                                            onClick={() => {
-                                                openDeleteModal();
-                                                // setCategoryId(categoryIdIn);
-                                            }}
-                                            variant='no-hover'
-                                            ms='0px'
-                                            p='0px !important'>
-                                            <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px'/>
-                                        </Link>
+                                        {/*<Link*/}
+                                        {/*    onClick={() => {*/}
+                                        {/*        openEditModal();*/}
+                                        {/*        // setCategoryId(categoryIdIn);*/}
+                                        {/*    }}*/}
+                                        {/*    variant='no-hover'*/}
+                                        {/*    ms='0px'*/}
+                                        {/*    me="20px"*/}
+                                        {/*    p='0px !important'>*/}
+                                        {/*    <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px'/>*/}
+                                        {/*</Link>*/}
+                                        {/*<Link*/}
+                                        {/*    onClick={() => {*/}
+                                        {/*        openDeleteModal();*/}
+                                        {/*        // setCategoryId(categoryIdIn);*/}
+                                        {/*    }}*/}
+                                        {/*    variant='no-hover'*/}
+                                        {/*    ms='0px'*/}
+                                        {/*    p='0px !important'>*/}
+                                        {/*    <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px'/>*/}
+                                        {/*</Link>*/}
                                     </Box>
                                 </Flex>
                             </Flex>
