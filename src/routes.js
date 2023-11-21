@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Icon } from "@chakra-ui/react";
 import {
   MdMessage,
@@ -7,11 +6,9 @@ import {
   MdHome,
   MdOutlineMenuBook,
   MdCardGiftcard,
-  MdPerson2,
-  Md10K,
+  MdPerson,
+  MdPersonPin,
 } from "react-icons/md";
-
-// Admin Imports
 import MainDashboard from "views/admin/default";
 import NFTMarketplace from "views/admin/marketplace";
 import Group from "views/admin/group";
@@ -19,9 +16,7 @@ import DataTables from "views/admin/dataTables";
 import Profile from "views/admin/profile";
 import User from "./views/admin/users";
 import Teacher from "./views/admin/teachersAdd";
-// import RTL from "views/admin/rtl";
 
-// Auth Imports
 import SignIn from "views/auth/signIn";
 import Gifts from "views/admin/gifts";
 
@@ -37,14 +32,7 @@ const routes = [
     name: "Category",
     layout: "/admin",
     path: "/nft-marketplace",
-    icon: (
-      <Icon
-        as={MdOutlineMenuBook}
-        width='20px'
-        height='20px'
-        color='inherit'
-      />
-    ),
+    icon: <Icon as={MdOutlineMenuBook} width='20px' height='20px' color='inherit' />,
     component: NFTMarketplace,
     secondary: true,
   },
@@ -63,6 +51,27 @@ const routes = [
     component: Group,
   },
   {
+    name: "Gifts",
+    layout: "/admin",
+    path: "/gifts",
+    icon: <Icon as={MdCardGiftcard} width='20px' height='20px' color='inherit' />,
+    component: Gifts
+  },
+  {
+    name: "User",
+    layout: "/admin",
+    path: "/user",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: User,
+  },
+  {
+    name: "Teacher",
+    layout: "/admin",
+    path: "/teacher",
+    icon: <Icon as={MdPersonPin} width='20px' height='20px' color='inherit' />,
+    component: Teacher,
+  },
+  {
     name: "",
     layout: "/admin",
     path: "/profile",
@@ -75,27 +84,6 @@ const routes = [
     path: "/sign-in",
     icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
     component: SignIn
-  },
-  {
-    name: "Gifts",
-    layout: "/admin",
-    path: "/gifts",
-    icon: <Icon as={MdCardGiftcard} width='20px' height='20px' color='inherit' />,
-    component: Gifts
-  },
-  {
-    name: "User",
-    layout: "/admin",
-    path: "/user",
-    icon: <Icon as={MdPerson2} width='20px' height='20px' color='inherit' />,
-    component: User,
-  },
-  {
-    name: "Teacher",
-    layout: "/admin",
-    path: "/teacher",
-    icon: <Icon as={Md10K} width='20px' height='20px' color='inherit' />,
-    component: Teacher,
   },
 
 ];
