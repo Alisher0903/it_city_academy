@@ -17,6 +17,8 @@ import Card from "../../../../components/card/Card.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { api, teacherUrl, config, getUserUrl } from "api/api.js";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 
 // Assets
 export default function GeneralInformation(props) {
@@ -40,11 +42,14 @@ export default function GeneralInformation(props) {
 
   // get student
   const getStudent = () => {
-    axios.get(api + getUserUrl + generalId, config).then(res => setUsers(res.data.body));
+    axios.get(api + getUserUrl + generalId, config)
+      .then(res => setUsers(res.data.body))
+      .catch(() => toast.error("Bu guruhda hali student mavjud emas!!!"))
   }
 
   return (
     <Card>
+      <ToastContainer />
       <Text
         display="flex"
         justifyContent="space-between"

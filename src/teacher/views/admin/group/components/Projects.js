@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import Project from "./Project.js";
 import axios from "axios";
 import { api, teacherUrl, config } from "api/api.js";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Projects(props) {
 
@@ -22,11 +24,13 @@ export default function Projects(props) {
   // get group teacher
   const getGroupTeacher = () => {
     axios.get(api + teacherUrl, config)
-      .then(res => setGroupTeacher(res.data.body));
+      .then(res => setGroupTeacher(res.data.body))
+      .catch(() => toast.error("Sizda hozirda guruh mavjud emas!!!"));
   }
 
   return (
     <Card mb={{ base: "0px", "2xl": "20px" }}>
+      <ToastContainer />
       <Text
         color={textColorPrimary}
         fontWeight='bold'
