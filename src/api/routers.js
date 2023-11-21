@@ -1,5 +1,6 @@
 import axios from "axios";
 import {api, config} from "./api";
+import { useState } from "react";
 
 // Category
 export const   getCategory = (setCategory) => {
@@ -8,10 +9,12 @@ export const   getCategory = (setCategory) => {
 
 // Group
 export function getGroup(setGroup) {
+    
+
     axios.get(api + "user/teacher", config)
         .then(t => {
             let group = [];
-            axios.get(api + "group?page=0&size=10", config)
+            axios.get(api + "group?page=0&size=100", config)
                 .then(res => {
                     for (const g of res.data.body.object)
                         group.push({
@@ -25,7 +28,10 @@ export function getGroup(setGroup) {
             function teacherById(id) {
                 for (const teacher of t.data.body) if (teacher.id === id) return teacher.firstName;
             }
-        });
+        })
+        // .catch(error => {
+        //     setError(error); // Xatolikni saqlash
+        //   });
 }
 
 // User

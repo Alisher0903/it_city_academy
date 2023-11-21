@@ -7,6 +7,7 @@ import {
   MdHome,
   MdPerson3,
   MdOutlineMenuBook,
+  MdCurrencyExchange,
 } from "react-icons/md";
 
 // Student Imports
@@ -15,6 +16,7 @@ import NFTMarketplace from "./views/admin/marketplace/index";
 import Profile from "./views/admin/profile/index";
 import DataTables from "./views/admin/dataTables/index";
 import Banner from "./views/admin/marketplace/components/Banner"
+import Group from "./views/admin/group/index"
 // import RTL from "views/admin/rtl";
 
 // Auth Imports
@@ -70,6 +72,13 @@ const routes = [
     path: "/test/coding",
     icon: <Icon as={MdPerson3} width='20px' height='20px' color='inherit' />,
     component: Banner,
+  },
+  {
+    name: "Exchange",
+    layout: "/Student",
+    path: "/exchange",
+    icon: <Icon as={MdCurrencyExchange} width='20px' height='20px' color='inherit' />,
+    component: Group,
   }
 ];
 

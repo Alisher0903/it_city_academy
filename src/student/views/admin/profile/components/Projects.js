@@ -1,5 +1,5 @@
 // Chakra imports
-import { Text, useColorModeValue } from "@chakra-ui/react";
+import { Grid, Text, useColorModeValue } from "@chakra-ui/react";
 // Assets
 import Project1 from "../../../../assets/img/profile/Project1.png";
 import Project2 from "../../../../assets/img/profile/Project2.png";
@@ -24,36 +24,30 @@ export default function Projects(props) {
         fontWeight='bold'
         fontSize='2xl'
         mt='10px'
-        mb='4px'>
-        All projects
+        mb='40px'>
+        Your gifts
       </Text>
-      <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
-        Here you can find more details about your projects. Keep you user
-        engaged by providing meaningful information.
-      </Text>
-      <Project
-        boxShadow={cardShadow}
+      <Grid
         mb='20px'
-        image={Project1}
-        ranking='1'
-        link='#'
-        title='Technology behind the Blockchain'
-      />
-      <Project
-        boxShadow={cardShadow}
-        mb='20px'
-        image={Project2}
-        ranking='2'
-        link='#'
-        title='Greatest way to a good Economy'
-      />
-      <Project
-        boxShadow={cardShadow}
-        image={Project3}
-        ranking='3'
-        link='#'
-        title='Most essential tips for Burnout'
-      />
+        templateColumns={{
+          base: "1fr",
+          lg: "repeat(2, 1fr)",
+          "2xl": "1fr 1fr",
+        }}
+        templateRows={{
+          base: "1fr",
+        }}
+        gap={{ base: "15px", xl: "15px" }}>
+        <Project
+          boxShadow={cardShadow}
+          mb='10px'
+          image={Project1}
+          ranking='1'
+          link='#'
+          title='Technology behind the Blockchain'
+        />
+      </Grid>
+
     </Card>
   );
 }

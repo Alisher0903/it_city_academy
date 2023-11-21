@@ -25,6 +25,7 @@ export default function Projects() {
     const [category, setCategory] = useState([]);
     const [teacherId, setTeacherId] = useState([]);
     const [group, setGroup] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         getCategory();
@@ -36,6 +37,9 @@ export default function Projects() {
     // get category
     const getCategory = () => {
         axios.get(api + "category").then(res => setCategory(res.data.body))
+        .catch(error => {
+            setError(error); // Xatolikni saqlash
+          });
     }
 
     // add group

@@ -36,6 +36,7 @@ import axios from "axios";
 import { api } from "api/api";
 import { config } from "api/api";
 import { MdArrowDropDown } from "react-icons/md";
+import {ToastContainer, toast} from "react-toastify";
 import { messageAdd } from "api/api";
 export default function CheckTable(props) {
 
@@ -99,14 +100,17 @@ export default function CheckTable(props) {
     axios.post(api + messageAdd,
       {
         description: document.getElementById("messageId").value,
-
         groupId: group.id
 
       },
       config)
       .then(() => {
         openEditModal();
+        toast.success("Message successfully send")
         getMessage()
+      }).catch((err) => {
+        toast.error("Error")
+
       })
   }
 
@@ -130,6 +134,7 @@ export default function CheckTable(props) {
       w='100%'
       px='0px'
       overflowX={{ sm: "scroll", lg: "hidden" }}>
+            <ToastContainer/>
       <Flex px='25px' justify='space-between' mb='20px' align='center'>
         <Text
           color={textColor}
