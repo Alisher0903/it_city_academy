@@ -33,6 +33,24 @@ export default function Overview() {
             })
         // .catch(err => consol e.log(err))
     }
+  useEffect(() => {
+    if (sessionStorage.getItem('reload') !== "true") {
+      sessionStorage.setItem('reload', 'true')
+      window.location.reload();
+    }
+    getProfile();
+  }, []);
+
+  function getProfile() {
+    axios.get(api + "user/getMe", config)
+      .then(res => {
+        setInfo(res.data)
+        // console.log(res.data);
+      })
+      .catch(err =>{
+        console.log(err);
+      })
+  }
 
     // console.log(info);
 

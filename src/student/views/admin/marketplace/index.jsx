@@ -41,38 +41,6 @@ export default function Marketplace() {
                             <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
                                 Category
                             </Text>
-                            {/* <Flex
-                                align='center'
-                                me='20px'
-                                ms={{base: "24px", md: "0px"}}
-                                mt={{base: "20px", md: "0px"}}>
-                                <Link
-                                    color={textColorBrand}
-                                    fontWeight='500'
-                                    me={{base: "34px", md: "44px"}}
-                                    to='#art'>
-                                    All
-                                </Link>
-                                <Link
-                                    color={textColorBrand}
-                                    fontWeight='500'
-                                    me={{base: "34px", md: "44px"}}
-                                    to='#music'>
-                                    Front End
-                                </Link>
-                                <Link
-                                    color={textColorBrand}
-                                    fontWeight='500'
-                                    me={{base: "34px", md: "44px"}}
-                                    to='#collectibles'>
-                                    Back End
-                                </Link>
-                                <Link color={textColorBrand} fontWeight='500' to='#sports'>
-                                let lern = sessionStorage.getItem("learnId")
-                                
-                                    3D Max
-                                </Link>
-                            </Flex> */}
                         </Flex>
 
                         {/*    Accardion */}

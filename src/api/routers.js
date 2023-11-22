@@ -29,23 +29,30 @@ export function getGroup(setGroup) {
                 for (const teacher of t.data.body) if (teacher.id === id) return teacher.firstName;
             }
         })
-        // .catch(error => {
-        //     setError(error); // Xatolikni saqlash
-        //   });
+        
 }
 
 // User
 export const getTeacher = (setTeacher) => {
     axios.get(api + "user/teacher", config)
-        .then(res => setTeacher(res.data.body));
+        .then(res => setTeacher(res.data.body))
+    .catch((err) => {
+        console.log(err);
+    })
 }
 
 // Test
 export function getUserCategory(setCategory) {
     axios.get(api + "test/by/category", config).then(res => setCategory(res.data))
+    .catch((error) => {
+        console.log("Xatolik yuz berdi");
+    })
 }
 
 export function getCategoryByTest(setTest, categoryId) {
-    // console.log(categoryId)
+    console.log(categoryId)
     axios.get(api + `test/by/${categoryId}/test`, config).then(res => setTest(res.data))
+    .catch((err) => {
+        console.log(err);
+    })
 }
