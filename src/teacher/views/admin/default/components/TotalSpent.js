@@ -39,7 +39,7 @@ export default function TotalSpent(props) {
     return (
         <Card w='100%' {...rest}>
             <Text textAlign="center" mt=".3rem" mb=".45rem">
-                <span className="fs-5 fw-semibold">Hamma guruh bo'yicha top 5</span>
+                <span className="fs-5 fw-semibold">All group top 5</span>
             </Text>
             <TableContainer
                 mt="1rem"

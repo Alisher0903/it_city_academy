@@ -8,21 +8,25 @@ import {
     SimpleGrid,
     useColorModeValue,
 } from "@chakra-ui/react";
-import Usa from "../../../assets/img/dashboards/usa.png";
-import MiniCalendar from "../../../../components/calendar/MiniCalendar";
+import {
+    MdAttachMoney,
+    MdCurrencyExchange, MdOutlineCardGiftcard,
+    MdPeople,
+    MdPerson,
+} from "react-icons/md";
 import MiniStatistics from "../../../../components/card/MiniStatistics";
 import IconBox from "../../../components/icons/IconBox";
-import React, {useEffect} from "react";
-import {
-    MdAddTask,
-    MdAttachMoney,
-    MdBarChart, MdCurrencyExchange,
-    MdFileCopy, MdPeople, MdPerson, MdStackedBarChart,
-} from "react-icons/md";
+import React, {useEffect, useState} from "react";
 import TotalSpent from "./components/TotalSpent";
 import WeeklyRevenue from "./components/WeeklyRevenue";
+import axios from "axios";
+import {api, config} from "../../../../api/api";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from "react-toastify";
 
 import CheckTable from "./components/CheckTable";
+import Usa from "../../../assets/img/dashboards/usa.png";
+import MiniCalendar from "../../../../components/calendar/MiniCalendar";
 import ComplexTable from "./components/ComplexTable";
 import DailyTraffic from "./components/DailyTraffic";
 import PieCard from "./components/PieCard";
@@ -38,15 +42,54 @@ export default function UserReports() {
     const brandColor = useColorModeValue("brand.500", "white");
     const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
+    const [groupCount, setGroupCount] = useState([]);
+    const [userCount, setUserCount] = useState([]);
+    const [coinCount, setCoinCount] = useState([]);
+    const [exchangeCount, setExchangeCount] = useState([]);
+
     useEffect(() => {
         if (sessionStorage.getItem('reloadTeacher') !== "true") {
             sessionStorage.setItem('reloadTeacher', 'true')
             window.location.reload();
         }
+
+        getGroupCount();
+        getUserCount();
+        getUserCoin();
+        getExchangeCount();
     }, []);
+
+    //getGroupCount
+    const getGroupCount = () => {
+        axios.get(api + "group/teacher", config)
+            .then(res => setGroupCount(res.data.body))
+            .catch(err => console.log(err))
+    }
+
+    // getUserCount
+    const getUserCount = () => {
+        axios.get(api + "user/byTeacher/12", config)
+            .then(res => setUserCount(res.data.body))
+            .catch(err => console.log(err))
+    }
+
+    // getCoinCount
+    const getUserCoin = () => {
+        axios.get(api + "user/coinAllUser", config)
+            .then(res => setCoinCount(res.data.body))
+            .catch(err => console.log(err))
+    }
+
+    // getExchangeCount
+    const getExchangeCount = () => {
+        axios.get(api + "exchange/teacher/count", config)
+            .then(res => setExchangeCount(res.data.body))
+            .catch(err => console.log(err))
+    }
 
     return (
         <Box pt={{base: "130px", md: "80px", xl: "80px"}}>
+            <ToastContainer/>
             <SimpleGrid
                 columns={{base: 1, md: 2, lg: 2, "2xl": 4}}
                 gap='20px'
@@ -59,12 +102,10 @@ export default function UserReports() {
                             bg={boxBg}
                             icon={
                                 <Icon w='32px' h='32px' as={MdPeople} color={brandColor}/>
-                            }
-                        />
+                            }/>
                     }
-                    name="Guruhlarning umumiy soni"
-                    value='350.4'
-                />
+                    name="Groups count"
+                    value={groupCount.length > 0 ? groupCount.length : 0}/>
                 <MiniStatistics
                     startContent={
                         <IconBox
@@ -73,12 +114,10 @@ export default function UserReports() {
                             bg={boxBg}
                             icon={
                                 <Icon w='32px' h='32px' as={MdPerson} color={brandColor}/>
-                            }
-                        />
+                            }/>
                     }
-                    name="O'quvchilarning umumiy soni"
-                    value='642.39'
-                />
+                    name="All Students"
+                    value={userCount.length > 0 ? userCount.length : 0}/>
                 <MiniStatistics
                     startContent={
                         <IconBox
@@ -87,11 +126,10 @@ export default function UserReports() {
                             bg={boxBg}
                             icon={
                                 <Icon w='32px' h='32px' as={MdCurrencyExchange} color={brandColor}/>
-                            }
-                        />
+                            }/>
                     }
-                    name="O'quvchilarning umumiy coinlari soni"
-                    value='574.34'/>
+                    name="Total number of students coins"
+                    value={coinCount > 0 ? coinCount : 0}/>
                 <MiniStatistics
                     startContent={
                         <IconBox
@@ -99,13 +137,11 @@ export default function UserReports() {
                             h='56px'
                             bg={boxBg}
                             icon={
-                                <Icon w='32px' h='32px' as={MdAttachMoney} color={brandColor}/>
-                            }
-                        />
+                                <Icon w='32px' h='32px' as={MdOutlineCardGiftcard} color={brandColor}/>
+                            }/>
                     }
-                    name="Sovg'a olganlar soni"
-                    value='2935'
-                />
+                    name="Those who accepted the gift"
+                    value={exchangeCount > 0 ? exchangeCount : 0}/>
 
                 {/*<MiniStatistics*/}
                 {/*    endContent={*/}
@@ -144,7 +180,8 @@ export default function UserReports() {
 
             <SimpleGrid columns={{base: 1, md: 1, xl: 2}} gap='20px'>
                 <TotalSpent/>
-                <WeeklyRevenue/>
+                <WeeklyRevenue
+                    groupName={groupCount}/>
             </SimpleGrid>
 
             {/*comments dashboard*/}

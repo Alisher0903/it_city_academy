@@ -11,19 +11,22 @@ import {
     Tr,
 } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
-import React from "react";
+import React, {useState} from "react";
 
 export default function WeeklyRevenue(props) {
-    const {...rest} = props;
+    const {groupName, ...rest} = props;
+    const [oneGroup, setOneGroup] = useState(groupName[0]);
 
     return (
         <Card {...rest}>
             <Text
                 display="flex"
                 justifyContent="space-between">
-                <span className="ms-1 mt-1 fs-5 fw-semibold">Name guruh bo'yicha top 5</span>
-                <Select placeholder="select" w="25%">
-                    <option value='option1'>group 1</option>
+                <span className="ms-1 mt-1 fs-5 fw-semibold">{oneGroup.name} group top 5</span>
+                <Select w="25%">
+                    {groupName && groupName.map((item, i) =>
+                        <option key={i} value={item.id}>{item.name}</option>
+                    )}
                 </Select>
             </Text>
             <TableContainer
@@ -35,7 +38,7 @@ export default function WeeklyRevenue(props) {
             >
                 <Table>
                     <TableCaption
-                        fontSize="1rem">name Group</TableCaption>
+                        fontSize="1rem">{oneGroup.name} Group</TableCaption>
                     <Thead>
                         <Tr>
                             <Th>T/r</Th>
