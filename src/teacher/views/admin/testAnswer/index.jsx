@@ -16,7 +16,7 @@ export default function Overview() {
     const [testIdSelect, setTestIdSelect] = useState(0);
     const [testAnswerPlus, setTestAnswerPlus] = useState([]);
     const [testAnswerBtn, setTestAnswerBtn] = useState([]);
-    const [testAnswerBtnId, setTestAnswerBtnId] = useState(10);
+    const [testAnswerBtnId, setTestAnswerBtnId] = useState(1);
     const [testAnswerId, setTestAnswerId] = useState("");
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
@@ -48,13 +48,15 @@ export default function Overview() {
 
         // category btn get
         axios.get(api + "test?page=0&size=100", config)
-            .then(res => setTestAnswerBtn(res.data.object));
+            .then(res => setTestAnswerBtn(res.data.object))
+            .catch(() => toast.error("Sizda xali testlar yo'q. Test qo'shmasdan javob yo'llay olmaysiz!!!"));
     }, []);
 
     // getTestAnswer ?page=0&size=10
     const getTestAnswer = () => {
         axios.get(api + "test-answer/" + testAnswerBtnId, config)
-            .then(res => setTestAnswer(res.data.object));
+            .then(res => setTestAnswer(res.data.object))
+            .catch(() => toast.error("Xali bunda test-answer yo'q. Birorta testni tanlang!!!"))
     }
 
     // add
@@ -67,7 +69,7 @@ export default function Overview() {
         axios.post(api + "test-answer", addData, config)
             .then(() => {
                 openAddModal();
-                toast.success("successfully saved!");
+                toast.success("Testning javobi qo'shildi");
                 getTestAnswer();
             })
     }
@@ -82,7 +84,7 @@ export default function Overview() {
         axios.put(api + "test-answer/" + testAnswerId.id, editData, config)
             .then(() => {
                 openEditModal();
-                toast.success("successfully saved edit!");
+                toast.success("Testning javobi taxrirlandi");
                 getTestAnswer();
             })
     }
@@ -92,7 +94,7 @@ export default function Overview() {
         axios.delete(api + "test-answer/" + testAnswerId.id, config)
             .then(() => {
                 openDeleteModal();
-                toast.success("delete seved!");
+                toast.success("Testning javobi o'chirildi");
                 getTestAnswer();
             })
     }
@@ -236,7 +238,7 @@ export default function Overview() {
                     <Modal centered isOpen={deleteModal}>
                         <ModalHeader toggle={openDeleteModal} className="techer__modal-head">Delete TestAnswer</ModalHeader>
                         <ModalBody className="techer__modal-delete">
-                            Siz bu "{testAnswerId.answer}" o'chirishga ishonchingiz komilmi?
+                            Siz bu ({testAnswerId.answer}) javobni o'chirishga ishonchingiz komilmi?
                         </ModalBody>
                         <ModalFooter className="techer__modal-footer">
                             <Button onClick={openDeleteModal}>Close</Button>

@@ -5,6 +5,8 @@ import axios from "axios";
 import { api } from "api/api";
 import { getGeftsTeacher } from "api/api";
 import { imgUrl } from "api/api";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Marketplace() {
 
@@ -19,11 +21,13 @@ export default function Marketplace() {
   // get gifts
   const getGifts = () => {
     axios.get(api + getGeftsTeacher)
-      .then(res => setGifts(res.data.body.object));
+      .then(res => setGifts(res.data.body.object))
+      .catch(() => toast.error("Gifts mavjud emas!!!"));
   }
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+      <ToastContainer />
       <Grid
         mb='20px'
         gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
