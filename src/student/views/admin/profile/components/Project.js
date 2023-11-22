@@ -40,10 +40,8 @@ export default function Project(props) {
             color={textColorSecondary}
             fontSize='sm'
             me='4px'>
-            Project #{ranking} •{" "}
-            <Link fontWeight='500' color={brandColor} href={link} fontSize='sm'>
-              See project details
-            </Link>
+            Coin •{" "}{ranking}
+            
           </Text>
         </Box>
         

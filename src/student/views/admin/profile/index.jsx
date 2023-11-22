@@ -27,6 +27,10 @@ export default function Overview() {
   const [info, setInfo] = useState({});
 
   useEffect(() => {
+    if (sessionStorage.getItem('reload') !== "true") {
+      sessionStorage.setItem('reload', 'true')
+      window.location.reload();
+    }
     getProfile();
   }, []);
 
@@ -36,9 +40,10 @@ export default function Overview() {
         setInfo(res.data)
         // console.log(res.data);
       })
-      // .catch(err => consol e.log(err))
+      .catch(err =>{
+        console.log(err);
+      })
   }
-  // console.log(info);
 
   
 

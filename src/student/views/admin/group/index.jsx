@@ -29,16 +29,7 @@ export default function Overview() {
       <Grid
         mb='20px'
         gap={{ base: "20px", xl: "20px" }}>
-        <Projects
-          gridArea='1 / 2 / 2 / 2'
-          banner={banner}
-          avatar={avatar}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
-        />
+        <Projects/>
       </Grid>
     </Box>
   );

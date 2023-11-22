@@ -121,27 +121,21 @@ export default function Gifts() {
                                 error ? (
                                     <h1>404</h1>
                                 ) : (
-                                    
-                                        gift.length && gift.map((item, i) =>
-                                            <Gift
-                                                giftIdIn={item}
-                                                getGifts={getGifts}
-                                                key={i}
-                                                name={item.name}
-                                                description={item.description}
-                                                rate={item.rate}
-                                                bidders={[]}
-                                                image={imgUrl + item.attachmentId}
-                                            // download='frontend'
-                                            />
-                                        )
-                                    
+                                    gift.length && gift.map((item, i) =>
+                                        <Gift
+                                            giftIdIn={item}
+                                            getGifts={getGifts}
+                                            key={i}
+                                            name={item.name}
+                                            description={item.description}
+                                            rate={item.rate}
+                                            bidders={[]}
+                                            image={imgUrl + item.attachmentId}
+                                        // download='frontend'
+                                        />
+                                    )
                                 )
                             }
-
-
-
-
                         </SimpleGrid>
                     </Flex>
                 </Flex>

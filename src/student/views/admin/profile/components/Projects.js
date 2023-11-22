@@ -41,7 +41,7 @@ export default function Projects(props) {
         <Project
           boxShadow={cardShadow}
           mb='10px'
-          image={Project1}
+          image={Project2}
           ranking='1'
           link='#'
           title='Technology behind the Blockchain'
