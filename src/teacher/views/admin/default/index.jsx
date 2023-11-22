@@ -38,8 +38,8 @@ export default function UserReports() {
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
   useEffect(() => {
-    if (sessionStorage.getItem('reload') !== "true") {
-      sessionStorage.setItem('reload', 'true')
+    if (sessionStorage.getItem('reloadTeacher') !== "true") {
+      sessionStorage.setItem('reloadTeacher', 'true')
       window.location.reload();
     }
   }, []);
