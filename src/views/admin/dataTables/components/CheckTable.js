@@ -101,6 +101,7 @@ export default function CheckTable(props) {
         groupId: groupId
       },
       config)
+      
       .then(() => {
         openEditModal();
         toast.success("Message successfully send")
