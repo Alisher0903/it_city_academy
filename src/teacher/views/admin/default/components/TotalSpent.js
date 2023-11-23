@@ -1,40 +1,33 @@
 import {
-    Box,
-    Button,
-    Flex,
-    Icon, Table, TableCaption, TableContainer, Tbody, Td,
-    Text, Th, Thead, Tr,
-    useColorModeValue,
+    Table,
+    TableCaption,
+    TableContainer,
+    Tbody,
+    Td,
+    Text,
+    Th,
+    Thead,
+    Tr,
 } from "@chakra-ui/react";
-// Custom components
 import Card from "../../../../components/card/Card.js";
-import LineChart from "../../../../components/charts/LineChart";
-import React from "react";
-import {IoCheckmarkCircle} from "react-icons/io5";
-import {MdBarChart, MdOutlineCalendarToday} from "react-icons/md";
-// Assets
-import {RiArrowUpSFill} from "react-icons/ri";
-import {
-    lineChartDataTotalSpent,
-    lineChartOptionsTotalSpent,
-} from "../../../../variables/charts";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import {api, config} from "../../../../../api/api";
 
 export default function TotalSpent(props) {
     const {...rest} = props;
+    const [allGroupTop, setAllGroupTop] = useState([]);
 
-    const textColor = useColorModeValue("secondaryGray.900", "white");
-    const textColorSecondary = useColorModeValue("secondaryGray.600", "white");
-    const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-    const iconColor = useColorModeValue("brand.500", "white");
-    const bgButton = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-    const bgHover = useColorModeValue(
-        {bg: "secondaryGray.400"},
-        {bg: "whiteAlpha.50"}
-    );
-    const bgFocus = useColorModeValue(
-        {bg: "secondaryGray.300"},
-        {bg: "whiteAlpha.100"}
-    );
+    useEffect(() => {
+        getAllGroup();
+    }, []);
+
+    // getAllGroup
+    const getAllGroup = () => {
+        axios.get(api + "group/teacher/all/group/users", config)
+            .then(res => setAllGroupTop(res.data.body))
+            .catch(err => console.log(err))
+    }
 
     return (
         <Card w='100%' {...rest}>
@@ -59,12 +52,19 @@ export default function TotalSpent(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>1</Td>
-                            <Td>sodiqov a</Td>
-                            <Td>123456</Td>
-                            <Td>front</Td>
-                        </Tr>
+                        {allGroupTop !== null ?
+                            allGroupTop.map((item, i) =>
+                                <Tr key={i}>
+                                    <Td>{i + 1}</Td>
+                                    <Td>{item.firstName} {item.lastName}</Td>
+                                    <Td>{item.phoneNumber}</Td>
+                                    <Td>group</Td>
+                                </Tr>
+                            ) :
+                            <Tr>
+                                <Td colSpan="4">Top 5 lik student xali mavjud emas!!!</Td>
+                            </Tr>
+                        }
                     </Tbody>
                 </Table>
             </TableContainer>

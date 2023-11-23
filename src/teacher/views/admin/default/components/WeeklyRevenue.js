@@ -69,7 +69,7 @@ export default function WeeklyRevenue(props) {
             >
                 <Table>
                     <TableCaption
-                        fontSize="1rem">{titleGroup.name} Group</TableCaption>
+                        fontSize="1rem">{titleGroup.name} group</TableCaption>
                     <Thead>
                         <Tr>
                             <Th>T/r</Th>
