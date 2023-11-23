@@ -42,33 +42,50 @@ export default function UserReports() {
     const brandColor = useColorModeValue("brand.500", "white");
     const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
+    const [getMeCount, setGetMeCount] = useState([]);
     const [groupCount, setGroupCount] = useState([]);
     const [userCount, setUserCount] = useState([]);
     const [coinCount, setCoinCount] = useState([]);
     const [exchangeCount, setExchangeCount] = useState([]);
 
-    useEffect(() => {
+    useEffect(async () => {
         if (sessionStorage.getItem('reloadTeacher') !== "true") {
             sessionStorage.setItem('reloadTeacher', 'true')
             window.location.reload();
         }
 
-        getGroupCount();
-        getUserCount();
-        getUserCoin();
-        getExchangeCount();
+
+        await getMe();
+        // let intirvalId = setInterval(() => {
+        if (getMeCount.id !== "undefined") getGroupCount();
+        if (getMeCount.id !== "undefined") getUserCount();
+        // console.log('ha')
+        // }, ;
+        // if (getMeCount.id !== "undefined") clearInterval(intirvalId);
+        // await getGroupCount();
+        // await getUserCount();
+        await getUserCoin();
+        await getExchangeCount();
     }, []);
 
+    // getMe
+    const getMe = async () => {
+        console.log('get me start')
+        await axios.get(api + "user/getMe", config)
+            .then(async res => await setGetMeCount(res.data))
+            .catch(err => console.log(err));
+    }
+
     //getGroupCount
-    const getGroupCount = () => {
-        axios.get(api + "group/teacher", config)
+    const getGroupCount = async () => {
+        await axios.get(api + "group/byTeacher/" + getMeCount.id, config)
             .then(res => setGroupCount(res.data.body))
             .catch(err => console.log(err))
     }
 
     // getUserCount
     const getUserCount = () => {
-        axios.get(api + "user/byTeacher/12", config)
+        axios.get(api + "user/byTeacher/" + getMeCount.id, config)
             .then(res => setUserCount(res.data.body))
             .catch(err => console.log(err))
     }
@@ -105,7 +122,7 @@ export default function UserReports() {
                             }/>
                     }
                     name="Groups count"
-                    value={groupCount.length > 0 ? groupCount.length : 0}/>
+                    value={groupCount !== 0 ? groupCount : 0}/>
                 <MiniStatistics
                     startContent={
                         <IconBox
@@ -117,7 +134,7 @@ export default function UserReports() {
                             }/>
                     }
                     name="All Students"
-                    value={userCount.length > 0 ? userCount.length : 0}/>
+                    value={userCount !== 0 ? userCount : 0}/>
                 <MiniStatistics
                     startContent={
                         <IconBox
@@ -129,7 +146,7 @@ export default function UserReports() {
                             }/>
                     }
                     name="Total number of students coins"
-                    value={coinCount > 0 ? coinCount : 0}/>
+                    value={coinCount !== 0 ? coinCount : 0}/>
                 <MiniStatistics
                     startContent={
                         <IconBox
@@ -141,7 +158,7 @@ export default function UserReports() {
                             }/>
                     }
                     name="Those who accepted the gift"
-                    value={exchangeCount > 0 ? exchangeCount : 0}/>
+                    value={exchangeCount !== 0 ? exchangeCount : 0}/>
 
                 {/*<MiniStatistics*/}
                 {/*    endContent={*/}
@@ -180,8 +197,7 @@ export default function UserReports() {
 
             <SimpleGrid columns={{base: 1, md: 1, xl: 2}} gap='20px'>
                 <TotalSpent/>
-                <WeeklyRevenue
-                    groupName={groupCount}/>
+                <WeeklyRevenue/>
             </SimpleGrid>
 
             {/*comments dashboard*/}

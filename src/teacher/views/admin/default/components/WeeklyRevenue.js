@@ -11,20 +11,51 @@ import {
     Tr,
 } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import {api, config} from "../../../../../api/api";
 
 export default function WeeklyRevenue(props) {
-    const {groupName, ...rest} = props;
-    const [oneGroup, setOneGroup] = useState(groupName[0]);
+    const {...rest} = props;
+    const [oneGroup, setOneGroup] = useState([]);
+    const [titleGroup, setTitleGroup] = useState([]);
+    const [groupStudent, setGroupStudent] = useState([]);
+
+    useEffect(() => {
+        getOneGroup();
+        getGroupStudent();
+    }, [])
+
+    // getOneGroup
+    const getOneGroup = () => {
+        axios.get(api + "group/teacher", config)
+            .then(res => setOneGroup(res.data.body))
+            .catch(err => console.log(err))
+    }
+
+    // getGroupTitle
+    const getTitle = () => {
+        axios.get(api + "group/teacher", config)
+            .then(res => setTitleGroup(res.data.body.find(t =>
+                t.id == document.getElementById("groupSelect").value)))
+            .catch(err => console.log(err))
+    }
+
+    // getGroupStudent
+    const getGroupStudent = () => {
+        axios.get(api + "group/teacher/one/group/" + titleGroup.id, config)
+            .then(res => setGroupStudent(res.data.body))
+            .catch(err => console.log(err))
+    }
 
     return (
         <Card {...rest}>
             <Text
                 display="flex"
                 justifyContent="space-between">
-                <span className="ms-1 mt-1 fs-5 fw-semibold">{oneGroup.name} group top 5</span>
-                <Select w="25%">
-                    {groupName && groupName.map((item, i) =>
+                <span className="ms-1 mt-1 fs-5 fw-semibold">{titleGroup.name} group top 5</span>
+                <Select id="groupSelect" w="25%" onChange={getTitle}>
+                    {oneGroup.length && oneGroup.map((item, i) =>
                         <option key={i} value={item.id}>{item.name}</option>
                     )}
                 </Select>
@@ -38,7 +69,7 @@ export default function WeeklyRevenue(props) {
             >
                 <Table>
                     <TableCaption
-                        fontSize="1rem">{oneGroup.name} Group</TableCaption>
+                        fontSize="1rem">{titleGroup.name} Group</TableCaption>
                     <Thead>
                         <Tr>
                             <Th>T/r</Th>
@@ -47,11 +78,18 @@ export default function WeeklyRevenue(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>1</Td>
-                            <Td>sodiqov a</Td>
-                            <Td>123456</Td>
-                        </Tr>
+                        {groupStudent !== null ?
+                            groupStudent.map((item, i) =>
+                                <Tr key={i}>
+                                    <Td>{i + 1}</Td>
+                                    <Td>{item.firstName} {item.lastName}</Td>
+                                    <Td>{item.phoneNumber}</Td>
+                                </Tr>
+                            ) :
+                            <Tr>
+                                <Td colSpan="3">Bu guruhda o'quvchi yo'q</Td>
+                            </Tr>
+                        }
                     </Tbody>
                 </Table>
             </TableContainer>
