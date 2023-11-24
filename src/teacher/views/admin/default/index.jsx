@@ -1,19 +1,5 @@
-import {
-    Avatar,
-    Box,
-    Flex,
-    FormLabel,
-    Icon,
-    Select,
-    SimpleGrid,
-    useColorModeValue,
-} from "@chakra-ui/react";
-import {
-    MdAttachMoney,
-    MdCurrencyExchange, MdOutlineCardGiftcard,
-    MdPeople,
-    MdPerson,
-} from "react-icons/md";
+import {Box, Icon, SimpleGrid, useColorModeValue,} from "@chakra-ui/react";
+import {MdCurrencyExchange, MdOutlineCardGiftcard, MdPeople, MdPerson,} from "react-icons/md";
 import MiniStatistics from "../../../../components/card/MiniStatistics";
 import IconBox from "../../../components/icons/IconBox";
 import React, {useEffect, useState} from "react";
@@ -21,21 +7,7 @@ import TotalSpent from "./components/TotalSpent";
 import WeeklyRevenue from "./components/WeeklyRevenue";
 import axios from "axios";
 import {api, config} from "../../../../api/api";
-import {ToastContainer, toast} from "react-toastify";
-
-import CheckTable from "./components/CheckTable";
-import Usa from "../../../assets/img/dashboards/usa.png";
-import MiniCalendar from "../../../../components/calendar/MiniCalendar";
-import ComplexTable from "./components/ComplexTable";
-import DailyTraffic from "./components/DailyTraffic";
-import PieCard from "./components/PieCard";
-import Tasks from "./components/Tasks";
-import {
-    columnsDataCheck,
-    columnsDataComplex,
-} from "./variables/columnsData";
-import tableDataCheck from "./variables/tableDataCheck.json";
-import tableDataComplex from "./variables/tableDataComplex.json";
+import {ToastContainer} from "react-toastify";
 
 export default function UserReports() {
     const brandColor = useColorModeValue("brand.500", "white");
@@ -47,37 +19,27 @@ export default function UserReports() {
     const [coinCount, setCoinCount] = useState([]);
     const [exchangeCount, setExchangeCount] = useState([]);
 
-    useEffect(async () => {
-        if (sessionStorage.getItem('reloadTeacher') !== "true") {
-            sessionStorage.setItem('reloadTeacher', 'true')
-            window.location.reload();
-        }
-
-
-        await getMe();
-        // let intirvalId = setInterval(() => {
-        if (getMeCount.id !== "undefined") getGroupCount();
-        if (getMeCount.id !== "undefined") getUserCount();
-        // console.log('ha')
-        // }, ;
-        // if (getMeCount.id !== "undefined") clearInterval(intirvalId);
-        // await getGroupCount();
-        // await getUserCount();
-        await getUserCoin();
-        await getExchangeCount();
+    useEffect(() => {
+        getMe();
     }, []);
 
+    useEffect(() => {
+        getGroupCount();
+        getUserCount();
+        getUserCoin();
+        getExchangeCount();
+    }, [getMeCount]);
+
     // getMe
-    const getMe = async () => {
-        console.log('get me start')
-        await axios.get(api + "user/getMe", config)
-            .then(async res => await setGetMeCount(res.data))
+    const getMe = () => {
+        axios.get(api + "user/getMe", config)
+            .then(res => setGetMeCount(res.data))
             .catch(err => console.log(err));
     }
 
     //getGroupCount
-    const getGroupCount = async () => {
-        await axios.get(api + "group/byTeacher/" + getMeCount.id, config)
+    const getGroupCount = () => {
+        axios.get(api + "group/byTeacher/" + getMeCount.id, config)
             .then(res => setGroupCount(res.data.body))
             .catch(err => console.log(err))
     }

@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Box, Flex, Grid, SimpleGrid, Text, useColorModeValue, } from "@chakra-ui/react";
+import React, {useEffect, useState} from "react";
+import {Box, Flex, Grid, SimpleGrid, Text, useColorModeValue,} from "@chakra-ui/react";
 // Custom components
-
 // Assets
 import axios from "axios";
-import { api, config, giftAdd, imgUrl } from "api/api";
-import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import {api, config, giftAdd, imgUrl} from "api/api";
+import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import Gift from "components/card/Gift";
-import { ToastContainer, toast } from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 
 export default function Gifts() {
@@ -16,7 +15,6 @@ export default function Gifts() {
     const textColorBrand = useColorModeValue("brand.500", "white");
     const [gift, setGift] = useState([]);
     const [addModal, setAddModal] = useState(false);
-    const [imageId, setImageId] = useState(0);
     const [error, setError] = useState(null);
 
     const openAddModal = () => setAddModal(!addModal);
@@ -30,9 +28,9 @@ export default function Gifts() {
             .then(res => {
                 setGift(res.data.body.object)
             }).catch((error) => {
-                console.log(error);
-                setError(error);
-            })
+            console.log(error);
+            setError(error);
+        })
     }
 
     async function addGift() {
@@ -53,41 +51,41 @@ export default function Gifts() {
                         getGifts();
                         toast.success("Gift Added Successfully");
                     }).catch((err) => {
-                        console.log(err);
-                        toast.error(err.data)
-                    })
+                    console.log(err);
+                    toast.error(err.data)
+                })
             });
     }
 
     return (
-        <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-            <ToastContainer />
+        <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
+            <ToastContainer/>
 
             {/* Main Fields */}
             <Grid
                 mb='20px'
-                gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
-                gap={{ base: "20px", xl: "20px" }}
-                display={{ base: "block", xl: "grid" }}>
+                gridTemplateColumns={{xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr"}}
+                gap={{base: "20px", xl: "20px"}}
+                display={{base: "block", xl: "grid"}}>
                 <Flex
                     flexDirection='column'
-                    gridArea={{ xl: "1 / 1 / 2 / 4", "2xl": "1 / 1 / 2 / 3" }}>
+                    gridArea={{xl: "1 / 1 / 2 / 4", "2xl": "1 / 1 / 2 / 3"}}>
                     {/* <Banner /> */}
                     <Flex direction='column'>
                         <Flex
                             mt='45px'
                             mb='20px'
                             justifyContent='space-between'
-                            direction={{ base: "column", md: "row" }}
-                            align={{ base: "start", md: "center" }}>
+                            direction={{base: "column", md: "row"}}
+                            align={{base: "start", md: "center"}}>
                             <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
                                 All gifts
                             </Text>
                             <Flex
                                 align='center'
                                 me='20px'
-                                ms={{ base: "24px", md: "0px" }}
-                                mt={{ base: "20px", md: "0px" }}>
+                                ms={{base: "24px", md: "0px"}}
+                                mt={{base: "20px", md: "0px"}}>
                                 <Button
                                     onClick={() => {
                                         openAddModal();
@@ -101,10 +99,10 @@ export default function Gifts() {
                                         gift</ModalHeader>
                                     <ModalBody className="group__modal-body">
                                         <Box>
-                                            <Input type="file" id="img" />
-                                            <Input placeholder="name" id="title" />
-                                            <Input placeholder="description" id="description" />
-                                            <Input placeholder="rate" id="rate" type="number" />
+                                            <Input type="file" id="img"/>
+                                            <Input placeholder="name" id="title"/>
+                                            <Input placeholder="description" id="description"/>
+                                            <Input placeholder="rate" id="rate" type="number"/>
                                         </Box>
                                         {/* <Input type="number" placeholder="category id" /> */}
                                     </ModalBody>
@@ -115,7 +113,7 @@ export default function Gifts() {
                                 </Modal>
                             </Flex>
                         </Flex>
-                        <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
+                        <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
 
                             {
                                 error ? (
@@ -131,7 +129,7 @@ export default function Gifts() {
                                             rate={item.rate}
                                             bidders={[]}
                                             image={imgUrl + item.attachmentId}
-                                        // download='frontend'
+                                            // download='frontend'
                                         />
                                     )
                                 )
