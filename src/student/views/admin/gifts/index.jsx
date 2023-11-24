@@ -29,7 +29,9 @@ export default function Gifts() {
             .then(res => {
                 setGift(res.data.body.object)
             })
-        // .catch(err => consol e.log(err))rate
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     async function addGift() {
@@ -80,7 +82,7 @@ export default function Gifts() {
 
                             {gift.length && gift.map((item, i) =>
                                 <Gift
-                                    giftIdIn={item}
+                                    giftIdIn={item.id}
                                     getGifts={getGifts}
                                     key={i}
                                     name={item.name}
@@ -96,6 +98,7 @@ export default function Gifts() {
                     </Flex>
                 </Flex>
             </Grid>
+            
         </Box>
     );
 }
