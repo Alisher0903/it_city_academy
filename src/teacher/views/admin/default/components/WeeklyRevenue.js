@@ -47,6 +47,7 @@ export default function WeeklyRevenue(props) {
             .then(res => setGroupStudent(res.data.body))
             .catch(err => console.log(err))
     }
+    // console.log("bitta guruh top 5", groupStudent)
 
     return (
         <Card {...rest}>
@@ -75,6 +76,7 @@ export default function WeeklyRevenue(props) {
                             <Th>T/r</Th>
                             <Th>full name</Th>
                             <Th>phone number</Th>
+                            <Th>GroupId</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -84,6 +86,7 @@ export default function WeeklyRevenue(props) {
                                     <Td>{i + 1}</Td>
                                     <Td>{item.firstName} {item.lastName}</Td>
                                     <Td>{item.phoneNumber}</Td>
+                                    <Td>{item.groupId}</Td>
                                 </Tr>
                             ) :
                             <Tr>

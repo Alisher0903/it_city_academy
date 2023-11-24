@@ -40,7 +40,10 @@ export default function Overview() {
 
         // category get
         axios.get(api + "category/teacher/by/sub/category", config)
-            .then(res => setTeacherCategory(res.data));
+            .then(res => {
+                console.log(res.data)
+                setTeacherCategory(res.data)
+            });
 
         // test id get mana shuni tug'rilash kk
         axios.get(api + "test/by/" + testIdSelect + "/test", config)
