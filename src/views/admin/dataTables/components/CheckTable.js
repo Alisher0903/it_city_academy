@@ -36,6 +36,7 @@ import axios from "axios";
 import { api } from "api/api";
 import { config } from "api/api";
 import { MdArrowDropDown } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
 import { messageAdd } from "api/api";
 export default function CheckTable(props) {
 
@@ -92,44 +93,31 @@ export default function CheckTable(props) {
       })
       .catch(err => console.log(err))
   }
-
   const sendMessage = () => {
     let groupId = document.getElementById('groupId').value;
-    console.log(groupId);
     axios.post(api + messageAdd,
       {
         description: document.getElementById("messageId").value,
-
-        groupId: group.id
-
+        groupId: groupId
       },
       config)
+      
       .then(() => {
         openEditModal();
+        toast.success("Message successfully send")
         getMessage()
+      }).catch((err) => {
+        toast.error("Send error")
       })
   }
 
-  const sendAll = () => {
-    let groupId = document.getElementById('groupId').value;
-    console.log(groupId);
-    axios.post(api + messageAdd,
-      {
-        description: document.getElementById("messageId").value,
-        groupId: group.id
-      },
-      config)
-      .then(() => {
-        openEditModal();
-        getMessage()
-      })
-  }
   return (
     <Box
       direction='column'
       w='100%'
       px='0px'
       overflowX={{ sm: "scroll", lg: "hidden" }}>
+      <ToastContainer />
       <Flex px='25px' justify='space-between' mb='20px' align='center'>
         <Text
           color={textColor}
@@ -173,7 +161,6 @@ export default function CheckTable(props) {
             <Textarea placeholder="Write message" id="messageId" style={{ border: "1px solid black" }} mb="20px" />
             <Select id="groupId" icon={<MdArrowDropDown />} w="50%" style={{ border: "1px solid black" }}>
               <option selected disabled >select group</option>
-              {/* <option onClick={sendAll} >Barcha guruhga yuborish</option> */}
               {group.length && group.map((item, i) =>
                 <option value={item.id} key={i}>{item.name}</option>
               )}

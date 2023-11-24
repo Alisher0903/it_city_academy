@@ -126,7 +126,6 @@ export default function Gift(props) {
               </Text>
               <Text
                 color='secondaryGray.600'
-                mb="20px"
                 fontSize={{
                   base: "sm",
                 }}
@@ -136,22 +135,6 @@ export default function Gift(props) {
               </Text>
             </Flex>
 
-            <AvatarGroup
-              max={3}
-              color={textColorBid}
-              size='sm'
-              mt={{
-                base: "0px",
-                md: "10px",
-                lg: "0px",
-                xl: "10px",
-                "2xl": "0px",
-              }}
-              fontSize='12px'>
-              {bidders.map((avt, key) => (
-                <Avatar key={key} src={avt} />
-              ))}
-            </AvatarGroup>
           </Flex>
           <Flex
             align='start'

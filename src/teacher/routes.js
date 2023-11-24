@@ -1,16 +1,15 @@
 import React from "react";
-
 import { Icon } from "@chakra-ui/react";
 import {
   MdHome,
-  MdPerson3,
   MdOutlineMenuBook,
   MdGroup,
   MdEmojiEvents,
   MdPending,
   MdOutlinePending,
-  MdPerson,
+  MdCurrencyExchange,
 } from "react-icons/md";
+import 'react-toastify/dist/ReactToastify.css';
 
 import MainDashboard from "./views/admin/default";
 import Category from "./views/admin/marketplace";
@@ -21,6 +20,7 @@ import Test from "./views/admin/test";
 import TestAnswer from "./views/admin/testAnswer";
 import Profile from "./views/admin/myProfile";
 import Detielis from "./views/admin/test/components/Detielis";
+import Exchange from "./views/admin/exchange";
 
 const routes = [
   {
@@ -65,6 +65,13 @@ const routes = [
     icon: <Icon as={MdOutlinePending} width='20px' height='20px' color='inherit' />,
     path: "/answer",
     component: TestAnswer,
+  },
+  {
+    name: "Exchange",
+    layout: "/Teacher",
+    icon: <Icon as={MdCurrencyExchange} width='20px' height='20px' color='inherit' />,
+    path: "/exchange",
+    component: Exchange,
   },
   {
     name: "",

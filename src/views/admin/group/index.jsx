@@ -27,7 +27,7 @@ import Projects from "./components/Projects";
 
 export default function Group() {
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }} maxH={{ base: "100px" }}>
+    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <Grid>
         <Projects />
       </Grid>

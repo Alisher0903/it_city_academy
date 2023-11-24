@@ -32,8 +32,11 @@ export default function GeneralInformation(props) {
         setInfo(res.data)
         console.log(res.data);
       })
-      // .catch(err => consol e.log(err))
+      .catch(err => {
+        console.log(err);
+      })
   }
+
   return (
     <Card mb={{ base: "0px", "2xl": "20px" }} {...rest}>
       <Text
@@ -58,9 +61,9 @@ export default function GeneralInformation(props) {
         <Information
           boxShadow={cardShadow}
           title='Your group'
-          value='Product Design'
+          value={info.group ? info.group.name : ""}
         />
-        
+
       </SimpleGrid>
     </Card>
   );

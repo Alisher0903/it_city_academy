@@ -84,6 +84,7 @@ export default function Gift(props) {
             src={image}
             w={{ base: "100%", "3xl": "100%" }}
             h={{ base: "180px", "3xl": "180px" }}
+            objectFit="cover"
             borderRadius='20px'
           />
         </Box>
