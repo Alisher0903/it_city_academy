@@ -17,7 +17,6 @@ import {api, config} from "../../../../../api/api";
 export default function TotalSpent(props) {
     const {...rest} = props;
     const [allGroupTop, setAllGroupTop] = useState([]);
-    const [allGroupTopId, setAllGroupTopId] = useState("");
 
     useEffect(() => {
         getAllGroup();

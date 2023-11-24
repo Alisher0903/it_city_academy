@@ -41,6 +41,10 @@ export default function HeaderLinks(props) {
 			.then(res => setGetMeTeacher(res.data));
 	}
 
+	function logClear() {
+		sessionStorage.clear();
+	}
+
 	return (
 		<Flex
 			w={{ sm: '100%', md: 'auto' }}
@@ -93,7 +97,7 @@ export default function HeaderLinks(props) {
 							color="red.400"
 							borderRadius="8px"
 							px="14px">
-							<Link href='/'>
+							<Link href='/' onClick={logClear}>
 								<Text fontSize="sm">Log out</Text>
 							</Link>
 						</MenuItem>
