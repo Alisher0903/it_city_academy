@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {Box, Flex, Icon, Image, Link, SimpleGrid, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "../../../components/card/Card";
-import { MdDelete, MdEdit } from "react-icons/md";
+import {MdDelete, MdEdit} from "react-icons/md";
 import axios from "axios";
-import { api, byIdIn, config, imgUrl } from "../../../../api/api";
+import {api, byIdIn, config, imgUrl} from "../../../../api/api";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 import questionImages from "../test/question.png";
+import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 
 export default function Marketplace() {
     const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -101,8 +102,8 @@ export default function Marketplace() {
     }
 
     return (
-        <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-            <ToastContainer />
+        <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
+            <ToastContainer/>
             <Flex
                 mt="10px"
                 mb='20px'
@@ -113,8 +114,6 @@ export default function Marketplace() {
                     Category
                 </Text>
                 <Button className="rounded-5 addBtn" color="primary" onClick={openAddModal}>Add Category</Button>
-                direction={{ base: "column", md: "row" }}
-                align={{ base: "start", md: "center" }}>
                 <Text color={textColor} fontSize='2xl' ms='10px' fontWeight='700'>Category</Text>
                 <Button className="rounded-5 addBtn" color="primary" onClick={openAddModal}>Add Category</Button>
 
@@ -122,8 +121,8 @@ export default function Marketplace() {
                 <Modal isOpen={addModal} centered size="lg">
                     <ModalHeader className="techer__modal-head" toggle={openAddModal}>Add Teacher Category</ModalHeader>
                     <ModalBody className="techer__modal-body">
-                        <Input id="attachmentId" type="file" />
-                        <Input id="name" placeholder="Name" />
+                        <Input id="attachmentId" type="file"/>
+                        <Input id="name" placeholder="Name"/>
                         <select id="programmingLanguage" className="form-select">
                             <option value="0" selected disabled>Programming Language</option>
                             <option value="1">Java</option>
@@ -144,14 +143,14 @@ export default function Marketplace() {
                     </ModalFooter>
                 </Modal>
             </Flex>
-            <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
+            <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
                 {teacherCategory.length && teacherCategory.map((item, i) =>
                     <Card
                         key={i}
                         boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;"
                         p='20px'>
-                        <Flex direction={{ base: "column" }} justify='center'>
-                            <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
+                        <Flex direction={{base: "column"}} justify='center'>
+                            <Box mb={{base: "20px", "2xl": "20px"}} position='relative'>
                                 <Image
                                     objectFit="cover"
                                     src={item.attachment !== null && item.attachment !== 0
@@ -213,7 +212,7 @@ export default function Marketplace() {
                                             ms='0px'
                                             me="20px"
                                             p='0px !important'>
-                                            <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' />
+                                            <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px'/>
                                         </Link>
                                         <Link
                                             onClick={() => {
@@ -223,7 +222,7 @@ export default function Marketplace() {
                                             variant='no-hover'
                                             ms='0px'
                                             p='0px !important'>
-                                            <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px' />
+                                            <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px'/>
                                         </Link>
                                         <Link
                                             onClick={() => {
@@ -255,12 +254,13 @@ export default function Marketplace() {
 
                 {/*editModal*/}
                 <Modal isOpen={editModal} centered size="lg">
-                    <ModalHeader className="techer__modal-head" toggle={openEditModal}>Edit category information</ModalHeader>
+                    <ModalHeader className="techer__modal-head" toggle={openEditModal}>Edit category
+                        information</ModalHeader>
                     <ModalHeader className="techer__modal-head" toggle={openEditModal}>Edit Teacher
                         Category</ModalHeader>
                     <ModalBody className="techer__modal-body">
-                        <Input id="attachmentId" type="file" />
-                        <Input id="name" defaultValue={teacherCategoryId && teacherCategoryId.name} />
+                        <Input id="attachmentId" type="file"/>
+                        <Input id="name" defaultValue={teacherCategoryId && teacherCategoryId.name}/>
                         <select id="programmingLanguage" className="form-select">
                             <option value="0" selected disabled>Programming Language</option>
                             <option value="1">Java</option>
@@ -284,10 +284,11 @@ export default function Marketplace() {
 
                 {/*deleteModal*/}
                 <Modal isOpen={deleteModal} centered>
-                    <ModalHeader className="techer__modal-head" toggle={openDeleteModal}>Delete category data</ModalHeader>
+                    <ModalHeader className="techer__modal-head" toggle={openDeleteModal}>Delete category
+                        data</ModalHeader>
                     <ModalBody
                         className="text-dark fs-5 fw-medium"
-                        style={{ letterSpacing: ".5px", lineHeight: "22px", fontFamily: "'Fira Sans', sans-serif" }}>
+                        style={{letterSpacing: ".5px", lineHeight: "22px", fontFamily: "'Fira Sans', sans-serif"}}>
                         Siz bu ({teacherCategoryId.name}) categoryni o'chirib tashlamoqchimisiz?
                     </ModalBody>
                     <ModalFooter className="techer__modal-footer">
