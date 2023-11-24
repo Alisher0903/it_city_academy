@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Icon } from "@chakra-ui/react";
 import {
   MdHome,
@@ -10,6 +9,7 @@ import {
   MdOutlinePending,
   MdCurrencyExchange,
 } from "react-icons/md";
+import 'react-toastify/dist/ReactToastify.css';
 
 import MainDashboard from "./views/admin/default";
 import Category from "./views/admin/marketplace";

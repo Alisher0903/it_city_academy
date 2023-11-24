@@ -21,7 +21,6 @@ import TotalSpent from "./components/TotalSpent";
 import WeeklyRevenue from "./components/WeeklyRevenue";
 import axios from "axios";
 import {api, config} from "../../../../api/api";
-import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer, toast} from "react-toastify";
 
 import CheckTable from "./components/CheckTable";
