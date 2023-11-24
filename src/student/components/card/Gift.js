@@ -9,6 +9,7 @@ import {
   useColorModeValue,
   Link,
   Icon,
+  Button,
 } from "@chakra-ui/react";
 import { giftEdit } from "api/api";
 import { giftDelete } from "api/api";
@@ -19,7 +20,7 @@ import React, { useEffect, useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { toast } from "react-toastify";
-import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function Gift(props) {
   const { image, name, description, bidders, giftIdIn, getGifts, rate } = props;
@@ -31,7 +32,7 @@ export default function Gift(props) {
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [category, setCategory] = useState([]);
-  const [categoryId, setCategoryId] = useState("");
+  const [groupId, setGroupId] = useState("");
 
   const openEditModal = () => setEditModal(!editModal);
   const openDeleteModal = () => setDeleteModal(!deleteModal);
@@ -54,27 +55,19 @@ export default function Gift(props) {
   // }
 
   // edit category
-  const editGift = () => {
-    const img = new FormData();
-    img.append("file", document.getElementById("img").files[0]);
-
-    axios.post(api + "attachment/upload", img, config)
-      .then(res => {
-        axios.put(api + giftEdit + categoryId.id, {
-          name: document.getElementById("title").value,
-          attachmentId: res.data.body,
-          categoryId: 0,
-          description: document.getElementById('description').value,
-          rate: document.getElementById('rate').value
-        }, config)
-          .then(() => {
-            openEditModal();
-            getGifts();
-            toast.success("succesfully edit Gifts✔");    
-          })
+  const exchange = () => {
+    axios.post(api + "exchange/save/" + groupId, config)
+      .then(() => {
+        getGifts()
+        openDeleteModal();
+        toast.success("Exchange succesfully get✔");
+      })
+      .catch(() => {
+        toast.error("Exchange failed❌");
       })
   }
 
+  console.log(groupId);
 
   return (
     <Card p='20px'>
@@ -126,7 +119,7 @@ export default function Gift(props) {
               </Text>
             </Flex>
 
-            
+
           </Flex>
           <Flex
             align='start'
@@ -140,26 +133,32 @@ export default function Gift(props) {
               xl: "column",
               "2xl": "row",
             }}>
+
             {/* edit delete category link */}
             <Box display="flex"
-            w="100%"
-              justifyContent="center">
-                <Text
-                  color='secondaryGray.600'
-                  align="start"
-                  w="100%"
-                  fontSize={{
+              w="100%"
+              justifyContent="space-between">
+              <Text
+                color='secondaryGray.600'
+                align="start"
+                w="100%"
+                fontSize={{
 
-                    base: "22px",
-                  }}
-                  fontWeight='700'
-                  me='18px'>
-                  {rate}
-                  <span> coin</span>
-                </Text>              
+                  base: "22px",
+                }}
+                fontWeight='700'
+                me='10px'>
+                {rate}
+                <span> coin</span>
+              </Text>
+              <Button
+              >
+                Olish
+                <Icon ms="5px" icon="mingcute:left-line" />
+              </Button>
             </Box>
 
-            
+
             {/* <Text fontWeight='700' fontSize='sm' color={textColorBid}>
               Current Bid: {currentbid}
             </Text> */}
@@ -172,21 +171,22 @@ export default function Gift(props) {
                 xl: "10px",
                 "2xl": "0px",
               }}>
-              <Button
-                variant='darkBrand'
-                color='white'
-                fontSize='sm'
-                fontWeight='500'
-                borderRadius='70px'
-                px='24px'
-                py='5px'>
-                O'tish
-                <Icon icon="mingcute:right-line" />
-              </Button>
             </Link> */}
           </Flex>
         </Flex>
       </Flex>
+      <Modal isOpen={deleteModal} centered className="group__modals">
+                <ModalHeader toggle={openDeleteModal} className="group__modal-head">Delete Group</ModalHeader>
+                <ModalBody className="group__modal-body">
+                    <p>Bu guruhni o'chirmoqchimisiz?</p>
+                </ModalBody>
+                <ModalFooter>
+                    <Button onClick={openDeleteModal} color="dark">Close</Button>
+                    <Button outline color="danger" onClick={() => {
+                                    openDeleteModal();
+                                }}>Ok</Button>
+                </ModalFooter>
+            </Modal>
     </Card>
   );
 }

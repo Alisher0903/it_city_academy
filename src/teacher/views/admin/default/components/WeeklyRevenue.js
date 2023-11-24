@@ -10,21 +10,24 @@ import {
     Thead,
     Tr,
 } from "@chakra-ui/react";
-import Card from "../../../../components/card/Card.js";
+import Card from "components/card/Card";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {api, config} from "../../../../../api/api";
+import {api, config} from "api/api.js";
 
 export default function WeeklyRevenue(props) {
     const {...rest} = props;
     const [oneGroup, setOneGroup] = useState([]);
-    const [titleGroup, setTitleGroup] = useState([]);
+    const [titleGroup, setTitleGroup] = useState(0);
     const [groupStudent, setGroupStudent] = useState([]);
 
     useEffect(() => {
         getOneGroup();
-        getGroupStudent();
     }, [])
+
+    useEffect(() => {
+        getGroupStudent();
+    }, [titleGroup])
 
     // getOneGroup
     const getOneGroup = () => {
@@ -47,13 +50,15 @@ export default function WeeklyRevenue(props) {
             .then(res => setGroupStudent(res.data.body))
             .catch(err => console.log(err))
     }
+    // console.log(groupStudent)
+    // console.log(titleGroup.id)
 
     return (
         <Card {...rest}>
             <Text
                 display="flex"
                 justifyContent="space-between">
-                <span className="ms-1 mt-1 fs-5 fw-semibold">{titleGroup.name} group top 5</span>
+                <span className="ms-1 mt-1 fs-5 fw-semibold">{titleGroup.name} top 5</span>
                 <Select id="groupSelect" w="25%" onChange={getTitle}>
                     {oneGroup.length && oneGroup.map((item, i) =>
                         <option key={i} value={item.id}>{item.name}</option>
@@ -75,6 +80,7 @@ export default function WeeklyRevenue(props) {
                             <Th>T/r</Th>
                             <Th>full name</Th>
                             <Th>phone number</Th>
+                            <Th>GroupId</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -84,6 +90,7 @@ export default function WeeklyRevenue(props) {
                                     <Td>{i + 1}</Td>
                                     <Td>{item.firstName} {item.lastName}</Td>
                                     <Td>{item.phoneNumber}</Td>
+                                    <Td>{item.groupId}</Td>
                                 </Tr>
                             ) :
                             <Tr>

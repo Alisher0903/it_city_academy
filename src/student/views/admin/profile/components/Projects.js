@@ -12,6 +12,7 @@ import axios from "axios";
 import { api } from "api/api";
 import { config } from "api/api";
 import { imgUrl } from "api/api";
+import { ToastContainer } from "react-toastify";
 
 export default function Projects(props) {
   // Chakra Color Mode
@@ -31,8 +32,7 @@ export default function Projects(props) {
   function getExchange() {
     axios.get(api + "exchange/user", config)
       .then(res => {
-        setExchange(res.data.message)
-        console.log(res.data.message);
+        setExchange(res.data.message) 
 
       })
       .catch(err => {
@@ -43,6 +43,8 @@ export default function Projects(props) {
 
   return (
     <Card mb={{ base: "0px", "2xl": "20px" }}>
+            <ToastContainer/>
+
       <Text
         color={textColorPrimary}
         fontWeight='bold'
@@ -90,7 +92,7 @@ export default function Projects(props) {
           )
         }
       </Grid>
-
+    
     </Card>
   );
 }

@@ -20,6 +20,11 @@ export default function UserReports() {
     const [exchangeCount, setExchangeCount] = useState([]);
 
     useEffect(() => {
+        if (sessionStorage.getItem("reloadTeacher") !== "true") {
+            sessionStorage.setItem("reloadTeacher", "true")
+            window.location.reload();
+        }
+
         getMe();
     }, []);
 

@@ -28,6 +28,7 @@ export default function TotalSpent(props) {
             .then(res => setAllGroupTop(res.data.body))
             .catch(err => console.log(err))
     }
+    // console.log("teacherga tegishli hamma group top 5", allGroupTop)
 
     return (
         <Card w='100%' {...rest}>
@@ -58,7 +59,7 @@ export default function TotalSpent(props) {
                                     <Td>{i + 1}</Td>
                                     <Td>{item.firstName} {item.lastName}</Td>
                                     <Td>{item.phoneNumber}</Td>
-                                    <Td>group</Td>
+                                    <Td>{item.groupId}</Td>
                                 </Tr>
                             ) :
                             <Tr>
