@@ -10,10 +10,10 @@ import {
     Thead,
     Tr,
 } from "@chakra-ui/react";
-import Card from "../../../../components/card/Card.js";
+import Card from "components/card/Card";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {api, config} from "../../../../../api/api";
+import {api, config} from "api/api.js";
 
 export default function WeeklyRevenue(props) {
     const {...rest} = props;

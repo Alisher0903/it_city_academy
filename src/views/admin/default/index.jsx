@@ -80,7 +80,7 @@ export default function UserReports() {
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <Grid
-         gridTemplateColumns={{xl: " 2fr 1fr ",}}
+         gridTemplateColumns={{xl: "2fr 1fr",}}
         w="100%"
         gap='20px'
         mb='20px'>
@@ -136,13 +136,10 @@ export default function UserReports() {
         </SimpleGrid>
 
       </Grid>
-      <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
-        <ComplexTable
-          columnsData={columnsDataComplex}
-          tableData={tableDataComplex}
-        />
-        <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
-      </SimpleGrid>
+      <SimpleGrid columns={{base: 1, md: 1, xl: 2}} gap='20px'>
+                <TotalSpent/>
+                <WeeklyRevenue/>
+            </SimpleGrid>
 
     </Box>
   );
