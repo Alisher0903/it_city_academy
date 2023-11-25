@@ -16,6 +16,19 @@ import {api, config} from "../../../../../api/api";
 
 export default function TotalSpent(props) {
     const {...rest} = props;
+    const [allGroupTop, setAllGroupTop] = useState([]);
+
+    useEffect(() => {
+        getAllGroup();
+    }, []);
+
+    // getAllGroup
+    const getAllGroup = () => {
+        axios.get(api + "group/teacher/all/group/users", config)
+            .then(res => setAllGroupTop(res.data.body))
+            .catch(err => {})
+    }
+    // console.log("teacherga tegishli hamma group top 5", allGroupTop)
 
     return (
         <Card w='100%' {...rest}>

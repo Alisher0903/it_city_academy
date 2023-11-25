@@ -30,12 +30,15 @@ export default function WeeklyRevenue(props) {
     const getOneGroup = () => {
         axios.get(api + "group/teacher", config)
             .then(res => setOneGroup(res.data.body))
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
 
     // getGroupTitle
     const getTitle = () => {
         axios.get(api + "group/teacher", config)
+            .then(res => setTitleGroup(res.data.body.find(t =>
+                t.id == document.getElementById("groupSelect").value)))
+            .catch(err => {})
             .then(async res => {
                 await setTitleGroup(res.data.body.find(t => t.id === document.getElementById("groupSelect").value));
                 await getGroupStudent();
@@ -47,7 +50,7 @@ export default function WeeklyRevenue(props) {
     const getGroupStudent = () => {
         axios.get(api + "group/teacher/one/group/" + titleGroup.id, config)
             .then(res => setGroupStudent(res.data.body))
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
     // console.log(groupStudent)
     // console.log(titleGroup.id)

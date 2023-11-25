@@ -60,7 +60,6 @@ export default function Project(props) {
             })
     }
 
-    console.log(group)
 
     return (
         <>

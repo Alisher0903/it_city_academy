@@ -32,6 +32,41 @@ import {GoChevronDown, GoChevronRight} from "react-icons/go";
 import routes from "routes.js";
 
 export default function AuthNavbar(props) {
+  const { logo, logoText, secondary, sidebarWidth, ...rest } = props;
+  const { colorMode } = useColorMode();
+  // Menu States
+  const {
+    isOpen: isOpenAuth,
+    onOpen: onOpenAuth,
+    onClose: onCloseAuth,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenDashboards,
+    onOpen: onOpenDashboards,
+    onClose: onCloseDashboards,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenMain,
+    onOpen: onOpenMain,
+    onClose: onCloseMain,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenNft,
+    onOpen: onOpenNft,
+    onClose: onCloseNft,
+  } = useDisclosure();
+  // Menus
+  function getLinks(routeName) {
+    let foundRoute = routes.filter(function (route) {
+      return route.items && route.name === routeName;
+    });
+    // console.log(foundRoute);
+    return foundRoute[0].items;
+  }
+  function getLinksCollapse(routeName) {
+    let foundRoute = routes.filter(function (route) {
+      return route.items && route.name === routeName;
+    });
     const {logo, logoText, secondary, sidebarWidth, ...rest} = props;
     const {colorMode} = useColorMode();
     // Menu States
@@ -507,3 +542,4 @@ AuthNavbar.propTypes = {
     color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
     brandText: PropTypes.string,
 };
+}

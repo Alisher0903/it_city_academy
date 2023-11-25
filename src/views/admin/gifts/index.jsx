@@ -28,35 +28,40 @@ export default function Gifts() {
             .then(res => {
                 setGift(res.data.body.object)
             }).catch((error) => {
-            console.log(error);
+            // console.log(error);
             setError(error);
         })
     }
 
     async function addGift() {
+
         const img = new FormData();
         img.append('file', document.getElementById('img').files[0]);
 
-        axios.post(api + "attachment/upload", img, config)
+        if (img.get('file') !== '') {
+            axios.post(api + "attachment/upload", img, config)
             .then(res => {
-                axios.post(api + giftAdd, {
-                    name: document.getElementById("title").value,
-                    attachmentId: res.data.body,
-                    categoryId: 0,
-                    description: document.getElementById('description').value,
-                    rate: document.getElementById('rate').value
-                }, config)
-                    .then(() => {
-                        openAddModal();
-                        getGifts();
-                        toast.success("Gift Added Successfully");
-                    }).catch((err) => {
-                    toast.error(err.data)
-                })
                 console.log(res.data.body);
+                saveGift(res.data.body)
             })
-            .catch(() => {
-            })
+        } else saveGift(0);
+    }
+
+    function saveGift(imgId) {
+        axios.post(api + giftAdd, {
+            name: document.getElementById("title").value,
+            attachmentId: imgId,
+            categoryId: 0,
+            description: document.getElementById('description').value,
+            rate: document.getElementById('rate').value
+        }, config)
+            .then(() => {
+                openAddModal();
+                getGifts();
+                toast.success("Gift Added Successfully");
+            }).catch((err) => {
+            toast.error(err.data)
+        })
     }
 
     return (

@@ -29,6 +29,10 @@ export default function UserReports() {
     }, []);
 
     // getMe
+    const getMe = () => {
+        axios.get(api + "user/getMe", config)
+            .then(res => setGetMeCount(res.data))
+            .catch(err => {});
     const getMe = async () => {
         await axios.get(api + "user/getMe", config)
             .then(async res => {
@@ -43,28 +47,28 @@ export default function UserReports() {
     const getGroupCount = (id) => {
         axios.get(api + "group/byTeacher/" + id, config)
             .then(res => setGroupCount(res.data.body))
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
 
     // getUserCount
     const getUserCount = (id) => {
         axios.get(api + "user/byTeacher/" + id, config)
             .then(res => setUserCount(res.data.body))
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
 
     // getCoinCount
     const getUserCoin = () => {
         axios.get(api + "user/coinAllUser", config)
             .then(res => setCoinCount(res.data.body))
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
 
     // getExchangeCount
     const getExchangeCount = () => {
         axios.get(api + "exchange/teacher/count", config)
             .then(res => setExchangeCount(res.data.body))
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
 
     // getAllGroup
@@ -190,4 +194,5 @@ export default function UserReports() {
             {/*</SimpleGrid>*/}
         </Box>
     );
+}
 }
