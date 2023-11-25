@@ -25,8 +25,11 @@ export default function TotalSpent(props) {
   // getAllGroup
   const getAllGroup = () => {
       axios.get(api + "user/top-users", config)
-          .then(res => setAllGroupTop(res.data.body))
+          .then(res => {
+            console.log(res.data.body);
+            setAllGroupTop(res.data.body)})
           .catch(err => {})
+          
   }
 
   return (
@@ -46,9 +49,10 @@ export default function TotalSpent(props) {
                   <Thead>
                       <Tr>
                           <Th>T/r</Th>
-                          <Th>full name</Th>
-                          <Th>phone number</Th>
-                          <Th>group</Th>
+                          <Th>Full name</Th>
+                          <Th>Phone number</Th>
+                          <Th>Email</Th>
+                          <Th>Curren coin</Th>
                       </Tr>
                   </Thead>
                   <Tbody>
@@ -58,7 +62,8 @@ export default function TotalSpent(props) {
                                   <Td>{i + 1}</Td>
                                   <Td>{item.firstName} {item.lastName}</Td>
                                   <Td>{item.phoneNumber}</Td>
-                                  <Td>group</Td>
+                                  <Td>{item.email}</Td>
+                                  <Td>{item.currentRate}</Td>
                               </Tr>
                           ) :
                           <Tr>

@@ -43,12 +43,20 @@ function Users() {
     const openDeleteModal = () => setDeleteModal(!deleteModal);
 
     // getUsers
-    const getUsers = () => axios.get(api + "user?page=0&size=100", config)
-        .then(res => setUsers(res.data.body.object));
+    const getUsers = () => 
+    {axios.get(api + "user", config)
+        .then(res => {
+            setUsers(res.data.body.object)
+            console.log(res.data.body.object);
+        })
+        .catch(err => {
+            console.log(err);
+            })
+    }
 
     // getGroupSelect
     const getGroupSelect = () => {
-        axios.get(api + "group?page=0&size=100", config)
+        axios.get(api + "group", config)
             .then(res => setGroupSelect(res.data.body.object))
             .catch(() => {
             })
@@ -64,7 +72,14 @@ function Users() {
             phoneNumber: byIdIn("phoneNumber").value,
             groupId: byIdIn("groupId").value
         }
-        axios.post(api + "auth/register?ROLE=ROLE_USER", addData, config)
+        axios.post(api + "auth/register?ROLE=ROLE_USER", {
+            firstName: byIdIn("firstName").value,
+            lastName: byIdIn("lastName").value,
+            email: byIdIn("email").value,
+            password: byIdIn("password").value,
+            phoneNumber: byIdIn("phoneNumber").value,
+            groupId: byIdIn("groupId").value
+        }, config)
             .then(() => {
                 openAddModal();
                 getUsers();
