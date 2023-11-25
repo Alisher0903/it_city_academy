@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Flex, Grid, Text, useColorModeValue, SimpleGrid, } from "@chakra-ui/react";
 import NFT from "../../../components/card/NFTGIFTS";
 import axios from "axios";
-import { api } from "api/api";
-import { getGeftsTeacher } from "api/api";
+import {api, getGiftsTeacher} from "api/api";
 import { imgUrl } from "api/api";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
@@ -20,7 +19,7 @@ export default function Marketplace() {
 
   // get gifts
   const getGifts = () => {
-    axios.get(api + getGeftsTeacher)
+    axios.get(api + getGiftsTeacher)
       .then(res => setGifts(res.data.body.object))
       .catch(() => toast.error("Gifts mavjud emas!!!"));
   }
