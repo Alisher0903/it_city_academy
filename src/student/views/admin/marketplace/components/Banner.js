@@ -39,6 +39,10 @@ export default function Banner() {
       })
   }
 
+  function disableButton() {
+    document.querySelector('button').disabled = true;
+  }
+
   function getTest() {
     axios.get(api + "test/" + learnIdIn, config).then(res => {
       setTest(res.data)
@@ -128,22 +132,6 @@ export default function Banner() {
             />
           </Box>
         </Grid>
-        <Flex align='center'>
-          {/* <Button
-          bg='white'
-          color='black'
-          _hover={{ bg: "whiteAlpha.900" }}
-          _active={{ bg: "white" }}
-          _focus={{ bg: "white" }}
-          fontWeight='500'
-          fontSize='14px'
-          py='20px'
-          px='27'
-          me='38px'>
-          Discover now
-        </Button> */}
-          
-        </Flex>
       </Flex>
       <Flex
         direction='column'
@@ -184,7 +172,10 @@ export default function Banner() {
           px='27'
           mt="20px"
           ms="80%"
-          onClick={testCode}>
+          onClick={() => {
+            testCode()
+            disableButton()
+          }}>
           Send
         </Button>
       </Flex>

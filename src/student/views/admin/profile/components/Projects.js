@@ -66,14 +66,7 @@ export default function Projects(props) {
         gap={{ base: "15px", xl: "15px" }}>
         {
           error ? (
-            <Project
-              boxShadow={cardShadow}
-              mb='10px'
-              image={Project2}
-              ranking='1'
-              link='#'
-              title='Technology behind the Blockchain'
-            />
+            <p>{exchange.message}</p>
           ) : (
             exchange.message ? (
               <p>{exchange.message}</p>

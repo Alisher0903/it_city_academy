@@ -18,10 +18,14 @@ export default function UserReports() {
 
     useEffect(async () => {
         await setConfig();
+        if (sessionStorage.getItem('reload') !== "true") {
+          sessionStorage.setItem('reload', 'true')
+          window.location.reload();
+        }
         getUserCoin();
         getCoutnGroup()
         getCoutnUser()
-        getCoutnTeacher()
+        getCoutnTeacher() 
     }, []);
 
     function getCoutnGroup() {

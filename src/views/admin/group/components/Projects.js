@@ -35,7 +35,7 @@ export default function Projects() {
 
     // get category
     const getCategory = () => {
-        axios.get(api + "category").then(res => setCategory(res.data.body))
+        axios.get(api + "category?page=0&size=100").then(res => setCategory(res.data.body))
             .catch(error => {
                 // setError(error); // Xatolikni saqlash
             });

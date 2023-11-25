@@ -1,13 +1,13 @@
-import {Box, Button, Flex, Select, Text, Textarea, useColorModeValue} from "@chakra-ui/react";
-import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import React, {useEffect, useState} from "react";
+import { Box, Button, Flex, Select, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import React, { useEffect, useState } from "react";
 
 // Custom components
 import Card from "components/card/Card";
 import axios from "axios";
-import {api, config, messageAdd} from "api/api";
-import {MdArrowDropDown} from "react-icons/md";
-import {toast, ToastContainer} from "react-toastify";
+import { api, config, messageAdd } from "api/api";
+import { MdArrowDropDown } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function CheckTable(props) {
 
@@ -80,8 +80,8 @@ export default function CheckTable(props) {
                 toast.success("Message successfully send")
                 getMessage()
             }).catch((err) => {
-            toast.error("Send error")
-        })
+                toast.error("Send error")
+            })
     }
 
     return (
@@ -89,8 +89,8 @@ export default function CheckTable(props) {
             direction='column'
             w='100%'
             px='0px'
-            overflowX={{sm: "scroll", lg: "hidden"}}>
-            <ToastContainer/>
+            overflowX={{ sm: "scroll", lg: "hidden" }}>
+            <ToastContainer />
             <Flex px='25px' justify='space-between' mb='20px' align='center'>
                 <Text
                     color={textColor}
@@ -104,20 +104,22 @@ export default function CheckTable(props) {
                     onClick={() => {
                         openEditModal();
                     }}
-                    color={textColor}
+                    color="primary"
                     fontSize='15px'
                     fontWeight='700'
                     align="center"
-                    lineHeight='100%'>
+                    lineHeight='100%'
+                    className="px-4 py-2 bg-primary fw-medium rounded-5">
                     Send message
                 </Button>
+                
             </Flex>
             {message.length && message.map((item, i) => {
                 return (
                     <Card
                         key={i}
-                        fontSize={{sm: "14px"}}
-                        minW={{sm: "150px", md: "200px", lg: "auto"}}
+                        fontSize={{ sm: "14px" }}
+                        minW={{ sm: "150px", md: "200px", lg: "auto" }}
                         bg={bg}
                         mb="20px"
                         borderColor='transparent'>
@@ -131,9 +133,9 @@ export default function CheckTable(props) {
                 <ModalHeader toggle={openEditModal} className="group__modal-head">Send message</ModalHeader>
                 <ModalBody className="group__modal-body">
                     <Box display="flex" flexWrap="wrap">
-                        <Textarea placeholder="Write message" id="messageId" style={{border: "1px solid black"}}
-                                  mb="20px"/>
-                        <Select id="groupId" icon={<MdArrowDropDown/>} w="50%" style={{border: "1px solid black"}}>
+                        <Textarea placeholder="Write message" id="messageId" style={{ border: "1px solid black" }}
+                            mb="20px" />
+                        <Select id="groupId" icon={<MdArrowDropDown />} w="50%" style={{ border: "1px solid black" }}>
                             <option selected disabled>select group</option>
                             {group.length && group.map((item, i) =>
                                 <option value={item.id} key={i}>{item.name}</option>
