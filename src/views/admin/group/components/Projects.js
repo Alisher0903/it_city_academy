@@ -10,7 +10,7 @@ import {api, config, groupAdd} from "api/api";
 // toast
 import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from "react-toastify";
-import {getGroup, getTeacher} from "../../../../api/routers";
+import {getCategory, getGroup, getTeacher} from "../../../../api/routers";
 
 export default function Projects() {
 
@@ -27,19 +27,11 @@ export default function Projects() {
     const [group, setGroup] = useState([]);
 
     useEffect(() => {
-        getCategory();
+        getCategory(setCategory);
         getTeacher(setTeacherId);
     }, []);
 
     const openAddModal = () => setAddModal(!addModal);
-
-    // get category
-    const getCategory = () => {
-        axios.get(api + "category").then(res => setCategory(res.data.body))
-        .catch(error => {
-            // setError(error); // Xatolikni saqlash
-          });
-    }
 
     // add group
     const addGroup = () => {
@@ -79,19 +71,15 @@ export default function Projects() {
                     <Input id="groupName" type="text" placeholder="Group name"/>
                     <select className="form-select mb-3" id="groupTeacher">
                         <option selected disabled>Teacher name</option>
-                        {
-                            teacherId.map((item, i) =>
-                                <option key={i} value={item.id}>{item.lastName} {item.firstName}</option>
-                            )
-                        }
+                        {teacherId.map((item, i) =>
+                            <option key={i} value={item.id}>{item.lastName} {item.firstName}</option>
+                        )}
                     </select>
                     <select className="form-select" id="groupCategory">
                         <option selected disabled>Category name</option>
-                        {
-                            category.map((item, i) =>
-                                <option key={i} value={item.id}>{item.name}</option>
-                            )
-                        }
+                        {category.map((item, i) =>
+                            <option key={i} value={item.id}>{item.name}</option>
+                        )}
                     </select>
                 </ModalBody>
                 <ModalFooter>

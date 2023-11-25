@@ -38,6 +38,10 @@ export const config = {
     }
 };
 
+export function setConfig() {
+    config.headers.Authorization = sessionStorage.getItem('jwtTokin');
+}
+
 export async function addImage(image, setImageId) {
     axios.post(api + "attachment/upload", image, config)
         .then(res => setImageId(res.data.body));
