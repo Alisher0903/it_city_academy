@@ -33,6 +33,15 @@ export default function Projects() {
 
     const openAddModal = () => setAddModal(!addModal);
 
+    // get category
+    const getCategory = () => {
+        axios.get(api + "category").then(res => setCategory(res.data.body))
+        .catch(error => {
+            // setError(error); // Xatolikni saqlash
+            console.log(error);
+          });
+    }
+
     // add group
     const addGroup = () => {
         const data = {

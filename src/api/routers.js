@@ -3,13 +3,13 @@ import {api, config} from "./api";
 import { useState } from "react";
 
 // Category
-export const   getCategory = (setCategory) => {
-    axios.get(api + "category", config).then(res => setCategory(res.data.body));
+export const getCategory = (setCategory) => {
+    axios.get(api + "category", config).then(res => setCategory(res.data.body))
+    .catch((err) => console.log(err));
 }
 
 // Group
 export function getGroup(setGroup) {
-    
 
     axios.get(api + "user/teacher", config)
         .then(t => {
@@ -23,13 +23,15 @@ export function getGroup(setGroup) {
                             teacher: teacherById(g.teacherId)
                         });
                     setGroup(group);
-                });
+                })
+                .catch((err) =>{
+                    console.log(err);
+                })
 
             function teacherById(id) {
                 for (const teacher of t.data.body) if (teacher.id === id) return teacher.firstName;
             }
         })
-        
 }
 
 // User

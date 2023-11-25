@@ -66,7 +66,10 @@ function AddTeachers() {
                 openAddModal();
                 getTeachers();
                 toast.success("Teacher muvaffaqiyatli qo'shildi✔");
-            });
+            })
+            .catch(() => {
+                toast.error("Teacher qo'shishda xatolik")
+            })
     }
 
     // editTeacher
@@ -84,7 +87,10 @@ function AddTeachers() {
                 openEditModal();
                 getTeachers();
                 toast.success("Teacherning ma'lumotlari o'zgartirildi✔");
-            });
+            })
+            .catch(() => {
+                toast.error("Teacherning ma'lumotlarini o'zgartirilmadi!")
+                });
     }
 
     // deleteTeacher
@@ -93,7 +99,7 @@ function AddTeachers() {
             .then(() => {
                 openDeleteModal();
                 getTeachers();
-                toast.error("Teacherning ma'lumotlari o'zchirildi!!!");
+                toast.success("Teacherning ma'lumotlari o'zchirildi!!!");
             }).catch(() => {
                 toast.error("Xatolik yuz berdi");
             });
