@@ -16,19 +16,6 @@ import {api, config} from "../../../../../api/api";
 
 export default function TotalSpent(props) {
     const {...rest} = props;
-    const [allGroupTop, setAllGroupTop] = useState([]);
-
-    useEffect(() => {
-        getAllGroup();
-    }, []);
-
-    // getAllGroup
-    const getAllGroup = () => {
-        axios.get(api + "group/teacher/all/group/users", config)
-            .then(res => setAllGroupTop(res.data.body))
-            .catch(err => {})
-    }
-    // console.log("teacherga tegishli hamma group top 5", allGroupTop)
 
     return (
         <Card w='100%' {...rest}>
@@ -47,9 +34,11 @@ export default function TotalSpent(props) {
                     <Thead>
                         <Tr>
                             <Th>T/r</Th>
-                            <Th>full name</Th>
-                            <Th>phone number</Th>
-                            <Th>group</Th>
+                            <Th>First name</Th>
+                            <Th>Last name</Th>
+                            <Th>Phone number</Th>
+                            <Th>Rate</Th>
+                            <Th>Group</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -57,9 +46,11 @@ export default function TotalSpent(props) {
                             rest.allGroupTop.map((item, i) =>
                                 <Tr key={i}>
                                     <Td>{i + 1}</Td>
-                                    <Td>{item.firstName} {item.lastName}</Td>
+                                    <Td>{item.firstName}</Td>
+                                    <Td> {item.lastName}</Td>
                                     <Td>{item.phoneNumber}</Td>
-                                    <Td>{item.groupId}</Td>
+                                    <Td>{item.currentRate}</Td>
+                                    <Td>{item.groupName}</Td>
                                 </Tr>
                             ) :
                             <Tr>

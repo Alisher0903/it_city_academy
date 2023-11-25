@@ -33,8 +33,7 @@ export default function UserReports() {
             .then(async res => {
                 getGroupCount(res.data.id);
                 getUserCount(res.data.id);
-            })
-            .catch(err => console.log(err));
+            }).catch(err => console.log(err));
     }
 
     //getGroupCount
@@ -162,7 +161,7 @@ export default function UserReports() {
                 {/*/>*/}
             </SimpleGrid>
 
-            <SimpleGrid columns={{base: 1, md: 1, xl: 2}} gap='20px'>
+            <SimpleGrid columns={{base: 1, md: 1, xl: 1}} gap='20px'>
                 <TotalSpent allGroupTop={allGroupTop}/>
                 <WeeklyRevenue/>
             </SimpleGrid>

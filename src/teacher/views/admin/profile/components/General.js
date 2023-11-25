@@ -41,7 +41,9 @@ export default function GeneralInformation() {
     const getStudent = (groupId) => {
         axios.get(api + getUserUrl + groupId, config)
             .then(res => setUsers(res.data.body))
-            .catch(() => toast.error("Bu guruhda hali student mavjud emas!!!"))
+            .catch(err => {
+                if (err.response.status) setUsers([]);
+            })
     }
 
     const setGroup = (e) => {
