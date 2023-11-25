@@ -21,12 +21,12 @@ function TestList({categoryId, index}) {
             {/* test coding url link */}
             <Link to='test/coding' id='testCoding'></Link>
             {test.length ? test.map((item, i) =>
-                <Row className="py-4 border test-row w-100 ms-0 my-2" key={i} disabled={item.isActive}>
+                <Row className="py-4 border test-row w-100 ms-0 my-2" key={i} disabled={!item.isActive}>
                     <Col className="col-1 d-flex align-items-center justify-content-center">
                         <img src="https://blob.sololearn.com/web-assets/le-lesson-icon.svg" alt="coin lesson"/>
                     </Col>
                     <Col className='col-11'>
-                        {item.isActive &&
+                        {!item.isActive &&
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
                                  width="24"
                                  sl-test-data="lblIconLock"
@@ -43,7 +43,7 @@ function TestList({categoryId, index}) {
                            className='d-inline border py-1 px-2 position-relative'><span
                             className='fw-bold'>XP</span> +{item.grade}</p>
                     </Col>
-                    {!item.isActive &&
+                    {item.isActive &&
                         <div className='w-100 d-flex justify-content-center mt-3'>
                             <Button onClick={() => {
                                 sessionStorage.setItem("learnId", item.id)
