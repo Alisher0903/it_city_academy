@@ -51,10 +51,12 @@ export default function Gifts() {
                         getGifts();
                         toast.success("Gift Added Successfully");
                     }).catch((err) => {
-                    console.log(err);
                     toast.error(err.data)
                 })
-            });
+                console.log(res.data.body);
+            })
+            .catch(() => {
+            })
     }
 
     return (

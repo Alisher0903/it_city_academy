@@ -24,7 +24,7 @@ export default function TotalSpent(props) {
 
   // getAllGroup
   const getAllGroup = () => {
-      axios.get(api + "group/teacher/all/group/users", config)
+      axios.get(api + "user/top-users", config)
           .then(res => setAllGroupTop(res.data.body))
           .catch(err => console.log(err))
   }
@@ -32,7 +32,7 @@ export default function TotalSpent(props) {
   return (
       <Card w='100%' {...rest}>
           <Text textAlign="center" mt=".3rem" mb=".45rem">
-              <span className="fs-5 fw-semibold">All group top 5</span>
+              <span className="fs-5 fw-semibold">Top students</span>
           </Text>
           <TableContainer
               mt="1rem"
