@@ -8,11 +8,12 @@ export const getCategory = (setCategory) => {
     .catch((err) => {
         // console.log(err);
     })
+    axios.get(api + "category", config).then(res => setCategory(res.data.body))
+    .catch((err) => console.log(err));
 }
 
 // Group
 export function getGroup(setGroup) {
-    
 
     axios.get(api + "user/teacher", config)
         .then(t => {
@@ -35,7 +36,6 @@ export function getGroup(setGroup) {
                 for (const teacher of t.data.body) if (teacher.id === id) return teacher.firstName;
             }
         })
-        
 }
 
 // User

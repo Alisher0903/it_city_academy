@@ -14,6 +14,7 @@ import Card from "components/card/Card";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {api, config} from "api/api.js";
+import {getGroup} from "../../../../../api/routers";
 
 export default function WeeklyRevenue(props) {
     const {...rest} = props;
@@ -23,13 +24,9 @@ export default function WeeklyRevenue(props) {
 
     useEffect(() => {
         getOneGroup();
-    }, [])
+    }, []);
 
-    useEffect(() => {
-        getGroupStudent();
-    }, [titleGroup])
-
-    // getOneGroup
+    // getOneGroup // TODO bu yirda xatolik bor tugirlashim kk men Javiohir!!!
     const getOneGroup = () => {
         axios.get(api + "group/teacher", config)
             .then(res => setOneGroup(res.data.body))
@@ -42,6 +39,11 @@ export default function WeeklyRevenue(props) {
             .then(res => setTitleGroup(res.data.body.find(t =>
                 t.id == document.getElementById("groupSelect").value)))
             .catch(err => {})
+            .then(async res => {
+                await setTitleGroup(res.data.body.find(t => t.id === document.getElementById("groupSelect").value));
+                await getGroupStudent();
+            })
+            .catch(err => console.log(err));
     }
 
     // getGroupStudent

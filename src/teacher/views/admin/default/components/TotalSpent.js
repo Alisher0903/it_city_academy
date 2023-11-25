@@ -53,8 +53,8 @@ export default function TotalSpent(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {allGroupTop !== null ?
-                            allGroupTop.map((item, i) =>
+                        {rest.allGroupTop !== null ?
+                            rest.allGroupTop.map((item, i) =>
                                 <Tr key={i}>
                                     <Td>{i + 1}</Td>
                                     <Td>{item.firstName} {item.lastName}</Td>
