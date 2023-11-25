@@ -83,7 +83,7 @@ export default function CheckTable(props) {
       .then(res => {
         setGroup(res.data.body.object)
       })
-      .catch(err => console.log(err))
+      .catch(err => {})
   }
 
   function getMessage() {
@@ -91,7 +91,7 @@ export default function CheckTable(props) {
       .then(res => {
         setMessage(res.data.body.object)
       })
-      .catch(err => console.log(err))
+      .catch(err => {})
   }
   const sendMessage = () => {
     let groupId = document.getElementById('groupId').value;

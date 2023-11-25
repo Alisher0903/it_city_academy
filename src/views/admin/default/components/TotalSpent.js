@@ -26,7 +26,7 @@ export default function TotalSpent(props) {
   const getAllGroup = () => {
       axios.get(api + "user/top-users", config)
           .then(res => setAllGroupTop(res.data.body))
-          .catch(err => console.log(err))
+          .catch(err => {})
   }
 
   return (

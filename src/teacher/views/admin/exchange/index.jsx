@@ -27,7 +27,7 @@ function Exchange() {
             .then(res => setExchanges(res.data.body))
             .catch(err => {
                 toast.error("Exchange not found");
-                console.log(err)
+                
             })
     }
 

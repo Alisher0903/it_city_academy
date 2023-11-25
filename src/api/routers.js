@@ -6,7 +6,7 @@ import { useState } from "react";
 export const getCategory = (setCategory) => {
     axios.get(api + "category").then(res => setCategory(res.data.body))
     .catch((err) => {
-        console.log(err);
+        // console.log(err);
     })
 }
 
@@ -27,8 +27,8 @@ export function getGroup(setGroup) {
                         });
                     setGroup(group);
                 })
-                .catch((err) =>{
-                    console.log(err);
+                .catch(() =>{
+                    // console.log(err);
                 })
 
             function teacherById(id) {
@@ -43,7 +43,7 @@ export const getTeacher = (setTeacher) => {
     axios.get(api + "user/teacher", config)
         .then(res => setTeacher(res.data.body))
     .catch((err) => {
-        console.log(err);
+        // console.log(err);
     })
 }
 
@@ -56,9 +56,9 @@ export function getUserCategory(setCategory) {
 }
 
 export function getCategoryByTest(setTest, categoryId) {
-    console.log(categoryId)
+    // console.log(categoryId)
     axios.get(api + `test/by/${categoryId}/test`, config).then(res => setTest(res.data))
     .catch((err) => {
-        console.log(err);
+        // console.log(err);
     })
 }

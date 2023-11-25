@@ -77,7 +77,7 @@ export default function CheckTable(props) {
     axios.get(api + "message/student?page=0&size=10", config)
       .then(res => {
         setMessage(res.data.body.object)
-        console.log(res);
+        // console.log(res);
       })
   }
 

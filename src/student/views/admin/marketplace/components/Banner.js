@@ -25,7 +25,7 @@ export default function Banner() {
   let learnIdIn = sessionStorage.getItem("learnId");
 
   function testCode() {
-    console.log(learnIdIn);
+    // console.log(learnIdIn);
     axios.post(api + "test/test-code", {
       programmingLanguage: "JAVA",
       testId: learnIdIn,
@@ -46,7 +46,7 @@ export default function Banner() {
   }
 
 
-  console.log(test);
+  // console.log(test);
 
   return (
     <>

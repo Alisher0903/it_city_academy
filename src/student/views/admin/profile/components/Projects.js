@@ -36,7 +36,7 @@ export default function Projects(props) {
 
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         setError(error);
       })
   }

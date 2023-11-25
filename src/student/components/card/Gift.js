@@ -45,7 +45,7 @@ export default function Gift(props) {
         setGift(res.data.body.object)
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       })
   }
   function exchange() {
@@ -55,7 +55,7 @@ export default function Gift(props) {
         toast.success("Exchange succesfully get✔");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error("Exchange failed❌");
       })
   }

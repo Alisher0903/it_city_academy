@@ -57,7 +57,7 @@ export default function HeaderLinks(props) {
 		axios.get(api + "user/getMe", config)
 			.then(res => {
 				setInfo(res.data)
-				console.log(res.data);
+				// console.log(res.data);
 			})
 		// .catch(err => consol e.log(err))
 	}

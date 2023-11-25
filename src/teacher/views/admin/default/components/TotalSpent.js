@@ -26,7 +26,7 @@ export default function TotalSpent(props) {
     const getAllGroup = () => {
         axios.get(api + "group/teacher/all/group/users", config)
             .then(res => setAllGroupTop(res.data.body))
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
     // console.log("teacherga tegishli hamma group top 5", allGroupTop)
 

@@ -30,10 +30,10 @@ export default function GeneralInformation(props) {
     axios.get(api + "user/getMe", config)
       .then(res => {
         setInfo(res.data)
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       })
   }
 
