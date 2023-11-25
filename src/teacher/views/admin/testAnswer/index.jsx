@@ -1,12 +1,12 @@
-import { Box, Icon, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import {Box, Icon, SimpleGrid, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "../../../components/card/Card";
-import React, { useEffect, useState } from "react";
-import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import React, {useEffect, useState} from "react";
+import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import "../test/modal.scss";
-import { MdDelete, MdEdit } from "react-icons/md";
+import {MdDelete, MdEdit} from "react-icons/md";
 import axios from "axios";
-import { config, byIdIn, api } from "api/api";
-import { ToastContainer, toast } from "react-toastify";
+import {config, byIdIn, api} from "api/api";
+import {ToastContainer, toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Overview() {
@@ -16,7 +16,7 @@ export default function Overview() {
     const [testIdSelect, setTestIdSelect] = useState(0);
     const [testAnswerPlus, setTestAnswerPlus] = useState([]);
     const [testAnswerBtn, setTestAnswerBtn] = useState([]);
-    const [testAnswerBtnId, setTestAnswerBtnId] = useState(1);
+    const [testAnswerBtnId, setTestAnswerBtnId] = useState('');
     const [testAnswerId, setTestAnswerId] = useState("");
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
@@ -36,29 +36,35 @@ export default function Overview() {
     const openDeleteModal = () => setDeleteModal(!deleteModal);
 
     useEffect(() => {
-        getTestAnswer();
-
-        // category get
-        axios.get(api + "category/teacher/by/sub/category", config)
-            .then(res => {
-                setTeacherCategory(res.data)
-            });
-
-        // test id get mana shuni tug'rilash kk
-        axios.get(api + "test/by/" + testIdSelect + "/test", config)
-            .then(res => setTestAnswerPlus(res.data));
-
         // category btn get
         axios.get(api + "test?page=0&size=100", config)
             .then(res => setTestAnswerBtn(res.data.object))
             .catch(() => toast.error("Sizda xali testlar yo'q. Test qo'shmasdan javob yo'llay olmaysiz!!!"));
+
+        // category get
+        axios.get(api + "category/teacher/by/sub/category", config)
+            .then(res => setTeacherCategory(res.data));
+
+        // test id get mana shuni tug'rilash kk
+        axios.get(api + "test/by/" + testIdSelect + "/test", config)
+            .then(res => setTestAnswerPlus(res.data));
     }, []);
+
+    useEffect(() => {
+        if (testAnswerBtn[0] && testAnswerBtn[0] !== 'undefined') setTestAnswerBtnId(testAnswerBtn[0].id);
+    }, [testAnswerBtn]);
+
+    useEffect(() => {
+        getTestAnswer();
+    }, [testAnswerBtnId]);
 
     // getTestAnswer ?page=0&size=10
     const getTestAnswer = () => {
-        axios.get(api + "test-answer/" + testAnswerBtnId, config)
-            .then(res => setTestAnswer(res.data.object))
-            .catch(() => toast.error("Xali bunda test-answer yo'q. Birorta testni tanlang!!!"))
+        if (testAnswerBtnId) {
+            axios.get(api + "test-answer/" + testAnswerBtnId, config)
+                .then(res => setTestAnswer(res.data.object))
+                .catch(() => toast.error("Xali bunda test-answer yo'q. Birorta testni tanlang!!!"))
+        }
     }
 
     // add
@@ -72,7 +78,6 @@ export default function Overview() {
             .then(() => {
                 openAddModal();
                 toast.success("Testning javobi qo'shildi");
-                getTestAnswer();
             })
     }
 
@@ -87,7 +92,6 @@ export default function Overview() {
             .then(() => {
                 openEditModal();
                 toast.success("Testning javobi taxrirlandi");
-                getTestAnswer();
             })
     }
 
@@ -97,7 +101,6 @@ export default function Overview() {
             .then(() => {
                 openDeleteModal();
                 toast.success("Testning javobi o'chirildi");
-                getTestAnswer();
             })
     }
 
@@ -110,8 +113,8 @@ export default function Overview() {
     // console.log(testAnswerPlus);
 
     return (
-        <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-            <ToastContainer />
+        <Box pt={{base: "130px", md: "80px", xl: "80px"}}>
+            <ToastContainer/>
             <Card>
                 <Text
                     display="flex"
@@ -132,8 +135,8 @@ export default function Overview() {
                 <Modal centered size="lg" isOpen={addModal}>
                     <ModalHeader toggle={openAddModal} className="techer__modal-head">Add TestAnswer</ModalHeader>
                     <ModalBody className="techer__modal-body">
-                        <Input id="answer" placeholder="answer" />
-                        <Input id="result" placeholder="result" />
+                        <Input id="answer" placeholder="answer"/>
+                        <Input id="result" placeholder="result"/>
                         <select
                             onClick={selectOnClick}
                             id="categoryId"
@@ -159,10 +162,7 @@ export default function Overview() {
                 <Text className="testCategoryBtn" color={textColorSecondary} fontSize='md'>
                     {testAnswerBtn && testAnswerBtn.map((item, i) =>
                         <Button
-                            onClick={() => {
-                                setTestAnswerBtnId(item.id);
-                                getTestAnswer();
-                            }}
+                            onClick={() => setTestAnswerBtnId(item.id)}
                             key={i}
                             color="success">{item.question}</Button>
                     )}
@@ -193,8 +193,8 @@ export default function Overview() {
                                     }}
                                     as={MdEdit}
                                     color='secondaryGray.500'
-                                    style={{ cursor: "pointer" }}
-                                    h='18px' w='18px' />
+                                    style={{cursor: "pointer"}}
+                                    h='18px' w='18px'/>
                                 <Icon
                                     onClick={() => {
                                         openDeleteModal();
@@ -202,8 +202,8 @@ export default function Overview() {
                                     }}
                                     as={MdDelete}
                                     color='secondaryGray.500'
-                                    style={{ cursor: "pointer" }}
-                                    h='18px' w='18px' />
+                                    style={{cursor: "pointer"}}
+                                    h='18px' w='18px'/>
                             </Box>
                         </Box>
                     )}
@@ -212,8 +212,8 @@ export default function Overview() {
                     <Modal centered size="lg" isOpen={editModal} className="techer__modal-head">
                         <ModalHeader toggle={openEditModal}>Edit TestAnswer</ModalHeader>
                         <ModalBody className="techer__modal-body">
-                            <Input id="answer" defaultValue={testAnswerId && testAnswerId.answer} />
-                            <Input id="result" defaultValue={testAnswerId && testAnswerId.result} />
+                            <Input id="answer" defaultValue={testAnswerId && testAnswerId.answer}/>
+                            <Input id="result" defaultValue={testAnswerId && testAnswerId.result}/>
                             <select
                                 onChange={selectOnClick}
                                 id="categoryId"
@@ -238,7 +238,8 @@ export default function Overview() {
 
                     {/* deleteModal */}
                     <Modal centered isOpen={deleteModal}>
-                        <ModalHeader toggle={openDeleteModal} className="techer__modal-head">Delete TestAnswer</ModalHeader>
+                        <ModalHeader toggle={openDeleteModal} className="techer__modal-head">Delete
+                            TestAnswer</ModalHeader>
                         <ModalBody className="techer__modal-delete">
                             Siz bu ({testAnswerId.answer}) javobni o'chirishga ishonchingiz komilmi?
                         </ModalBody>
