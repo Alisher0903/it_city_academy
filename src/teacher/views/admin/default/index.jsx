@@ -13,7 +13,6 @@ export default function UserReports() {
     const brandColor = useColorModeValue("brand.500", "white");
     const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
-    const [getMeCount, setGetMeCount] = useState('');
     const [groupCount, setGroupCount] = useState([]);
     const [userCount, setUserCount] = useState([]);
     const [coinCount, setCoinCount] = useState([]);
@@ -29,14 +28,9 @@ export default function UserReports() {
     }, []);
 
     // getMe
-    const getMe = () => {
-        axios.get(api + "user/getMe", config)
-            .then(res => setGetMeCount(res.data))
-            .catch(err => {});
     const getMe = async () => {
         await axios.get(api + "user/getMe", config)
             .then(async res => {
-                await setGetMeCount(res.data);
                 getGroupCount(res.data.id);
                 getUserCount(res.data.id);
             })
@@ -47,28 +41,27 @@ export default function UserReports() {
     const getGroupCount = (id) => {
         axios.get(api + "group/byTeacher/" + id, config)
             .then(res => setGroupCount(res.data.body))
-            .catch(err => {})
     }
 
     // getUserCount
     const getUserCount = (id) => {
         axios.get(api + "user/byTeacher/" + id, config)
             .then(res => setUserCount(res.data.body))
-            .catch(err => {})
+            .catch(err => console.log(err))
     }
 
     // getCoinCount
     const getUserCoin = () => {
         axios.get(api + "user/coinAllUser", config)
             .then(res => setCoinCount(res.data.body))
-            .catch(err => {})
+            .catch(err => console.log(err))
     }
 
     // getExchangeCount
     const getExchangeCount = () => {
         axios.get(api + "exchange/teacher/count", config)
             .then(res => setExchangeCount(res.data.body))
-            .catch(err => {})
+            .catch(err => console.log(err))
     }
 
     // getAllGroup
@@ -194,5 +187,4 @@ export default function UserReports() {
             {/*</SimpleGrid>*/}
         </Box>
     );
-}
 }

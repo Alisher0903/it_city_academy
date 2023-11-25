@@ -10,7 +10,7 @@ import {api, config, groupAdd} from "api/api";
 // toast
 import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from "react-toastify";
-import {getCategory, getGroup, getTeacher} from "../../../../api/routers";
+import {getGroup, getTeacher} from "../../../../api/routers";
 
 export default function Projects() {
 
@@ -36,9 +36,9 @@ export default function Projects() {
     // get category
     const getCategory = () => {
         axios.get(api + "category").then(res => setCategory(res.data.body))
-        .catch(error => {
-            // setError(error); // Xatolikni saqlash
-          });
+            .catch(error => {
+                // setError(error); // Xatolikni saqlash
+            });
     }
 
     // add group

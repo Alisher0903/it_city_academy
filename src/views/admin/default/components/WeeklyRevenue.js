@@ -37,7 +37,7 @@ export default function WeeklyRevenue(props) {
   const getTitle = () => {
       axios.get(api + "group/teacher", config)
           .then(res => setTitleGroup(res.data.body.find(t =>
-              t.id == document.getElementById("groupSelect").value)))
+              t.id === +document.getElementById("groupSelect").value)))
           .catch(err => {})
   }
 
