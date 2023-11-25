@@ -1,177 +1,151 @@
-import {
-  Flex,
-  Table,
-  Checkbox,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-
-  useColorModeValue,
-  Radio,
-  RadioGroup,
-  Stack,
-  Button,
-  Box,
-  EditableTextarea,
-  Textarea,
-  Select
-
-} from "@chakra-ui/react";
-import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import React, { useEffect, useMemo, useState } from "react";
-import {
-  useGlobalFilter,
-  usePagination,
-  useSortBy,
-  useTable,
-} from "react-table";
+import {Box, Button, Flex, Select, Text, Textarea, useColorModeValue} from "@chakra-ui/react";
+import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import React, {useEffect, useState} from "react";
 
 // Custom components
 import Card from "components/card/Card";
-import Menu from "components/menu/MainMenu";
 import axios from "axios";
-import { api } from "api/api";
-import { config } from "api/api";
-import { MdArrowDropDown } from "react-icons/md";
-import { ToastContainer, toast } from "react-toastify";
-import { messageAdd } from "api/api";
+import {api, config, messageAdd} from "api/api";
+import {MdArrowDropDown} from "react-icons/md";
+import {toast, ToastContainer} from "react-toastify";
+
 export default function CheckTable(props) {
 
-  const [value, setValue] = useState('1')
-  const openEditModal = () => setEditModal(!editModal);
+    const openEditModal = () => setEditModal(!editModal);
 
-  // const tableInstance = useTable(
-  //   useGlobalFilter,
-  //   useSortBy,
-  //   usePagination
-  // );
+    // const tableInstance = useTable(
+    //   useGlobalFilter,
+    //   useSortBy,
+    //   usePagination
+    // );
 
-  // const {
-  //   getTableProps,
-  //   getTableBodyProps,
-  //   headerGroups,
-  //   page,
-  //   prepareRow,
-  //   initialState,
-  // } = tableInstance;
-  // initialState.pageSize = 11;
+    // const {
+    //   getTableProps,
+    //   getTableBodyProps,
+    //   headerGroups,
+    //   page,
+    //   prepareRow,
+    //   initialState,
+    // } = tableInstance;
+    // initialState.pageSize = 11;
 
-  const [editModal, setEditModal] = useState(false);
-  const [checkedItems, setCheckedItems] = React.useState([false, false])
+    const [editModal, setEditModal] = useState(false);
+    const [checkedItems, setCheckedItems] = React.useState([false, false])
 
-  const allChecked = checkedItems.every(Boolean)
-  const bg = useColorModeValue("white", "navy.700");
-  const isIndeterminate = checkedItems.some(Boolean) && !allChecked
-
-
-  const textColor = useColorModeValue("secondaryGray.900", "white");
-  const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
-  const [group, setGroup] = useState([]);
-  const [message, setMessage] = useState([]);
+    const allChecked = checkedItems.every(Boolean)
+    const bg = useColorModeValue("white", "navy.700");
+    const isIndeterminate = checkedItems.some(Boolean) && !allChecked
 
 
-  useEffect(() => {
-    getGroup();
-    getMessage()
-  }, []);
+    const textColor = useColorModeValue("secondaryGray.900", "white");
+    const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+    const [group, setGroup] = useState([]);
+    const [message, setMessage] = useState([]);
 
-  function getGroup() {
-    axios.get(api + "group", config)
-      .then(res => {
-        setGroup(res.data.body.object)
-      })
-      .catch(err => {})
-  }
 
-  function getMessage() {
-    axios.get(api + "message", config)
-      .then(res => {
-        setMessage(res.data.body.object)
-      })
-      .catch(err => {})
-  }
-  const sendMessage = () => {
-    let groupId = document.getElementById('groupId').value;
-    axios.post(api + messageAdd,
-      {
-        description: document.getElementById("messageId").value,
-        groupId: groupId
-      },
-      config)
-      
-      .then(() => {
-        openEditModal();
-        toast.success("Message successfully send")
+    useEffect(() => {
+        getGroup();
         getMessage()
-      }).catch((err) => {
-        toast.error("Send error")
-      })
-  }
+    }, []);
 
-  return (
-    <Box
-      direction='column'
-      w='100%'
-      px='0px'
-      overflowX={{ sm: "scroll", lg: "hidden" }}>
-      <ToastContainer />
-      <Flex px='25px' justify='space-between' mb='20px' align='center'>
-        <Text
-          color={textColor}
-          fontSize='25px'
-          fontWeight='700'
-          lineHeight='100%'
-          align="center">
-          Sent messages
-        </Text>
-        <Button
-          onClick={() => {
-            openEditModal();
-          }}
-          color={textColor}
-          fontSize='15px'
-          fontWeight='700'
-          align="center"
-          lineHeight='100%'>
-          Send message
-        </Button>
-      </Flex>
-      {message.length && message.map((item, i) => {
-        return (
-          <Card
-            key={i}
-            fontSize={{ sm: "14px" }}
-            minW={{ sm: "150px", md: "200px", lg: "auto" }}
-            bg={bg}
-            mb="20px"
-            borderColor='transparent'>
-            <Text color={textColor} fontSize='17px' fontWeight='700'>
-              {item.description}
-            </Text>
-          </Card>
-        );
-      })}
-      <Modal isOpen={editModal} centered size="lg" className="group__modals">
-        <ModalHeader toggle={openEditModal} className="group__modal-head">Send message</ModalHeader>
-        <ModalBody className="group__modal-body">
-          <Box display="flex" flexWrap="wrap">
-            <Textarea placeholder="Write message" id="messageId" style={{ border: "1px solid black" }} mb="20px" />
-            <Select id="groupId" icon={<MdArrowDropDown />} w="50%" style={{ border: "1px solid black" }}>
-              <option selected disabled >select group</option>
-              {group.length && group.map((item, i) =>
-                <option value={item.id} key={i}>{item.name}</option>
-              )}
-            </Select>
-          </Box>
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={openEditModal} color="dark">Back</Button>
-          <Button color="success" onClick={sendMessage}>Send</Button>
-        </ModalFooter>
-      </Modal>
-    </Box>
-  );
+    function getGroup() {
+        axios.get(api + "group", config)
+            .then(res => {
+                setGroup(res.data.body.object)
+            })
+            .catch(err => {
+            })
+    }
+
+    function getMessage() {
+        axios.get(api + "message", config)
+            .then(res => {
+                setMessage(res.data.body.object)
+            })
+            .catch(err => {
+            })
+    }
+
+    const sendMessage = () => {
+        let groupId = document.getElementById('groupId').value;
+        axios.post(api + messageAdd,
+            {
+                description: document.getElementById("messageId").value,
+                groupId: groupId
+            },
+            config)
+
+            .then(() => {
+                openEditModal();
+                toast.success("Message successfully send")
+                getMessage()
+            }).catch((err) => {
+            toast.error("Send error")
+        })
+    }
+
+    return (
+        <Box
+            direction='column'
+            w='100%'
+            px='0px'
+            overflowX={{sm: "scroll", lg: "hidden"}}>
+            <ToastContainer/>
+            <Flex px='25px' justify='space-between' mb='20px' align='center'>
+                <Text
+                    color={textColor}
+                    fontSize='25px'
+                    fontWeight='700'
+                    lineHeight='100%'
+                    align="center">
+                    Sent messages
+                </Text>
+                <Button
+                    onClick={() => {
+                        openEditModal();
+                    }}
+                    color={textColor}
+                    fontSize='15px'
+                    fontWeight='700'
+                    align="center"
+                    lineHeight='100%'>
+                    Send message
+                </Button>
+            </Flex>
+            {message.length && message.map((item, i) => {
+                return (
+                    <Card
+                        key={i}
+                        fontSize={{sm: "14px"}}
+                        minW={{sm: "150px", md: "200px", lg: "auto"}}
+                        bg={bg}
+                        mb="20px"
+                        borderColor='transparent'>
+                        <Text color={textColor} fontSize='17px' fontWeight='700'>
+                            {item.description}
+                        </Text>
+                    </Card>
+                );
+            })}
+            <Modal isOpen={editModal} centered size="lg" className="group__modals">
+                <ModalHeader toggle={openEditModal} className="group__modal-head">Send message</ModalHeader>
+                <ModalBody className="group__modal-body">
+                    <Box display="flex" flexWrap="wrap">
+                        <Textarea placeholder="Write message" id="messageId" style={{border: "1px solid black"}}
+                                  mb="20px"/>
+                        <Select id="groupId" icon={<MdArrowDropDown/>} w="50%" style={{border: "1px solid black"}}>
+                            <option selected disabled>select group</option>
+                            {group.length && group.map((item, i) =>
+                                <option value={item.id} key={i}>{item.name}</option>
+                            )}
+                        </Select>
+                    </Box>
+                </ModalBody>
+                <ModalFooter>
+                    <Button onClick={openEditModal} color="dark">Back</Button>
+                    <Button color="success" onClick={sendMessage}>Send</Button>
+                </ModalFooter>
+            </Modal>
+        </Box>
+    );
 }
