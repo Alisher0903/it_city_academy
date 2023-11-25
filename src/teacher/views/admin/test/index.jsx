@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Card from "../../../components/card/Card";
 import questionImg from "./question.png";
-import {
-    Box,
-    Flex,
-    Icon,
-    Image,
-    Link,
-    SimpleGrid,
-    Text,
-    useColorModeValue
-} from "@chakra-ui/react";
-import { MdDelete, MdEdit } from "react-icons/md";
-import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import {Box, Flex, Icon, Image, Link, SimpleGrid, Text, useColorModeValue} from "@chakra-ui/react";
+import {MdDelete, MdEdit} from "react-icons/md";
+import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import axios from "axios";
-import { api, imgUrl, config, byIdIn } from "api/api";
+import {api, byIdIn, config, imgUrl} from "api/api";
 import "./modal.scss";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 export default function Overview() {
     const textColor = useColorModeValue("navy.700", "white");
@@ -89,12 +80,10 @@ export default function Overview() {
             countNumber: byIdIn("countNumber").value
         }
 
-        if (imgEdit.get('file') !== 'undefined')
-            await axios.post(api + "attachment/upload", imgEdit, config)
-                .then(res => {
-                    editData.attachmentId = res.data.body
-                })
-        await axios.put(api + "test/" + testPlusId.id, editData, config)
+        if (imgEdit.get('file') !== 'undefined') await axios.post(api + "attachment/upload", imgEdit, config)
+                .then(res => editData.attachmentId = res.data.body);
+
+        axios.put(api + "test/" + testPlusId.id, editData, config)
             .then(() => {
                 openEditModal();
                 getTestTeacher();
@@ -115,9 +104,9 @@ export default function Overview() {
     const goPageDetails = () => document.getElementById("detielis").click();
 
     return (
-        <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+        <Box pt={{base: "130px", md: "80px", xl: "80px"}}>
             <Link href="/#/Teacher/detielis" id="detielis"></Link>
-            <ToastContainer />
+            <ToastContainer/>
             <Box
                 display="flex"
                 justifyContent="space-between">
@@ -131,7 +120,7 @@ export default function Overview() {
                     onClick={openAddModal}
                     color="success"
                     className="rounded-5 px-4 me-2 mb-3 addBtn"
-                    style={{ letterSpacing: "1px" }}>
+                    style={{letterSpacing: "1px"}}>
                     Add Test
                 </Button>
             </Box>
@@ -140,13 +129,13 @@ export default function Overview() {
             <Modal centered size="lg" isOpen={addModal}>
                 <ModalHeader toggle={openAddModal} className="techer__modal-head">Add Test</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="attachmentId" type="file" />
-                    <Input id="question" placeholder="question" />
-                    <Input id="description" placeholder="description" />
-                    <Input id="grade" type="number" placeholder="ball" />
-                    <Input id="inType" placeholder="inType" />
-                    <Input id="outType" placeholder="outType" />
-                    <Input id="countNumber" type="number" placeholder="countNumber" />
+                    <Input id="attachmentId" type="file"/>
+                    <Input id="question" placeholder="question"/>
+                    <Input id="description" placeholder="description"/>
+                    <Input id="grade" type="number" placeholder="ball"/>
+                    <Input id="inType" placeholder="inType"/>
+                    <Input id="outType" placeholder="outType"/>
+                    <Input id="countNumber" type="number" placeholder="countNumber"/>
                     <select id="categoryId" className="form-select">
                         <option selected disabled>Teacher category</option>
                         {testCategoryPlus && testCategoryPlus.map((item, i) =>
@@ -159,11 +148,11 @@ export default function Overview() {
                     <Button color="success" onClick={addTeacherTest}>Save</Button>
                 </ModalFooter>
             </Modal>
-            <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
+            <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
                 {testPlus.length && testPlus.map((item, i) =>
                     <Card p='20px' key={i}>
-                        <Flex direction={{ base: "column" }} justify='center'>
-                            <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
+                        <Flex direction={{base: "column"}} justify='center'>
+                            <Box mb={{base: "20px", "2xl": "20px"}} position='relative'>
                                 <Image
                                     src={item.attachmentId !== 0
                                         // && item.attachmentId !== "undefined"
@@ -253,7 +242,7 @@ export default function Overview() {
                                             }}
                                             variant='no-hover'
                                             me="15px">
-                                            <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' />
+                                            <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px'/>
                                         </Link>
                                         <Link
                                             onClick={() => {
@@ -262,7 +251,7 @@ export default function Overview() {
                                             }}
                                             me="1px"
                                             variant='no-hover'>
-                                            <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px' />
+                                            <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px'/>
                                         </Link>
                                     </Box>
                                 </Flex>
@@ -276,17 +265,17 @@ export default function Overview() {
             <Modal centered size="lg" isOpen={editModal} className="techer__modal-head">
                 <ModalHeader toggle={openEditModal}>Edit Test</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="attachmentId" type="file" />
-                    <Input id="question" defaultValue={testPlusId && testPlusId.question} />
-                    <Input id="description" defaultValue={testPlusId && testPlusId.description} />
-                    <Input id="grade" type="number" defaultValue={testPlusId && testPlusId.grade} />
-                    <Input id="inType" defaultValue={testPlusId && testPlusId.inType} />
-                    <Input id="outType" defaultValue={testPlusId && testPlusId.outType} />
-                    <Input id="countNumber" type="number" defaultValue={testPlusId && testPlusId.countNumber} />
+                    <Input id="attachmentId" type="file"/>
+                    <Input id="question" defaultValue={testPlusId && testPlusId.question}/>
+                    <Input id="description" defaultValue={testPlusId && testPlusId.description}/>
+                    <Input id="grade" type="number" defaultValue={testPlusId && testPlusId.grade}/>
+                    <Input id="inType" defaultValue={testPlusId && testPlusId.inType}/>
+                    <Input id="outType" defaultValue={testPlusId && testPlusId.outType}/>
+                    <Input id="countNumber" type="number" defaultValue={testPlusId && testPlusId.countNumber}/>
                     <select id="categoryId" className="form-select">
-                        <option selected disabled>Teacher category</option>
+                        <option disabled>Category select</option>
                         {testCategoryPlus && testCategoryPlus.map((item, i) =>
-                            <option key={i} value={item.id}>{item.name}</option>
+                            <option key={i} value={item.id} selected={testPlusId && testPlusId.id === item.id}>{item.name}</option>
                         )}
                     </select>
                 </ModalBody>

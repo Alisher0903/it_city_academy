@@ -21,8 +21,8 @@ export default function UserReports() {
     const [allGroupTop, setAllGroupTop] = useState([]);
 
     useEffect(async () => {
-        await setConfig();
-        getMe();
+        setConfig();
+        await getMe();
         getUserCoin();
         getExchangeCount();
         getAllGroup();
@@ -35,7 +35,6 @@ export default function UserReports() {
                 await setGetMeCount(res.data);
                 getGroupCount(res.data.id);
                 getUserCount(res.data.id);
-
             })
             .catch(err => console.log(err));
     }
