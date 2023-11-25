@@ -110,10 +110,10 @@ export default function Marketplace() {
                 justifyContent='space-between'
                 direction={{base: "column", md: "row"}}
                 align={{base: "start", md: "center"}}>
-                <Text color={textColor} fontSize='2xl' ms='10px' fontWeight='700'>
-                    Category
-                </Text>
-                <Button className="rounded-5 addBtn" color="primary" onClick={openAddModal}>Add Category</Button>
+                {/*<Text color={textColor} fontSize='2xl' ms='10px' fontWeight='700'>*/}
+                {/*    Category*/}
+                {/*</Text>*/}
+                {/*<Button className="rounded-5 addBtn" color="primary" onClick={openAddModal}>Add Category</Button>*/}
                 <Text color={textColor} fontSize='2xl' ms='10px' fontWeight='700'>Category</Text>
                 <Button className="rounded-5 addBtn" color="primary" onClick={openAddModal}>Add Category</Button>
 

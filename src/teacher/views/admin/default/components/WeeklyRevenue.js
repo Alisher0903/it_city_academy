@@ -18,13 +18,16 @@ import {api, config} from "api/api.js";
 export default function WeeklyRevenue(props) {
     const {...rest} = props;
     const [oneGroup, setOneGroup] = useState([]);
-    const [titleGroup, setTitleGroup] = useState([]);
+    const [titleGroup, setTitleGroup] = useState(0);
     const [groupStudent, setGroupStudent] = useState([]);
 
     useEffect(() => {
         getOneGroup();
-        getGroupStudent();
     }, [])
+
+    useEffect(() => {
+        getGroupStudent();
+    }, [titleGroup])
 
     // getOneGroup
     const getOneGroup = () => {
@@ -47,14 +50,15 @@ export default function WeeklyRevenue(props) {
             .then(res => setGroupStudent(res.data.body))
             .catch(err => console.log(err))
     }
-    // console.log("bitta guruh top 5", groupStudent)
+    // console.log(groupStudent)
+    // console.log(titleGroup.id)
 
     return (
         <Card {...rest}>
             <Text
                 display="flex"
                 justifyContent="space-between">
-                <span className="ms-1 mt-1 fs-5 fw-semibold">{titleGroup.name} group top 5</span>
+                <span className="ms-1 mt-1 fs-5 fw-semibold">{titleGroup.name} top 5</span>
                 <Select id="groupSelect" w="25%" onChange={getTitle}>
                     {oneGroup.length && oneGroup.map((item, i) =>
                         <option key={i} value={item.id}>{item.name}</option>
