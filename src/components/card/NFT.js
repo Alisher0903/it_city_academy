@@ -12,14 +12,13 @@ import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactst
 import {getCategory} from "../../api/routers";
 
 export default function NFT(props) {
-    const {image, name, author, bidders, categoryIdIn} = props;
+    const {image, name, author, bidders, categoryIdIn, setCategory} = props;
     const textColor = useColorModeValue("navy.700", "white");
     const textColorBid = useColorModeValue("brand.500", "white");
 
     // modals
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
-    const [category, setCategory] = useState([]);
     const [categoryId, setCategoryId] = useState("");
 
     const openEditModal = () => setEditModal(!editModal);

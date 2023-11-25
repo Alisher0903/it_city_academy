@@ -5,7 +5,7 @@ export const api = "http://142.93.209.179/";
 // teacher url
 export const teacherUrl = "group/teacher";
 export const getUserUrl = "group/teacher/one/group/";
-export const getGeftsTeacher = "gift";
+export const getGiftsTeacher = "gift";
 export const byIdIn = (id) => document.getElementById(id);
 
 
@@ -32,13 +32,11 @@ export const groupDelete = "group/isactive/";
 
 // beautification jwt token
 export const config = {
-    headers: {
-        Authorization: sessionStorage.getItem('jwtTokin'),
-        // 'Content-Type':'application/json'
-    }
+    headers: {Authorization: sessionStorage.getItem('jwtTokin')}
 };
 
+export const setConfig = () => config.headers.Authorization = sessionStorage.getItem('jwtTokin');
+
 export async function addImage(image, setImageId) {
-    axios.post(api + "attachment/upload", image, config)
-        .then(res => setImageId(res.data.body));
+    axios.post(api + "attachment/upload", image, config).then(res => setImageId(res.data.body));
 }

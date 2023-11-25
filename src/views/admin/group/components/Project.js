@@ -120,19 +120,15 @@ export default function Project(props) {
                     <Input id="groupName" type="text" defaultValue={groupId && groupId.name}/>
                     <select className="form-select mb-3" id="groupTeacher">
                         <option selected disabled>Teacher name</option>
-                        {
-                            teacherId.map((item, i) =>
-                                <option key={i} value={item.id}>{item.lastName} {item.firstName}</option>
-                            )
-                        }
+                        {teacherId.map((item, i) =>
+                            <option key={i} value={item.id}>{item.lastName} {item.firstName}</option>
+                        )}
                     </select>
                     <select className="form-select" id="groupCategory">
                         <option selected disabled>Category</option>
-                        {
-                            category.map((item, i) =>
-                                <option key={i} value={item.id}>{item.name}</option>
-                            )
-                        }
+                        {category.map((item, i) =>
+                            <option key={i} value={item.id}>{item.name}</option>
+                        )}
                     </select>
                 </ModalBody>
                 <ModalFooter>

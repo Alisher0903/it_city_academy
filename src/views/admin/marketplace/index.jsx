@@ -15,7 +15,6 @@ export default function Marketplace() {
     const textColor = useColorModeValue("secondaryGray.900", "white");
     const textColorBrand = useColorModeValue("brand.500", "white");
     const [category, setCategory] = useState([]);
-    const [imageId, setImageId] = useState(0);
     const [addModal, setAddModal] = useState(false);
 
     const openAddModal = () => setAddModal(!addModal);
@@ -100,6 +99,7 @@ export default function Marketplace() {
                                     name={item.name}
                                     bidders={[]}
                                     image={imgUrl + item.attachmentId}
+                                    setCategory={setCategory}
                                     // download='frontend'
                                 />
                             )}

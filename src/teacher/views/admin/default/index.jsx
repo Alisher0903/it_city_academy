@@ -6,52 +6,50 @@ import React, {useEffect, useState} from "react";
 import TotalSpent from "./components/TotalSpent";
 import WeeklyRevenue from "./components/WeeklyRevenue";
 import axios from "axios";
-import {api, config} from "../../../../api/api";
+import {api, config, setConfig} from "../../../../api/api";
 import {ToastContainer} from "react-toastify";
 
 export default function UserReports() {
     const brandColor = useColorModeValue("brand.500", "white");
     const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
-    const [getMeCount, setGetMeCount] = useState([]);
+    const [getMeCount, setGetMeCount] = useState('');
     const [groupCount, setGroupCount] = useState([]);
     const [userCount, setUserCount] = useState([]);
     const [coinCount, setCoinCount] = useState([]);
     const [exchangeCount, setExchangeCount] = useState([]);
+    const [allGroupTop, setAllGroupTop] = useState([]);
 
-    useEffect(() => {
-        if (sessionStorage.getItem("reloadTeacher") !== "true") {
-            sessionStorage.setItem("reloadTeacher", "true")
-            window.location.reload();
-        }
-
+    useEffect(async () => {
+        await setConfig();
         getMe();
-    }, []);
-
-    useEffect(() => {
-        getGroupCount();
-        getUserCount();
         getUserCoin();
         getExchangeCount();
-    }, [getMeCount]);
+        getAllGroup();
+    }, []);
 
     // getMe
-    const getMe = () => {
-        axios.get(api + "user/getMe", config)
-            .then(res => setGetMeCount(res.data))
+    const getMe = async () => {
+        await axios.get(api + "user/getMe", config)
+            .then(async res => {
+                await setGetMeCount(res.data);
+                getGroupCount(res.data.id);
+                getUserCount(res.data.id);
+
+            })
             .catch(err => console.log(err));
     }
 
     //getGroupCount
-    const getGroupCount = () => {
-        axios.get(api + "group/byTeacher/" + getMeCount.id, config)
+    const getGroupCount = (id) => {
+        axios.get(api + "group/byTeacher/" + id, config)
             .then(res => setGroupCount(res.data.body))
             .catch(err => console.log(err))
     }
 
     // getUserCount
-    const getUserCount = () => {
-        axios.get(api + "user/byTeacher/" + getMeCount.id, config)
+    const getUserCount = (id) => {
+        axios.get(api + "user/byTeacher/" + id, config)
             .then(res => setUserCount(res.data.body))
             .catch(err => console.log(err))
     }
@@ -67,6 +65,13 @@ export default function UserReports() {
     const getExchangeCount = () => {
         axios.get(api + "exchange/teacher/count", config)
             .then(res => setExchangeCount(res.data.body))
+            .catch(err => console.log(err))
+    }
+
+    // getAllGroup
+    const getAllGroup = () => {
+        axios.get(api + "group/teacher/all/group/users", config)
+            .then(res => setAllGroupTop(res.data.body))
             .catch(err => console.log(err))
     }
 
@@ -162,7 +167,7 @@ export default function UserReports() {
             </SimpleGrid>
 
             <SimpleGrid columns={{base: 1, md: 1, xl: 2}} gap='20px'>
-                <TotalSpent/>
+                <TotalSpent allGroupTop={allGroupTop}/>
                 <WeeklyRevenue/>
             </SimpleGrid>
 
