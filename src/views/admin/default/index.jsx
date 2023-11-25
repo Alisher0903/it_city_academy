@@ -21,7 +21,7 @@ export default function UserReports() {
         getUserCoin();
         getCoutnGroup()
         getCoutnUser()
-        getCoutnTeacher()
+        getCoutnTeacher() 
     }, []);
 
     function getCoutnGroup() {

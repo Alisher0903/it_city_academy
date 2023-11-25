@@ -4,11 +4,7 @@ import { useState } from "react";
 
 // Category
 export const getCategory = (setCategory) => {
-    axios.get(api + "category").then(res => setCategory(res.data.body))
-    .catch((err) => {
-        // console.log(err);
-    })
-    axios.get(api + "category", config).then(res => setCategory(res.data.body))
+    axios.get(api + "category?page=0&size=100", config).then(res => setCategory(res.data.body))
     .catch((err) => console.log(err));
 }
 

@@ -12,7 +12,7 @@ import {
   Button,
   SimpleGrid,
 } from "@chakra-ui/react";
-import { MdSupervisedUserCircle } from "react-icons/md";
+import { MdOutlineCurrencyExchange } from "react-icons/md";
 import { imgUrl } from "api/api";
 import 'react-toastify/dist/ReactToastify.css';
 import { config, api } from "api/api";
@@ -51,7 +51,6 @@ export default function Gift(props) {
   function exchange() {
     axios.post(api + "exchange/save/" + groupId, config)
       .then(() => {
-        openDeleteModal();
         toast.success("Exchange succesfully get✔");
       })
       .catch((error) => {
@@ -147,32 +146,35 @@ export default function Gift(props) {
                     <span> coin</span>
                   </Text>
                   <Button
+                    colorScheme="green"
+                    boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
                     onClick={() => {
                       openDeleteModal()
                       setGroupId(item.id);
                     }}>
                     Olish
-                    <Icon w='25px' as={MdSupervisedUserCircle} />
+                    <Icon w='25px' as={MdOutlineCurrencyExchange} />
                   </Button>
+
                 </Box>
               </Flex>
             </Flex>
           </Flex>
 
 
-          <Modal isOpen={deleteModal} centered className="group__modals">
-            <ModalHeader toggle={openDeleteModal} className="group__modal-head">Delete Group</ModalHeader>
-            <ModalBody className="group__modal-body">
-              <p>Bu sovg'ani olmoqchimisiz?</p>
-            </ModalBody>
-            <ModalFooter>
-              <Button onClick={openDeleteModal} color="dark">Close</Button>
-              <Button outline color="danger" onClick={() => {
-                exchange()
-                openDeleteModal();
-              }}>Ok</Button>
-            </ModalFooter>
-          </Modal>
+            <Modal isOpen={deleteModal} centered className="group__modals">
+              <ModalHeader toggle={openDeleteModal} className="group__modal-head">Delete Group</ModalHeader>
+              <ModalBody className="group__modal-body">
+                <p>Bu sovg'ani olmoqchimisiz?</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button onClick={openDeleteModal} color="dark">Close</Button>
+                <Button outline color="danger" onClick={() => {
+                  exchange()
+                  openDeleteModal();
+                }}>Ok</Button>
+              </ModalFooter>
+            </Modal>
         </Card>
       )}
     </SimpleGrid>

@@ -24,7 +24,7 @@ export default function Gifts() {
     }, []);
 
     function getGifts() {
-        axios.get(api + "gift", config)
+        axios.get(api + "gift?page=0&size=100", config)
             .then(res => {
                 setGift(res.data.body.object)
             }).catch((error) => {
