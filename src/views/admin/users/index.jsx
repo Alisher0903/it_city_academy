@@ -50,6 +50,8 @@ function Users() {
     const getGroupSelect = () => {
         axios.get(api + "group?page=0&size=100", config)
             .then(res => setGroupSelect(res.data.body.object))
+            .catch(() => {
+            })
     }
 
     // addUser
@@ -67,7 +69,10 @@ function Users() {
                 openAddModal();
                 getUsers();
                 toast.success("User muvaffaqiyatli qo'shildi✔");
-            });
+            })
+            .catch(() => {
+                toast.error("User qo'shishda xatolik yuz berdi!")
+                })
     }
 
     // editUser
@@ -85,7 +90,10 @@ function Users() {
                 openEditModal();
                 getUsers();
                 toast.success("Userning ma'lumotlari o'zgartirildi✔");
-            });
+            })
+            .catch(() => {
+                toast.error("User o'zgartirishda xatolik yuz berdi!")
+                })
     }
 
     // deleteUser
@@ -94,8 +102,11 @@ function Users() {
             .then(() => {
                 openDeleteModal();
                 getUsers();
-                toast.error("Userning ma'lumotlari o'zchirildi!!!");
+                toast.success("Userning ma'lumotlari o'zchirildi!!!");
             })
+            .catch(() => {
+                toast.error("User o'chirilmada xatolik yuz berdi!");
+                })
     }
 
     return (
