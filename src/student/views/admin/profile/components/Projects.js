@@ -32,7 +32,7 @@ export default function Projects(props) {
   function getExchange() {
     axios.get(api + "exchange/user", config)
       .then(res => {
-        setExchange(res.data.message) 
+        setExchange(res.data.body.object) 
 
       })
       .catch(err => {
@@ -83,9 +83,9 @@ export default function Projects(props) {
                   key={index}
                   boxShadow={cardShadow}
                   mb='10px'
-                  image={(item.attachmentId != 0) ? imgUrl + item.attachmentId : Project2}
-                  ranking={item.rate}
-                  title={item.name}
+                  image={(item.gift.attachmentId != 0) ? imgUrl + item.gift.attachmentId : Project2}
+                  ranking={item.gift.rate}
+                  title={item.gift.name}
                 />
               ))
             )

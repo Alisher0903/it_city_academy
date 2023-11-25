@@ -82,6 +82,66 @@ export default function UserReports() {
                         name='Students Count'
                         value={user}
                     />
+  function getCoutnGroup() {
+    axios.get(api + "group/countAllGroup", config)
+      .then(res => {
+        setGroup(res.data.body)
+      })
+      .catch(() => {})
+  }
+
+  function getCoutnUser() {
+    axios.get(api + "user/allUserCount", config)
+      .then(res => {
+        setUser(res.data.body)
+      })
+      .catch(() => {})
+  }
+  function getCoutnTeacher() {
+    axios.get(api + "user/allTeacherCount", config)
+      .then(res => {
+        setTeacher(res.data.body)
+      })
+      .catch(() => {})
+  }
+  return (
+    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+      <Grid
+         gridTemplateColumns={{xl: "2fr 1fr",}}
+        w="100%"
+        gap='20px'
+        mb='20px'>
+        <SimpleGrid
+          columns={{ base: 1, md: 2, lg: 2, "2xl": 6 }}
+          w="100%"
+          gap='20px'
+          mb='20px'>
+          <MiniStatistics
+            startContent={
+              <IconBox
+                w='56px'
+                h='56px'
+                bg={boxBg}
+                icon={
+                  <Icon w='32px' h='32px' as={MdSupervisedUserCircle} color={brandColor} />
+                }
+              />
+            }
+            name='Teachers count'
+            value={teacher}
+          />
+          <MiniStatistics
+            startContent={
+              <IconBox
+                w='56px'
+                h='56px'
+                bg='linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)'
+                icon={<Icon w='28px' h='28px' as={MdOutlinePerson4} color='white' />}
+              />
+            }
+            name='Students Count'
+            value={user}
+          />
 
                     <MiniStatistics
                         startContent={
