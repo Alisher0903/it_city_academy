@@ -63,6 +63,7 @@ export default function UserReports() {
       .then(res => {
         setGroup(res.data.body)
       })
+      .catch(() => {})
   }
 
   function getCoutnUser() {
@@ -70,12 +71,14 @@ export default function UserReports() {
       .then(res => {
         setUser(res.data.body)
       })
+      .catch(() => {})
   }
   function getCoutnTeacher() {
     axios.get(api + "user/allTeacherCount", config)
       .then(res => {
         setTeacher(res.data.body)
       })
+      .catch(() => {})
   }
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>

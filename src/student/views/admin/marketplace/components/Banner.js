@@ -31,8 +31,11 @@ export default function Banner() {
       testId: learnIdIn,
       userCode: document.getElementById('code').value
     }, config)
-      .then(() => {
-        toast.success("succesfull✔");
+      .then((res) => {
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        toast.error(err.data.message);
       })
   }
 
@@ -139,11 +142,7 @@ export default function Banner() {
           me='38px'>
           Discover now
         </Button> */}
-          <Link>
-            {/* <Text color='white' fontSize='sm' fontWeight='500'>
-            Watch video
-          </Text> */}
-          </Link>
+          
         </Flex>
       </Flex>
       <Flex

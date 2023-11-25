@@ -38,6 +38,7 @@ export default function Projects() {
         axios.get(api + "category").then(res => setCategory(res.data.body))
         .catch(error => {
             // setError(error); // Xatolikni saqlash
+            console.log(error);
           });
     }
 
