@@ -18,7 +18,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {api, config, getUserUrl, teacherUrl} from "api/api.js";
 import 'react-toastify/dist/ReactToastify.css';
-import {toast, ToastContainer} from "react-toastify";
+import {ToastContainer} from "react-toastify";
 
 // Assets
 export default function GeneralInformation() {

@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 import Project from "./Project";
 import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import axios from "axios";
-import {api, config, groupAdd} from "api/api";
+import {api, config, groupAdd, setConfig} from "api/api";
 
 // toast
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,7 +27,8 @@ export default function Projects() {
     const [group, setGroup] = useState([]);
 
     useEffect(() => {
-        getCategory();
+        setConfig();
+        getCategory(setCategory);
         getTeacher(setTeacherId);
     }, []);
 
@@ -35,7 +36,7 @@ export default function Projects() {
 
     // get category
     const getCategory = () => {
-        axios.get(api + "category?page=0&size=100").then(res => setCategory(res.data.body))
+        axios.get(api + "category?page=0&size=100", config).then(res => setCategory(res.data.body))
             .catch(error => {
                 // setError(error); // Xatolikni saqlash
             });

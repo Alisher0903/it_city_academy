@@ -64,6 +64,8 @@ export default function Marketplace() {
                 openAddModal();
                 getTeacherCategory();
                 toast.success("Category muvaffaqiyatli qo'shildi")
+            }).catch(err => {
+                if (err.response.status === 409) toast.warning(err.response.data.message)
             })
     }
 
@@ -101,6 +103,8 @@ export default function Marketplace() {
             })
     }
 
+    const checkPL = (pl) => teacherCategoryId && pl === teacherCategoryId.programmingLanguage;
+
     return (
         <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
             <ToastContainer/>
@@ -117,31 +121,6 @@ export default function Marketplace() {
                 <Text color={textColor} fontSize='2xl' ms='10px' fontWeight='700'>Category</Text>
                 <Button className="rounded-5 addBtn" color="primary" onClick={openAddModal}>Add Category</Button>
 
-                {/*addModal*/}
-                <Modal isOpen={addModal} centered size="lg">
-                    <ModalHeader className="techer__modal-head" toggle={openAddModal}>Add Teacher Category</ModalHeader>
-                    <ModalBody className="techer__modal-body">
-                        <Input id="attachmentId" type="file"/>
-                        <Input id="name" placeholder="Name"/>
-                        <select id="programmingLanguage" className="form-select">
-                            <option value="0" selected disabled>Programming Language</option>
-                            <option value="1">Java</option>
-                            <option value="2">JavaScript</option>
-                            <option value="3">C++</option>
-                            <option value="4">Python</option>
-                        </select>
-                        <select id="categoryId" className="form-select">
-                            <option selected disabled>Category Select</option>
-                            {teacherCategorySelect && teacherCategorySelect.map((item, i) =>
-                                <option key={i} value={item.id}>{item.name}</option>
-                            )}
-                        </select>
-                    </ModalBody>
-                    <ModalFooter className="techer__modal-footer">
-                        <Button color="dark" onClick={openAddModal}>Close</Button>
-                        <Button color="success" onClick={addTeacherCategory}>Save</Button>
-                    </ModalFooter>
-                </Modal>
             </Flex>
             <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
                 {teacherCategory.length && teacherCategory.map((item, i) =>
@@ -224,27 +203,6 @@ export default function Marketplace() {
                                             p='0px !important'>
                                             <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px'/>
                                         </Link>
-                                        <Link
-                                            onClick={() => {
-                                                openEditModal();
-                                                // setCategoryId(categoryIdIn);
-                                            }}
-                                            variant='no-hover'
-                                            ms='0px'
-                                            me="20px"
-                                            p='0px !important'>
-                                            <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px'/>
-                                        </Link>
-                                        <Link
-                                            onClick={() => {
-                                                openDeleteModal();
-                                                // setCategoryId(categoryIdIn);
-                                            }}
-                                            variant='no-hover'
-                                            ms='0px'
-                                            p='0px !important'>
-                                            <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px'/>
-                                        </Link>
                                     </Box>
                                 </Flex>
                             </Flex>
@@ -252,27 +210,50 @@ export default function Marketplace() {
                     </Card>
                 )}
 
-                {/*editModal*/}
-                <Modal isOpen={editModal} centered size="lg">
-                    <ModalHeader className="techer__modal-head" toggle={openEditModal}>Edit category
-                        information</ModalHeader>
-                    <ModalHeader className="techer__modal-head" toggle={openEditModal}>Edit Teacher
-                        Category</ModalHeader>
+                {/*addModal*/}
+                <Modal isOpen={addModal} centered size="lg">
+                    <ModalHeader className="techer__modal-head" toggle={openAddModal}>Add Teacher Category</ModalHeader>
                     <ModalBody className="techer__modal-body">
                         <Input id="attachmentId" type="file"/>
-                        <Input id="name" defaultValue={teacherCategoryId && teacherCategoryId.name}/>
+                        <Input id="name" placeholder="Name"/>
                         <select id="programmingLanguage" className="form-select">
                             <option value="0" selected disabled>Programming Language</option>
                             <option value="1">Java</option>
                             <option value="2">JavaScript</option>
                             <option value="3">C++</option>
                             <option value="4">Python</option>
-                            <option value="5">Golang</option>
                         </select>
                         <select id="categoryId" className="form-select">
                             <option selected disabled>Category Select</option>
                             {teacherCategorySelect && teacherCategorySelect.map((item, i) =>
                                 <option key={i} value={item.id}>{item.name}</option>
+                            )}
+                        </select>
+                    </ModalBody>
+                    <ModalFooter className="techer__modal-footer">
+                        <Button color="dark" onClick={openAddModal}>Close</Button>
+                        <Button color="success" onClick={addTeacherCategory}>Save</Button>
+                    </ModalFooter>
+                </Modal>
+
+                {/*editModal*/}
+                <Modal isOpen={editModal} centered size="lg">
+                    <ModalHeader className="techer__modal-head" toggle={openEditModal}>Edit category</ModalHeader>
+                    <ModalBody className="techer__modal-body">
+                        <Input id="attachmentId" type="file"/>
+                        <Input id="name" defaultValue={teacherCategoryId && teacherCategoryId.name}/>
+                        <select id="programmingLanguage" className="form-select">
+                            <option value="0" disabled>Programming Language</option>
+                            <option value="1" selected={checkPL('JAVA')}>Java</option>
+                            <option value="2" selected={checkPL('JAVA_SCRIPT')}>JavaScript</option>
+                            <option value="3" selected={checkPL('CPP')}>C++</option>
+                            <option value="4" selected={checkPL('PYTHON')}>Python</option>
+                        </select>
+                        <select id="categoryId" className="form-select">
+                            <option disabled>Category Select</option>
+                            {teacherCategorySelect && teacherCategorySelect.map((item, i) =>
+                                <option key={i} value={item.id}
+                                        selected={teacherCategoryId && item.name === teacherCategoryId.name}>{item.name}</option>
                             )}
                         </select>
                     </ModalBody>

@@ -4,75 +4,67 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Flex, Grid, Image, Link, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
 
 // Assets
-import banner from "../../../../assets/img/nfts/NftBanner1.png";
 import axios from "axios";
-import { config } from "api/api";
-import { api } from "api/api";
-import { ToastContainer, toast } from "react-toastify";
-import { AndroidLogo } from "components/icons/Icons";
-import { imgUrl } from "api/api";
+import {api, config, imgUrl} from "api/api";
+import {toast, ToastContainer} from "react-toastify";
 
 export default function Banner() {
 
-  const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-  const [test, setTest] = useState([]);
+    const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
+    const [test, setTest] = useState([]);
 
-  useEffect(() => {
-    getTest();
-}, []);
-
-
-  let learnIdIn = sessionStorage.getItem("learnId");
-
-  function testCode() {
-    // console.log(learnIdIn);
-    axios.post(api + "test/test-code", {
-      programmingLanguage: "JAVA",
-      testId: learnIdIn,
-      userCode: document.getElementById('code').value
-    }, config)
-      .then((res) => {
-        toast.success(res.data.message);
-      })
-      .catch((err) => {
-        toast.error(err.data.message);
-      })
-  }
-
-  function disableButton() {
-    document.querySelector('button').disabled = true;
-  }
-
-  function getTest() {
-    axios.get(api + "test/" + learnIdIn, config).then(res => {
-      setTest(res.data)
-    })
-  }
+    useEffect(() => {
+        getTest();
+    }, []);
 
 
-  // console.log(test);
+    let learnIdIn = sessionStorage.getItem("learnId");
 
-  return (
-    <>
-      <ToastContainer />
-      <Flex
-        direction='column'
-        // bgImage={banner}
-        bgColor="#4314EC"
-        bgSize='cover'
-        mt="80px"
-        py={{ base: "30px", md: "56px" }}
-        px={{ base: "30px", md: "64px" }}
-        borderRadius='30px'>
-        <Grid
-          templateColumns={{
-            base: "1fr",
-            lg: "repeat(2, 1fr)",
-            "2xl": "repeat(2, 1fr)",
-          }}
+    function testCode() {
+        // console.log(learnIdIn);
+        axios.post(api + "test/test-code", {
+            programmingLanguage: "JAVA",
+            testId: learnIdIn,
+            userCode: document.getElementById('code').value
+        }, config)
+            .then((res) => {
+                toast.success(res.data.message);
+            })
+            .catch((err) => {
+                toast.error(err.data.message);
+            })
+    }
 
-          gap={{ base: "20px", xl: "20px" }}>
-          <Box>
+    function getTest() {
+        axios.get(api + "test/" + learnIdIn, config).then(res => {
+            setTest(res.data)
+        })
+    }
+
+
+    // console.log(test);
+
+    return (
+        <>
+            <ToastContainer/>
+            <Flex
+                direction='column'
+                // bgImage={banner}
+                bgColor="#4314EC"
+                bgSize='cover'
+                mt="80px"
+                py={{base: "30px", md: "56px"}}
+                px={{base: "30px", md: "64px"}}
+                borderRadius='30px'>
+                <Grid
+                    templateColumns={{
+                        base: "1fr",
+                        lg: "repeat(2, 1fr)",
+                        "2xl": "repeat(2, 1fr)",
+                    }}
+
+                    gap={{base: "20px", xl: "20px"}}>
+                    <Box>
 
             <Text
               fontSize={{ base: "24px", md: "34px" }}
@@ -172,14 +164,11 @@ export default function Banner() {
           px='27'
           mt="20px"
           ms="80%"
-          onClick={() => {
-            testCode()
-            disableButton()
-          }}>
+          onClick={testCode}>
           Send
         </Button>
       </Flex>
 
-    </>
-  );
+        </>
+    );
 }
