@@ -43,12 +43,8 @@ export default function Overview() {
             question: byIdIn("question").value,
             attachmentId: 0,
             categoryId: byIdIn("categoryId").value,
-            answer: "",
             grade: byIdIn("grade").value,
             description: byIdIn("description").value,
-            inType: byIdIn("inType").value,
-            outType: byIdIn("outType").value,
-            countNumber: byIdIn("countNumber").value
         }
 
         if (img.get('file') !== 'undefined')
@@ -72,12 +68,8 @@ export default function Overview() {
             question: byIdIn("question").value,
             attachmentId: 0,
             categoryId: byIdIn("categoryId").value,
-            answer: "",
             grade: byIdIn("grade").value,
             description: byIdIn("description").value,
-            inType: byIdIn("inType").value,
-            outType: byIdIn("outType").value,
-            countNumber: byIdIn("countNumber").value
         }
 
         if (imgEdit.get('file') !== 'undefined') await axios.post(api + "attachment/upload", imgEdit, config)
@@ -133,9 +125,6 @@ export default function Overview() {
                     <Input id="question" placeholder="question"/>
                     <Input id="description" placeholder="description"/>
                     <Input id="grade" type="number" placeholder="ball"/>
-                    <Input id="inType" placeholder="inType"/>
-                    <Input id="outType" placeholder="outType"/>
-                    <Input id="countNumber" type="number" placeholder="countNumber"/>
                     <select id="categoryId" className="form-select">
                         <option selected disabled>Teacher category</option>
                         {testCategoryPlus && testCategoryPlus.map((item, i) =>
@@ -269,9 +258,6 @@ export default function Overview() {
                     <Input id="question" defaultValue={testPlusId && testPlusId.question}/>
                     <Input id="description" defaultValue={testPlusId && testPlusId.description}/>
                     <Input id="grade" type="number" defaultValue={testPlusId && testPlusId.grade}/>
-                    <Input id="inType" defaultValue={testPlusId && testPlusId.inType}/>
-                    <Input id="outType" defaultValue={testPlusId && testPlusId.outType}/>
-                    <Input id="countNumber" type="number" defaultValue={testPlusId && testPlusId.countNumber}/>
                     <select id="categoryId" className="form-select">
                         <option disabled>Category select</option>
                         {testCategoryPlus && testCategoryPlus.map((item, i) =>

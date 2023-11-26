@@ -27,7 +27,7 @@ export default function Projects() {
     const [group, setGroup] = useState([]);
 
     useEffect(() => {
-        getCategory(setCategory);
+        getCategory();
         getTeacher(setTeacherId);
     }, []);
 
