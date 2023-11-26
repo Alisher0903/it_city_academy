@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {
+    Box,
+    Button,
     SimpleGrid,
-    useColorModeValue,
     Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
     TableCaption,
     TableContainer,
-    Box,
+    Tbody,
+    Td,
     Text,
-    Button,
+    Th,
+    Thead,
+    Tr,
+    useColorModeValue,
 } from "@chakra-ui/react";
-import { config, api, byIdIn } from "api/api";
+import {api, byIdIn, config} from "api/api";
 import axios from "axios";
-import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import {Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 function AddTeachers() {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -59,7 +59,7 @@ function AddTeachers() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value
+            groupId: 0
         }
         axios.post(api + "auth/register?ROLE=ROLE_TEACHER", addData, config)
             .then(() => {
@@ -80,7 +80,7 @@ function AddTeachers() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value
+            groupId: 0
         }
         axios.put(api + "user/update/" + teacherGetId.id, editData, config)
             .then(() => {
@@ -90,7 +90,7 @@ function AddTeachers() {
             })
             .catch(() => {
                 toast.error("Teacherning ma'lumotlarini o'zgartirilmadi!")
-                });
+            });
     }
 
     // deleteTeacher
@@ -101,13 +101,13 @@ function AddTeachers() {
                 getTeachers();
                 toast.success("Teacherning ma'lumotlari o'zchirildi!!!");
             }).catch(() => {
-                toast.error("Xatolik yuz berdi");
-            });
+            toast.error("Xatolik yuz berdi");
+        });
     }
 
     return (
         <>
-            <ToastContainer />
+            <ToastContainer/>
             <SimpleGrid color={textColorPrimary} pt="100px">
                 <Box
                     display="flex"
@@ -125,17 +125,11 @@ function AddTeachers() {
                             toggle={openAddModal}
                             className="text-dark fs-4 fw-bolder">Add Teachers</ModalHeader>
                         <ModalBody className="techer__modal-body">
-                            <Input id="firstName" placeholder="firstName" />
-                            <Input id="lastName" placeholder="lastName" />
-                            <Input type="email" id="email" placeholder="email" />
-                            <Input type="password" id="password" placeholder="password" />
-                            <Input type="number" id="phoneNumber" placeholder="phoneNumber" />
-                            <select id="groupId" className="form-select">
-                                <option selected disabled>groupName</option>
-                                {groupSelect.length && groupSelect.map((item, i) =>
-                                    <option key={i} value={item.id}>{item.name}</option>
-                                )}
-                            </select>
+                            <Input id="firstName" placeholder="firstName"/>
+                            <Input id="lastName" placeholder="lastName"/>
+                            <Input type="email" id="email" placeholder="email"/>
+                            <Input type="password" id="password" placeholder="password"/>
+                            <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
                         </ModalBody>
                         <ModalFooter>
                             <Button
@@ -209,17 +203,11 @@ function AddTeachers() {
                     className="text-dark fs-4 fw-bolder">
                     Editing data of ({teacherGetId.firstName} {teacherGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="firstName" defaultValue={teacherGetId && teacherGetId.firstName} />
-                    <Input id="lastName" defaultValue={teacherGetId && teacherGetId.lastName} />
-                    <Input type="email" id="email" defaultValue={teacherGetId && teacherGetId.email} />
-                    <Input type="password" id="password" placeholder="password" />
-                    <Input type="number" id="phoneNumber" defaultValue={teacherGetId && teacherGetId.phoneNumber} />
-                    <select id="groupId" className="form-select">
-                        <option selected disabled>groupName</option>
-                        {groupSelect.length && groupSelect.map((item, i) =>
-                            <option key={i} value={item.id}>{item.name}</option>
-                        )}
-                    </select>
+                    <Input id="firstName" defaultValue={teacherGetId && teacherGetId.firstName}/>
+                    <Input id="lastName" defaultValue={teacherGetId && teacherGetId.lastName}/>
+                    <Input type="email" id="email" defaultValue={teacherGetId && teacherGetId.email}/>
+                    <Input type="password" id="password" placeholder="password"/>
+                    <Input type="number" id="phoneNumber" defaultValue={teacherGetId && teacherGetId.phoneNumber}/>
                 </ModalBody>
                 <ModalFooter>
                     <Button
@@ -239,7 +227,7 @@ function AddTeachers() {
                     toggle={openDeleteModal}
                     className="text-dark fs-4 fw-bolder">
                     Delete data of ({teacherGetId.firstName} {teacherGetId.lastName})</ModalHeader>
-                <ModalBody className="text-dark fs-5 fw-medium" style={{ letterSpacing: ".5px", lineHeight: "22px" }}>
+                <ModalBody className="text-dark fs-5 fw-medium" style={{letterSpacing: ".5px", lineHeight: "22px"}}>
                     Siz "{teacherGetId.firstName} {teacherGetId.lastName}" ma'lumotlarini o'chirib yubormoqchisiz.
                     Bunga ishonchingiz komilmi?
                 </ModalBody>
