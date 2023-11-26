@@ -60,6 +60,7 @@ export default function Project(props) {
             })
     }
 
+    console.log(category);
 
     return (
         <>
@@ -125,7 +126,7 @@ export default function Project(props) {
                     </select>
                     <select className="form-select" id="groupCategory">
                         <option selected disabled>Category</option>
-                        {category.map((item, i) =>
+                        {category.length && category.map((item, i) =>
                             <option key={i} value={item.id}>{item.name}</option>
                         )}
                     </select>

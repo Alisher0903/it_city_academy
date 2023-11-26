@@ -2,6 +2,21 @@
 import {Box, Button, Flex, Icon, Image, SimpleGrid, Text, useColorModeValue,} from "@chakra-ui/react";
 import {MdSupervisedUserCircle} from "react-icons/md";
 import {api, config, imgUrl, setConfig} from "api/api";
+import {
+  AvatarGroup,
+  Avatar,
+  Box,
+  Flex,
+  Image,
+  Text,
+  useColorModeValue,
+  Link,
+  Icon,
+  Button,
+  SimpleGrid,
+} from "@chakra-ui/react";
+import { MdOutlineCurrencyExchange } from "react-icons/md";
+import { imgUrl } from "api/api";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Card from "components/card/Card.js";
@@ -24,7 +39,7 @@ export default function Gift() {
         setConfig();
         getGifts()
     }, []);
-
+  
     function getGifts() {
         axios.get(api + "gift", config)
             .then(res => {
@@ -50,7 +65,6 @@ export default function Gift() {
             {gift.length && gift.map((item, i) =>
                 <Card p='20px'>
                     <ToastContainer/>
-
                     <Flex key={i} id={item.id} direction={{base: "column"}} justify='center'>
                         <Box mb={{base: "20px", "2xl": "20px"}} h="13rem" position='relative'>
                             <Image
@@ -111,6 +125,37 @@ export default function Gift() {
                                     xl: "column",
                                     "2xl": "row",
                                 }}>
+                {/* edit delete category link */}
+                <Box display="flex"
+                  w="100%"
+                  justifyContent="space-between">
+                  <Text
+                    color='secondaryGray.600'
+                    align="start"
+                    w="100%"
+                    fontSize={{
+                      base: "22px",
+                    }}
+                    fontWeight='700'
+                    me='10px'>
+                    {item.rate}
+                    <span> coin</span>
+                  </Text>
+                  <Button
+                    colorScheme="green"
+                    boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                    onClick={() => {
+                      openDeleteModal()
+                      setGroupId(item.id);
+                    }}>
+                    Olish
+                    <Icon w='25px' as={MdOutlineCurrencyExchange} />
+                  </Button>
+
+                </Box>
+              </Flex>
+            </Flex>
+          </Flex>
 
                                 {/* edit delete category link */}
                                 <Box display="flex"
@@ -158,4 +203,20 @@ export default function Gift() {
             </Modal>
         </SimpleGrid>
     );
+              <ModalHeader toggle={openDeleteModal} className="group__modal-head">Delete Group</ModalHeader>
+              <ModalBody className="group__modal-body">
+                <p>Bu sovg'ani olmoqchimisiz?</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button onClick={openDeleteModal} color="dark">Close</Button>
+                <Button outline color="danger" onClick={() => {
+                  exchange()
+                  openDeleteModal();
+                }}>Ok</Button>
+              </ModalFooter>
+            </Modal>
+        </Card>
+      )}
+    </SimpleGrid>
+  );
 }

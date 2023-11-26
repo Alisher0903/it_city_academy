@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 // Chakra imports
-import {Box, Button, Flex, Grid, Image, Text, Textarea, useColorModeValue} from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Image, Link, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
 
 // Assets
 import axios from "axios";
@@ -66,66 +66,93 @@ export default function Banner() {
                     gap={{base: "20px", xl: "20px"}}>
                     <Box>
 
-                        <Text
-                            fontSize={{base: "24px", md: "34px"}}
-                            color='white'
-                            mb='14px'
-                            maxW={{
-                                base: "100%",
-                                md: "64%",
-                                lg: "46%",
-                                xl: "70%",
-                                "2xl": "50%",
-                                "3xl": "42%",
-                            }}
-                            fontWeight='700'
-                            lineHeight={{base: "32px", md: "42px"}}>
-                            {test.question}
-                        </Text>
-                        <Text
-                            fontSize='md'
-                            color='#E3DAFF'
-                            maxW={{
-                                base: "100%",
-                                md: "64%",
-                                lg: "40%",
-                                xl: "56%",
-                                "2xl": "46%",
-                                "3xl": "34%",
-                            }}
-                            fontWeight='500'
-                            mb='40px'
-                            lineHeight='28px'>
-                            {test.description}
-                        </Text>
-                        <Text
-                            fontSize={{base: "20px", md: "30px"}}
-                            color='white'
-                            mb='14px'
-                            maxW={{
-                                base: "100%",
-                                md: "64%",
-                                lg: "46%",
-                                xl: "70%",
-                                "2xl": "50%",
-                                "3xl": "42%",
-                            }}
-                            fontWeight='700'
-                            lineHeight={{base: "32px", md: "42px"}}>
-                            Grade: {test.grade}
-                        </Text>
-                    </Box>
-                    <Box>
-                        <Image
-                            src={(test.attachmentId != 0) ? imgUrl + test.attachmentId : "https://spendmatters-site.s3.amazonaws.com/uploads/2019/05/foire-questions-automobiles.jpg"}
-                            w={{base: "90%", base: "70%", "3xl": "60%"}}
-                            h={{base: "90%",}}
-                            borderRadius='20px'
-                        />
-                    </Box>
-                </Grid>
-                <Flex align='center'>
-                    {/* <Button
+            <Text
+              fontSize={{ base: "24px", md: "34px" }}
+              color='white'
+              mb='14px'
+              maxW={{
+                base: "100%",
+                md: "64%",
+                lg: "46%",
+                xl: "70%",
+                "2xl": "50%",
+                "3xl": "42%",
+              }}
+              fontWeight='700'
+              lineHeight={{ base: "32px", md: "42px" }}>
+              {test.question}
+            </Text>
+            <Text
+              fontSize='md'
+              color='#E3DAFF'
+              maxW={{
+                base: "100%",
+                md: "64%",
+                lg: "40%",
+                xl: "56%",
+                "2xl": "46%",
+                "3xl": "34%",
+              }}
+              fontWeight='500'
+              mb='40px'
+              lineHeight='28px'>
+              {test.description}
+            </Text>
+            <Text
+              fontSize={{ base: "20px", md: "30px" }}
+              color='white'
+              mb='14px'
+              maxW={{
+                base: "100%",
+                md: "64%",
+                lg: "46%",
+                xl: "70%",
+                "2xl": "50%",
+                "3xl": "42%",
+              }}
+              fontWeight='700'
+              lineHeight={{ base: "32px", md: "42px" }}>
+                Grade: {test.grade}
+            </Text>
+          </Box>
+          <Box>
+            <Image
+              src={(test.attachmentId != 0) ? imgUrl + test.attachmentId : "https://spendmatters-site.s3.amazonaws.com/uploads/2019/05/foire-questions-automobiles.jpg"}
+              w={{ base: "90%", base: "70%", "3xl": "60%" }}
+              h={{ base: "90%", }}
+              borderRadius='20px'
+            />
+          </Box>
+        </Grid>
+      </Flex>
+      <Flex
+        direction='column'
+        bgColor={boxBg}
+        bgSize='cover'
+        mt="20px"
+        py={{ base: "20px", md: "26px" }}
+        px={{ base: "20px", md: "26px" }}
+        borderRadius='30px'>
+        <Textarea className="textarea" placeholder="Write your code..."
+          id="code"
+          color="#666666"
+          padding="1em"
+          borderRadius="10px"
+          border="2px solid transparent"
+          outline="none"
+          fontFamily="'Heebo', sans-serif"
+          fontWeight="500"
+          fontSize="16px"
+          lineHeight="1.4"
+          transition="all 0.2s"
+          height="200px"
+          _hover={{
+            cursor: "pointer"
+          }}
+        />
+        <Button
+
+          width="15%"
           bg='white'
           color='black'
           _hover={{ bg: "whiteAlpha.900" }}
@@ -135,55 +162,12 @@ export default function Banner() {
           fontSize='14px'
           py='20px'
           px='27'
-          me='38px'>
-          Discover now
-        </Button> */}
-
-                </Flex>
-            </Flex>
-            <Flex
-                direction='column'
-                bgColor={boxBg}
-                bgSize='cover'
-                mt="20px"
-                py={{base: "20px", md: "26px"}}
-                px={{base: "20px", md: "26px"}}
-                borderRadius='30px'>
-                <Textarea className="textarea" placeholder="Write your code..."
-                          id="code"
-                          color="#666666"
-                          padding="1em"
-                          borderRadius="10px"
-                          border="2px solid transparent"
-                          outline="none"
-                          fontFamily="'Heebo', sans-serif"
-                          fontWeight="500"
-                          fontSize="16px"
-                          lineHeight="1.4"
-                          transition="all 0.2s"
-                          height="200px"
-                          _hover={{
-                              cursor: "pointer"
-                          }}
-                />
-                <Button
-
-                    width="15%"
-                    bg='white'
-                    color='black'
-                    _hover={{bg: "whiteAlpha.900"}}
-                    _active={{bg: "white"}}
-                    _focus={{bg: "white"}}
-                    fontWeight='500'
-                    fontSize='14px'
-                    py='20px'
-                    px='27'
-                    mt="20px"
-                    ms="80%"
-                    onClick={testCode}>
-                    Send
-                </Button>
-            </Flex>
+          mt="20px"
+          ms="80%"
+          onClick={testCode}>
+          Send
+        </Button>
+      </Flex>
 
         </>
     );
