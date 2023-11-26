@@ -72,14 +72,7 @@ function Users() {
             phoneNumber: byIdIn("phoneNumber").value,
             groupId: byIdIn("groupId").value
         }
-        axios.post(api + "auth/register?ROLE=ROLE_USER", {
-            firstName: byIdIn("firstName").value,
-            lastName: byIdIn("lastName").value,
-            email: byIdIn("email").value,
-            password: byIdIn("password").value,
-            phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value
-        }, config)
+        axios.post(api + "auth/register?ROLE=ROLE_USER", addData, config)
             .then(() => {
                 openAddModal();
                 getUsers();

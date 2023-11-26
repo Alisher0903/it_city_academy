@@ -18,11 +18,8 @@ export default function UserReports() {
 
     useEffect(async () => {
         await setConfig();
-        if (sessionStorage.getItem('reload') !== "true") {
-          sessionStorage.setItem('reload', 'true')
-          window.location.reload();
-        }
         getUserCoin();
+        getAllGroup()
         getCoutnGroup()
         getCoutnUser()
         getCoutnTeacher() 
@@ -60,6 +57,14 @@ export default function UserReports() {
             .then(res => setCoinCount(res.data.body))
             .catch(err => {
             })
+    }
+
+    const getAllGroup = () => {
+        axios.get(api + "user/top-users", config)
+            .then(res => {
+              console.log(res.data.body);})
+            .catch(err => {})
+            
     }
     return (
         <Box pt={{base: "130px", md: "80px", xl: "80px"}}>
