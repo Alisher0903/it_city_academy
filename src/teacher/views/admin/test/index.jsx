@@ -48,6 +48,9 @@ export default function Overview() {
             description: byIdIn("description").value,
             inType: byIdIn("inType").value,
             outType: byIdIn("outType").value,
+            categoryId: byIdIn("categoryId").value,
+            grade: byIdIn("grade").value,
+            description: byIdIn("description").value,
         }
 
         if (img.get('file') !== 'undefined') await axios.post(api + "attachment/upload", img, config)
@@ -70,12 +73,8 @@ export default function Overview() {
             question: byIdIn("question").value,
             attachmentId: 0,
             categoryId: byIdIn("categoryId").value,
-            answer: "",
             grade: byIdIn("grade").value,
             description: byIdIn("description").value,
-            inType: byIdIn("inType").value,
-            outType: byIdIn("outType").value,
-            countNumber: byIdIn("countNumber").value
         }
 
         if (imgEdit.get('file') !== 'undefined') await axios.post(api + "attachment/upload", imgEdit, config)
@@ -123,6 +122,26 @@ export default function Overview() {
                 </Button>
             </Box>
 
+            {/* addModal */}
+            <Modal centered size="lg" isOpen={addModal}>
+                <ModalHeader toggle={openAddModal} className="techer__modal-head">Add Test</ModalHeader>
+                <ModalBody className="techer__modal-body">
+                    <Input id="attachmentId" type="file"/>
+                    <Input id="question" placeholder="question"/>
+                    <Input id="description" placeholder="description"/>
+                    <Input id="grade" type="number" placeholder="ball"/>
+                    <select id="categoryId" className="form-select">
+                        <option selected disabled>Teacher category</option>
+                        {testCategoryPlus && testCategoryPlus.map((item, i) =>
+                            <option key={i} value={item.id}>{item.name}</option>
+                        )}
+                    </select>
+                </ModalBody>
+                <ModalFooter className="techer__modal-footer">
+                    <Button onClick={openAddModal}>Close</Button>
+                    <Button color="success" onClick={addTeacherTest}>Save</Button>
+                </ModalFooter>
+            </Modal>
             <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
                 {testPlus.length && testPlus.map((item, i) =>
                     <Card p='20px' key={i}>
@@ -267,9 +286,6 @@ export default function Overview() {
                     <Input id="question" defaultValue={testPlusId && testPlusId.question}/>
                     <Input id="description" defaultValue={testPlusId && testPlusId.description}/>
                     <Input id="grade" type="number" defaultValue={testPlusId && testPlusId.grade}/>
-                    <Input id="inType" defaultValue={testPlusId && testPlusId.inType}/>
-                    <Input id="outType" defaultValue={testPlusId && testPlusId.outType}/>
-                    <Input id="countNumber" type="number" defaultValue={testPlusId && testPlusId.countNumber}/>
                     <select id="categoryId" className="form-select">
                         <option disabled>Category select</option>
                         {testCategoryPlus && testCategoryPlus.map((item, i) =>
