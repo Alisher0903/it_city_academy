@@ -43,12 +43,14 @@ function AddTeachers() {
 
     // getTeachers
     const getTeachers = () => axios.get(api + "user/teacher", config)
-        .then(res => setTeachers(res.data.body));
+        .then(res => setTeachers(res.data.body))
+        .catch((err) => console.log(err))
 
     // getGroupSelect
     const getGroupSelect = () => {
         axios.get(api + "group?page=0&size=100", config)
-            .then(res => setGroupSelect(res.data.body.object));
+            .then(res => setGroupSelect(res.data.body.object))
+            .catch((err) => console.log(err))
     }
 
     // addTeacher
