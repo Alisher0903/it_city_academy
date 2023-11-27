@@ -19,6 +19,7 @@ import Teacher from "./views/admin/teachersAdd";
 
 import SignIn from "views/auth/signIn";
 import Gifts from "views/admin/gifts";
+import AdminAdd from "views/admin/adminAdd";
 
 const routes = [
   {
@@ -70,6 +71,13 @@ const routes = [
     path: "/teacher",
     icon: <Icon as={MdPersonPin} width='20px' height='20px' color='inherit' />,
     component: Teacher,
+  },
+  {
+    name: "AdminAdd",
+    layout: "/admin",
+    path: "/AdminAdd",
+    icon: <Icon as={MdPersonPin} width='20px' height='20px' color='inherit' />,
+    component: AdminAdd,
   },
   {
     name: "",

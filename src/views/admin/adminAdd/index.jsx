@@ -21,7 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
 import { byIdIn } from "api/api";
 
-function Users() {
+function AdminAdd() {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
 
     // state hooks
@@ -34,7 +34,6 @@ function Users() {
 
     useEffect(() => {
         getUsers();
-        getGroupSelect();
     }, []);
 
     // modals function
@@ -44,21 +43,13 @@ function Users() {
 
     // getUsers
     const getUsers = () => 
-    {axios.get(api + "user", config)
+    {axios.get(api + "user/admin", config)
         .then(res => {
             setUsers(res.data.body.object)
             console.log(res.data.body.object);
         })
         .catch(err => {
             console.log(err);
-            })
-    }
-
-    // getGroupSelect
-    const getGroupSelect = () => {
-        axios.get(api + "group", config)
-            .then(res => setGroupSelect(res.data.body.object))
-            .catch(() => {
             })
     }
 
@@ -70,16 +61,16 @@ function Users() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value
+            groupId: 0
         }
-        axios.post(api + "auth/register?ROLE=ROLE_USER", addData, config)
+        axios.post(api + "auth/register?ROLE=ROLE_SUPER_ADMIN", addData, config)
             .then(() => {
                 openAddModal();
                 getUsers();
-                toast.success("User muvaffaqiyatli qo'shildi✔");
+                toast.success("Admin muvaffaqiyatli qo'shildi✔");
             })
             .catch(() => {
-                toast.error("User qo'shishda xatolik yuz berdi!")
+                toast.error("Admin qo'shishda xatolik yuz berdi!")
                 })
     }
 
@@ -91,16 +82,16 @@ function Users() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value
+            groupId: 0
         }
         axios.put(api + "user/update/" + userGetId.id, editData, config)
             .then(() => {
                 openEditModal();
                 getUsers();
-                toast.success("Userning ma'lumotlari o'zgartirildi✔");
+                toast.success("Adminning ma'lumotlari o'zgartirildi✔");
             })
             .catch(() => {
-                toast.error("User o'zgartirishda xatolik yuz berdi!")
+                toast.error("Admin o'zgartirishda xatolik yuz berdi!")
                 })
     }
 
@@ -110,10 +101,10 @@ function Users() {
             .then(() => {
                 openDeleteModal();
                 getUsers();
-                toast.success("Userning ma'lumotlari o'zchirildi!!!");
+                toast.success("Adminning ma'lumotlari o'zchirildi!!!");
             })
             .catch(() => {
-                toast.error("User o'chirilmada xatolik yuz berdi!");
+                toast.error("Admin o'chirilmada xatolik yuz berdi!");
                 })
     }
 
@@ -124,30 +115,24 @@ function Users() {
                 <Box
                     display="flex"
                     justifyContent="space-between">
-                    <Text fontSize="1.5rem" fontWeight="bold" letterSpacing=".5px">Users</Text>
+                    <Text fontSize="1.5rem" fontWeight="bold" letterSpacing=".5px">Admin</Text>
                     <Button
                         onClick={openAddModal}
                         colorScheme="green" variant="outline"
                         boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
-                        Add Users</Button>
+                        Add Admin</Button>
 
                     {/* addUserModal */}
                     <Modal isOpen={addModal} centered size="lg">
                         <ModalHeader
                             toggle={openAddModal}
-                            className="text-dark fs-4 fw-bolder">Add Users</ModalHeader>
+                            className="text-dark fs-4 fw-bolder">Add Admin</ModalHeader>
                         <ModalBody className="techer__modal-body">
                             <Input id="firstName" placeholder="firstName" />
                             <Input id="lastName" placeholder="lastName" />
                             <Input type="email" id="email" placeholder="email" />
                             <Input type="password" id="password" placeholder="password" />
                             <Input type="number" id="phoneNumber" placeholder="phoneNumber" />
-                            <select id="groupId" className="form-select">
-                                <option selected disabled>groupName</option>
-                                {groupSelect.length && groupSelect.map((item, i) =>
-                                    <option key={i} value={item.id}>{item.name}</option>
-                                )}
-                            </select>
                         </ModalBody>
                         <ModalFooter>
                             <Button
@@ -226,12 +211,6 @@ function Users() {
                     <Input type="email" id="email" defaultValue={userGetId && userGetId.email} />
                     <Input type="password" id="password" placeholder="password1" />
                     <Input type="number" id="phoneNumber" defaultValue={userGetId && userGetId.phoneNumber} />
-                    <select id="groupId" className="form-select">
-                        <option selected disabled>groupName</option>
-                        {groupSelect.length && groupSelect.map((item, i) =>
-                            <option key={i} value={item.id}>{item.name}</option>
-                        )}
-                    </select>
                 </ModalBody>
                 <ModalFooter>
                     <Button
@@ -270,4 +249,4 @@ function Users() {
     );
 }
 
-export default Users;
+export default AdminAdd;
