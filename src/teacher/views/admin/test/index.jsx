@@ -42,10 +42,9 @@ export default function Overview() {
         const addData = {
             question: byIdIn("question").value,
             attachmentId: 0,
-            categoryId: +byIdIn("categoryId").value,
+            categoryId: byIdIn("categoryId").value,
             grade: +byIdIn("grade").value,
-            description: byIdIn("description").value,
-            categoryId: byIdIn("categoryId").value
+            description: byIdIn("description").value
         }
 
         if (img.get('file') !== 'undefined') await axios.post(api + "attachment/upload", img, config)
@@ -116,27 +115,6 @@ export default function Overview() {
                     Add Test
                 </Button>
             </Box>
-
-            {/* addModal */}
-            <Modal centered size="lg" isOpen={addModal}>
-                <ModalHeader toggle={openAddModal} className="techer__modal-head">Add Test</ModalHeader>
-                <ModalBody className="techer__modal-body">
-                    <Input id="attachmentId" type="file"/>
-                    <Input id="question" placeholder="question"/>
-                    <Input id="description" placeholder="description"/>
-                    <Input id="grade" type="number" placeholder="ball"/>
-                    <select id="categoryId" className="form-select">
-                        <option selected disabled>Teacher category</option>
-                        {testCategoryPlus && testCategoryPlus.map((item, i) =>
-                            <option key={i} value={item.id}>{item.name}</option>
-                        )}
-                    </select>
-                </ModalBody>
-                <ModalFooter className="techer__modal-footer">
-                    <Button onClick={openAddModal}>Close</Button>
-                    <Button color="success" onClick={addTeacherTest}>Save</Button>
-                </ModalFooter>
-            </Modal>
             <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
                 {testPlus.length && testPlus.map((item, i) =>
                     <Card p='20px' key={i}>
