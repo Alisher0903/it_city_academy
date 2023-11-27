@@ -43,14 +43,9 @@ export default function Overview() {
             question: byIdIn("question").value,
             attachmentId: 0,
             categoryId: +byIdIn("categoryId").value,
-            answer: "",
             grade: +byIdIn("grade").value,
             description: byIdIn("description").value,
-            inType: byIdIn("inType").value,
-            outType: byIdIn("outType").value,
-            categoryId: byIdIn("categoryId").value,
-            grade: byIdIn("grade").value,
-            description: byIdIn("description").value,
+            categoryId: byIdIn("categoryId").value
         }
 
         if (img.get('file') !== 'undefined') await axios.post(api + "attachment/upload", img, config)
@@ -263,8 +258,6 @@ export default function Overview() {
                     <Input id="question" placeholder="question"/>
                     <Input id="description" placeholder="description"/>
                     <Input id="grade" type="number" placeholder="ball"/>
-                    <Input id="inType" placeholder="inType"/>
-                    <Input id="outType" placeholder="outType"/>
                     <select id="categoryId" className="form-select">
                         <option selected disabled>Teacher category</option>
                         {testCategoryPlus && testCategoryPlus.map((item, i) =>
