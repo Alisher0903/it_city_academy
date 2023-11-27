@@ -5,15 +5,14 @@ import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactst
 import "../test/modal.scss";
 import {MdDelete, MdEdit} from "react-icons/md";
 import axios from "axios";
-import {config, byIdIn, api} from "api/api";
-import {ToastContainer, toast} from "react-toastify";
+import {api, byIdIn, config} from "api/api";
+import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Overview() {
 
     const [testAnswer, setTestAnswer] = useState([]);
     const [teacherCategory, setTeacherCategory] = useState([]);
-    const [testIdSelect, setTestIdSelect] = useState(0);
     const [testAnswerPlus, setTestAnswerPlus] = useState([]);
     const [testAnswerBtn, setTestAnswerBtn] = useState([]);
     const [testAnswerBtnId, setTestAnswerBtnId] = useState('');
@@ -44,10 +43,6 @@ export default function Overview() {
         // category get
         axios.get(api + "category/teacher/by/sub/category", config)
             .then(res => setTeacherCategory(res.data));
-
-        // test id get mana shuni tug'rilash kk
-        axios.get(api + "test/by/" + testIdSelect + "/test", config)
-            .then(res => setTestAnswerPlus(res.data));
     }, []);
 
     useEffect(() => {
@@ -106,11 +101,11 @@ export default function Overview() {
 
     // categorydan testni filterlash
     const selectOnClick = () => {
-        setTestIdSelect(byIdIn("categoryId").value);
+        axios.get(api + "test/by/" + byIdIn("categoryId").value + "/test", config)
+            .then(res => {
+                setTestAnswerPlus(res.data)
+            });
     }
-
-    // console.log(testIdSelect);
-    // console.log(testAnswerPlus);
 
     return (
         <Box pt={{base: "130px", md: "80px", xl: "80px"}}>
@@ -138,17 +133,17 @@ export default function Overview() {
                         <Input id="answer" placeholder="answer"/>
                         <Input id="result" placeholder="result"/>
                         <select
-                            onClick={selectOnClick}
+                            onChange={selectOnClick}
                             id="categoryId"
                             className="form-select">
-                            <option selected disabled>CategoryId select</option>
+                            <option selected disabled>Select category</option>
                             {teacherCategory && teacherCategory.map((item, i) =>
                                 <option key={i} value={item.id}>{item.name}</option>
                             )}
                         </select>
                         <select id="testId" className="form-select">
-                            <option selected disabled>TestId select</option>
-                            {testAnswerBtn && testAnswerBtn.map((item, i) =>
+                            <option selected disabled>Select test</option>
+                            {testAnswerPlus && testAnswerPlus.map((item, i) =>
                                 <option key={i} value={item.id}>{item.question}</option>
                             )}
                         </select>
@@ -225,7 +220,7 @@ export default function Overview() {
                             </select>
                             <select id="testId" className="form-select">
                                 <option selected disabled>TestId select</option>
-                                {testAnswerBtn && testAnswerBtn.map((item, i) =>
+                                {testAnswerPlus && testAnswerPlus.map((item, i) =>
                                     <option key={i} value={item.id}>{item.question}</option>
                                 )}
                             </select>
