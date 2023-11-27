@@ -8,6 +8,7 @@ import {
   MdCardGiftcard,
   MdPerson,
   MdPersonPin,
+  MdPersonAddAlt
 } from "react-icons/md";
 import MainDashboard from "views/admin/default";
 import NFTMarketplace from "views/admin/marketplace";
@@ -76,7 +77,7 @@ const routes = [
     name: "AdminAdd",
     layout: "/admin",
     path: "/AdminAdd",
-    icon: <Icon as={MdPersonPin} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={MdPersonAddAlt} width='20px' height='20px' color='inherit' />,
     component: AdminAdd,
   },
   {
