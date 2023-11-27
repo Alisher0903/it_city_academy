@@ -45,6 +45,7 @@ export default function Overview() {
             categoryId: +byIdIn("categoryId").value,
             grade: +byIdIn("grade").value,
             description: byIdIn("description").value,
+            categoryId: byIdIn("categoryId").value
         }
 
         if (img.get('file') !== 'undefined') await axios.post(api + "attachment/upload", img, config)

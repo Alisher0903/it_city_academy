@@ -43,6 +43,7 @@ export default function Gifts() {
             .then(res => {
                 console.log(res.data.body);
                 saveGift(res.data.body)
+                getGifts()
             })
         } else saveGift(0);
     }
@@ -122,11 +123,7 @@ export default function Gifts() {
                         </Flex>
                         <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
 
-                            {
-                                error ? (
-                                    <h1>404</h1>
-                                ) : (
-                                    gift.length && gift.map((item, i) =>
+                            { gift.length && gift.map((item, i) =>
                                         <Gift
                                             giftIdIn={item}
                                             getGifts={getGifts}
@@ -137,10 +134,7 @@ export default function Gifts() {
                                             bidders={[]}
                                             image={imgUrl + item.attachmentId}
                                             // download='frontend'
-                                        />
-                                    )
-                                )
-                            }
+                                        />)}
                         </SimpleGrid>
                     </Flex>
                 </Flex>
