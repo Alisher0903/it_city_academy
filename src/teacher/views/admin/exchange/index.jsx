@@ -69,16 +69,17 @@ function Exchange() {
                                     color={textColor1}
                                     fontSize="1rem"
                                     mb='5px'
-                                    mt="5px"
+                                    mt="2px"
                                     ms='4px'
                                     fontWeight="normal"
+                                    lineHeight="28px"
                                     letterSpacing=".5px">
-                                    <span>{item.user.groupName}</span><br/>
-                                    <span className="me-1">{item.gift.rate} coin</span>
+                                    {item.user.groupName}<br/>
+                                    {item.gift.rate} coin
                                 </Text>
                                 <Text
                                     color={textColor1}
-                                    fontSize="1rem"
+                                    fontSize="1.2rem"
                                     mb='5px'
                                     fontWeight="bolder"
                                     ms='4px'
