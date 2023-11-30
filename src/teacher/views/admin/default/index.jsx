@@ -126,39 +126,6 @@ export default function UserReports() {
                     name="Those who accepted the gift"
                     value={exchangeCount !== 0 ? exchangeCount : 0}/>
 
-                {/*<MiniStatistics*/}
-                {/*    endContent={*/}
-                {/*        <Flex me='-16px' mt='10px'>*/}
-                {/*            <FormLabel htmlFor='balance'>*/}
-                {/*                <Avatar src={Usa}/>*/}
-                {/*            </FormLabel>*/}
-                {/*            <Select*/}
-                {/*                id='balance'*/}
-                {/*                variant='mini'*/}
-                {/*                mt='5px'*/}
-                {/*                me='0px'*/}
-                {/*                defaultValue='usd'>*/}
-                {/*                <option value='usd'>USD</option>*/}
-                {/*                <option value='eur'>EUR</option>*/}
-                {/*                <option value='gba'>GBA</option>*/}
-                {/*            </Select>*/}
-                {/*        </Flex>*/}
-                {/*    }*/}
-                {/*    name='Your balance'*/}
-                {/*    value='$1,000'*/}
-                {/*/>*/}
-                {/*<MiniStatistics*/}
-                {/*    startContent={*/}
-                {/*        <IconBox*/}
-                {/*            w='56px'*/}
-                {/*            h='56px'*/}
-                {/*            bg='linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)'*/}
-                {/*            icon={<Icon w='28px' h='28px' as={MdAddTask} color='white'/>}*/}
-                {/*        />*/}
-                {/*    }*/}
-                {/*    name='New Tasks'*/}
-                {/*    value='154'*/}
-                {/*/>*/}
             </SimpleGrid>
 
             <SimpleGrid columns={{base: 1, md: 1, xl: 1}} gap='20px'>
@@ -166,24 +133,6 @@ export default function UserReports() {
                 <WeeklyRevenue/>
             </SimpleGrid>
 
-            {/*comments dashboard*/}
-            {/*<SimpleGrid columns={{base: 1, md: 1, xl: 2}} gap='20px' mb='20px'>*/}
-            {/*    <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck}/>*/}
-            {/*    <SimpleGrid columns={{base: 1, md: 2, xl: 2}} gap='20px'>*/}
-            {/*        <DailyTraffic/>*/}
-            {/*        <PieCard/>*/}
-            {/*    </SimpleGrid>*/}
-            {/*</SimpleGrid>*/}
-            {/*<SimpleGrid columns={{base: 1, md: 1, xl: 2}} gap='20px' mb='20px'>*/}
-            {/*    <ComplexTable*/}
-            {/*        columnsData={columnsDataComplex}*/}
-            {/*        tableData={tableDataComplex}*/}
-            {/*    />*/}
-            {/*    <SimpleGrid gap='20px'>*/}
-            {/*        <Tasks/>*/}
-            {/*        <MiniCalendar h='100%' w='100%' selectRange={false}/>*/}
-            {/*    </SimpleGrid>*/}
-            {/*</SimpleGrid>*/}
         </Box>
     );
 }
