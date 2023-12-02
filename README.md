@@ -1,4 +1,4 @@
-# [IT CITY ACADEMY ⚡️](https://github.com/Alisher0903/it_city_academy) [![Intagram](https://img.freepik.com/premium-vector/instagram-icon_488108-3.jpg)](https://www.instagram.com/itcity_academy/)
+# [IT CITY ACADEMY ⚡️](https://github.com/Alisher0903/it_city_academy) [![Intagram]](https://www.instagram.com/itcity_academy/)
 
 ![version](https://img.shields.io/badge/version-1.3.0-brightgreen.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
