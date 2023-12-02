@@ -1,4 +1,4 @@
-# [IT CITY ACADEMY ⚡️](https://github.com/Alisher0903/it_city_academy) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https://horizon-ui.com/&text=Check%20Horizon%20UI,%20the%20trendiest%20open-source%20admin%20template%20for%20Chakra%20UI%20&%20React!)
+# [IT CITY ACADEMY ⚡️](https://github.com/Alisher0903/it_city_academy) [![Intagram]()](https://www.instagram.com/itcity_academy/)
 
 ![version](https://img.shields.io/badge/version-1.3.0-brightgreen.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
