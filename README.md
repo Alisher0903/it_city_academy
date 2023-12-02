@@ -1,12 +1,12 @@
-# [Horizon UI ⚡️](https://horizon-ui.com/horizon-ui-chakra) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https://horizon-ui.com/&text=Check%20Horizon%20UI,%20the%20trendiest%20open-source%20admin%20template%20for%20Chakra%20UI%20&%20React!)
+# [IT CITY ACADEMY ⚡️](https://github.com/Alisher0903/it_city_academy) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https://horizon-ui.com/&text=Check%20Horizon%20UI,%20the%20trendiest%20open-source%20admin%20template%20for%20Chakra%20UI%20&%20React!)
 
 ![version](https://img.shields.io/badge/version-1.3.0-brightgreen.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
-[![GitHub issues open](https://img.shields.io/github/issues/horizon-ui/horizon-ui-chakra.svg?maxAge=2592000)](https://github.com/horizon-ui/horizon-ui-chakra/issues?q=is%3Aopen+is%3Aissue)
+[![GitHub issues open](https://img.shields.io/github/issues/horizon-ui/horizon-ui-chakra.svg?maxAge=2592000)](https://github.com/Alisher0903/it_city_academy/issues)
 
 <p>&nbsp;</p>
 
-[<img alt="Horizon UI" src="./src/assets/img/auth/itcity.png" /> ](https://github.com/horizon-ui/horizon-ui-chakra)
+[<img alt="Horizon UI" src="./src/assets/img/auth/itcity.png" /> ](https://github.com/Alisher0903/it_city_academy)
 
 <p>&nbsp;</p>
 
@@ -51,7 +51,7 @@ Install Horizon UI by running either of the following:
 Clone the repository with the following command:
 
 ```bash
-git clone https://github.com/horizon-ui/horizon-ui-chakra.git
+git clone git@github.com:Alisher0903/it_city_academy.git
 ```
 
 Run in terminal this command:
@@ -71,14 +71,14 @@ npm start
 If you want to get inspiration or just show something directly to your clients,
 you can jump start your development with our pre-built example pages. You will
 be able to quickly set up the basic structure for your web project. View
-<a href="https://horizon-ui.com/horizon-ui-chakra/?ref=readme-horizon" target="_blank">example
+<a href="https://it-city-academy.vercel.app/" target="_blank">example
 pages here.</a>
 
 ### Versions
 
 | Free Version                                                                                                       | PRO Version                                                                                                               |
 | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| [![Horizon UI](https://i.ibb.co/fdyTwz1/introduction-image-2.png)](https://www.horizon-ui.com/?ref=readme-horizon) | [![Horizon UI PRO](https://i.ibb.co/R6jFKRM/introduction-image-1.png)](https://www.horizon-ui.com/pro?ref=readme-horizon) |
+| [![Horizon UI](./src/assets/img/auth/itcity.png)](https://github.com/Alisher0903/it_city_academy) | [![Horizon UI PRO](./src/assets/img/auth/itcity.png)](https://github.com/Alisher0903/it_city_academy) |
 
 ### Figma Version
 
@@ -93,7 +93,7 @@ some advices for our users that want to report an issue:
 
 1. Make sure that you are using the latest version of the Horizon UI Dashbaord.
    Check the CHANGELOG from your dashboard on our
-   [CHANGE LOG File](https://github.com/horizon-ui/horizon-ui-chakra/blob/main/CHANGELOG.md?ref=readme-horizon).
+   [CHANGE LOG File](https://github.com/Alisher0903/it_city_academy).
 2. Providing us reproducible steps for the issue will shorten the time it takes
    for it to be fixed.
 3. Some issues may be browser specific, so specifying in what browser you
