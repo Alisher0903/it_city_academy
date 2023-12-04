@@ -50,7 +50,7 @@ export default function WeeklyRevenue(props) {
                                     onClick={goInfo}
                                     variant="outline"
                                     boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                                    Veiw Group
+                                    View Group
                                 </Button>
                             </Td>
                         </Tr>

@@ -51,7 +51,7 @@ export default function WeeklyRevenue(props) {
                                     onClick={goInfo}
                                     boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
                                     variant="outline">
-                                    Info
+                                    View Info
                                 </Button>
                             </Td>
                         </Tr>

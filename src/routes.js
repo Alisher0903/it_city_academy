@@ -76,7 +76,7 @@ const routes = [
     component: Teacher,
   },
   {
-    name: "AdminAdd",
+    name: "Admin",
     layout: "/admin",
     path: "/AdminAdd",
     icon: <Icon as={MdPersonAddAlt} width='20px' height='20px' color='inherit' />,
