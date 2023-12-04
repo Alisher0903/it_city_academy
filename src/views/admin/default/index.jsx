@@ -7,14 +7,7 @@ import IconBox from "components/icons/IconBox";
 import React, { useEffect, useState } from "react";
 import { MdCurrencyExchange, MdOutlinePeopleAlt, MdOutlinePerson4, MdSupervisedUserCircle } from "react-icons/md";
 import TotalSpent from "views/admin/default/components/TotalSpent";
-import PieCard from "../../../views/admin/default/components/PieCard";
 import Card from "components/card/Card";
-import DailyTraffic from "student/views/admin/default/components/DailyTraffic";
-import {columnsDataCheck, columnsDataComplex,} from "./variables/columnsData";
-import CheckTable from "./components/CheckTable";
-import tableDataCheck from "../../../views/admin/default/variables/tableDataCheck.json";
-import WeeklyRevenue from "student/views/admin/default/components/WeeklyRevenue";
-
 
 export default function UserReports() {
     const brandColor = useColorModeValue("brand.500", "white");
@@ -23,15 +16,13 @@ export default function UserReports() {
     const [user, setUser] = useState();
     const [coinCount, setCoinCount] = useState([]);
     const [teacher, setTeacher] = useState();
-    const [allGroupTop, setAllGroupTop] = useState([]);
 
     useEffect(async () => {
         await setConfig();
         getUserCoin();
-        getAllGroup()
-        getCoutnGroup()
-        getCoutnUser()
-        getCoutnTeacher()
+        getCoutnGroup();
+        getCoutnUser();
+        getCoutnTeacher();
     }, []);
 
     function getCoutnGroup() {
@@ -68,16 +59,10 @@ export default function UserReports() {
             })
     }
 
-    const getAllGroup = () => {
-        axios.get(api + "user/top-users", config)
-            .then(res => setAllGroupTop(res.data.body))
-            .catch(() => { })
-
-    }
-
     return (
         <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
             <Grid
+                gridTemplateColumns={{ xl: "2fr 1fr", "2xl": "1fr"}}
                 w="100%"
                 gap='20px'
                 mb='20px'>
@@ -128,59 +113,19 @@ export default function UserReports() {
                         value={group}
                     />
                 </SimpleGrid>
-            </Grid>
-            <Grid
-                w="100%"
-                gap='20px'
-                mb='20px'>
-                <SimpleGrid columns={{base: 1, md: 2, xl: 2}} gap='20px'>
-                <DailyTraffic/>
-                    <PieCard/>
+                <SimpleGrid
+                    display={{base: "none", xl: "block", "2xl": "none"}}
+                 gap='20px'
+                 mb='20px'>
+                    <MiniCalendar h='100%' w='100%' selectRange={false} />
                 </SimpleGrid>
             </Grid>
             <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px'>
-                {/* <TotalSpent/> */}
-                <Card>
-                    <Text textAlign="center" mt=".3rem" mb=".45rem">
-                        <span className="fs-5 fw-semibold">Top students</span>
-                    </Text>
-                    <TableContainer
-                        mt="1rem"
-                        pt=".7rem"
-                        pb=".7rem"
-                        borderRadius="15px"
-                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
-                        <Table>
-                            <TableCaption
-                                fontSize="1rem">All Group</TableCaption>
-                            <Thead>
-                                <Tr>
-                                    <Th>T/r</Th>
-                                    <Th>Full name</Th>
-                                    <Th>Phone number</Th>
-                                    <Th>Email</Th>
-                                    <Th>Curren coin</Th>
-                                </Tr>
-                            </Thead>
-                            <Tbody>
-                                {allGroupTop !== null ?
-                                    allGroupTop.map((item, i) =>
-                                        <Tr key={i}>
-                                            <Td>{i + 1}</Td>
-                                            <Td>{item.firstName} {item.lastName}</Td>
-                                            <Td>{item.phoneNumber}</Td>
-                                            <Td>{item.email}</Td>
-                                            <Td>{item.currentRate}</Td>
-                                        </Tr>
-                                    ) :
-                                    <Tr>
-                                        <Td colSpan="4">Top 5 lik student xali mavjud emas!!!</Td>
-                                    </Tr>
-                                }
-                            </Tbody>
-                        </Table>
-                    </TableContainer>
-                </Card>
+                <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap="20px">
+                    <TopGroups />
+                    <TopTeachers />
+                </SimpleGrid>
+                <TopStudent />
             </SimpleGrid>
 
         </Box>
