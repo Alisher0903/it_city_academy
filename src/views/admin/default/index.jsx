@@ -1,19 +1,18 @@
 import { Box, Grid, Icon, SimpleGrid, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, } from "@chakra-ui/react";
 import { api, config, setConfig } from "api/api";
 import axios from "axios";
-import MiniCalendar from "components/calendar/MiniCalendar";
+// import MiniCalendar from "components/calendar/MiniCalendar";
 import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
 import React, { useEffect, useState } from "react";
 import { MdCurrencyExchange, MdOutlinePeopleAlt, MdOutlinePerson4, MdSupervisedUserCircle } from "react-icons/md";
-import TotalSpent from "views/admin/default/components/TotalSpent";
+// import TotalSpent from "views/admin/default/components/TotalSpent";
 import PieCard from "../../../views/admin/default/components/PieCard";
-import Card from "components/card/Card";
+// import Card from "components/card/Card";
 import DailyTraffic from "student/views/admin/default/components/DailyTraffic";
-import {columnsDataCheck, columnsDataComplex,} from "./variables/columnsData";
-import CheckTable from "./components/CheckTable";
-import tableDataCheck from "../../../views/admin/default/variables/tableDataCheck.json";
-import WeeklyRevenue from "student/views/admin/default/components/WeeklyRevenue";
+// import CheckTable from "./components/CheckTable";
+// import tableDataCheck from "../../../views/admin/default/variables/tableDataCheck.json";
+// import WeeklyRevenue from "student/views/admin/default/components/WeeklyRevenue";
 
 import TopStudent from "./components/TopStudent";
 import TopTeachers from "./components/TopTeachers";
@@ -72,7 +71,6 @@ export default function UserReports() {
     return (
         <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
             <Grid
-                gridTemplateColumns={{ xl: "2fr 1fr", "2xl": "1fr" }}
                 w="100%"
                 gap='20px'
                 mb='20px'>
