@@ -71,7 +71,7 @@ export default function UserReports() {
     return (
         <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
             <Grid
-                gridTemplateColumns={{ xl: "2fr 1fr", }}
+                gridTemplateColumns={{ xl: "2fr 1fr", "2xl": "1fr"}}
                 w="100%"
                 gap='20px'
                 mb='20px'>
@@ -131,10 +131,13 @@ export default function UserReports() {
                                     <Icon w='32px' h='32px' as={MdCurrencyExchange} color={brandColor} />
                                 } />
                         }
-                        name="Total number of students coins"
+                        name="Students coin"
                         value={coinCount !== 0 ? coinCount : 0} />
                 </SimpleGrid>
-                <SimpleGrid gap='20px' mb='20px'>
+                <SimpleGrid
+                    display={{base: "none", xl: "block", "2xl": "none"}}
+                 gap='20px'
+                 mb='20px'>
                     <MiniCalendar h='100%' w='100%' selectRange={false} />
                 </SimpleGrid>
             </Grid>
