@@ -75,7 +75,7 @@ export default function NFT(props) {
                     <Image
                         src={image}
                         w={{base: "100%", "3xl": "100%"}}
-                        h={{base: "180px", "3xl": "100%"}}
+                        h={{base: "180px", "3xl": "200px"}}
                         borderRadius='20px'
                         objectFit="cover"
                     />
