@@ -11,13 +11,13 @@ import {
     Thead,
     Tr,
 } from "@chakra-ui/react";
-import {api, byIdIn, config, setConfig} from "api/api";
+import { api, byIdIn, config, setConfig } from "api/api";
 import Card from "components/card/Card";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function WeeklyRevenue(props) {
-    const {...rest} = props;
+    const { ...rest } = props;
     const [topGroup, setTopGroup] = useState([]);
 
     useEffect(async () => {
@@ -53,8 +53,8 @@ export default function WeeklyRevenue(props) {
                     <Thead>
                         <Tr>
                             <Th>T/r</Th>
-                            <Th>Name</Th>
-                            <Th colSpan="2">coinCount</Th>
+                            <Th>GroupName</Th>
+                            <Th colSpan="2">CoinCount</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -66,7 +66,10 @@ export default function WeeklyRevenue(props) {
                                     <Td>{item.coinCount}</Td>
                                     <Td textAlign="end">
                                         <Button
-                                            onClick={goInfo}
+                                            onClick={() => {
+                                                goInfo();
+                                                sessionStorage.setItem("topGroup", item.groupName)
+                                            }}
                                             variant="outline"
                                             boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;">
                                             View Group
