@@ -23,6 +23,8 @@ import TeacherInfo from "./views/admin/default/components/infoDashboard/TeacherI
 import SignIn from "views/auth/signIn";
 import Gifts from "views/admin/gifts";
 import AdminAdd from "views/admin/adminAdd";
+import Forgot from "views/auth/forgot/forgot1";
+import Forgot2 from "views/auth/forgot/forgot2";
 
 const routes = [
   {
@@ -94,7 +96,21 @@ const routes = [
     layout: "/auth",
     path: "/sign-in",
     icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
-    component: SignIn
+    component: SignIn,
+  },
+  {
+    name: "",
+    layout: "/auth",
+    path: "/forgot-password",
+    icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
+    component: Forgot
+  },
+  {
+    name: "",
+    layout: "/auth",
+    path: "/forgot-password-2",
+    icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
+    component: Forgot2
   },
   {
     name: "",
