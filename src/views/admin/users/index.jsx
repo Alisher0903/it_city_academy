@@ -120,6 +120,8 @@ function Users() {
     }
 
     function addCoinInUser() {
+        let userId = byIdIn('userId').value;
+        let coin = byIdIn('coin').value;
         toast.success('Progress...');
     }
 
@@ -204,7 +206,7 @@ function Users() {
             <Modal isOpen={coinModal} centered size="lg" toggle={openCoinModal}>
                 <ModalHeader toggle={openCoinModal} className="text-dark fs-4 fw-bolder">Add Coin</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <select id="groupId" className="form-select">
+                    <select className="form-select" onChange={getStudentsInGroup}>
                         <option selected disabled>Select group</option>
                         {groupSelect.length && groupSelect.map((item, i) =>
                             <option key={i} value={item.id}>{item.name}</option>
