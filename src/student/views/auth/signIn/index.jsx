@@ -10,7 +10,6 @@
 */
 
 import React from "react";
-import { NavLink } from "react-router-dom";
 // Chakra imports
 import {
   Box,
@@ -32,9 +31,9 @@ import { HSeparator } from "../../../components/separator/Separator";
 import DefaultAuth from "../../../layouts/auth/Default";
 // Assets
 import itcity from "../../../assets/img/auth/itcity.png";
-import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import { Link } from "@chakra-ui/react";
 
 function SignIn() {
   // Chakra color mode
@@ -179,7 +178,7 @@ function SignIn() {
                   Keep me logged in
                 </FormLabel>
               </FormControl>
-              {/* <NavLink to='/auth/forgot-password'>
+              <Link href="/auth/forgot-password">
                 <Text
                   color={textColorBrand}
                   fontSize='sm'
@@ -187,7 +186,7 @@ function SignIn() {
                   fontWeight='500'>
                   Forgot password?
                 </Text>
-              </NavLink> */}
+              </Link>
             </Flex>
             <Button
               fontSize='sm'

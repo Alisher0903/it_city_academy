@@ -11,12 +11,27 @@ import {
     Thead,
     Tr,
 } from "@chakra-ui/react";
-import { byIdIn } from "api/api";
+import { api, byIdIn, config, setConfig } from "api/api";
 import Card from "components/card/Card";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function WeeklyRevenue(props) {
     const { ...rest } = props;
+    const [topGroup, setTopGroup] = useState([]);
+
+    useEffect(async () => {
+        await setConfig();
+        getTopGroup();
+    }, []);
+
+    // getTopGroup
+    const getTopGroup = () => {
+        axios.get(api + "user/popularCourse", config)
+            .then(res => setTopGroup(res.data.body))
+            .catch(() => {
+            });
+    }
 
     const goInfo = () => byIdIn("groupInfo").click();
 
@@ -38,22 +53,33 @@ export default function WeeklyRevenue(props) {
                     <Thead>
                         <Tr>
                             <Th>T/r</Th>
-                            <Th colSpan="2">Name</Th>
+                            <Th>GroupName</Th>
+                            <Th colSpan="2">CoinCount</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>1</Td>
-                            <Td>GroupName</Td>
-                            <Td textAlign="end">
-                                <Button
-                                    onClick={goInfo}
-                                    variant="outline"
-                                    boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                                    View Group
-                                </Button>
-                            </Td>
-                        </Tr>
+                        {topGroup.length
+                            ? topGroup.map((item, i) =>
+                                <Tr key={i}>
+                                    <Td>{i + 1}</Td>
+                                    <Td>{item.groupName}</Td>
+                                    <Td>{item.coinCount}</Td>
+                                    <Td textAlign="end">
+                                        <Button
+                                            onClick={() => {
+                                                goInfo();
+                                                sessionStorage.setItem("topGroup", item.groupName)
+                                            }}
+                                            variant="outline"
+                                            boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                                            View Group
+                                        </Button>
+                                    </Td>
+                                </Tr>
+                            )
+                            : <Tr><Td>xxxxxxxxxx</Td></Tr>
+                        }
+
                     </Tbody>
                 </Table>
             </TableContainer>

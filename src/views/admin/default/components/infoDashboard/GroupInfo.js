@@ -12,6 +12,9 @@ import {
 import Card from "components/card/Card";
 
 function GroupInfo() {
+
+    let topGroupInfo = sessionStorage.getItem("topGroup");
+
     return (<>
         <Card mt="100px">
             <Text textAlign="center" mt=".3rem" mb=".45rem">
