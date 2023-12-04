@@ -13,7 +13,7 @@ import {
 // Student Imports
 import Gifts from "./views/admin/gifts";
 import NFTMarketplace from "./views/admin/marketplace/index";
-import Profile from "./views/admin/profile/index";
+import Default from "./views/admin/default"
 import DataTables from "./views/admin/dataTables/index";
 import Banner from "./views/admin/marketplace/components/Banner"
 import Group from "./views/admin/group/index"
@@ -28,7 +28,7 @@ const routes = [
     layout: "/Student",
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: Profile,
+    component: Default,
   },
   {
     name: "Test",
