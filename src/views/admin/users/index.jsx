@@ -14,14 +14,11 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import {api, byIdIn, config, setConfig} from "api/api";
-import {config, api} from "api/api";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from "react-toastify";
-import {ToastContainer, toast} from "react-toastify";
-import {byIdIn} from "api/api";
 
 function Users() {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -48,21 +45,8 @@ function Users() {
     // getUsers
     const getUsers = () => {
         axios.get(api + "user", config)
-            .then(res => {
-                setUsers(res.data.body.object)
-                console.log(res.data.body.object);
-            })
-            .catch(err => {
-                console.log(err);
-    const getUsers = () => {
-        axios.get(api + "user", config)
-            .then(res => {
-                setUsers(res.data.body.object)
-                // console.log(res.data.body.object);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            .then(res => setUsers(res.data.body.object))
+            .catch(err => console.log(err));
     }
 
     // getGroupSelect
@@ -70,7 +54,7 @@ function Users() {
         axios.get(api + "group", config)
             .then(res => setGroupSelect(res.data.body.object))
             .catch(() => {
-            })
+            });
     }
 
     // addUser
@@ -236,17 +220,8 @@ function Users() {
                     <Input id="lastName" defaultValue={userGetId && userGetId.lastName}/>
                     <Input type="email" id="email" defaultValue={userGetId && userGetId.email}/>
                     <Input type="password" id="password" defaultValue={userGetId && userGetId.password}/>
-                    <Input type="number" id="phoneNumber" defaultValue={userGetId && userGetId.phoneNumber}/>
-                    <Input id="firstName" defaultValue={userGetId && userGetId.firstName} />
-                    <Input id="lastName" defaultValue={userGetId && userGetId.lastName} />
-                    <Input type="email" id="email" defaultValue={userGetId && userGetId.email} />
-                    <Input type="password" id="password" placeholder="password1" />
-                    <Input type="number" id="phoneNumber" defaultValue={userGetId && userGetId.phoneNumber} />
-                    <Input id="firstName" defaultValue={userGetId && userGetId.firstName}/>
-                    <Input id="lastName" defaultValue={userGetId && userGetId.lastName}/>
-                    <Input type="email" id="email" defaultValue={userGetId && userGetId.email}/>
-                    <Input type="password" id="password" placeholder="password1"/>
-                    <Input type="number" id="phoneNumber" defaultValue={userGetId && userGetId.phoneNumber}/>
+                    <Input type="number" id="phoneNumber"
+                           defaultValue={userGetId && userGetId.phoneNumber}/>
                     <select id="groupId" className="form-select">
                         <option selected disabled>groupName</option>
                         {groupSelect.length && groupSelect.map((item, i) =>
