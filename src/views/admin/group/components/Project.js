@@ -5,7 +5,7 @@ import {MdDelete, MdEdit} from "react-icons/md";
 import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import "./scss/group.scss";
 import axios from "axios";
-import {api, config, groupDelete, groupEdit} from "api/api";
+import {api, config, groupDelete, groupEdit, setConfig} from "api/api";
 import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from "react-toastify";
 import {getCategory, getGroup, getTeacher} from "../../../../api/routers";
@@ -30,6 +30,7 @@ export default function Project(props) {
 
 
     useEffect(() => {
+        setConfig();
         getGroup(setGroup);
         getCategory(setCategory);
         getTeacher(setTeacherId);
@@ -59,8 +60,6 @@ export default function Project(props) {
                 toast.success("Group muvaffaqiyatli o'chirildi❌");
             })
     }
-
-    console.log(category);
 
     return (
         <>

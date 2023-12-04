@@ -10,10 +10,10 @@ export const getCategory = (setCategory) => {
 
 // Group
 export function getGroup(setGroup) {
-
     axios.get(api + "user/teacher", config)
         .then(t => {
             let group = [];
+            console.log('teacher: ' + t)
             axios.get(api + "group?page=0&size=100", config)
                 .then(res => {
                     for (const g of res.data.body.object)
