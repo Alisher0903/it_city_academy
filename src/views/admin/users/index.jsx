@@ -26,7 +26,9 @@ function Users() {
     // state hooks
     const [users, setUsers] = useState([]);
     const [groupSelect, setGroupSelect] = useState([]);
+    const [students, setStudent] = useState([]);
     const [addModal, setAddModal] = useState(false);
+    const [coinModal, setCoinModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
     const [userGetId, setUserGetId] = useState("");
@@ -41,6 +43,7 @@ function Users() {
     const openAddModal = () => setAddModal(!addModal);
     const openEditModal = () => setEditModal(!editModal);
     const openDeleteModal = () => setDeleteModal(!deleteModal);
+    const openCoinModal = () => setCoinModal(!coinModal);
 
     // getUsers
     const getUsers = () => {
@@ -112,6 +115,14 @@ function Users() {
             })
     }
 
+    function getStudentsInGroup(e) {
+        setStudent([]);
+    }
+
+    function addCoinInUser() {
+        toast.success('Progress...');
+    }
+
     return (
         <>
             <ToastContainer/>
@@ -120,41 +131,20 @@ function Users() {
                     display="flex"
                     justifyContent="space-between">
                     <Text fontSize="1.5rem" fontWeight="bold" letterSpacing=".5px">Users</Text>
-                    <Button
-                        onClick={openAddModal}
-                        colorScheme="green" variant="outline"
-                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
-                        Add Users</Button>
-
-                    {/* addUserModal */}
-                    <Modal isOpen={addModal} centered size="lg">
-                        <ModalHeader
-                            toggle={openAddModal}
-                            className="text-dark fs-4 fw-bolder">Add Users</ModalHeader>
-                        <ModalBody className="techer__modal-body">
-                            <Input id="firstName" placeholder="firstName"/>
-                            <Input id="lastName" placeholder="lastName"/>
-                            <Input type="email" id="email" placeholder="email"/>
-                            <Input type="password" id="password" placeholder="password"/>
-                            <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
-                            <select id="groupId" className="form-select">
-                                <option selected disabled>groupName</option>
-                                {groupSelect.length && groupSelect.map((item, i) =>
-                                    <option key={i} value={item.id}>{item.name}</option>
-                                )}
-                            </select>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button
-                                boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                                colorScheme="facebook"
-                                onClick={openAddModal}>Close</Button>
-                            <Button
-                                colorScheme="green"
-                                boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                                onClick={addUsers}>Save</Button>
-                        </ModalFooter>
-                    </Modal>
+                    <div>
+                        <Button
+                            onClick={openCoinModal}
+                            colorScheme="green" variant="outline"
+                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                            marginEnd='15px'>
+                            Add coin
+                        </Button>
+                        <Button
+                            onClick={openAddModal}
+                            colorScheme="green" variant="outline"
+                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
+                            Add Users</Button>
+                    </div>
 
                 </Box>
                 <TableContainer
@@ -208,6 +198,66 @@ function Users() {
                     </Table>
                 </TableContainer>
             </SimpleGrid>
+
+            {/* Add coin Modal */}
+            <Modal isOpen={coinModal} centered size="lg" toggle={openCoinModal}>
+                <ModalHeader toggle={openCoinModal} className="text-dark fs-4 fw-bolder">Add Coin</ModalHeader>
+                <ModalBody className="techer__modal-body">
+                    <select id="groupId" className="form-select">
+                        <option selected disabled>Select group</option>
+                        {groupSelect.length && groupSelect.map((item, i) =>
+                            <option key={i} value={item.id}>{item.name}</option>
+                        )}
+                    </select>
+                    <select id="userId" className="form-select">
+                        <option selected disabled>Select group</option>
+                        {students.length && students.map((item, i) =>
+                            <option key={i} value={item.id}>{item.firstName}</option>
+                        )}
+                    </select>
+                    <Input type="number" id="coin" placeholder="Coin"/>
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                        colorScheme="facebook"
+                        onClick={openCoinModal}>Close</Button>
+                    <Button
+                        colorScheme="green"
+                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                        onClick={addCoinInUser}>Save</Button>
+                </ModalFooter>
+            </Modal>
+
+            {/* addUserModal */}
+            <Modal isOpen={addModal} centered size="lg">
+                <ModalHeader
+                    toggle={openAddModal}
+                    className="text-dark fs-4 fw-bolder">Add Users</ModalHeader>
+                <ModalBody className="techer__modal-body">
+                    <Input id="firstName" placeholder="firstName"/>
+                    <Input id="lastName" placeholder="lastName"/>
+                    <Input type="email" id="email" placeholder="email"/>
+                    <Input type="password" id="password" placeholder="password"/>
+                    <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
+                    <select id="groupId" className="form-select">
+                        <option selected disabled>groupName</option>
+                        {groupSelect.length && groupSelect.map((item, i) =>
+                            <option key={i} value={item.id}>{item.name}</option>
+                        )}
+                    </select>
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                        colorScheme="facebook"
+                        onClick={openAddModal}>Close</Button>
+                    <Button
+                        colorScheme="green"
+                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                        onClick={addUsers}>Save</Button>
+                </ModalFooter>
+            </Modal>
 
             {/* editUserModal */}
             <Modal isOpen={editModal} centered size="lg">
