@@ -60,7 +60,7 @@ export default function Project(props) {
             })
     }
 
-    console.log(category);
+    // console.log(category);
 
     return (
         <>
