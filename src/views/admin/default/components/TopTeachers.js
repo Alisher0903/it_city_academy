@@ -11,12 +11,27 @@ import {
     Thead,
     Tr,
 } from "@chakra-ui/react";
+import { api } from "api/api";
+import { config } from "api/api";
 import { byIdIn } from "api/api";
+import axios from "axios";
 import Card from "components/card/Card";
 import React, { useEffect, useState } from "react";
 
 export default function WeeklyRevenue(props) {
     const { ...rest } = props;
+    const [topTeacher, setTopTeacher] = useState([]);
+
+    useEffect(() => {
+        
+    }, []);
+
+    // getTopTeacher
+    const getTopTeacher = () => {
+        axios.get(api + "user/teacher/level", config)
+            .then(res => setTopTeacher(res.data.body))
+            .catch(() => { })
+    }
 
     const goInfo = () => byIdIn("teacherInfo").click();
 
