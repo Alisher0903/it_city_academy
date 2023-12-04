@@ -78,7 +78,7 @@ export default function Marketplace() {
                                             }
                                             {item.name}
                                         </AccordionHeader>
-                                        <TestList categoryId={item.id} index={i + 1}/>
+                                        <TestList categoryId={item.id} pl={item.programmingLanguage} index={i + 1}/>
                                     </AccordionItem>
                                 )}
                             </UncontrolledAccordion>

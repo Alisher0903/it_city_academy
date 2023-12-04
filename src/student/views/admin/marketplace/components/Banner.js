@@ -18,15 +18,19 @@ export default function Banner() {
     }, []);
 
 
-    let learnIdIn = sessionStorage.getItem("learnId");
+    let learnId = sessionStorage.getItem("learnId");
 
     function testCode() {
-        // console.log(learnIdIn);
-        axios.post(api + "test/test-code", {
-            programmingLanguage: "JAVA",
-            testId: learnIdIn,
+        // console.log(learnId.id);
+        let data = {
+            programmingLanguage: sessionStorage.getItem("PL"),
+            testId: learnId,
             userCode: document.getElementById('code').value
-        }, config)
+        }
+
+
+        console.log(data)
+        axios.post(api + "test/test-code", data, config)
             .then((res) => {
                 toast.success(res.data.message);
             })
@@ -36,11 +40,21 @@ export default function Banner() {
     }
 
     function getTest() {
-        axios.get(api + "test/" + learnIdIn, config).then(res => {
+        axios.get(api + "test/" + learnId, config).then(res => {
             setTest(res.data)
         })
     }
 
+    function example() {
+        switch (sessionStorage.getItem("PL")) {
+            case "JAVA_SCRIPT":
+                return "Msol: function checkCode(params) {\n//code...\n}";
+            case "PYTHON":
+                return "Msol: def checkCode(params):\n\t#code...";
+            case "JAVA":
+                return "public static String checkCode(params) {\n\t//code...\n}";
+        }
+    }
 
     // console.log(test);
 
@@ -117,12 +131,19 @@ export default function Banner() {
                     </Box>
                     <Box>
                         <Image
-                            src={(test.attachmentId != 0) ? imgUrl + test.attachmentId : "https://spendmatters-site.s3.amazonaws.com/uploads/2019/05/foire-questions-automobiles.jpg"}
-                            w={{base: "90%", base: "70%", "3xl": "60%"}}
+                            src={(test.attachmentId !== 0) ? imgUrl + test.attachmentId : "https://spendmatters-site.s3.amazonaws.com/uploads/2019/05/foire-questions-automobiles.jpg"}
+                            w={{base: "70%", "3xl": "60%"}}
                             h={{base: "90%",}}
                             borderRadius='20px'
                         />
                     </Box>
+                    <Text color="white">
+                        <Text color="warning" fontSize={{base: "25px"}}>
+                            ⚠️Eslatma: fucsiya nomi codeCheck bulishi shart!
+                        </Text>
+                        ⚠️{example()}
+                    </Text>
+
                 </Grid>
             </Flex>
             <Flex
