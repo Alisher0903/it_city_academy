@@ -13,13 +13,13 @@ import {
     Text,
     Button,
 } from "@chakra-ui/react";
-import { config, api } from "api/api";
+import {config, api} from "api/api";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import {useEffect, useState} from "react";
+import {Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from "react-toastify";
-import { byIdIn } from "api/api";
+import {ToastContainer, toast} from "react-toastify";
+import {byIdIn} from "api/api";
 
 function AdminAdd() {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -42,14 +42,14 @@ function AdminAdd() {
     const openDeleteModal = () => setDeleteModal(!deleteModal);
 
     // getUsers
-    const getUsers = () => 
-    {axios.get(api + "user/admin", config)
-        .then(res => {
-            setUsers(res.data.body.object)
-            console.log(res.data.body.object);
-        })
-        .catch(err => {
-            console.log(err);
+    const getUsers = () => {
+        axios.get(api + "user/admin", config)
+            .then(res => {
+                setUsers(res.data.body.object)
+                console.log(res.data.body.object);
+            })
+            .catch(err => {
+                console.log(err);
             })
     }
 
@@ -71,7 +71,7 @@ function AdminAdd() {
             })
             .catch(() => {
                 toast.error("Admin qo'shishda xatolik yuz berdi!")
-                })
+            })
     }
 
     // editUser
@@ -92,7 +92,7 @@ function AdminAdd() {
             })
             .catch(() => {
                 toast.error("Admin o'zgartirishda xatolik yuz berdi!")
-                })
+            })
     }
 
     // deleteUser
@@ -105,12 +105,12 @@ function AdminAdd() {
             })
             .catch(() => {
                 toast.error("Admin o'chirilmada xatolik yuz berdi!");
-                })
+            })
     }
 
     return (
         <>
-            <ToastContainer />
+            <ToastContainer/>
             <SimpleGrid color={textColorPrimary} pt="100px">
                 <Box
                     display="flex"
@@ -128,11 +128,11 @@ function AdminAdd() {
                             toggle={openAddModal}
                             className="text-dark fs-4 fw-bolder">Add Admin</ModalHeader>
                         <ModalBody className="techer__modal-body">
-                            <Input id="firstName" placeholder="firstName" />
-                            <Input id="lastName" placeholder="lastName" />
-                            <Input type="email" id="email" placeholder="email" />
-                            <Input type="password" id="password" placeholder="password" />
-                            <Input type="number" id="phoneNumber" placeholder="phoneNumber" />
+                            <Input id="firstName" placeholder="firstName"/>
+                            <Input id="lastName" placeholder="lastName"/>
+                            <Input type="email" id="email" placeholder="email"/>
+                            <Input type="password" id="password" placeholder="password"/>
+                            <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
                         </ModalBody>
                         <ModalFooter>
                             <Button
@@ -167,33 +167,36 @@ function AdminAdd() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {users.length && users.map((item, i) =>
-                                <Tr key={i}>
-                                    <Td>{i + 1}</Td>
-                                    <Td>{item.lastName}</Td>
-                                    <Td>{item.firstName}</Td>
-                                    <Td>{item.email}</Td>
-                                    <Td>{item.phoneNumber}</Td>
-                                    <Td>
-                                        <Button
-                                            onClick={() => {
-                                                openEditModal();
-                                                setUserGetId(item);
-                                            }}
-                                            colorScheme="yellow"
-                                            variant="outline">Edit</Button>
-                                    </Td>
-                                    <Td>
-                                        <Button
-                                            onClick={() => {
-                                                openDeleteModal();
-                                                setUserGetId(item);
-                                            }}
-                                            colorScheme="red"
-                                            variant="outline">Delete</Button>
-                                    </Td>
-                                </Tr>
-                            )}
+                            {users.length ?
+                                users.map((item, i) =>
+                                    <Tr key={i}>
+                                        <Td>{i + 1}</Td>
+                                        <Td>{item.lastName}</Td>
+                                        <Td>{item.firstName}</Td>
+                                        <Td>{item.email}</Td>
+                                        <Td>{item.phoneNumber}</Td>
+                                        <Td>
+                                            <Button
+                                                onClick={() => {
+                                                    openEditModal();
+                                                    setUserGetId(item);
+                                                }}
+                                                colorScheme="yellow"
+                                                variant="outline">Edit</Button>
+                                        </Td>
+                                        <Td>
+                                            <Button
+                                                onClick={() => {
+                                                    openDeleteModal();
+                                                    setUserGetId(item);
+                                                }}
+                                                colorScheme="red"
+                                                variant="outline">Delete</Button>
+                                        </Td>
+                                    </Tr>
+                                ) :
+                                <Tr><Td colSpan="6" className="text-center">Super adminlar yuq</Td></Tr>
+                            }
                         </Tbody>
                     </Table>
                 </TableContainer>
@@ -206,11 +209,11 @@ function AdminAdd() {
                     className="text-dark fs-4 fw-bolder">
                     Editing data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="firstName" defaultValue={userGetId && userGetId.firstName} />
-                    <Input id="lastName" defaultValue={userGetId && userGetId.lastName} />
-                    <Input type="email" id="email" defaultValue={userGetId && userGetId.email} />
-                    <Input type="password" id="password" placeholder="password1" />
-                    <Input type="number" id="phoneNumber" defaultValue={userGetId && userGetId.phoneNumber} />
+                    <Input id="firstName" defaultValue={userGetId && userGetId.firstName}/>
+                    <Input id="lastName" defaultValue={userGetId && userGetId.lastName}/>
+                    <Input type="email" id="email" defaultValue={userGetId && userGetId.email}/>
+                    <Input type="password" id="password" placeholder="password1"/>
+                    <Input type="number" id="phoneNumber" defaultValue={userGetId && userGetId.phoneNumber}/>
                 </ModalBody>
                 <ModalFooter>
                     <Button

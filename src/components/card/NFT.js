@@ -75,8 +75,9 @@ export default function NFT(props) {
                     <Image
                         src={image}
                         w={{base: "100%", "3xl": "100%"}}
-                        h={{base: "150px", "3xl": "100%"}}
+                        h={{base: "180px", "3xl": "100%"}}
                         borderRadius='20px'
+                        objectFit="cover"
                     />
                 </Box>
                 <Flex flexDirection='column' justify='space-between' h='100%'>
@@ -164,7 +165,7 @@ export default function NFT(props) {
                                     setCategoryId(categoryIdIn);
                                 }}
                                 variant='no-hover'
-                                me='25px'
+                                // me='25px'
                                 ms='0px'
                                 p='0px !important'>
                                 <Icon as={MdDelete} color='secondaryGray.500' h='18px' w='18px'/>
