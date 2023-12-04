@@ -24,12 +24,10 @@ function Exchange() {
     // getExchange
     const getExchange = () => {
         axios.get(api + "exchange/teacher?page=0&size=100", config)
-            .then(res => setExchanges(res.data.body))
-            .catch(err => {
-                toast.error("Exchange not found");
-                
-            })
+            .then(res => setExchanges(res.data.body.object))
+            .catch(err => {})
     }
+    console.log(exchanges)
 
     return (
         <>
@@ -52,7 +50,7 @@ function Exchange() {
                                 <Box position='relative'>
                                     <Image
                                         objectFit="cover"
-                                        src={item.attachmentId ? imgUrl + item.attachmentId : categoryImg}
+                                        src={imgUrl + item.gift.attachmentId}
                                         alt="img"
                                         w="100%"
                                         h="180px"
@@ -65,24 +63,28 @@ function Exchange() {
                                     fontWeight='bold'
                                     ms='4px'
                                     mt="10px">
-                                    {item.name}
+                                    {item.gift.name}
                                 </Text>
                                 <Text
                                     color={textColor1}
                                     fontSize="1rem"
                                     mb='5px'
+                                    mt="2px"
+                                    ms='4px'
                                     fontWeight="normal"
-                                    ms='4px'>
-                                    {item.rate}
+                                    lineHeight="28px"
+                                    letterSpacing=".5px">
+                                    {item.user.groupName}<br/>
+                                    {item.gift.rate} coin
                                 </Text>
                                 <Text
                                     color={textColor1}
-                                    fontSize="1rem"
+                                    fontSize="1.2rem"
                                     mb='5px'
                                     fontWeight="bolder"
                                     ms='4px'
                                     mt="8px">
-                                    {item.firstName} {item.lastName}
+                                    {item.user.firstName} {item.user.lastName}
                                 </Text>
                             </Flex>
                         </Card>

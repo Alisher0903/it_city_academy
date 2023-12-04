@@ -42,10 +42,9 @@ export default function Overview() {
         const addData = {
             question: byIdIn("question").value,
             attachmentId: 0,
-            categoryId: +byIdIn("categoryId").value,
+            categoryId: byIdIn("categoryId").value,
             grade: +byIdIn("grade").value,
-            description: byIdIn("description").value,
-            categoryId: byIdIn("categoryId").value
+            description: byIdIn("description").value
         }
 
         if (img.get('file') !== 'undefined') await axios.post(api + "attachment/upload", img, config)
@@ -115,7 +114,6 @@ export default function Overview() {
                     Add Test
                 </Button>
             </Box>
-
             <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
                 {testPlus.length && testPlus.map((item, i) =>
                     <Card p='20px' key={i}>

@@ -13,22 +13,6 @@ export default function CheckTable(props) {
 
     const openEditModal = () => setEditModal(!editModal);
 
-    // const tableInstance = useTable(
-    //   useGlobalFilter,
-    //   useSortBy,
-    //   usePagination
-    // );
-
-    // const {
-    //   getTableProps,
-    //   getTableBodyProps,
-    //   headerGroups,
-    //   page,
-    //   prepareRow,
-    //   initialState,
-    // } = tableInstance;
-    // initialState.pageSize = 11;
-
     const [editModal, setEditModal] = useState(false);
     const [checkedItems, setCheckedItems] = React.useState([false, false])
 

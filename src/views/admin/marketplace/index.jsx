@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 import {Box, Flex, Grid, SimpleGrid, Text, useColorModeValue,} from "@chakra-ui/react";
 import NFT from "components/card/NFT";
 import axios from "axios";
-import {api, categoryAdd, config, imgUrl} from "api/api";
+import {api, byIdIn, categoryAdd, config, imgUrl} from "../../../api/api";
 import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import imgCategory from "../../../assets/img/auth/itcity.png";
 
 // toast
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,21 +26,44 @@ export default function Marketplace() {
 
     // add category
     const addCategory = async () => {
-        const img = new FormData();
-        img.append('file', document.getElementById('img').files[0]);
+        // const img = new FormData();
+        // img.append('file', document.getElementById('img').files[0]);
+        //
+        // axios.post(api + "attachment/upload", img, config)
+        //     .then(res => {
+        //         axios.post(api + categoryAdd, {
+        //             name: document.getElementById("title").value,
+        //             attachmentId: res.data.body,
+        //             categoryId: 0
+        //         }, config)
+        //             .then(() => {
+        //                 openAddModal();
+        //                 getCategory(setCategory);
+        //                 toast.success("Categorya muvaffaqiyatli qo'shildi✔");
+        //             }).catch(() => toast.error("Xatolik yuz berdi. Buning uchun sizdan uzur suraymiz, buni tez orada bartaraf etamiz!!!"))
+        //     })
 
-        axios.post(api + "attachment/upload", img, config)
-            .then(res => {
-                axios.post(api + categoryAdd, {
-                    name: document.getElementById("title").value,
-                    attachmentId: res.data.body,
-                    categoryId: 0
-                }, config)
-                    .then(() => {
-                        openAddModal();
-                        getCategory(setCategory);
-                        toast.success("Categorya muvaffaqiyatli qo'shildi✔");
-                    }).catch(() => toast.error("Xatolik yuz berdi. Buning uchun sizdan uzur suraymiz, buni tez orada bartaraf etamiz!!!"))
+        const img = new FormData();
+        img.append('file', byIdIn('img').files[0]);
+        const addData = {
+            name: byIdIn("title").value,
+            attachmentId: 0,
+            categoryId: 0,
+            programmingLanguage: 0
+        }
+
+        if (img.get('file') !== 'undefined')
+            await axios.post(api + "attachment/upload", img, config)
+                .then(res => {
+                    addData.attachmentId = res.data.body
+                })
+        await axios.post(api + categoryAdd, addData, config)
+            .then(() => {
+                openAddModal();
+                getCategory(setCategory);
+                toast.success("Categorya muvaffaqiyatli qo'shildi✔");
+            }).catch(err => {
+                if (err.response.status === 409) toast.warning(err.response.data.message)
             })
     }
 
@@ -98,7 +122,10 @@ export default function Marketplace() {
                                     key={i}
                                     name={item.name}
                                     bidders={[]}
-                                    image={imgUrl + item.attachmentId}
+                                    image={item.attachmentId !== null && item.attachmentId !== 0
+                                        ? imgUrl + item.attachmentId
+                                        : imgCategory
+                                    }
                                     setCategory={setCategory}
                                     // download='frontend'
                                 />

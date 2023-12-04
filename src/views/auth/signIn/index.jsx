@@ -21,6 +21,7 @@ import {RiEyeCloseLine} from "react-icons/ri";
 import axios from 'axios';
 import {api, config} from "api/api";
 import "../../loginBtn/style.scss";
+import { ToastContainer, toast } from "react-toastify";
 
 function SignIn() {
     // Chakra color mode
@@ -71,11 +72,23 @@ function SignIn() {
 
             await document.getElementById('link').click()
         })
-        // .catch(err => console.log(err))
+        .catch((err) => {
+            toast.error("Raqam yoki parol xato!")
+        })
     }
+
+    function checkKeyPress(event) {
+        if (event.key === "Enter") {
+          event.preventDefault(); // Enter tuşunun varsayılan davranışını engeller
+      
+          var submitButton = document.getElementById("button");
+          submitButton.click(); // "Submit" düğmesini tıklar
+        }
+      }
 
     return (
         <DefaultAuth illustrationBackground={itcity} image={itcity}>
+            <ToastContainer/>
             <Link id="link" to={role} href={role}></Link>
 
             <Flex
@@ -176,6 +189,7 @@ function SignIn() {
                                 type={show ? "text" : "password"}
                                 variant='auth'
                                 id="password"
+                                onKeyDown={checkKeyPress}
                             />
                             <InputRightElement display='flex' alignItems='center' mt='4px'>
                                 <Icon
@@ -186,32 +200,7 @@ function SignIn() {
                                 />
                             </InputRightElement>
                         </InputGroup>
-                        <Flex justifyContent='space-between' align='center' mb='24px'>
-                            {/* <FormControl display='flex' alignItems='center'>
-                <Checkbox
-                  id='remember-login'
-                  colorScheme='brandScheme'
-                  me='10px'
-                />
-                <FormLabel
-                  htmlFor='remember-login'
-                  mb='0'
-                  fontWeight='normal'
-                  color={textColor}
-                  fontSize='sm'>
-                  Keep me logged in
-                </FormLabel>
-              </FormControl> */}
-                            {/* <NavLink to='/auth/forgot-password'>
-                <Text
-                  color={textColorBrand}
-                  fontSize='sm'
-                  w='124px'
-                  fontWeight='500'>
-                  Forgot password?
-                </Text>
-              </NavLink> */}
-                        </Flex>
+                        
 
                         {/* login btn */}
                         <button
@@ -223,17 +212,6 @@ function SignIn() {
                             className={`${isClicked ? 'onclic' : ''} ${isValidated ? 'validate' : ''}`}>
                             {isValidated ? 'Loading...' : 'Log In'}
                         </button>
-
-                        {/* <Button
-                fontSize='sm'
-                variant='brand'
-                fontWeight='700'
-                w='100%'
-                h='50'
-                mb='24px'
-                onClick={logIn}>
-                Log In
-              </Button> */}
                     </FormControl>
                 </Flex>
             </Flex>

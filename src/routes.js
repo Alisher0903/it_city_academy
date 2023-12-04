@@ -17,6 +17,8 @@ import DataTables from "views/admin/dataTables";
 import Profile from "views/admin/profile";
 import User from "./views/admin/users";
 import Teacher from "./views/admin/teachersAdd";
+import GroupInfo from "./views/admin/default/components/infoDashboard/GroupInfo";
+import TeacherInfo from "./views/admin/default/components/infoDashboard/TeacherInfo";
 
 import SignIn from "views/auth/signIn";
 import Gifts from "views/admin/gifts";
@@ -74,7 +76,7 @@ const routes = [
     component: Teacher,
   },
   {
-    name: "AdminAdd",
+    name: "Admin",
     layout: "/admin",
     path: "/AdminAdd",
     icon: <Icon as={MdPersonAddAlt} width='20px' height='20px' color='inherit' />,
@@ -94,7 +96,18 @@ const routes = [
     icon: <Icon className="d-none" as={MdPeople} width='20px' height='20px' color='inherit' />,
     component: SignIn
   },
-
+  {
+    name: "",
+    layout: "/admin",
+    path: "/info/g",
+    component: GroupInfo,
+  },
+  {
+    name: "",
+    layout: "/admin",
+    path: "/info/t",
+    component: TeacherInfo,
+  },
 ];
 
 export default routes;
