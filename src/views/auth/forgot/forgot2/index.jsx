@@ -21,11 +21,11 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import axios from 'axios';
 import { api, config } from "api/api";
-import "../../loginBtn/style.scss";
+import "../../../loginBtn/style.scss";
 import { ToastContainer, toast } from "react-toastify";
 import { NavLink } from "reactstrap";
 
-function SignIn() {
+function Forgot2() {
     // Chakra color mode
     const textColor = useColorModeValue("navy.700", "white");
     const textColorSecondary = "gray.400";
@@ -63,19 +63,25 @@ function SignIn() {
         { bg: "whiteAlpha.200" }
     );
 
-    async function logIn() {
+    function logIn() {
+        let forgetEmail = sessionStorage.getItem("emailValue");
         let phoneNumber = document.getElementById('number').value;
         let password = document.getElementById('password').value;
-        await axios.post(api + "auth/login", { phoneNumber, password }).then(async res => {
-            await sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
-            if (res.data.message === "ROLE_USER") await setRole('/#/Student/default');
-            else if (res.data.message === "ROLE_SUPER_ADMIN") await setRole('/#/admin/default');
-            else if (res.data.message === "ROLE_TEACHER") await setRole('/#/Teacher/default');
+        let password2 = document.getElementById('password2').value;
+        console.log(forgetEmail);
 
-            await document.getElementById('link').click()
+        axios.post(api + "user/forgetPassword", {
+            email: forgetEmail,
+            code: phoneNumber,
+            password: password,
+            prePassword: password2
+        }).then(res => {
+            setRole(res.data)
+            document.getElementById('link').click()
+            toast.success("Succesfully reset password!d")
         })
             .catch((err) => {
-                toast.error("Raqam yoki parol xato!")
+                toast.error("Something is error")
             })
     }
 
@@ -91,7 +97,7 @@ function SignIn() {
     return (
         <DefaultAuth illustrationBackground={itcity} image={itcity}>
             <ToastContainer />
-            <Link id="link" to={role} href={role}></Link>
+            <Link id="link" href="#/auth/sign-in/default"></Link>
 
             <Flex
                 maxW={{ base: "100%", md: "max-content" }}
@@ -103,11 +109,11 @@ function SignIn() {
                 justifyContent='center'
                 mb={{ base: "30px", md: "60px" }}
                 px={{ base: "25px", md: "0px" }}
-                mt={{ base: "40px", md: "14vh" }}
+                mt={{ base: "30px", md: "8vh" }}
                 flexDirection='column'>
                 <Box me='auto'>
                     <Heading color={textColor} fontSize='36px' mb='10px'>
-                        Log In
+                        Reset password
                     </Heading>
                     <Text
                         mb='36px'
@@ -115,7 +121,7 @@ function SignIn() {
                         color={textColorSecondary}
                         fontWeight='400'
                         fontSize='md'>
-                        Enter your phone number and password to Log In in!
+                        Code has been sent to your email!
                     </Text>
                 </Box>
                 <Flex
@@ -128,29 +134,7 @@ function SignIn() {
                     mx={{ base: "auto", lg: "unset" }}
                     me='auto'
                     mb={{ base: "20px", md: "auto" }}>
-                    {/* <Button
-            fontSize='sm'
-            me='0px'
-            mb='26px'
-            py='15px'
-            h='50px'
-            borderRadius='16px'
-            bg={googleBg}
-            color={googleText}
-            fontWeight='500'
-            _hover={googleHover}
-            _active={googleActive}
-            _focus={googleActive}>
-            <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
-            Sign in with Google
-          </Button> */}
-                    {/* <Flex align='center' mb='25px'>
-            <HSeparator />
-            <Text color='gray.400' mx='14px'>
-              or
-            </Text>
-            <HSeparator />
-          </Flex> */}
+
                     <FormControl>
                         <FormLabel
                             display='flex'
@@ -159,7 +143,7 @@ function SignIn() {
                             fontWeight='500'
                             color={textColor}
                             mb='8px'>
-                            Phone number<Text color={brandStars}>*</Text>
+                            Code<Text color={brandStars}>*</Text>
                         </FormLabel>
                         <Input
                             isRequired={true}
@@ -167,7 +151,7 @@ function SignIn() {
                             fontSize='sm'
                             ms={{ base: "0px", md: "0px" }}
                             type='number'
-                            placeholder='993393300'
+                            placeholder='Enter code'
                             mb='24px'
                             fontWeight='500'
                             size='lg'
@@ -202,33 +186,36 @@ function SignIn() {
                                 />
                             </InputRightElement>
                         </InputGroup>
-
-                        <Flex justifyContent='space-between' align='center' mb='24px'>
-                            <FormControl display='flex' alignItems='center'>
-                                <Checkbox
-                                    id='remember-login'
-                                    colorScheme='brandScheme'
-                                    me='10px'
+                        <FormLabel
+                            ms='4px'
+                            fontSize='sm'
+                            fontWeight='500'
+                            color={textColor}
+                            display='flex'>
+                            Prepassword<Text color={brandStars}>*</Text>
+                        </FormLabel>
+                        <InputGroup size='md'>
+                            <Input
+                                isRequired={true}
+                                fontSize='sm'
+                                placeholder='Enter password'
+                                mb='24px'
+                                size='lg'
+                                type={show ? "text" : "password"}
+                                variant='auth'
+                                id="password2"
+                                onKeyDown={checkKeyPress}
+                            />
+                            <InputRightElement display='flex' alignItems='center' mt='4px'>
+                                <Icon
+                                    color={textColorSecondary}
+                                    _hover={{ cursor: "pointer" }}
+                                    as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                                    onClick={handleClick}
                                 />
-                                <FormLabel
-                                    htmlFor='remember-login'
-                                    mb='0'
-                                    fontWeight='normal'
-                                    color={textColor}
-                                    fontSize='sm'>
-                                    Keep me logged in
-                                </FormLabel>
-                            </FormControl>
-                            <Link href='#/auth/forgot-password'>
-                                <Text
-                                    color={textColorBrand}
-                                    fontSize='sm'
-                                    w='124px'
-                                    fontWeight='500'>
-                                    Forgot password?
-                                </Text>
-                            </Link>
-                        </Flex>
+                            </InputRightElement>
+                        </InputGroup>
+
                         {/* login btn */}
                         <button
                             id="button"
@@ -237,7 +224,7 @@ function SignIn() {
                                 await logIn();
                             }}
                             className={`${isClicked ? 'onclic' : ''} ${isValidated ? 'validate' : ''}`}>
-                            {isValidated ? 'Loading...' : 'Log In'}
+                            {isValidated ? 'Loading...' : 'Send'}
                         </button>
                     </FormControl>
                 </Flex>
@@ -246,4 +233,4 @@ function SignIn() {
     );
 }
 
-export default SignIn;
+export default Forgot2;
