@@ -126,10 +126,10 @@ export default function UserReports() {
                 w="100%"
                 gap='20px'
                 mb='20px'>
-                <SimpleGrid columns={{base: 1, md: 2, xl: 2}} gap='20px'>
-                <DailyTraffic/>
-                    <PieCard/>
-               
+                <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
+                    <DailyTraffic />
+                    <PieCard />
+
                 </SimpleGrid>
             </Grid>
             <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px'>
