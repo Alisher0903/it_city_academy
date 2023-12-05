@@ -13,12 +13,12 @@ import {
     Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
-import { api, byIdIn, config, setConfig } from "../../../api/api";
+import {api, byIdIn, config, setConfig} from "../../../api/api";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import {useEffect, useState} from "react";
+import {Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import 'react-toastify/dist/ReactToastify.css';
-import { toast, ToastContainer } from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 function Users() {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -160,7 +160,8 @@ function Users() {
 
         return (
             <>
-                <ToastContainer />
+                <ToastContainer/>
+
                 <SimpleGrid color={textColorPrimary} pt="100px">
                     <Box
                         display="flex"
@@ -244,6 +245,13 @@ function Users() {
                 <Modal isOpen={coinModal} centered size="lg">
                     <ModalHeader toggle={openCoinModal} className="techer__modal-head">Add Coin</ModalHeader>
                     <ModalBody className="techer__modal-body">
+                        <select id="groupId" className="form-select" onChange={getStudentsInGroup}>
+                            <option selected disabled>Select group</option>
+
+                {/* Add coin Modal */}
+                <Modal isOpen={coinModal} centered size="lg">
+                    <ModalHeader toggle={openCoinModal} className="techer__modal-head">Add Coin</ModalHeader>
+                    <ModalBody className="techer__modal-body">
                         {/* <select className="form-select" onChange={getStudentsInGroup}> */}
                         {/* <select id="groupId" className="form-select">
                         <option selected disabled>Select group</option>
@@ -298,6 +306,69 @@ function Users() {
                                 <option key={i} value={item.id}>{item.name}</option>
                             )}
                         </select>
+                        <select id="userId" className="form-select">
+                            <option selected disabled>Select User</option>
+                            {students.length && students.map((item, i) =>
+                                <option key={i} value={item.id}>{item.firstName}</option>
+                            )}
+                        </select>
+                        <Input type="number" id="coin" placeholder="Coin"/>
+                        <Input id="description" placeholder="Description"/>
+                        <select className="form-select" id="gender">
+                            <option selected disabled>gender select</option>
+                            <option value="MALE">Erkak</option>
+                            <option value="FMALE">Ayol</option>
+                        </select>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button
+                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                            colorScheme="facebook"
+                            onClick={openCoinModal}>Close</Button>
+                        <Button
+                            colorScheme="green"
+                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                            onClick={addCoinInUser}>Save</Button>
+                    </ModalFooter>
+                </Modal>
+
+                {/* addUserModal */}
+                <Modal isOpen={addModal} centered size="lg">
+                    <ModalHeader
+                        toggle={openAddModal}
+                        className="text-dark fs-4 fw-bolder">Add Users</ModalHeader>
+                    <ModalBody className="techer__modal-body">
+                        <Input id="firstName" placeholder="firstName"/>
+                        <Input id="lastName" placeholder="lastName"/>
+                        <Input type="email" id="email" placeholder="email"/>
+                        <Input type="password" id="password" placeholder="password"/>
+                        <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
+                            onClick={openAddModal}>Close</Button>
+                        <Button
+                            colorScheme="green"
+                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                            onClick={addUsers}>Save</Button>
+                    </ModalFooter>
+                </Modal>
+                {/* editUserModal */}
+                <Modal isOpen={editModal} centered size="lg">
+                    <ModalHeader
+                        toggle={openEditModal}
+                        className="text-dark fs-4 fw-bolder">
+                        Editing data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
+                    <ModalBody className="techer__modal-body">
+                        <Input id="firstName" defaultValue={userGetId && userGetId.firstName} />
+                        <Input id="lastName" defaultValue={userGetId && userGetId.lastName} />
+                        <Input type="email" id="email" defaultValue={userGetId && userGetId.email} />
+                        <Input type="password" id="password" defaultValue={userGetId && userGetId.password} />
+                        <Input type="number" id="phoneNumber"
+                            defaultValue={userGetId && userGetId.phoneNumber} />
+                        <select id="groupId" className="form-select">
+                            <option selected disabled>groupName</option>
+                            {groupSelect.length && groupSelect.map((item, i) =>
+                                <option key={i} value={item.id}>{item.name}</option>
+                            )}
+                        </select>
                         <select className="form-select" id="gender">
                             <option selected disabled>gender select</option>
                             <option value="MALE">Erkak</option>
@@ -323,12 +394,12 @@ function Users() {
                         className="text-dark fs-4 fw-bolder">
                         Editing data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
                     <ModalBody className="techer__modal-body">
-                        <Input id="firstName" defaultValue={userGetId && userGetId.firstName} />
-                        <Input id="lastName" defaultValue={userGetId && userGetId.lastName} />
-                        <Input type="email" id="email" defaultValue={userGetId && userGetId.email} />
-                        <Input type="password" id="password" defaultValue={userGetId && userGetId.password} />
+                        <Input id="firstName" defaultValue={userGetId && userGetId.firstName}/>
+                        <Input id="lastName" defaultValue={userGetId && userGetId.lastName}/>
+                        <Input type="email" id="email" defaultValue={userGetId && userGetId.email}/>
+                        <Input type="password" id="password" defaultValue={userGetId && userGetId.password}/>
                         <Input type="number" id="phoneNumber"
-                            defaultValue={userGetId && userGetId.phoneNumber} />
+                               defaultValue={userGetId && userGetId.phoneNumber}/>
                         <select id="groupId" className="form-select">
                             <option selected disabled>groupName</option>
                             {groupSelect.length && groupSelect.map((item, i) =>
@@ -347,7 +418,13 @@ function Users() {
                             onClick={editUsers}>Save</Button>
                     </ModalFooter>
                 </Modal>
-
+                            onClick={openEditModal}>Close</Button>
+                        <Button
+                            colorScheme="green"
+                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                            onClick={editUsers}>Save</Button>
+                    </ModalFooter>
+                </Modal>
                 {/* deleteUserModal */}
                 <Modal isOpen={deleteModal} centered size="lg">
                     <ModalHeader
