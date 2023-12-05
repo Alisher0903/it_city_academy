@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { api } from "api/api";
 import { config } from "api/api";
+import { setConfig } from "api/api";
 import { byIdIn } from "api/api";
 import axios from "axios";
 import Card from "components/card/Card";
@@ -22,8 +23,9 @@ export default function WeeklyRevenue(props) {
     const { ...rest } = props;
     const [topTeacher, setTopTeacher] = useState([]);
 
-    useEffect(() => {
-        
+    useEffect(async() => {
+        await setConfig();
+        getTopTeacher();
     }, []);
 
     // getTopTeacher
@@ -32,6 +34,7 @@ export default function WeeklyRevenue(props) {
             .then(res => setTopTeacher(res.data.body))
             .catch(() => { })
     }
+    console.log(topTeacher);
 
     const goInfo = () => byIdIn("teacherInfo").click();
 
