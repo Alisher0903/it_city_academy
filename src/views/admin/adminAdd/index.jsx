@@ -47,14 +47,6 @@ function AdminAdd() {
         axios.get(api + "user/super-admin", config)
             .then(res => setUsers(res.data.body))
             .catch(err => console.log(err));
-            .then(res => {
-                setUsers(res.data.body.object)
-                console.log(res.data.body.object);
-            })
-            .catch(err => {
-                console.log(err);
-                setError(err)
-            })
     }
 
     // addUser
@@ -191,7 +183,7 @@ function AdminAdd() {
                                         <Td>
                                             <Button
                                                 onClick={() => {
-                                                     openDeleteModal();
+                                                    openDeleteModal();
                                                     setUserGetId(item);
                                                 }}
                                                 colorScheme="red"

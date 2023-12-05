@@ -1,32 +1,19 @@
-import {
-    Button,
-    Table,
-    TableCaption,
-    TableContainer,
-    Tbody,
-    Td,
-    Text,
-    Th,
-    Thead,
-    Tr,
-} from "@chakra-ui/react";
-import { api, byIdIn, config, setConfig } from "../../../../api/api";
+import {Button, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr,} from "@chakra-ui/react";
+import {api, config, setConfig} from "../../../../api/api";
 import axios from "axios";
 import Card from "components/card/Card";
-import React, { useEffect, useState } from "react";
-import { Col, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
-import erkakImg from "../components/infoDashboard/erkakImg.jpg";
-import ayolImg from "../components/infoDashboard/ayolImg.webp";
+import React, {useEffect, useState} from "react";
+import {Col, Modal, ModalBody, ModalFooter, ModalHeader, Row} from "reactstrap";
 
 export default function WeeklyRevenue(props) {
-    const { ...rest } = props;
+    const {...rest} = props;
     const [topTeacher, setTopTeacher] = useState([]);
     const [topTeacherId, setTopTeacherId] = useState({});
     const [viewAllTeacher, setViewAllTeacher] = useState(false);
     const [viewInfoModal, setviewInfoModal] = useState(false);
 
-    useEffect(async () => {
-        await setConfig();
+    useEffect(() => {
+        setConfig();
         getTopTeacher();
     }, []);
 
@@ -37,7 +24,8 @@ export default function WeeklyRevenue(props) {
     const getTopTeacher = () => {
         axios.get(api + "user/teacher/level", config)
             .then(res => setTopTeacher(res.data.body))
-            .catch(() => {});
+            .catch(() => {
+            });
     }
 
     return (
@@ -46,11 +34,11 @@ export default function WeeklyRevenue(props) {
                 <ModalHeader toggle={openViewAllTeacher} className="techer__modal-head">All Top Teachers</ModalHeader>
                 <ModalBody>
                     <TableContainer {...rest}
-                        mt="1rem"
-                        pt=".7rem"
-                        pb=".7rem"
-                        borderRadius="15px"
-                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
+                                    mt="1rem"
+                                    pt=".7rem"
+                                    pb=".7rem"
+                                    borderRadius="15px"
+                                    boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
                         <Table className="text-dark">
                             <TableCaption
                                 color="black"
@@ -197,8 +185,6 @@ export default function WeeklyRevenue(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {topTeacher ?
-                            topTeacher.map((item, i) =>
                         {topTeacher.length ?
                             topTeacher.slice(0, 5).map((item, i) =>
                                 <Tr key={i}>
@@ -207,7 +193,8 @@ export default function WeeklyRevenue(props) {
                                     <Td>{item.phoneNumber}</Td>
                                 </Tr>
                             )
-                            : <Tr><Td colSpan="3" textAlign="center">Top teacher yuq!!!</Td></Tr>}
+                            : <Tr><Td colSpan="3" textAlign="center">Top teacher yuq!!!</Td></Tr>
+                        }
                     </Tbody>
                 </Table>
             </TableContainer>
