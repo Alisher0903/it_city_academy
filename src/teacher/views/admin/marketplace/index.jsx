@@ -60,6 +60,7 @@ export default function Marketplace() {
                 .then(res => {
                     addData.attachmentId = res.data.body
                 })
+                .catch(() => {})
         await axios.post(api + "category/save", addData, config)
             .then(() => {
                 openAddModal();

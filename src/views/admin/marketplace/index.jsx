@@ -49,7 +49,7 @@ export default function Marketplace() {
             name: byIdIn("title").value,
             attachmentId: 0,
             categoryId: 0,
-            programmingLanguage: 0
+            programmingLanguage: "JAVA"
         }
 
         if (img.get('file') !== 'undefined')

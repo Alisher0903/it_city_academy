@@ -36,7 +36,7 @@ export default function Gift() {
     }
 
     function exchange() {
-        axios.post(api + "exchange/save/" + groupId, config)
+        axios.post(api + "exchange/save/" + groupId, {}, config)
             .then((res) => {
                 toast.success("Exchange succesfully get✔");
             }).catch((error) => {
@@ -45,7 +45,6 @@ export default function Gift() {
                     === "You do not have enough score" ? "You do not have enough score  " : "Exchange failed❌")
             });
     }
-
 
     return (
         <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
