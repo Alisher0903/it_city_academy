@@ -24,7 +24,7 @@ export default function Gifts() {
                     {/* <Banner /> */}
                     <Flex direction='column'>
                         <Flex
-                            mt='45px'
+                            mt='20px'
                             mb='20px'
                             justifyContent='space-between'
                             direction={{base: "column", md: "row"}}
