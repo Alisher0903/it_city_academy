@@ -61,6 +61,7 @@ function AddTeachers() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
+            gender: byIdIn('gender').value,
             groupId: 0
         }
         axios.post(api + "auth/register?ROLE=ROLE_TEACHER", addData, config)
@@ -82,6 +83,7 @@ function AddTeachers() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
+            gender: byIdIn('gender').value,
             groupId: 0
         }
         axios.put(api + "user/update/" + teacherGetId.id, editData, config)
@@ -132,6 +134,11 @@ function AddTeachers() {
                             <Input type="email" id="email" placeholder="email"/>
                             <Input type="password" id="password" placeholder="password"/>
                             <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
+                            <select id="gender" className="form-select">
+                                <option selected disabled>Select Gender</option>
+                                <option value='MALE'>Male</option>
+                                <option value='FIMALE'>FiMale</option>
+                            </select>
                         </ModalBody>
                         <ModalFooter>
                             <Button
