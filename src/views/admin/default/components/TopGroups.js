@@ -77,7 +77,7 @@ export default function WeeklyRevenue(props) {
                                     </Td>
                                 </Tr>
                             )
-                            : <Tr><Td>xxxxxxxxxx</Td></Tr>
+                            : <Tr><Td colSpan="3" textAlign="center">Top group yuq!!!</Td></Tr>
                         }
 
                     </Tbody>
