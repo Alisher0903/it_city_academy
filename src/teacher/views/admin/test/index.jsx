@@ -50,7 +50,6 @@ export default function Overview() {
         if (img.get('file') !== 'undefined') await axios.post(api + "attachment/upload", img, config)
                 .then(res => addData.attachmentId = res.data.body);
 
-        console.log(addData)
         axios.post(api + "test", addData, config)
             .then(() => {
                 openAddModal();

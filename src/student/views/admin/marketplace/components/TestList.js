@@ -4,7 +4,7 @@ import {getCategoryByTest} from "../../../../../api/routers";
 import '../../../../../assets/css/test.css';
 import {Link} from 'react-router-dom';
 
-function TestList({categoryId, index}) {
+function TestList({categoryId, index, pl}) {
 
     const [test, setTest] = useState([]);
 
@@ -47,6 +47,8 @@ function TestList({categoryId, index}) {
                         <div className='w-100 d-flex justify-content-center mt-3'>
                             <Button onClick={() => {
                                 sessionStorage.setItem("learnId", item.id)
+                                sessionStorage.setItem("PL", pl);
+                                console.log(pl)
                                 goPageStudent();
                             }} style={{width: "99%", backgroundColor: '#2493DF'}}
                                     className='border-0 py-2'>Learn</Button>

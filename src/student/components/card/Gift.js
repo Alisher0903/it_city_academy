@@ -1,6 +1,6 @@
 // Chakra imports
 import {Box, Button, Flex, Icon, Image, SimpleGrid, Text, useColorModeValue,} from "@chakra-ui/react";
-import {MdOutlineCurrencyExchange, MdSupervisedUserCircle} from "react-icons/md";
+import {MdOutlineCurrencyExchange} from "react-icons/md";
 import {api, config, imgUrl, setConfig} from "api/api";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
@@ -141,32 +141,6 @@ export default function Gift() {
                             </Flex>
                         </Flex>
                     </Flex>
-
-                    {/* edit delete category link */}
-                    <Box display="flex"
-                         w="100%"
-                         justifyContent="space-between">
-                        <Text
-                            color='secondaryGray.600'
-                            align="start"
-                            w="100%"
-                            fontSize={{
-                                base: "22px",
-                            }}
-                            fontWeight='700'
-                            me='10px'>
-                            {item.rate}
-                            <span> coin</span>
-                        </Text>
-                        <Button
-                            onClick={() => {
-                                openDeleteModal()
-                                setGroupId(item.id);
-                            }}>
-                            Olish
-                            <Icon w='25px' as={MdSupervisedUserCircle}/>
-                        </Button>
-                    </Box>
                 </Card>
             )}
 
