@@ -31,6 +31,7 @@ function AdminAdd() {
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
     const [userGetId, setUserGetId] = useState("");
+    const [error, setError] = useState("");
 
     useEffect(() => {
         getUsers();
@@ -50,6 +51,7 @@ function AdminAdd() {
             })
             .catch(err => {
                 console.log(err);
+                setError(err)
             })
     }
 
