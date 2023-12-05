@@ -116,15 +116,27 @@ function Users() {
     }
 
     function getStudentsInGroup(e) {
+        axios.get(api + 'group/students/' + e.target.value, config)
+            .then(res => setStudent(res.data.body))
+            .catch(err => console.log(err))
         setStudent([]);
     }
 
     function addCoinInUser() {
         let userId = byIdIn('userId').value;
         let coin = byIdIn('coin').value;
-        toast.success('Progress...');
+        let description = byIdIn('description').value;
+        if (userId !== 'undefined' && coin !== 'undefined' && description !== 'undefined') {
+            let giveCoin = new FormData();
+            giveCoin.set('id', userId);
+            giveCoin.set('coin', coin);
+            giveCoin.set('description', description);
+            axios.post(api + 'user/give-coin', giveCoin, config)
+                .then(() => toast.success('coin muaffaqiyatli qushildi'))
+                .catch(() => toast.error('malumotlar tugri tuldirilmagan'));
+            openCoinModal();
+        } else toast.warning('barcha malumotlar tuldirrilmagan!');
     }
-
 
     return (
         <>
@@ -213,12 +225,13 @@ function Users() {
                         )}
                     </select>
                     <select id="userId" className="form-select">
-                        <option selected disabled>Select group</option>
+                        <option selected disabled>Select User</option>
                         {students.length && students.map((item, i) =>
                             <option key={i} value={item.id}>{item.firstName}</option>
                         )}
                     </select>
                     <Input type="number" id="coin" placeholder="Coin"/>
+                    <Input id="description" placeholder="Description"/>
                 </ModalBody>
                 <ModalFooter>
                     <Button
