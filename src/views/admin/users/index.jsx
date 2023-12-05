@@ -68,7 +68,8 @@ function Users() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value
+            groupId: byIdIn("groupId").value,
+            gender: byIdIn("gender").value
         }
         axios.post(api + "auth/register?ROLE=ROLE_USER", addData, config)
             .then(() => {
@@ -151,7 +152,6 @@ function Users() {
                             boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
                             Add Users</Button>
                     </div>
-
                 </Box>
                 <TableContainer
                     mt="1rem"
@@ -266,6 +266,11 @@ function Users() {
                         {groupSelect.length && groupSelect.map((item, i) =>
                             <option key={i} value={item.id}>{item.name}</option>
                         )}
+                    </select>
+                    <select className="form-select" id="gender">
+                        <option selected disabled>gender select</option>
+                        <option value="MALE">Erkak</option>
+                        <option value="FMALE">Ayol</option>
                     </select>
                 </ModalBody>
                 <ModalFooter>
