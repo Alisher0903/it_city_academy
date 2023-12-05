@@ -26,9 +26,9 @@ export default function Conversion(props) {
         w='100%'
         mb='8px'>
         <Text color={textColor} fontSize='md' fontWeight='600' mt='4px'>
-          Your Pie Chart
+          Overall Pass Percentage
         </Text>
-        <Select
+        {/* <Select
           fontSize='sm'
           variant='subtle'
           defaultValue='monthly'
@@ -37,7 +37,7 @@ export default function Conversion(props) {
           <option value='daily'>Daily</option>
           <option value='monthly'>Monthly</option>
           <option value='yearly'>Yearly</option>
-        </Select>
+        </Select> */}
       </Flex>
 
       <PieChart
@@ -61,11 +61,11 @@ export default function Conversion(props) {
           <Flex align='center'>
             <Box h='8px' w='8px' bg='brand.500' borderRadius='50%' me='4px' />
             <Text
-              fontSize='xs'
+              fontSize='md'
               color='secondaryGray.600'
               fontWeight='700'
               mb='5px'>
-              Your files
+              Boys
             </Text>
           </Flex>
           <Text fontSize='lg' color={textColor} fontWeight='700'>
@@ -77,11 +77,11 @@ export default function Conversion(props) {
           <Flex align='center'>
             <Box h='8px' w='8px' bg='#6AD2FF' borderRadius='50%' me='4px' />
             <Text
-              fontSize='xs'
+              fontSize='md'
               color='secondaryGray.600'
               fontWeight='700'
               mb='5px'>
-              System
+              Girls
             </Text>
           </Flex>
           <Text fontSize='lg' color={textColor} fontWeight='700'>

@@ -209,8 +209,8 @@ export const barChartOptionsConsumption = {
 };
 
 export const pieChartOptions = {
-  labels: ["Your files", "System", "Empty"],
-  colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+  labels: ["Boys", "Girls"],
+  colors: ["#4318FF", "#6AD2FF"],
   chart: {
     width: "50px",
   },
@@ -247,7 +247,7 @@ export const pieChartOptions = {
   },
 };
 
-export const pieChartData = [63, 25, 12];
+export const pieChartData = [100, 0];
 
 // Total Spent Default
 
