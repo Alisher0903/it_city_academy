@@ -46,9 +46,7 @@ export default function UserReports() {
         axios.get(api + "user/allUserCount", config)
             .then(res => {
                 setUser(res.data.body)
-            })
-            .catch(() => {
-            })
+            }).catch(() => {})
     }
 
     function getCoutnTeacher() {

@@ -22,8 +22,8 @@ export default function WeeklyRevenue(props) {
     const [topGroup, setTopGroup] = useState([]);
     const [viewallModal, setViewAllModal] = useState(false);
 
-    useEffect(async () => {
-        await setConfig();
+    useEffect(() => {
+        setConfig();
         getTopGroup();
     }, []);
 
@@ -128,7 +128,7 @@ export default function WeeklyRevenue(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {topGroup.length
+                        {topGroup
                             ? topGroup.slice(0, 5).map((item, i) =>
                                 <Tr key={i}>
                                     <Td>{i + 1}</Td>
