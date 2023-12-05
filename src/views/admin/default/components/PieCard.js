@@ -51,6 +51,8 @@ export default function Conversion(props) {
         flexDirection='row'
         boxShadow={cardShadow}
         w='100%'
+        display="flex"
+        justifyContent="center"
         p='15px'
         px='20px'
         mt='15px'
