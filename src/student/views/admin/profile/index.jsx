@@ -48,7 +48,7 @@ export default function Overview() {
         // console.log(res.data);
       })
       .catch(err =>{
-        console.log(err);
+        // console.log(err);
       })
   }
 

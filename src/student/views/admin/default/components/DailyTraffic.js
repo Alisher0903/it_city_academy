@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Chakra imports
 import { Box, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
@@ -13,12 +13,31 @@ import {
 
 // Assets
 import { RiArrowUpSFill } from "react-icons/ri";
+import axios from "axios";
+import { api } from "api/api";
+import { config } from "api/api";
 
 export default function DailyTraffic(props) {
   const { ...rest } = props;
 
+  const [traffic, setTraffic] = useState('')
+
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
+
+  function getTraffic() {
+    axios.get(api + "user/give-student-coin", config)
+      .then((res) => {
+        setTraffic(res.data)
+      })
+      .catch(() => { })
+  }
+
+  useEffect(() => {
+    getTraffic();
+  }, [])
+
+  console.log(traffic);
   return (
     <Card align='center' direction='column' w='100%' {...rest}>
       <Flex justify='space-between' align='start' px='10px' pt='5px'>
@@ -29,7 +48,7 @@ export default function DailyTraffic(props) {
               color='secondaryGray.600'
               fontSize='sm'
               fontWeight='500'>
-              Daily Traffic
+              Traffic
             </Text>
           </Flex>
           <Flex align='end'>
@@ -38,14 +57,14 @@ export default function DailyTraffic(props) {
               fontSize='34px'
               fontWeight='700'
               lineHeight='100%'>
-              2.579
+
             </Text>
             <Text
               ms='6px'
               color='secondaryGray.600'
               fontSize='sm'
               fontWeight='500'>
-              Visitors
+
             </Text>
           </Flex>
         </Flex>

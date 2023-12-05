@@ -13,12 +13,12 @@ import {
     Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
-import {api, byIdIn, config, setConfig} from "api/api";
+import { api, byIdIn, config, setConfig } from "../../../api/api";
 import axios from "axios";
-import {useEffect, useState} from "react";
-import {Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import { useEffect, useState } from "react";
+import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import 'react-toastify/dist/ReactToastify.css';
-import {toast, ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 function Users() {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -68,7 +68,8 @@ function Users() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value
+            groupId: byIdIn("groupId").value,
+            gender: byIdIn("gender").value
         }
         axios.post(api + "auth/register?ROLE=ROLE_USER", addData, config)
             .then(() => {
@@ -111,7 +112,7 @@ function Users() {
                 toast.success("Userning ma'lumotlari o'zchirildi!!!");
             })
             .catch(() => {
-                toast.error("User o'chirilmada xatolik yuz berdi!");
+                toast.error("User o'chirilmadi xatolik yuz berdi!");
             })
     }
 
@@ -136,11 +137,30 @@ function Users() {
                 .catch(() => toast.error('malumotlar tugri tuldirilmagan'));
             openCoinModal();
         } else toast.warning('barcha malumotlar tuldirrilmagan!');
+    console.log(userGetId);
+    // function getStudentsInGroup(e) {
+    //     setStudent([]);
+    // }
+
+    function addCoinInUser() {
+        const addData = {
+            id: userGetId.id,
+            coin: byIdIn("coin").value,
+            description: byIdIn("description").value
+        }
+        axios.post(api + `user/give-coin?coin=${addData.coin}&description=${addData.description}&id=${addData.id}`, config)
+            .then(() => {
+                toast.success("Coins have been successfully issued to the student.")
+            })
+            .catch(() => {
+                console.log(addData);
+                toast.error("An error occurred when giving a coin to a student.")
+            })
     }
 
     return (
         <>
-            <ToastContainer/>
+            <ToastContainer />
             <SimpleGrid color={textColorPrimary} pt="100px">
                 <Box
                     display="flex"
@@ -148,19 +168,11 @@ function Users() {
                     <Text fontSize="1.5rem" fontWeight="bold" letterSpacing=".5px">Users</Text>
                     <div>
                         <Button
-                            onClick={openCoinModal}
-                            colorScheme="green" variant="outline"
-                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                            marginEnd='15px'>
-                            Add coin
-                        </Button>
-                        <Button
                             onClick={openAddModal}
                             colorScheme="green" variant="outline"
                             boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
                             Add Users</Button>
                     </div>
-
                 </Box>
                 <TableContainer
                     mt="1rem"
@@ -176,9 +188,9 @@ function Users() {
                                 <Th>T/r</Th>
                                 <Th>Last Name</Th>
                                 <Th>First Name</Th>
-                                <Th>Email</Th>
+                                {/* <Th>Email</Th> */}
                                 <Th>Phone Number</Th>
-                                <Th textAlign="center" colSpan="2">Action</Th>
+                                <Th textAlign="center" colSpan="3">Action</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -187,8 +199,19 @@ function Users() {
                                     <Td>{i + 1}</Td>
                                     <Td>{item.lastName}</Td>
                                     <Td>{item.firstName}</Td>
-                                    <Td>{item.email}</Td>
+                                    {/* <Td>{item.email}</Td> */}
                                     <Td>{item.phoneNumber}</Td>
+                                    <Td>
+                                        <Button
+                                            onClick={() => {
+                                                openCoinModal();
+                                                setUserGetId(item);
+                                            }}
+                                            colorScheme="green" variant="outline"
+                                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
+                                            addCoin
+                                        </Button>
+                                    </Td>
                                     <Td>
                                         <Button
                                             onClick={() => {
@@ -196,7 +219,9 @@ function Users() {
                                                 setUserGetId(item);
                                             }}
                                             colorScheme="yellow"
-                                            variant="outline">Edit</Button>
+                                            variant="outline"
+                                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">Edit</Button>
+
                                     </Td>
                                     <Td>
                                         <Button
@@ -205,7 +230,8 @@ function Users() {
                                                 setUserGetId(item);
                                             }}
                                             colorScheme="red"
-                                            variant="outline">Delete</Button>
+                                            variant="outline"
+                                            boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">Delete</Button>
                                     </Td>
                                 </Tr>
                             )}
@@ -215,10 +241,11 @@ function Users() {
             </SimpleGrid>
 
             {/* Add coin Modal */}
-            <Modal isOpen={coinModal} centered size="lg" toggle={openCoinModal}>
-                <ModalHeader toggle={openCoinModal} className="text-dark fs-4 fw-bolder">Add Coin</ModalHeader>
+            <Modal isOpen={coinModal} centered size="lg">
+                <ModalHeader toggle={openCoinModal} className="techer__modal-head">Add Coin</ModalHeader>
                 <ModalBody className="techer__modal-body">
                     <select className="form-select" onChange={getStudentsInGroup}>
+                    {/* <select id="groupId" className="form-select">
                         <option selected disabled>Select group</option>
                         {groupSelect.length && groupSelect.map((item, i) =>
                             <option key={i} value={item.id}>{item.name}</option>
@@ -232,6 +259,15 @@ function Users() {
                     </select>
                     <Input type="number" id="coin" placeholder="Coin"/>
                     <Input id="description" placeholder="Description"/>
+                    </select> */}
+                    {/* <select id="userId" className="form-select">
+                        <option selected disabled>Select group</option>
+                        {students.length && students.map((item, i) =>
+                            <option key={i} value={item.id}>{item.firstName}</option>
+                        )}
+                    </select> */}
+                    <Input type="number" id="coin" placeholder="number of coins" />
+                    <Input id="description" placeholder="description" />
                 </ModalBody>
                 <ModalFooter>
                     <Button
@@ -251,16 +287,21 @@ function Users() {
                     toggle={openAddModal}
                     className="text-dark fs-4 fw-bolder">Add Users</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="firstName" placeholder="firstName"/>
-                    <Input id="lastName" placeholder="lastName"/>
-                    <Input type="email" id="email" placeholder="email"/>
-                    <Input type="password" id="password" placeholder="password"/>
-                    <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
+                    <Input id="firstName" placeholder="firstName" />
+                    <Input id="lastName" placeholder="lastName" />
+                    <Input type="email" id="email" placeholder="email" />
+                    <Input type="password" id="password" placeholder="password" />
+                    <Input type="number" id="phoneNumber" placeholder="phoneNumber" />
                     <select id="groupId" className="form-select">
                         <option selected disabled>groupName</option>
                         {groupSelect.length && groupSelect.map((item, i) =>
                             <option key={i} value={item.id}>{item.name}</option>
                         )}
+                    </select>
+                    <select className="form-select" id="gender">
+                        <option selected disabled>gender select</option>
+                        <option value="MALE">Erkak</option>
+                        <option value="FMALE">Ayol</option>
                     </select>
                 </ModalBody>
                 <ModalFooter>
@@ -282,12 +323,12 @@ function Users() {
                     className="text-dark fs-4 fw-bolder">
                     Editing data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="firstName" defaultValue={userGetId && userGetId.firstName}/>
-                    <Input id="lastName" defaultValue={userGetId && userGetId.lastName}/>
-                    <Input type="email" id="email" defaultValue={userGetId && userGetId.email}/>
-                    <Input type="password" id="password" defaultValue={userGetId && userGetId.password}/>
+                    <Input id="firstName" defaultValue={userGetId && userGetId.firstName} />
+                    <Input id="lastName" defaultValue={userGetId && userGetId.lastName} />
+                    <Input type="email" id="email" defaultValue={userGetId && userGetId.email} />
+                    <Input type="password" id="password" defaultValue={userGetId && userGetId.password} />
                     <Input type="number" id="phoneNumber"
-                           defaultValue={userGetId && userGetId.phoneNumber}/>
+                        defaultValue={userGetId && userGetId.phoneNumber} />
                     <select id="groupId" className="form-select">
                         <option selected disabled>groupName</option>
                         {groupSelect.length && groupSelect.map((item, i) =>
