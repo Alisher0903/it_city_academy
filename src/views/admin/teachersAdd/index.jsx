@@ -83,7 +83,7 @@ function AddTeachers() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId"),
+            groupId: byIdIn("groupId").value,
             gender: byIdIn('gender').value
         }
         axios.put(api + "user/update/" + teacherGetId.id, editData, config)
@@ -94,6 +94,7 @@ function AddTeachers() {
             })
             .catch(() => {
                 toast.error("Teacherning ma'lumotlarini o'zgartirilmadi!")
+                console.log(editData)
             });
     }
 
@@ -108,7 +109,6 @@ function AddTeachers() {
             toast.error("Xatolik yuz berdi");
         });
     }
-    console.log(teacherGetId)
 
     return (
         <>
