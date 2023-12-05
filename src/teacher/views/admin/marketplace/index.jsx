@@ -41,7 +41,8 @@ export default function Marketplace() {
     const getTeacherCategoryId = () => {
         axios.get(api + "category/teacher/by/category", config)
             .then(res => setTeacherCategorySelect(res.data.body))
-    }
+            .catch(() => {})
+        }
 
     // add
     const addTeacherCategory = async () => {
@@ -85,12 +86,17 @@ export default function Marketplace() {
                 .then(res => {
                     editData.attachmentId = res.data.body
                 })
+                .catch(() => {
+                })
         await axios.put(api + "category/update/" + teacherCategoryId.id, editData, config)
             .then(() => {
                 openEditModal();
                 getTeacherCategory();
                 toast.success("Category muvaffaqiyatli qo'shildi")
             })
+            .catch(() => {
+            })
+
     }
 
     // delete
@@ -100,6 +106,9 @@ export default function Marketplace() {
                 openDeleteModal();
                 getTeacherCategory();
                 toast.success("Category o'chirib tashlandi!!!");
+            })
+            .catch(() => {
+                toast.error("Something is error!")
             })
     }
 
