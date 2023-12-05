@@ -90,7 +90,8 @@ function Users() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value
+            groupId: byIdIn("groupId").value,
+            gender: byIdIn("gender").value
         }
         axios.put(api + "user/update/" + userGetId.id, editData, config)
             .then(() => {
@@ -142,7 +143,6 @@ function Users() {
     return (
         <>
             <ToastContainer/>
-
             <SimpleGrid color={textColorPrimary} pt="100px">
                 <Box
                     display="flex"
@@ -160,15 +160,13 @@ function Users() {
                             colorScheme="green" variant="outline"
                             boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
                             Add Users</Button>
-
                     </div>
                 </Box>
                 <TableContainer
                     mt="1rem"
                     pb=".7rem"
                     borderRadius="15px"
-                    boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                >
+                    boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
                     <Table>
                         <TableCaption
                             fontSize="1rem">Users</TableCaption>
@@ -199,7 +197,6 @@ function Users() {
                                             colorScheme="yellow"
                                             variant="outline"
                                             boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">Edit</Button>
-
                                     </Td>
                                     <Td>
                                         <Button
@@ -266,51 +263,6 @@ function Users() {
                             <option key={i} value={item.id}>{item.name}</option>
                         )}
                     </select>
-                    <select id="userId" className="form-select">
-                        <option selected disabled>Select User</option>
-                        {students.length && students.map((item, i) =>
-                            <option key={i} value={item.id}>{item.firstName}</option>
-                        )}
-                    </select>
-                    <Input type="number" id="coin" placeholder="Coin"/>
-                    <Input id="description" placeholder="Description"/>
-                    <select className="form-select" id="gender">
-                        <option selected disabled>gender select</option>
-                        <option value="MALE">Erkak</option>
-                        <option value="FMALE">Ayol</option>
-                    </select>
-                </ModalBody>
-                <ModalFooter>
-                    <Button
-                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                        colorScheme="facebook"
-                        onClick={openCoinModal}>Close</Button>
-                    <Button
-                        colorScheme="green"
-                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                        onClick={addCoinInUser}>Save</Button>
-                </ModalFooter>
-            </Modal>
-
-            {/* editUserModal */}
-            <Modal isOpen={editModal} centered size="lg">
-                <ModalHeader
-                    toggle={openEditModal}
-                    className="text-dark fs-4 fw-bolder">
-                    Editing data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
-                <ModalBody className="techer__modal-body">
-                    <Input id="firstName" defaultValue={userGetId && userGetId.firstName}/>
-                    <Input id="lastName" defaultValue={userGetId && userGetId.lastName}/>
-                    <Input type="email" id="email" defaultValue={userGetId && userGetId.email}/>
-                    <Input type="password" id="password" defaultValue={userGetId && userGetId.password}/>
-                    <Input type="number" id="phoneNumber"
-                           defaultValue={userGetId && userGetId.phoneNumber}/>
-                    <select id="groupId" className="form-select">
-                        <option selected disabled>groupName</option>
-                        {groupSelect.length && groupSelect.map((item, i) =>
-                            <option key={i} value={item.id}>{item.name}</option>
-                        )}
-                    </select>
                     <select className="form-select" id="gender">
                         <option selected disabled>gender select</option>
                         <option value="MALE">Erkak</option>
@@ -326,6 +278,46 @@ function Users() {
                         colorScheme="green"
                         boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
                         onClick={addUsers}>Save</Button>
+                </ModalFooter>
+            </Modal>
+
+            {/* editUserModal */}
+            <Modal isOpen={editModal} centered size="lg">
+                <ModalHeader
+                    toggle={openEditModal}
+                    className="text-dark fs-4 fw-bolder">
+                    Editing data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
+                <ModalBody className="techer__modal-body">
+                    <Input id="firstName" placeholder="firstName"
+                           defaultValue={userGetId && userGetId.firstName}/>
+                    <Input id="lastName" placeholder="lastName"
+                           defaultValue={userGetId && userGetId.lastName}/>
+                    <Input type="email" id="email" placeholder="email"
+                           defaultValue={userGetId && userGetId.email}/>
+                    <Input type="password" id="password" placeholder="password"/>
+                    <Input type="number" id="phoneNumber" placeholder="phoneNumber"
+                           defaultValue={userGetId && userGetId.phoneNumber}/>
+                    <select id="groupId" className="form-select">
+                        <option selected disabled>{userGetId.groupName}</option>
+                        {groupSelect.length && groupSelect.map((item, i) =>
+                            <option key={i} value={item.id}>{item.name}</option>
+                        )}
+                    </select>
+                    <select className="form-select" id="gender">
+                        <option selected disabled>{userGetId.gender}</option>
+                        <option value="MALE">MALE</option>
+                        <option value="FMALE">FMALE</option>
+                    </select>
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                        colorScheme="facebook"
+                        onClick={openEditModal}>Close</Button>
+                    <Button
+                        colorScheme="green"
+                        boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                        onClick={editUsers}>Save</Button>
                 </ModalFooter>
             </Modal>
 
