@@ -94,6 +94,7 @@ function AddTeachers() {
             })
             .catch(() => {
                 toast.error("Teacherning ma'lumotlarini o'zgartirilmadi!")
+                console.log(editData)
             });
     }
 
@@ -108,7 +109,6 @@ function AddTeachers() {
             toast.error("Xatolik yuz berdi");
         });
     }
-    console.log(teacherGetId)
 
     return (
         <>
