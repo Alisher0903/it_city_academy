@@ -1,20 +1,8 @@
-import {
-    Select,
-    Table,
-    TableCaption,
-    TableContainer,
-    Tbody,
-    Td,
-    Text,
-    Th,
-    Thead,
-    Tr,
-} from "@chakra-ui/react";
+import {Select, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr,} from "@chakra-ui/react";
 import Card from "components/card/Card";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {api, config} from "api/api.js";
-import {getGroup} from "../../../../../api/routers";
 
 export default function WeeklyRevenue(props) {
     const {...rest} = props;
@@ -30,38 +18,36 @@ export default function WeeklyRevenue(props) {
     const getOneGroup = () => {
         axios.get(api + "group/teacher", config)
             .then(res => setOneGroup(res.data.body))
-            .catch(err => {})
+            .catch(() => {});
     }
 
     // getGroupTitle
     const getTitle = () => {
         axios.get(api + "group/teacher", config)
             .then(res => setTitleGroup(res.data.body.find(t =>
-                t.id == document.getElementById("groupSelect").value)))
-            .catch(err => {})
+                t.id === document.getElementById("groupSelect").value)))
+            .catch(() => {})
             .then(async res => {
                 await setTitleGroup(res.data.body.find(t => t.id === document.getElementById("groupSelect").value));
                 await getGroupStudent();
-            })
-            .catch(err => console.log(err));
+            }).catch(err => console.log(err));
     }
 
     // getGroupStudent
     const getGroupStudent = () => {
         axios.get(api + "group/teacher/one/group/" + titleGroup.id, config)
             .then(res => setGroupStudent(res.data.body))
-            .catch(err => {})
+            .catch(() => {});
     }
-    // console.log(groupStudent)
-    // console.log(titleGroup.id)
 
     return (
         <Card {...rest}>
             <Text
                 display="flex"
                 justifyContent="space-between">
-                <span className="ms-1 mt-1 fs-5 fw-semibold">{titleGroup.name} top 5</span>
+                <span className="ms-1 mt-1 fs-5 fw-semibold">{titleGroup && titleGroup.name} top 5</span>
                 <Select id="groupSelect" w="25%" onChange={getTitle}>
+                    <option selected disabled>Select Group</option>
                     {oneGroup.length && oneGroup.map((item, i) =>
                         <option key={i} value={item.id}>{item.name}</option>
                     )}
@@ -76,7 +62,7 @@ export default function WeeklyRevenue(props) {
             >
                 <Table>
                     <TableCaption
-                        fontSize="1rem">{titleGroup.name} group</TableCaption>
+                        fontSize="1rem">{titleGroup && titleGroup.name} group</TableCaption>
                     <Thead>
                         <Tr>
                             <Th>T/r</Th>
@@ -86,7 +72,7 @@ export default function WeeklyRevenue(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {groupStudent !== null ?
+                        {groupStudent ?
                             groupStudent.map((item, i) =>
                                 <Tr key={i}>
                                     <Td>{i + 1}</Td>
