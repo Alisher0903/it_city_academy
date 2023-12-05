@@ -42,6 +42,7 @@ export default function WeeklyRevenue(props) {
     return (
         <Card {...rest}>
             <Link href="/#/admin/info/g" id="groupInfo"></Link>
+
             <Modal isOpen={viewallModal} scrollable centered size="lg">
                 <ModalHeader toggle={openViewAllModal} className="techer__modal-head">All Top Groups</ModalHeader>
                 <ModalBody>
@@ -53,6 +54,7 @@ export default function WeeklyRevenue(props) {
                         boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
                         <Table className="text-dark">
                             <TableCaption
+                            color="black"
                                 fontSize="1rem">
                                 All group
                             </TableCaption>
@@ -97,6 +99,7 @@ export default function WeeklyRevenue(props) {
                         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;">Close</Button>
                 </ModalFooter>
             </Modal>
+            
             <Text>
                 <span className="ms-1 mt-1 fs-5 fw-semibold">Top Groups</span>
             </Text>

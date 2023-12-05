@@ -31,6 +31,7 @@ function AdminAdd() {
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
     const [userGetId, setUserGetId] = useState("");
+    const [error, setError] = useState("");
 
     useEffect(() => {
         getUsers();
@@ -46,6 +47,14 @@ function AdminAdd() {
         axios.get(api + "user/super-admin", config)
             .then(res => setUsers(res.data.body))
             .catch(err => console.log(err));
+            .then(res => {
+                setUsers(res.data.body.object)
+                console.log(res.data.body.object);
+            })
+            .catch(err => {
+                console.log(err);
+                setError(err)
+            })
     }
 
     // addUser
