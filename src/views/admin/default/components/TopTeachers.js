@@ -197,8 +197,8 @@ export default function WeeklyRevenue(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {topTeacher ?
-                            topTeacher.map((item, i) =>
+                        {/* {topTeacher ?
+                            topTeacher.map((item, i) => */}
                         {topTeacher.length ?
                             topTeacher.slice(0, 5).map((item, i) =>
                                 <Tr key={i}>

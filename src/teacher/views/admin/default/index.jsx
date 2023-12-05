@@ -40,34 +40,35 @@ export default function UserReports() {
     const getGroupCount = (id) => {
         axios.get(api + "group/byTeacher/" + id, config)
             .then(res => setGroupCount(res.data.body))
+            .catch(() => console.log("group count kelmadi"))
     }
 
     // getUserCount
     const getUserCount = (id) => {
         axios.get(api + "user/byTeacher/" + id, config)
             .then(res => setUserCount(res.data.body))
-            .catch(err => console.log(err))
+            .catch(() => console.log("user count kelmadi"))
     }
 
     // getCoinCount
     const getUserCoin = () => {
         axios.get(api + "user/coinAllUser", config)
             .then(res => setCoinCount(res.data.body))
-            .catch(err => console.log(err))
+            .catch(() => console.log("coin count kelmadi"))
     }
 
     // getExchangeCount
     const getExchangeCount = () => {
         axios.get(api + "exchange/teacher/count", config)
             .then(res => setExchangeCount(res.data.body))
-            .catch(err => console.log(err))
+            .catch(() => console.log("exchange count kelmadi"))
     }
 
     // getAllGroup
     const getAllGroup = () => {
         axios.get(api + "group/teacher/all/group/users", config)
             .then(res => setAllGroupTop(res.data.body))
-            .catch(err => console.log(err))
+            .catch(res => console.log(res.data))
     }
 
     return (
