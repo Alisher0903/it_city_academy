@@ -61,8 +61,8 @@ function AddTeachers() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            gender: byIdIn('gender').value,
-            groupId: 0
+            groupId: byIdIn("groupId").value,
+            gender: byIdIn('gender').value
         }
         axios.post(api + "auth/register?ROLE=ROLE_TEACHER", addData, config)
             .then(() => {
@@ -83,8 +83,8 @@ function AddTeachers() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            gender: byIdIn('gender').value,
-            groupId: 0
+            groupId: byIdIn("groupId"),
+            gender: byIdIn('gender').value
         }
         axios.put(api + "user/update/" + teacherGetId.id, editData, config)
             .then(() => {
@@ -108,6 +108,7 @@ function AddTeachers() {
             toast.error("Xatolik yuz berdi");
         });
     }
+    console.log(teacherGetId)
 
     return (
         <>
@@ -134,10 +135,16 @@ function AddTeachers() {
                             <Input type="email" id="email" placeholder="email"/>
                             <Input type="password" id="password" placeholder="password"/>
                             <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
+                            <select id="groupId" className="form-select">
+                                <option selected disabled>groupName</option>
+                                {groupSelect.length && groupSelect.map((item, i) =>
+                                    <option key={i} value={item.id}>{item.name}</option>
+                                )}
+                            </select>
                             <select id="gender" className="form-select">
                                 <option selected disabled>Select Gender</option>
-                                <option value='MALE'>Male</option>
-                                <option value='FIMALE'>FiMale</option>
+                                <option value='MALE'>MALE</option>
+                                <option value='FMALE'>FMALE</option>
                             </select>
                         </ModalBody>
                         <ModalFooter>
@@ -157,8 +164,7 @@ function AddTeachers() {
                     mt="1rem"
                     pb=".7rem"
                     borderRadius="15px"
-                    boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                >
+                    boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
                     <Table>
                         <TableCaption
                             fontSize="1rem">Teachers</TableCaption>
@@ -212,11 +218,26 @@ function AddTeachers() {
                     className="text-dark fs-4 fw-bolder">
                     Editing data of ({teacherGetId.firstName} {teacherGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="firstName" defaultValue={teacherGetId && teacherGetId.firstName}/>
-                    <Input id="lastName" defaultValue={teacherGetId && teacherGetId.lastName}/>
-                    <Input type="email" id="email" defaultValue={teacherGetId && teacherGetId.email}/>
+                    <Input id="firstName" placeholder="firstName"
+                           defaultValue={teacherGetId && teacherGetId.firstName}/>
+                    <Input id="lastName" placeholder="lastName"
+                           defaultValue={teacherGetId && teacherGetId.lastName}/>
+                    <Input type="email" id="email" placeholder="email"
+                           defaultValue={teacherGetId && teacherGetId.email}/>
                     <Input type="password" id="password" placeholder="password"/>
-                    <Input type="number" id="phoneNumber" defaultValue={teacherGetId && teacherGetId.phoneNumber}/>
+                    <Input type="number" id="phoneNumber" placeholder="phoneNumber"
+                           defaultValue={teacherGetId && teacherGetId.phoneNumber}/>
+                    <select id="groupId" className="form-select">
+                        <option selected disabled>{teacherGetId.groupName}</option>
+                        {groupSelect.length && groupSelect.map((item, i) =>
+                            <option key={i} value={item.id}>{item.name}</option>
+                        )}
+                    </select>
+                    <select className="form-select" id="gender">
+                        <option selected disabled>{teacherGetId.gender}</option>
+                        <option value="MALE">MALE</option>
+                        <option value="FMALE">FMALE</option>
+                    </select>
                 </ModalBody>
                 <ModalFooter>
                     <Button
