@@ -57,7 +57,7 @@ export default function WeeklyRevenue(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {topTeacher.length ?
+                        {topTeacher ?
                             topTeacher.map((item, i) =>
                                 <Tr key={i}>
                                     <Td>{i + 1}</Td>
