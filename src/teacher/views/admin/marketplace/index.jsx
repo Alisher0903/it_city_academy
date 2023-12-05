@@ -82,7 +82,7 @@ export default function Marketplace() {
             programmingLanguage: byIdIn("programmingLanguage").value
         }
 
-        if (img.get('file') !== 'undefined')
+        if (img.get('file') !== 'un          defined')
             await axios.post(api + "attachment/upload", img, config)
                 .then(res => {
                     editData.attachmentId = res.data.body

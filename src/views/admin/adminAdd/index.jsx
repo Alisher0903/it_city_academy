@@ -46,11 +46,10 @@ function AdminAdd() {
     const getUsers = () => {
         axios.get(api + "user/super-admin", config)
             .then(res => {
-                setUsers(res.data.body.object)
-                console.log(res.data.body.object);
+                setUsers(res.data)
+                console.log(res.data);
             })
             .catch(err => {
-                console.log(err);
                 setError(err)
             })
     }
