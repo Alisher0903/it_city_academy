@@ -24,6 +24,7 @@ export default function UserReports() {
     const [user, setUser] = useState();
     const [coinCount, setCoinCount] = useState([]);
     const [teacher, setTeacher] = useState();
+    const [genders, setGender] = useState('');
 
     useEffect(() => {
         setConfig();
@@ -31,6 +32,7 @@ export default function UserReports() {
         getCoutnGroup();
         getCoutnUser();
         getCoutnTeacher();
+        getGender();
     }, []);
 
     function getCoutnGroup() {
@@ -46,7 +48,8 @@ export default function UserReports() {
         axios.get(api + "user/allUserCount", config)
             .then(res => {
                 setUser(res.data.body)
-            }).catch(() => {})
+            }).catch(() => {
+        })
     }
 
     function getCoutnTeacher() {
@@ -61,6 +64,13 @@ export default function UserReports() {
     const getUserCoin = () => {
         axios.get(api + "user/coinAllUser", config)
             .then(res => setCoinCount(res.data.body))
+            .catch(() => {
+            });
+    }
+
+    function getGender() {
+        axios.get(api + 'user/gender', config)
+            .then(res => setGender(res.data.body))
             .catch(() => {
             });
     }
@@ -125,7 +135,7 @@ export default function UserReports() {
                 mb='20px'>
                 <SimpleGrid columns={{base: 1, md: 2, xl: 2}} gap='20px'>
                     <DailyTraffic/>
-                    <PieCard/>
+                    <PieCard genders={genders}/>
 
                 </SimpleGrid>
             </Grid>

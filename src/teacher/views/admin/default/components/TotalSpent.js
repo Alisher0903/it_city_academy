@@ -1,18 +1,6 @@
-import {
-    Table,
-    TableCaption,
-    TableContainer,
-    Tbody,
-    Td,
-    Text,
-    Th,
-    Thead,
-    Tr,
-} from "@chakra-ui/react";
+import {Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr,} from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {api, config} from "../../../../../api/api";
+import React from "react";
 
 export default function TotalSpent(props) {
     const {...rest} = props;

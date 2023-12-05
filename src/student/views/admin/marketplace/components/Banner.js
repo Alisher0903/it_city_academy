@@ -139,7 +139,7 @@ export default function Banner() {
                     </Box>
                     <Text color="white">
                         <Text color="warning" fontSize={{base: "25px"}}>
-                            ⚠️Eslatma: fucsiya nomi codeCheck bulishi shart!
+                            ⚠️Eslatma: fucsiya nomi checkCode bulishi shart!
                         </Text>
                         ⚠️{example()}
                     </Text>
