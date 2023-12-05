@@ -79,6 +79,9 @@ export default function CheckTable(props) {
         setMessage(res.data.body.object)
         // console.log(res);
       })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
 

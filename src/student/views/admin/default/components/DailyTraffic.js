@@ -28,7 +28,7 @@ export default function DailyTraffic(props) {
   function getTraffic() {
     axios.get(api + "user/give-student-coin", config)
       .then((res) => {
-        setTraffic(res.data.message)
+        setTraffic(res.data)
       })
       .catch(() => { })
   }

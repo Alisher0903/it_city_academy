@@ -23,7 +23,9 @@ export function getGroup(setGroup) {
                             teacher: teacherById(g.teacherId)
                         });
                     setGroup(group);
-                }).catch(() => {});
+                }).catch((err) => {
+                    console.log(err);
+                });
 
             function teacherById(id) {
                 for (const teacher of t.data.body) if (teacher.id === id) return teacher.firstName;
