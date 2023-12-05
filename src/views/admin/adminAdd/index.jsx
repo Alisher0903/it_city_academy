@@ -45,6 +45,8 @@ function AdminAdd() {
     // getUsers
     const getUsers = () => {
         axios.get(api + "user/super-admin", config)
+            .then(res => setUsers(res.data.body))
+            .catch(err => console.log(err));
             .then(res => {
                 setUsers(res.data.body.object)
                 console.log(res.data.body.object);
@@ -169,7 +171,7 @@ function AdminAdd() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {users.length ?
+                            {users ?
                                 users.map((item, i) =>
                                     <Tr key={i}>
                                         <Td>{i + 1}</Td>
