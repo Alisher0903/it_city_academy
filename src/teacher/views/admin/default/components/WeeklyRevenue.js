@@ -1,4 +1,4 @@
-import {Select, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr,} from "@chakra-ui/react";
+import {Select, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr} from "@chakra-ui/react";
 import Card from "components/card/Card";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
@@ -14,6 +14,12 @@ export default function WeeklyRevenue(props) {
         getOneGroup();
     }, []);
 
+    useEffect(() => {
+        if (oneGroup[0]) {
+            getGroupStudent(oneGroup[0].id)
+        }
+    }, [oneGroup]);
+
     // getOneGroup // TODO bu yirda xatolik bor tugirlashim kk men Javiohir!!!
     const getOneGroup = () => {
         axios.get(api + "group/teacher", config)
@@ -24,20 +30,23 @@ export default function WeeklyRevenue(props) {
     // getGroupTitle
     const getTitle = () => {
         axios.get(api + "group/teacher", config)
-            .then(res => setTitleGroup(res.data.body.find(t =>
-                t.id === document.getElementById("groupSelect").value)))
-            .catch(() => {})
-            .then(async res => {
-                await setTitleGroup(res.data.body.find(t => t.id === document.getElementById("groupSelect").value));
-                await getGroupStudent();
-            }).catch(err => console.log(err));
+            .then(res => {
+                setTitleGroup(res.data.body.find(t =>
+                    t.id === +document.getElementById("groupSelect").value))
+                getGroupStudent(res.data.body.find(t =>
+                    t.id === +document.getElementById("groupSelect").value).id);
+            })
+            .catch(() => {
+            })
     }
 
     // getGroupStudent
-    const getGroupStudent = () => {
-        axios.get(api + "group/teacher/one/group/" + titleGroup.id, config)
+    const getGroupStudent = (id) => {
+        console.log(id)
+        axios.get(api + "group/teacher/one/group/" + id, config)
             .then(res => setGroupStudent(res.data.body))
-            .catch(() => {});
+            .catch(() => {
+            });
     }
 
     return (
@@ -49,7 +58,7 @@ export default function WeeklyRevenue(props) {
                 <Select id="groupSelect" w="25%" onChange={getTitle}>
                     <option selected disabled>Select Group</option>
                     {oneGroup.length && oneGroup.map((item, i) =>
-                        <option key={i} value={item.id}>{item.name}</option>
+                        <option key={i} value={item.id} selected={oneGroup[0]}>{item.name}</option>
                     )}
                 </Select>
             </Text>

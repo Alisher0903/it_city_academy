@@ -61,7 +61,7 @@ function AddTeachers() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value,
+            groupId: 0,
             gender: byIdIn('gender').value
         }
         axios.post(api + "auth/register?ROLE=ROLE_TEACHER", addData, config)
@@ -83,7 +83,7 @@ function AddTeachers() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: byIdIn("groupId").value,
+            groupId: 0,
             gender: byIdIn('gender').value
         }
         axios.put(api + "user/update/" + teacherGetId.id, editData, config)
@@ -135,12 +135,6 @@ function AddTeachers() {
                             <Input type="email" id="email" placeholder="email"/>
                             <Input type="password" id="password" placeholder="password"/>
                             <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
-                            <select id="groupId" className="form-select">
-                                <option selected disabled>groupName</option>
-                                {groupSelect.length && groupSelect.map((item, i) =>
-                                    <option key={i} value={item.id}>{item.name}</option>
-                                )}
-                            </select>
                             <select id="gender" className="form-select">
                                 <option selected disabled>Select Gender</option>
                                 <option value='MALE'>MALE</option>
@@ -227,12 +221,6 @@ function AddTeachers() {
                     <Input type="password" id="password" placeholder="password"/>
                     <Input type="number" id="phoneNumber" placeholder="phoneNumber"
                            defaultValue={teacherGetId && teacherGetId.phoneNumber}/>
-                    <select id="groupId" className="form-select">
-                        <option selected disabled>{teacherGetId.groupName}</option>
-                        {groupSelect.length && groupSelect.map((item, i) =>
-                            <option key={i} value={item.id}>{item.name}</option>
-                        )}
-                    </select>
                     <select className="form-select" id="gender">
                         <option selected disabled>{teacherGetId.gender}</option>
                         <option value="MALE">MALE</option>
