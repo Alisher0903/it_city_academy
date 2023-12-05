@@ -11,10 +11,7 @@ import {
     Thead,
     Tr,
 } from "@chakra-ui/react";
-import { api } from "api/api";
-import { config } from "api/api";
-import { setConfig } from "api/api";
-import { byIdIn } from "api/api";
+import { api, byIdIn, config, setConfig } from "../../../../api/api";
 import axios from "axios";
 import Card from "components/card/Card";
 import React, { useEffect, useState } from "react";
@@ -23,7 +20,7 @@ export default function WeeklyRevenue(props) {
     const { ...rest } = props;
     const [topTeacher, setTopTeacher] = useState([]);
 
-    useEffect(async() => {
+    useEffect(async () => {
         await setConfig();
         getTopTeacher();
     }, []);
@@ -34,7 +31,6 @@ export default function WeeklyRevenue(props) {
             .then(res => setTopTeacher(res.data.body))
             .catch(() => { })
     }
-    console.log(topTeacher);
 
     const goInfo = () => byIdIn("teacherInfo").click();
 
@@ -61,18 +57,22 @@ export default function WeeklyRevenue(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>1</Td>
-                            <Td>Full Name</Td>
-                            <Td textAlign="end">
-                                <Button
-                                    onClick={goInfo}
-                                    boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
-                                    variant="outline">
-                                    View Info
-                                </Button>
-                            </Td>
-                        </Tr>
+                        {topTeacher.length ?
+                            topTeacher.map((item, i) =>
+                                <Tr key={i}>
+                                    <Td>{i + 1}</Td>
+                                    <Td>{item.name}</Td>
+                                    <Td textAlign="end">
+                                        <Button
+                                            onClick={goInfo}
+                                            boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+                                            variant="outline">
+                                            View Info
+                                        </Button>
+                                    </Td>
+                                </Tr>
+                            )
+                            : <Tr><Td colSpan="2" textAlign="center">Top teacher yuq!!!</Td></Tr>}
                     </Tbody>
                 </Table>
             </TableContainer>
