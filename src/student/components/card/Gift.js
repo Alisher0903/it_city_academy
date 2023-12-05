@@ -1,13 +1,13 @@
 // Chakra imports
-import {Box, Button, Flex, Icon, Image, SimpleGrid, Text, useColorModeValue,} from "@chakra-ui/react";
-import {MdOutlineCurrencyExchange} from "react-icons/md";
-import {api, config, imgUrl, setConfig} from "api/api";
+import { Box, Button, Flex, Icon, Image, SimpleGrid, Text, useColorModeValue, } from "@chakra-ui/react";
+import { MdOutlineCurrencyExchange } from "react-icons/md";
+import { api, config, imgUrl, setConfig } from "api/api";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Card from "components/card/Card.js";
-import React, {useEffect, useState} from "react";
-import {toast, ToastContainer} from "react-toastify";
-import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function Gift() {
     const textColor = useColorModeValue("navy.700", "white");
@@ -36,26 +36,28 @@ export default function Gift() {
     }
 
     function exchange() {
-        axios.get(api + "exchange/save/" + groupId, config)
-            .then(() => {
-                openDeleteModal();
+        axios.post(api + "exchange/save/" + groupId, config)
+            .then((res) => {
                 toast.success("Exchange succesfully get✔");
-            }).catch((error) => toast.error(error.response.data.message
-        === "You do not have enough score" ? "Sizda yetarli ball yo‘q" : "Exchange failed❌"));
+            }).catch((error) => {
+                console.log(error);
+                toast.error(error
+                    === "You do not have enough score" ? "You do not have enough score  " : "Exchange failed❌")
+            });
     }
 
 
     return (
-        <SimpleGrid columns={{base: 1, md: 3, xl: 4}} gap='20px'>
+        <SimpleGrid columns={{ base: 1, md: 3, xl: 4 }} gap='20px'>
             {gift.length && gift.map((item, i) =>
                 <Card p='20px'>
-                    <ToastContainer/>
-                    <Flex key={i} id={item.id} direction={{base: "column"}} justify='center'>
-                        <Box mb={{base: "20px", "2xl": "20px"}} h="13rem" position='relative'>
+                    <ToastContainer />
+                    <Flex key={i} id={item.id} direction={{ base: "column" }} justify='center'>
+                        <Box mb={{ base: "20px", "2xl": "20px" }} h="13rem" position='relative'>
                             <Image
                                 src={imgUrl + item.attachmentId}
-                                w={{base: "100%", "3xl": "100%"}}
-                                h={{base: "180px", "3xl": "180px"}}
+                                w={{ base: "100%", "3xl": "100%" }}
+                                h={{ base: "180px", "3xl": "180px" }}
                                 objectFit="cover"
                                 borderRadius='20px'
                             />
@@ -112,8 +114,8 @@ export default function Gift() {
                                 }}>
                                 {/* edit delete category link */}
                                 <Box display="flex"
-                                     w="100%"
-                                     justifyContent="space-between">
+                                    w="100%"
+                                    justifyContent="space-between">
                                     <Text
                                         color='secondaryGray.600'
                                         align="start"
@@ -134,7 +136,7 @@ export default function Gift() {
                                             setGroupId(item.id);
                                         }}>
                                         Olish
-                                        <Icon w='25px' as={MdOutlineCurrencyExchange}/>
+                                        <Icon w='25px' as={MdOutlineCurrencyExchange} />
                                     </Button>
 
                                 </Box>
@@ -145,15 +147,15 @@ export default function Gift() {
             )}
 
             <Modal isOpen={deleteModal} centered className="group__modals">
-                <ModalHeader toggle={openDeleteModal} className="group__modal-head">Delete Group</ModalHeader>
+                <ModalHeader toggle={openDeleteModal} className="group__modal-head">Receive the gift</ModalHeader>
                 <ModalBody className="group__modal-body">
-                    <p>Bu sovg'ani olmoqchimisiz?</p>
+                    <p>Do you want to receive this gift?</p>
                 </ModalBody>
                 <ModalFooter>
                     <Button onClick={openDeleteModal} color="dark">Close</Button>
                     <Button outline color="danger" onClick={() => {
                         exchange()
-                        openDeleteModal();
+                        openDeleteModal()
                     }}>Ok</Button>
                 </ModalFooter>
             </Modal>
