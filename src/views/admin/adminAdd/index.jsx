@@ -187,7 +187,7 @@ function AdminAdd() {
                                         <Td>
                                             <Button
                                                 onClick={() => {
-                                                    openDeleteModal();
+                                                     openDeleteModal();
                                                     setUserGetId(item);
                                                 }}
                                                 colorScheme="red"
