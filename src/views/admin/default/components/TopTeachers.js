@@ -29,7 +29,7 @@ export default function WeeklyRevenue(props) {
     const getTopTeacher = () => {
         axios.get(api + "user/teacher/level", config)
             .then(res => setTopTeacher(res.data.body))
-            .catch(() => { })
+            .catch(() => {});
     }
 
     const goInfo = () => byIdIn("teacherInfo").click();
