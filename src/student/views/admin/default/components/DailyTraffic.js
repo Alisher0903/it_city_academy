@@ -17,10 +17,6 @@ export default function DailyTraffic(props) {
     const { ...rest } = props;
 
     const [traffic, setTraffic] = useState('')
-    const [chartData, setChartData] = useState([{
-        name: "Daily Traffic",
-        data: [20, 30, 40]
-    }])
 
     // Chakra Color Mode
     const textColor = useColorModeValue("secondaryGray.900", "white");
