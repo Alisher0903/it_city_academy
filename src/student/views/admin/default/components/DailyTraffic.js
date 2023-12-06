@@ -26,22 +26,11 @@ export default function DailyTraffic(props) {
     const textColor = useColorModeValue("secondaryGray.900", "white");
 
     function getTraffic() {
-        axios.get(api + "user/rates/and/exchange/count", config)
-            .then((res) => {
-                let data = res.data.body;
-                if (data.usedRate !== 0 && data.currentRate !== 0 && data.exchangeCount !== 0) setChartData([{
-                    name: "Daily Traffic",
-                    data: [data.usedRate, data.currentRate, data.exchangeCount]
-                }]);
-                setTraffic(data)
-            })
-            .catch(() => {
-            });
+        return <BarChart
+            chartData={rest.exchangeCount}
+            chartOptions={barChartOptionsDailyTraffic}
+        />
     }
-
-    useEffect(() => {
-        getTraffic();
-    }, [])
 
     console.log(traffic);
     return (
@@ -82,10 +71,8 @@ export default function DailyTraffic(props) {
                 </Flex>
             </Flex>
             <Box h='240px' mt='auto'>
-                <BarChart
-                    chartData={chartData}
-                    chartOptions={barChartOptionsDailyTraffic}
-                />
+                {/* BarChart */}
+                {getTraffic()}
             </Box>
         </Card>
     );

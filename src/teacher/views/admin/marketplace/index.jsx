@@ -99,8 +99,7 @@ export default function Marketplace() {
                 toast.success("Category muvaffaqiyatli qo'shildi")
             })
             .catch(() => {
-            })
-
+            });
     }
 
     // delete

@@ -137,8 +137,8 @@ function AddTeachers() {
                             <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
                             <select id="gender" className="form-select">
                                 <option selected disabled>Select Gender</option>
-                                <option value='MALE'>MALE</option>
-                                <option value='FMALE'>FMALE</option>
+                                <option value='MALE'>Erkak</option>
+                                <option value='FMALE'>Ayol</option>
                             </select>
                         </ModalBody>
                         <ModalFooter>
