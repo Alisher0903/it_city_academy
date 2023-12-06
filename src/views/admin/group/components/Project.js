@@ -122,7 +122,7 @@ export default function Project(props) {
                     <select className="form-select mb-3" id="groupTeacher">
                         <option selected disabled>Teacher name</option>
                         {teacherId.map((item, i) =>
-                            <option key={i} value={item.id}>{item.lastName} {item.firstName}</option>
+                            <option key={i} value={item.id} selected={groupId.teacher === item.firstName}>{item.lastName} {item.firstName}</option>
                         )}
                     </select>
                     <select className="form-select" id="groupCategory">

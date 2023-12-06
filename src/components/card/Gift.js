@@ -44,16 +44,6 @@ export default function Gift(props) {
       .catch(() => {})
   }, []);
 
-  // categoryObj
-  // const addcategoryObj = () => {
-  //   const categoryObj = new FormData();
-  //   categoryObj.append("image", document.getElementById("categoryImg").files[0]);
-  //   categoryObj.append("name", document.getElementById("categoryTitle").value);
-  //   // categoryObj.append("attachmentId", document.getElementById("attachmentId").value);
-  //   // categoryObj.append("categoryId", document.getElementById("categoryId").value);
-  //   return categoryObj;
-  // }
-
   // edit category
   const editGift = () => {
     const img = new FormData();
@@ -78,7 +68,6 @@ export default function Gift(props) {
 
   // delete category
   const deleteGift = () => {
-    // console.log(giftIdIn.id);
     axios.delete(api + giftDelete + categoryId.id, config)
       .then(() => {
         openDeleteModal();
@@ -136,7 +125,6 @@ export default function Gift(props) {
                 {description}
               </Text>
             </Flex>
-
           </Flex>
           <Flex
             align='start'
@@ -152,12 +140,10 @@ export default function Gift(props) {
             }}
             mt='5px'>
             {/* edit delete category link */}
-            <Box display="flex"
-            >
+            <Box display="flex">
               <Flex
                 align='start'
-                direction='column'
-              >
+                direction='column'>
                 <Text
                   color='secondaryGray.600'
                   w="100%"
@@ -201,11 +187,10 @@ export default function Gift(props) {
               <ModalBody className="group__modal-body">
                 <Box>
                   <Input type="file" id="img" />
-                  <Input placeholder="name" id="title" />
-                  <Input placeholder="description" id="description" />
-                  <Input placeholder="rate" id="rate" type="number" />
+                  <Input placeholder="name" id="title" defaultValue={categoryId.name} />
+                  <Input placeholder="description" id="description" defaultValue={categoryId.description} />
+                  <Input placeholder="rate" id="rate" type="number" defaultValue={categoryId.rate} />
                 </Box>
-                {/* <Input type="number" placeholder="category id" /> */}
               </ModalBody>
               <ModalFooter>
                 <Button onClick={openEditModal} color="dark" outline>Back</Button>
@@ -225,30 +210,6 @@ export default function Gift(props) {
                 }>Ok</Button>
               </ModalFooter>
             </Modal>
-            {/* <Text fontWeight='700' fontSize='sm' color={textColorBid}>
-              Current Bid: {currentbid}
-            </Text> */}
-            {/* <Link
-              href={download}
-              mt={{
-                base: "0px",
-                md: "10px",
-                lg: "0px",
-                xl: "10px",
-                "2xl": "0px",
-              }}>
-              <Button
-                variant='darkBrand'
-                color='white'
-                fontSize='sm'
-                fontWeight='500'
-                borderRadius='70px'
-                px='24px'
-                py='5px'>
-                O'tish
-                <Icon icon="mingcute:right-line" />
-              </Button>
-            </Link> */}
           </Flex>
         </Flex>
       </Flex>

@@ -57,7 +57,8 @@ function AdminAdd() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: 0
+            groupId: 0,
+            gender: byIdIn("gender").value
         }
         axios.post(api + "auth/register?ROLE=ROLE_SUPER_ADMIN", addData, config)
             .then(() => {
@@ -78,7 +79,8 @@ function AdminAdd() {
             email: byIdIn("email").value,
             password: byIdIn("password").value,
             phoneNumber: byIdIn("phoneNumber").value,
-            groupId: 0
+            groupId: 0,
+            gender: byIdIn("gender").value
         }
         axios.put(api + "user/update/" + userGetId.id, editData, config)
             .then(() => {
@@ -129,6 +131,11 @@ function AdminAdd() {
                             <Input type="email" id="email" placeholder="email"/>
                             <Input type="password" id="password" placeholder="password"/>
                             <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
+                            <select className="form-select" id="gender">
+                                <option selected disabled>gender select</option>
+                                <option value="MALE">Erkak</option>
+                                <option value="FEMALE">Ayol</option>
+                            </select>
                         </ModalBody>
                         <ModalFooter>
                             <Button
@@ -147,8 +154,7 @@ function AdminAdd() {
                     mt="1rem"
                     pb=".7rem"
                     borderRadius="15px"
-                    boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-                >
+                    boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
                     <Table>
                         <TableCaption
                             fontSize="1rem">Users</TableCaption>
@@ -205,11 +211,21 @@ function AdminAdd() {
                     className="text-dark fs-4 fw-bolder">
                     Editing data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="firstName" defaultValue={userGetId && userGetId.firstName}/>
-                    <Input id="lastName" defaultValue={userGetId && userGetId.lastName}/>
-                    <Input type="email" id="email" defaultValue={userGetId && userGetId.email}/>
-                    <Input type="password" id="password" placeholder="password1"/>
-                    <Input type="number" id="phoneNumber" defaultValue={userGetId && userGetId.phoneNumber}/>
+                    <Input
+                        id="firstName" placeholder="firstName" defaultValue={userGetId && userGetId.firstName}/>
+                    <Input
+                        id="lastName" placeholder="lastName" defaultValue={userGetId && userGetId.lastName}/>
+                    <Input
+                        type="email" id="email" placeholder="email" defaultValue={userGetId && userGetId.email}/>
+                    <Input
+                        type="password" id="password" placeholder="password1"/>
+                    <Input
+                        type="number" id="phoneNumber" placeholder="phoneNumber" defaultValue={userGetId && userGetId.phoneNumber}/>
+                    <select className="form-select" id="gender">
+                        <option selected disabled>gender select</option>
+                        <option value="MALE" selected={userGetId.gender === 'MALE'}>Erkak</option>
+                        <option value="FEMALE" selected={userGetId.gender === 'FEMALE'}>Ayol</option>
+                    </select>
                 </ModalBody>
                 <ModalFooter>
                     <Button
@@ -230,8 +246,8 @@ function AdminAdd() {
                     className="text-dark fs-4 fw-bolder">
                     Delete data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-delete">
-                You want to delete {userGetId.firstName} {userGetId.lastName}.
-                     Are you sure about that?
+                    You want to delete {userGetId.firstName} {userGetId.lastName}.
+                    Are you sure about that?
                 </ModalBody>
                 <ModalFooter>
                     <Button

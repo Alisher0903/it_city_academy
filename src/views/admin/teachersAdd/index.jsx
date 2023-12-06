@@ -222,9 +222,9 @@ function AddTeachers() {
                     <Input type="number" id="phoneNumber" placeholder="phoneNumber"
                            defaultValue={teacherGetId && teacherGetId.phoneNumber}/>
                     <select className="form-select" id="gender">
-                        <option selected disabled>{teacherGetId.gender}</option>
-                        <option value="MALE">MALE</option>
-                        <option value="FMALE">FEMALE</option>
+                        <option selected disabled>gender select</option>
+                        <option value="MALE" selected={teacherGetId.gender === 'MALE'}>Erkak</option>
+                        <option value="FEMALE" selected={teacherGetId.gender === 'FEMALE'}>Ayol</option>
                     </select>
                 </ModalBody>
                 <ModalFooter>

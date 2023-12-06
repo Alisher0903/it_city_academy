@@ -64,7 +64,7 @@ export default function WeeklyRevenue(props) {
                                             <Button
                                                 colorScheme="green"
                                                 onClick={() => {
-                                                    // goInfo();
+                                                    openViewAllTeacher();
                                                     openViewInfoModal();
                                                     setTopTeacherId(item);
                                                 }}
@@ -87,14 +87,17 @@ export default function WeeklyRevenue(props) {
                 </ModalFooter>
             </Modal>
             {/* open info modal */}
-            <Modal isOpen={viewInfoModal} scrollable centered size="xl">
-                <ModalHeader className="techer__modal-head" toggle={openViewInfoModal}>
+            <Modal isOpen={viewInfoModal} scrollable centered size="lg">
+                <ModalHeader className="techer__modal-head" toggle={() => {
+                    openViewInfoModal();
+                    openViewAllTeacher();
+                }}>
                     {topTeacherId.firstName} {topTeacherId.lastName} Information
                 </ModalHeader>
                 <ModalBody>
                     <Card bg="light" boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px">
-                        <Row className="w-100 text-dark">
-                            <Col className="col-12 col-md-6">
+                        <Row className="p-4 text-dark">
+                            <Col className="col-12">
                                 <Text
                                     boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
                                     borderRadius="20px"
@@ -121,15 +124,6 @@ export default function WeeklyRevenue(props) {
                                     borderRadius="20px"
                                     mb="15px"
                                     p="20px">
-                                    Group Name: {topTeacherId.groupName}
-                                </Text>
-                            </Col>
-                            <Col className="col-12 col-md-6">
-                                <Text
-                                    boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
-                                    borderRadius="20px"
-                                    mb="15px"
-                                    p="20px">
                                     Gender: {topTeacherId.gender}
                                 </Text>
                                 <Text
@@ -139,21 +133,30 @@ export default function WeeklyRevenue(props) {
                                     p="20px">
                                     Level: {topTeacherId.level}
                                 </Text>
-                                <Text
-                                    boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
-                                    borderRadius="20px"
-                                    mb="15px"
-                                    p="20px">
-                                    CurrentRate: {topTeacherId.currentRate}
-                                </Text>
-                                <Text
-                                    boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
-                                    borderRadius="20px"
-                                    mb="15px"
-                                    p="20px">
-                                    UsedRate: {topTeacherId.usedRate}
-                                </Text>
+                                {/*<Text*/}
+                                {/*    boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"*/}
+                                {/*    borderRadius="20px"*/}
+                                {/*    mb="15px"*/}
+                                {/*    p="20px">*/}
+                                {/*    Group Name: {topTeacherId.groupName}*/}
+                                {/*</Text>*/}
                             </Col>
+                            {/*<Col className="col-12 col-md-6">*/}
+                            {/*    <Text*/}
+                            {/*        boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"*/}
+                            {/*        borderRadius="20px"*/}
+                            {/*        mb="15px"*/}
+                            {/*        p="20px">*/}
+                            {/*        CurrentRate: {topTeacherId.currentRate}*/}
+                            {/*    </Text>*/}
+                            {/*    <Text*/}
+                            {/*        boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"*/}
+                            {/*        borderRadius="20px"*/}
+                            {/*        mb="15px"*/}
+                            {/*        p="20px">*/}
+                            {/*        UsedRate: {topTeacherId.usedRate}*/}
+                            {/*    </Text>*/}
+                            {/*</Col>*/}
                         </Row>
                     </Card>
                 </ModalBody>

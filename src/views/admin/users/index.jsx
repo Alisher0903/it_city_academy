@@ -308,7 +308,7 @@ function Users() {
                     <select className="form-select" id="gender">
                         <option selected disabled>Gender select</option>
                         <option value="MALE" selected={userGetId.gender === 'MALE'}>Erkak</option>
-                        <option value="FMALE" selected={userGetId.gender === 'FEMALE'}>Ayol</option>
+                        <option value="FEMALE" selected={userGetId.gender === 'FEMALE'}>Ayol</option>
                     </select>
                 </ModalBody>
                 <ModalFooter>
