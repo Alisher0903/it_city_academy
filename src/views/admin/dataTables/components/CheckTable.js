@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Select, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Flex, Select, Text, Textarea, useColorModeValue, SimpleGrid } from "@chakra-ui/react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import React, { useEffect, useState } from "react";
 
@@ -108,21 +108,45 @@ export default function CheckTable(props) {
                         mb="20px"
                         borderColor='transparent'>
                         <Flex direction='column'>
-                            <Text
-                                color={textColor}
-                                fontSize={{
-                                    base: "xl",
-                                    md: "lg",
-                                    lg: "lg",
-                                    xl: "lg",
-                                    "2xl": "md",
-                                    "3xl": "lg",
-                                }}
-                                mb='5px'
-                                fontWeight='bold'
-                                me='14px'>
-                                {item.groupName}
-                            </Text>
+                            <SimpleGrid
+                                columns={{ base: 2, md: 2, lg: 2, "2xl": 2 }}
+                                w="100%"
+                                gap='20px'
+                                mb='20px'>
+                                <Text
+                                    color={textColor}
+                                    fontSize={{
+                                        base: "xl",
+                                        md: "lg",
+                                        lg: "lg",
+                                        xl: "lg",
+                                        "2xl": "md",
+                                        "3xl": "lg",
+                                    }}
+                                    mb='5px'
+                                    fontWeight='bold'
+                                    me='14px'>
+                                    {item.groupName}
+                                </Text>
+                                <Text
+                                    color={textColor}
+                                    fontSize={{
+                                        base: "xs",
+                                        md: "md",
+                                        lg: "md",
+                                        xl: "md",
+                                        "2xl": "lg",
+                                        "3xl": "lg",
+                                    }}
+                                    mb='5px'
+                                    textAlign="right"
+                                    fontWeight='bold'
+                                    me='14px'>
+                                    {item.date}
+                                </Text>
+
+                            </SimpleGrid>
+
                             <Text
                                 color='secondaryGray.600'
                                 fontSize={{
