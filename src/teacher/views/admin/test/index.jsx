@@ -31,7 +31,7 @@ export default function Overview() {
     }, []);
 
     // getTest  url: ?page=0&size=100
-    const getTestTeacher = () => axios.get(api + "test?page=0&size=100", config)
+    const getTestTeacher = () => axios.get(api + "test/ofTeache", config)
         .then(res => setTestPlus(res.data.object))
         .catch(() => toast.error("Sizda xali testlar yo'q. Test qo'shishingizni tavsiya qilamiz!!!"));
 
