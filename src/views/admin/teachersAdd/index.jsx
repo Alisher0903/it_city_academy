@@ -68,10 +68,10 @@ function AddTeachers() {
             .then(() => {
                 openAddModal();
                 getTeachers();
-                toast.success("Teacher muvaffaqiyatli qo'shildi✔");
+                toast.success("Teacher successfully added✔");
             })
             .catch(() => {
-                toast.error("Teacher qo'shishda xatolik")
+                toast.error("Something went wrong❓")
             })
     }
 
@@ -90,12 +90,11 @@ function AddTeachers() {
             .then(() => {
                 openEditModal();
                 getTeachers();
-                toast.success("Teacherning ma'lumotlari o'zgartirildi✔");
+                toast.success("Teacher successfully edited✔");
             })
             .catch(() => {
-                toast.error("Teacherning ma'lumotlarini o'zgartirilmadi!")
-                console.log(editData)
-            });
+                toast.error("Something went wrong❓")
+            })
     }
 
     // deleteTeacher
@@ -104,10 +103,11 @@ function AddTeachers() {
             .then(() => {
                 openDeleteModal();
                 getTeachers();
-                toast.success("Teacherning ma'lumotlari o'zchirildi!!!");
-            }).catch(() => {
-            toast.error("Xatolik yuz berdi");
-        });
+                toast.success("Teacher successfully deleted");
+            })
+            .catch(() => {
+                toast.error("Something went wrong❓")
+            })
     }
 
     return (
@@ -128,7 +128,7 @@ function AddTeachers() {
                     <Modal isOpen={addModal} centered size="lg">
                         <ModalHeader
                             toggle={openAddModal}
-                            className="text-dark fs-4 fw-bolder">Add Teachers</ModalHeader>
+                            className="text-dark fs-4 fw-bolder">Add Teacher</ModalHeader>
                         <ModalBody className="techer__modal-body">
                             <Input id="firstName" placeholder="firstName"/>
                             <Input id="lastName" placeholder="lastName"/>
@@ -138,7 +138,7 @@ function AddTeachers() {
                             <select id="gender" className="form-select">
                                 <option selected disabled>Select Gender</option>
                                 <option value='MALE'>MALE</option>
-                                <option value='FMALE'>FMALE</option>
+                                <option value='FMALE'>FEMALE</option>
                             </select>
                         </ModalBody>
                         <ModalFooter>
@@ -223,8 +223,8 @@ function AddTeachers() {
                            defaultValue={teacherGetId && teacherGetId.phoneNumber}/>
                     <select className="form-select" id="gender">
                         <option selected disabled>{teacherGetId.gender}</option>
-                        <option value="MALE">Erkak</option>
-                        <option value="FMALE">Ayol</option>
+                        <option value="MALE">MALE</option>
+                        <option value="FMALE">FEMALE</option>
                     </select>
                 </ModalBody>
                 <ModalFooter>
@@ -246,8 +246,8 @@ function AddTeachers() {
                     className="text-dark fs-4 fw-bolder">
                     Delete data of ({teacherGetId.firstName} {teacherGetId.lastName})</ModalHeader>
                 <ModalBody className="text-dark fs-5 fw-medium" style={{letterSpacing: ".5px", lineHeight: "22px"}}>
-                    Siz "{teacherGetId.firstName} {teacherGetId.lastName}" ma'lumotlarini o'chirib yubormoqchisiz.
-                    Bunga ishonchingiz komilmi?
+                You want to delete {teacherGetId.firstName} {teacherGetId.lastName}.
+                     Are you sure about that?
                 </ModalBody>
                 <ModalFooter>
                     <Button

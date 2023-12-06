@@ -97,7 +97,7 @@ export default function UserReports() {
                                 }
                             />
                         }
-                        name='Teachers count'
+                        name='Number of teachers'
                         value={teacher}
                     />
                     <MiniStatistics
@@ -109,7 +109,7 @@ export default function UserReports() {
                                 icon={<Icon w='28px' h='28px' as={MdOutlinePerson4} color='white'/>}
                             />
                         }
-                        name='Students Count'
+                        name='Number of students'
                         value={user}
                     />
 
@@ -124,7 +124,7 @@ export default function UserReports() {
                                 }
                             />
                         }
-                        name='Groups count'
+                        name='Number of groups'
                         value={group}
                     />
                 </SimpleGrid>

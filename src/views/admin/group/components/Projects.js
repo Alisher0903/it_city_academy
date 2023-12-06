@@ -53,7 +53,10 @@ export default function Projects() {
             .then(() => {
                 getGroup(setGroup);
                 openAddModal();
-                toast.success("Group muvaffaqiyatli saqlandi✔");
+                toast.success("Group successfully added✔");
+            })
+            .catch(() => {
+                toast.error("Something went wrong❓")
             })
     }
 

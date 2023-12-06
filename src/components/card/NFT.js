@@ -43,7 +43,10 @@ export default function NFT(props) {
                         .then(() => {
                             openEditModal();
                             getCategory(setCategory);
-                            toast.success("Categorya muvaffaqiyatli taxrirlandi✔");
+                            toast.success("Category edited successfully✔");
+                        })
+                        .catch(() => {
+                            toast.error("Something went wrong❓")
                         })
                 })
         } else axios.put(api + categoryEdit + categoryId.id, {
@@ -53,8 +56,11 @@ export default function NFT(props) {
         }, config).then(() => {
             openEditModal();
             getCategory(setCategory);
-            toast.success("Categorya muvaffaqiyatli taxrirlandi✔");
-        });
+            toast.success("Category edited successfully✔");
+        })
+        .catch(() => {
+            toast.error("Something went wrong❓")
+        })
     }
 
     // delete category
@@ -62,8 +68,11 @@ export default function NFT(props) {
         axios.delete(api + categoryDelete + categoryId.id, config)
             .then(() => {
                 openDeleteModal();
-                toast.success("Categorya muvaffaqiyatli o'chirildi✔")
+                toast.success("Category delete successfully✔")
                 getCategory(setCategory);
+            })
+            .catch(() => {
+                toast.error("Something went wrong❓")
             })
     }
 
@@ -181,8 +190,8 @@ export default function NFT(props) {
                                 <Input type="text" id="categoryTitle" placeholder="name"/>
                             </ModalBody>
                             <ModalFooter>
-                                <Button onClick={openEditModal} color="dark" outline>Orqaga</Button>
-                                <Button color="success" outline onClick={editCategory}>Saqlash</Button>
+                                <Button onClick={openEditModal} color="dark" outline>Back</Button>
+                                <Button color="success" outline onClick={editCategory}>Save</Button>
                             </ModalFooter>
                         </Modal>
 
@@ -191,11 +200,11 @@ export default function NFT(props) {
                             <ModalHeader toggle={openDeleteModal} className="group__modal-head">Delete
                                 Category</ModalHeader>
                             <ModalBody className="group__modal-body">
-                                <p>Bu categoryni o'chirmoqchimisiz?</p>
+                                <p>Do you want to delete this category?</p>
                             </ModalBody>
                             <ModalFooter>
-                                <Button onClick={openDeleteModal} color="dark" outline>Orqaga</Button>
-                                <Button color="danger" outline onClick={deleteCategory}>Ha</Button>
+                                <Button onClick={openDeleteModal} color="dark" outline>Back</Button>
+                                <Button color="danger" outline onClick={deleteCategory}>Yes</Button>
                             </ModalFooter>
                         </Modal>
                         {/* <Text fontWeight='700' fontSize='sm' color={textColorBid}>
