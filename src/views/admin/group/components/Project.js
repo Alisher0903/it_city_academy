@@ -28,7 +28,6 @@ export default function Project(props) {
     const openEditModal = () => setEditModal(!editModal);
     const openDeleteModal = () => setDeleteModal(!deleteModal);
 
-
     useEffect(() => {
         setConfig();
         getGroup(setGroup);
@@ -129,7 +128,7 @@ export default function Project(props) {
                     <select className="form-select" id="groupCategory">
                         <option selected disabled>Category</option>
                         {category.length && category.map((item, i) =>
-                            <option key={i} value={item.id}>{item.name}</option>
+                            <option key={i} value={item.id} >{item.name}</option>
                         )}
                     </select>
                 </ModalBody>

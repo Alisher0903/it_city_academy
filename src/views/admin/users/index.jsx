@@ -300,15 +300,15 @@ function Users() {
                     <Input type="number" id="phoneNumber" placeholder="phoneNumber"
                         defaultValue={userGetId && userGetId.phoneNumber} />
                     <select id="groupId" className="form-select">
-                        <option selected disabled>{userGetId.groupName}</option>
+                        <option selected disabled>Group select</option>
                         {groupSelect.length && groupSelect.map((item, i) =>
-                            <option key={i} value={item.id}>{item.name}</option>
+                            <option key={i} value={item.id} selected={userGetId.groupName === item.name}>{item.name}</option>
                         )}
                     </select>
                     <select className="form-select" id="gender">
-                        <option selected disabled>{userGetId.gender}</option>
-                        <option value="MALE">MALE</option>
-                        <option value="FMALE">FEMALE</option>
+                        <option selected disabled>Gender select</option>
+                        <option value="MALE" selected={userGetId.gender === 'MALE'}>Erkak</option>
+                        <option value="FMALE" selected={userGetId.gender === 'FEMALE'}>Ayol</option>
                     </select>
                 </ModalBody>
                 <ModalFooter>
