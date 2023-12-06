@@ -223,8 +223,8 @@ function AddTeachers() {
                            defaultValue={teacherGetId && teacherGetId.phoneNumber}/>
                     <select className="form-select" id="gender">
                         <option selected disabled>{teacherGetId.gender}</option>
-                        <option value="MALE">MALE</option>
-                        <option value="FMALE">FMALE</option>
+                        <option value="MALE">Erkak</option>
+                        <option value="FMALE">Ayol</option>
                     </select>
                 </ModalBody>
                 <ModalFooter>
