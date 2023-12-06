@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 // Chakra imports
-import { Box, Flex, Icon, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import {Box, Flex, SimpleGrid, Text, useColorModeValue} from "@chakra-ui/react";
 import BarChart from "../../../../components/charts/BarChart";
 
 // Custom components
 import Card from "../../../../components/card/Card.js";
-import { barChartOptionsDailyTraffic, } from "../../../../variables/charts";
+import {barChartOptionsDailyTraffic,} from "../../../../variables/charts";
 
 // Assets
-import { RiArrowUpSFill } from "react-icons/ri";
-import axios from "axios";
-import { api, config } from "api/api";
 
 export default function DailyTraffic(props) {
-    const { ...rest } = props;
-
-    const [traffic, setTraffic] = useState('')
+    const {...rest} = props;
 
     // Chakra Color Mode
     const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -28,7 +23,6 @@ export default function DailyTraffic(props) {
         />
     }
 
-    console.log(traffic);
     return (
         <Card align='center' direction='column' w='100%' {...rest}>
             <Flex justify='space-between' align='start' px='10px' pt='5px'>
@@ -47,7 +41,7 @@ export default function DailyTraffic(props) {
                         w="100%"
                         display="flex"
                         textAlign="center"
-                        columns={{ base: 3, md: 3, lg: 3 }}
+                        columns={{base: 3, md: 3, lg: 3}}
                         gap='30%'
                         mb='20px'>
                         <Text
