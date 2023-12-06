@@ -66,7 +66,7 @@ export default function Gifts() {
     }
 
     return (
-        <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
+        <Box pt={{base: "140px", md: "40px", xl: "40px"}}>
             <ToastContainer/>
 
             {/* Main Fields */}

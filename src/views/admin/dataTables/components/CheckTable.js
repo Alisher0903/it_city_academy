@@ -82,7 +82,7 @@ export default function CheckTable(props) {
                     fontWeight='700'
                     lineHeight='100%'
                     align="center">
-                    Sent messages
+                    Send messages
                 </Text>
                 <Button
                     onClick={() => {
@@ -96,7 +96,7 @@ export default function CheckTable(props) {
                     className="px-4 py-2 bg-primary fw-medium rounded-5">
                     Send message
                 </Button>
-                
+
             </Flex>
             {message.length && message.map((item, i) => {
                 return (
@@ -107,9 +107,32 @@ export default function CheckTable(props) {
                         bg={bg}
                         mb="20px"
                         borderColor='transparent'>
-                        <Text color={textColor} fontSize='17px' fontWeight='700'>
-                            {item.description}
-                        </Text>
+                        <Flex direction='column'>
+                            <Text
+                                color={textColor}
+                                fontSize={{
+                                    base: "xl",
+                                    md: "lg",
+                                    lg: "lg",
+                                    xl: "lg",
+                                    "2xl": "md",
+                                    "3xl": "lg",
+                                }}
+                                mb='5px'
+                                fontWeight='bold'
+                                me='14px'>
+                                {item.groupName}
+                            </Text>
+                            <Text
+                                color='secondaryGray.600'
+                                fontSize={{
+                                    base: "sm",
+                                }}
+                                fontWeight='600'
+                                me='14px'>
+                                {item.description}
+                            </Text>
+                        </Flex>
                     </Card>
                 );
             })}

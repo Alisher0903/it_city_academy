@@ -25,14 +25,18 @@ export default function UserReports() {
     const [coinCount, setCoinCount] = useState([]);
     const [teacher, setTeacher] = useState();
     const [genders, setGender] = useState('');
+    const [traffic, setTraffic] = useState([{
+        name: "Daily Traffic",
+        data: [1, 1, 1]
+    }])
 
     useEffect(() => {
         setConfig();
-        getUserCoin();
         getCoutnGroup();
         getCoutnUser();
         getCoutnTeacher();
         getGender();
+        getTraffic();
     }, []);
 
     function getCoutnGroup() {
@@ -61,16 +65,22 @@ export default function UserReports() {
             })
     }
 
-    const getUserCoin = () => {
-        axios.get(api + "user/coinAllUser", config)
-            .then(res => setCoinCount(res.data.body))
+    function getGender() {
+        axios.get(api + 'user/gender', config)
+            .then(res => setGender(res.data.body))
             .catch(() => {
             });
     }
 
-    function getGender() {
-        axios.get(api + 'user/gender', config)
-            .then(res => setGender(res.data.body))
+    function getTraffic() {
+        axios.get(api + "user/rates/and/exchange/count", config)
+            .then(res => {
+                let data = res.data.body;
+                if (data.usedRate !== 0 && data.currentRate !== 0 && data.exchangeCount !== 0) setTraffic([{
+                    name: "Daily Traffic",
+                    data: [data.usedRate, data.currentRate, data.exchangeCount]
+                }]);
+            })
             .catch(() => {
             });
     }
@@ -97,7 +107,7 @@ export default function UserReports() {
                                 }
                             />
                         }
-                        name='Teachers count'
+                        name='Number of teachers'
                         value={teacher}
                     />
                     <MiniStatistics
@@ -109,7 +119,7 @@ export default function UserReports() {
                                 icon={<Icon w='28px' h='28px' as={MdOutlinePerson4} color='white'/>}
                             />
                         }
-                        name='Students Count'
+                        name='Number of students'
                         value={user}
                     />
 
@@ -124,7 +134,7 @@ export default function UserReports() {
                                 }
                             />
                         }
-                        name='Groups count'
+                        name='Number of groups'
                         value={group}
                     />
                 </SimpleGrid>
@@ -134,7 +144,7 @@ export default function UserReports() {
                 gap='20px'
                 mb='20px'>
                 <SimpleGrid columns={{base: 1, md: 2, xl: 2}} gap='20px'>
-                    <DailyTraffic/>
+                    <DailyTraffic exchangeCount={traffic}/>
                     <PieCard genders={genders}/>
 
                 </SimpleGrid>

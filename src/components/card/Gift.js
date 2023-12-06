@@ -41,6 +41,7 @@ export default function Gift(props) {
       .then(res => {
         setCategory(res.data.body)
       })
+      .catch(() => {})
   }, []);
 
   // categoryObj
@@ -70,7 +71,7 @@ export default function Gift(props) {
           .then(() => {
             openEditModal();
             getGifts();
-            toast.success("succesfully edit Gifts✔");    
+            toast.success("Succesfully edited Gift✔");    
           })
       })
   }
@@ -81,7 +82,7 @@ export default function Gift(props) {
     axios.delete(api + giftDelete + categoryId.id, config)
       .then(() => {
         openDeleteModal();
-        toast.success("successfully saved Gifts!")
+        toast.success("Successfully delete Gift!")
         getGifts();
       })
   }
@@ -207,8 +208,8 @@ export default function Gift(props) {
                 {/* <Input type="number" placeholder="category id" /> */}
               </ModalBody>
               <ModalFooter>
-                <Button onClick={openEditModal} color="dark" outline>Orqaga</Button>
-                <Button color="success" outline onClick={editGift}>Saqlash</Button>
+                <Button onClick={openEditModal} color="dark" outline>Back</Button>
+                <Button color="success" outline onClick={editGift}>Save</Button>
               </ModalFooter>
             </Modal>
 
@@ -219,9 +220,9 @@ export default function Gift(props) {
                 <p>Bu categoryni o'chirmoqchimisiz?</p>
               </ModalBody>
               <ModalFooter>
-                <Button onClick={openDeleteModal} color="dark" outline>Orqaga</Button>
+                <Button onClick={openDeleteModal} color="dark" outline>Back</Button>
                 <Button color="danger" outline onClick={deleteGift
-                }>Ha</Button>
+                }>Ok</Button>
               </ModalFooter>
             </Modal>
             {/* <Text fontWeight='700' fontSize='sm' color={textColorBid}>
