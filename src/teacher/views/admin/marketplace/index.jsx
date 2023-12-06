@@ -228,10 +228,10 @@ export default function Marketplace() {
                         <Input id="name" placeholder="Name"/>
                         <select id="programmingLanguage" className="form-select">
                             <option value="0" selected disabled>Programming Language</option>
-                            <option value="1">Java</option>
-                            <option value="2">JavaScript</option>
-                            <option value="3">C++</option>
-                            <option value="4">Python</option>
+                            <option value="JAVA">Java</option>
+                            <option value="JAVA_SCRIPT">JavaScript</option>
+                            <option value="CPP">C++</option>
+                            <option value="PYTHON">Python</option>
                         </select>
                         <select id="categoryId" className="form-select">
                             <option selected disabled>Category Select</option>
@@ -254,10 +254,10 @@ export default function Marketplace() {
                         <Input id="name" defaultValue={teacherCategoryId && teacherCategoryId.name}/>
                         <select id="programmingLanguage" className="form-select">
                             <option value="0" disabled>Programming Language</option>
-                            <option value="1" selected={checkPL('JAVA')}>Java</option>
-                            <option value="2" selected={checkPL('JAVA_SCRIPT')}>JavaScript</option>
-                            <option value="3" selected={checkPL('CPP')}>C++</option>
-                            <option value="4" selected={checkPL('PYTHON')}>Python</option>
+                            <option value="JAVA" selected={checkPL('JAVA')}>Java</option>
+                            <option value="JAVA_SCRIPT" selected={checkPL('JAVA_SCRIPT')}>JavaScript</option>
+                            <option value="CPP" selected={checkPL('CPP')}>C++</option>
+                            <option value="PYTHON" selected={checkPL('PYTHON')}>Python</option>
                         </select>
                         <select id="categoryId" className="form-select">
                             <option disabled>Category Select</option>

@@ -8,7 +8,7 @@ import {
   MdCardGiftcard,
   MdPerson,
   MdPersonPin,
-  MdPersonAddAlt
+  MdPersonAddAlt, MdRecommend
 } from "react-icons/md";
 import MainDashboard from "views/admin/default";
 import NFTMarketplace from "views/admin/marketplace";
@@ -18,7 +18,7 @@ import Profile from "views/admin/profile";
 import User from "./views/admin/users";
 import Teacher from "./views/admin/teachersAdd";
 import GroupInfo from "./views/admin/default/components/infoDashboard/GroupInfo";
-import TeacherInfo from "./views/admin/default/components/infoDashboard/TeacherInfo";
+import Recommendation from "./views/admin/recommendation/Recommendation";
 
 import SignIn from "views/auth/signIn";
 import Gifts from "views/admin/gifts";
@@ -80,9 +80,16 @@ const routes = [
   {
     name: "Admin",
     layout: "/admin",
-    path: "/AdminAdd",
+    path: "/add/admin",
     icon: <Icon as={MdPersonAddAlt} width='20px' height='20px' color='inherit' />,
     component: AdminAdd,
+  },
+  {
+    name: "Recommendation",
+    layout: "/admin",
+    path: "/recommendation",
+    icon: <Icon as={MdRecommend} width='20px' height='20px' color='inherit' />,
+    component: Recommendation,
   },
   {
     name: "",
@@ -117,12 +124,6 @@ const routes = [
     layout: "/admin",
     path: "/info/g",
     component: GroupInfo,
-  },
-  {
-    name: "",
-    layout: "/admin",
-    path: "/info/t",
-    component: TeacherInfo,
   },
 ];
 
