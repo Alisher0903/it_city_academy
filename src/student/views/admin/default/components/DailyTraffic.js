@@ -43,7 +43,7 @@ export default function DailyTraffic(props) {
                             Traffic
                         </Text>
                     </Flex>
-                    <SimpleGrid
+                    {/* <SimpleGrid
                         w="100%"
                         display="flex"
                         textAlign="center"
@@ -71,7 +71,7 @@ export default function DailyTraffic(props) {
                             lineHeight='100%'>
                             Used <br/>exchange
                         </Text>
-                    </SimpleGrid>
+                    </SimpleGrid> */}
                 </Flex>
             </Flex>
             <Box h='240px' mt='auto'>
