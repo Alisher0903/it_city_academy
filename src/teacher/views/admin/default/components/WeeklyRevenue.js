@@ -24,7 +24,8 @@ export default function WeeklyRevenue(props) {
     const getOneGroup = () => {
         axios.get(api + "group/teacher", config)
             .then(res => setOneGroup(res.data.body))
-            .catch(() => {});
+            .catch(() => {
+            });
     }
 
     // getGroupTitle
