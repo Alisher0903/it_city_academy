@@ -48,7 +48,7 @@ export default function Overview() {
         }
 
         if (img.get('file') !== 'undefined') await axios.post(api + "attachment/upload", img, config)
-                .then(res => addData.attachmentId = res.data.body);
+            .then(res => addData.attachmentId = res.data.body);
 
         axios.post(api + "test", addData, config)
             .then(() => {
@@ -88,7 +88,10 @@ export default function Overview() {
                 toast.success("Test o'chirildi");
                 openDeleteModal();
                 getTestTeacher();
-            });
+            })
+            .catch(() => {
+                toast.error("Test o'chirilmadi")
+            })
     }
 
     const goPageDetails = () => document.getElementById("detielis").click();
