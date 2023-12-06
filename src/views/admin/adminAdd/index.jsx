@@ -63,10 +63,10 @@ function AdminAdd() {
             .then(() => {
                 openAddModal();
                 getUsers();
-                toast.success("Admin muvaffaqiyatli qo'shildi✔");
+                toast.success("Admin successfully added✔");
             })
             .catch(() => {
-                toast.error("Admin qo'shishda xatolik yuz berdi!")
+                toast.error("Something went wrong❓")
             })
     }
 
@@ -84,10 +84,10 @@ function AdminAdd() {
             .then(() => {
                 openEditModal();
                 getUsers();
-                toast.success("Adminning ma'lumotlari o'zgartirildi✔");
+                toast.success("Admin successfully edited✔");
             })
             .catch(() => {
-                toast.error("Admin o'zgartirishda xatolik yuz berdi!")
+                toast.error("Something went wrong❓")
             })
     }
 
@@ -97,10 +97,10 @@ function AdminAdd() {
             .then(() => {
                 openDeleteModal();
                 getUsers();
-                toast.success("Adminning ma'lumotlari o'zchirildi!!!");
+                toast.success("Admin successfully deleted");
             })
             .catch(() => {
-                toast.error("Admin o'chirilmada xatolik yuz berdi!");
+                toast.error("Something went wrong❓")
             })
     }
 
@@ -191,7 +191,7 @@ function AdminAdd() {
                                         </Td>
                                     </Tr>
                                 ) :
-                                <Tr><Td colSpan="6" className="text-center">Super adminlar yuq</Td></Tr>
+                                <Tr><Td colSpan="6" className="text-center">No super admins</Td></Tr>
                             }
                         </Tbody>
                     </Table>
@@ -230,8 +230,8 @@ function AdminAdd() {
                     className="text-dark fs-4 fw-bolder">
                     Delete data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-delete">
-                    Siz {userGetId.firstName} {userGetId.lastName} ma'lumotlarini o'chirib yubormoqchisiz.
-                    Bunga ishonchingiz komilmi?
+                You want to delete {userGetId.firstName} {userGetId.lastName}.
+                     Are you sure about that?
                 </ModalBody>
                 <ModalFooter>
                     <Button

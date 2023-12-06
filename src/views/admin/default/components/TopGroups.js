@@ -43,11 +43,11 @@ export default function WeeklyRevenue(props) {
         <Card {...rest}>
             <Link href="/#/admin/info/g" id="groupInfo"></Link>
 
-            <Modal isOpen={viewallModal} scrollable centered size="lg">
+            <Modal isOpen={viewallModal} scrollable centered size="xl">
                 <ModalHeader toggle={openViewAllModal} className="techer__modal-head">All Top Groups</ModalHeader>
                 <ModalBody>
                     <TableContainer {...rest}
-                        mt="1rem"
+                        // mt="1rem"
                         pt=".7rem"
                         pb=".7rem"
                         borderRadius="15px"

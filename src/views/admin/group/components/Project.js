@@ -47,8 +47,11 @@ export default function Project(props) {
             .then(() => {
                 openEditModal();
                 getGroup(setGroup);
-                toast.success("Group muvaffaqiyatli taxrirlandi✔");
-            }).catch(() => toast.error("Xatolik yuz berdi. Buning uchun sizdan uzur suraymiz, beni tez orada bartaraf etamiz!!!"))
+                toast.success("Group edited successfully✔");
+            })
+            .catch(() => {
+                toast.error("Something went wrong❓")
+            })
     }
 
     // delete group
@@ -57,7 +60,7 @@ export default function Project(props) {
             .then(() => {
                 openDeleteModal();
                 getGroup(setGroup);
-                toast.success("Group muvaffaqiyatli o'chirildi❌");
+                toast.success("Group delete successfully❌");
             })
     }
 
@@ -81,7 +84,7 @@ export default function Project(props) {
                                 color={textColorSecondary}
                                 fontSize='sm'
                                 me='4px'>
-                                <p className="fw-medium" color={brandColor}>O'qituvchi: {item.teacher}</p>
+                                <p className="fw-medium" color={brandColor}>Teacher: {item.teacher}</p>
                             </Text>
                         </Box>
                         <Box ms="auto">
@@ -140,7 +143,7 @@ export default function Project(props) {
             <Modal isOpen={deleteModal} centered className="group__modals">
                 <ModalHeader toggle={openDeleteModal} className="group__modal-head">Delete Group</ModalHeader>
                 <ModalBody className="group__modal-body">
-                    <p>Bu guruhni o'chirmoqchimisiz?</p>
+                    <p>Do you want to delete this group?</p>
                 </ModalBody>
                 <ModalFooter>
                     <Button onClick={openDeleteModal} color="dark">Close</Button>

@@ -20,8 +20,8 @@ function Recommendation() {
 
     // addCoin
     const addCoin = () => {
-        let courseId = byIdIn("courseId").value
-        let coin = byIdIn("coin").value
+        let courseId = byIdIn("courseId").value;
+        let coin = byIdIn("coin").value;
         if (courseId !== "undefined" && coin !== "undefined") {
             let coinAdd = new FormData();
             coinAdd.set("courseId", courseId);
@@ -53,6 +53,7 @@ function Recommendation() {
                     colorScheme="facebook"
                     boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px">Close</Button>
                 <Button
+                    // onClick={addCoin}
                     colorScheme="green"
                     boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px">Save</Button>
             </ModalFooter>

@@ -13,12 +13,12 @@ import {
     Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
-import {api, byIdIn, config, setConfig} from "../../../api/api";
+import { api, byIdIn, config, setConfig } from "../../../api/api";
 import axios from "axios";
-import {useEffect, useState} from "react";
-import {Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import { useEffect, useState } from "react";
+import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import 'react-toastify/dist/ReactToastify.css';
-import {toast, ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 function Users() {
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -75,10 +75,10 @@ function Users() {
             .then(() => {
                 openAddModal();
                 getUsers();
-                toast.success("User muvaffaqiyatli qo'shildi✔");
+                toast.success("User successfully added✔");
             })
             .catch(() => {
-                toast.error("User qo'shishda xatolik yuz berdi!")
+                toast.error("Something went wrong❓")
             })
     }
 
@@ -97,10 +97,10 @@ function Users() {
             .then(() => {
                 openEditModal();
                 getUsers();
-                toast.success("Userning ma'lumotlari o'zgartirildi✔");
+                toast.success("User information has been changed✔");
             })
             .catch(() => {
-                toast.error("User o'zgartirishda xatolik yuz berdi!")
+                toast.error("Something went wrong❓")
             })
     }
 
@@ -110,10 +110,10 @@ function Users() {
             .then(() => {
                 openDeleteModal();
                 getUsers();
-                toast.success("Userning ma'lumotlari o'zchirildi!!!");
+                toast.success("User successfully deleted!!!");
             })
             .catch(() => {
-                toast.error("User o'chirilmadi xatolik yuz berdi!");
+                toast.error("Something went wrong❓")
             })
     }
 
@@ -134,15 +134,17 @@ function Users() {
             giveCoin.set('coin', coin);
             giveCoin.set('description', description);
             axios.post(api + 'user/give-coin', giveCoin, config)
-                .then(() => toast.success('coin muaffaqiyatli qushildi'))
-                .catch(() => toast.error('malumotlar tugri tuldirilmagan'));
+                .then(() => toast.success('Coin successfully minted✔'))
+                .catch(() => {
+                    toast.error("Something went wrong❓")
+                })
             openCoinModal();
-        } else toast.warning('barcha malumotlar tuldirrilmagan!');
+        } else toast.warning('Not all information is filled❗❗');
     }
 
     return (
         <>
-            <ToastContainer/>
+            <ToastContainer />
             <SimpleGrid color={textColorPrimary} pt="100px">
                 <Box
                     display="flex"
@@ -231,8 +233,8 @@ function Users() {
                             <option key={i} value={item.id}>{item.firstName}</option>
                         )}
                     </select>
-                    <Input type="number" id="coin" placeholder="number of coins"/>
-                    <Input id="description" placeholder="description"/>
+                    <Input type="number" id="coin" placeholder="number of coins" />
+                    <Input id="description" placeholder="description" />
                 </ModalBody>
                 <ModalFooter>
                     <Button
@@ -252,11 +254,11 @@ function Users() {
                     toggle={openAddModal}
                     className="text-dark fs-4 fw-bolder">Add Users</ModalHeader>
                 <ModalBody className="techer__modal-body">
-                    <Input id="firstName" placeholder="firstName"/>
-                    <Input id="lastName" placeholder="lastName"/>
-                    <Input type="email" id="email" placeholder="email"/>
-                    <Input type="password" id="password" placeholder="password"/>
-                    <Input type="number" id="phoneNumber" placeholder="phoneNumber"/>
+                    <Input id="firstName" placeholder="firstName" />
+                    <Input id="lastName" placeholder="lastName" />
+                    <Input type="email" id="email" placeholder="email" />
+                    <Input type="password" id="password" placeholder="password" />
+                    <Input type="number" id="phoneNumber" placeholder="phoneNumber" />
                     <select id="groupId" className="form-select">
                         <option selected disabled>groupName</option>
                         {groupSelect.length && groupSelect.map((item, i) =>
@@ -289,14 +291,14 @@ function Users() {
                     Editing data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-body">
                     <Input id="firstName" placeholder="firstName"
-                           defaultValue={userGetId && userGetId.firstName}/>
+                        defaultValue={userGetId && userGetId.firstName} />
                     <Input id="lastName" placeholder="lastName"
-                           defaultValue={userGetId && userGetId.lastName}/>
+                        defaultValue={userGetId && userGetId.lastName} />
                     <Input type="email" id="email" placeholder="email"
-                           defaultValue={userGetId && userGetId.email}/>
-                    <Input type="password" id="password" placeholder="password"/>
+                        defaultValue={userGetId && userGetId.email} />
+                    <Input type="password" id="password" placeholder="password" />
                     <Input type="number" id="phoneNumber" placeholder="phoneNumber"
-                           defaultValue={userGetId && userGetId.phoneNumber}/>
+                        defaultValue={userGetId && userGetId.phoneNumber} />
                     <select id="groupId" className="form-select">
                         <option selected disabled>{userGetId.groupName}</option>
                         {groupSelect.length && groupSelect.map((item, i) =>
@@ -306,7 +308,7 @@ function Users() {
                     <select className="form-select" id="gender">
                         <option selected disabled>{userGetId.gender}</option>
                         <option value="MALE">MALE</option>
-                        <option value="FMALE">FMALE</option>
+                        <option value="FMALE">FEMALE</option>
                     </select>
                 </ModalBody>
                 <ModalFooter>
@@ -328,8 +330,8 @@ function Users() {
                     className="text-dark fs-4 fw-bolder">
                     Delete data of ({userGetId.firstName} {userGetId.lastName})</ModalHeader>
                 <ModalBody className="techer__modal-delete">
-                    Siz {userGetId.firstName} {userGetId.lastName} ma'lumotlarini o'chirib yubormoqchisiz.
-                    Bunga ishonchingiz komilmi?
+                You want to delete {userGetId.firstName} {userGetId.lastName}.
+                     Are you sure about that?
                 </ModalBody>
                 <ModalFooter>
                     <Button

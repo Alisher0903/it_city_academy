@@ -31,6 +31,9 @@ export function getGroup(setGroup) {
                 for (const teacher of t.data.body) if (teacher.id === id) return teacher.firstName;
             }
         })
+        .catch((err) => {
+            console.log(err);
+            });
 }
 
 // User

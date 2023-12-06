@@ -61,14 +61,14 @@ export default function Marketplace() {
             .then(() => {
                 openAddModal();
                 getCategory(setCategory);
-                toast.success("Categorya muvaffaqiyatli qo'shildi✔");
+                toast.success("Category successfully added✔");
             }).catch(err => {
                 if (err.response.status === 409) toast.warning(err.response.data.message)
             })
     }
 
     return (
-        <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
+        <Box pt={{base: "140px", md: "40px", xl: "40px"}}>
             <ToastContainer/>
             <Grid
                 mb='20px'
@@ -86,7 +86,7 @@ export default function Marketplace() {
                             direction={{base: "column", md: "row"}}
                             align={{base: "start", md: "center"}}>
                             <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
-                                Category
+                            Categories
                             </Text>
                             <Flex
                                 align='center'
