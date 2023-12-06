@@ -3,21 +3,24 @@ import {Box, Flex, Text, useColorModeValue} from "@chakra-ui/react";
 // Custom components
 import Card from "components/card/Card.js";
 import PieChart from "components/charts/PieChart";
-import {pieChartData, pieChartOptions} from "variables/charts";
+import {pieChartOptions} from "variables/charts";
 import {VSeparator} from "components/separator/Separator";
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 export default function Conversion(props) {
     const {...rest} = props;
 
-    const [gender, setGender] = useState({male: 80, female: 20});
-
-    useEffect(() => {
+    const genderDiagram = () => {
         let full = rest.genders.MALE + rest.genders.FEMALE;
         let male = (rest.genders.MALE * 100) / isNaN(full) ? full : 100;
         let female = 100 - male;
-        setGender({male: male, female: female});
-    }, []);
+        return <PieChart
+            h='100%'
+            w='100%'
+            chartData={[male, female]}
+            chartOptions={pieChartOptions}
+        />
+    }
 
     // Chakra Color Mode
     const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -48,13 +51,8 @@ export default function Conversion(props) {
           <option value='yearly'>Yearly</option>
         </Select> */}
             </Flex>
-
-            <PieChart
-                h='100%'
-                w='100%'
-                chartData={[gender.male, gender.female]}
-                chartOptions={pieChartOptions}
-            />
+            {/*PieChart*/}
+            {genderDiagram()}
             <Card
                 bg={cardColor}
                 flexDirection='row'

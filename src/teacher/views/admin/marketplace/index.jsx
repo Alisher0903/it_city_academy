@@ -41,8 +41,9 @@ export default function Marketplace() {
     const getTeacherCategoryId = () => {
         axios.get(api + "category/teacher/by/category", config)
             .then(res => setTeacherCategorySelect(res.data.body))
-            .catch(() => {})
-        }
+            .catch(() => {
+            })
+    }
 
     // add
     const addTeacherCategory = async () => {
@@ -60,7 +61,8 @@ export default function Marketplace() {
                 .then(res => {
                     addData.attachmentId = res.data.body
                 })
-                .catch(() => {})
+                .catch(() => {
+                })
         await axios.post(api + "category/save", addData, config)
             .then(() => {
                 openAddModal();
@@ -82,13 +84,14 @@ export default function Marketplace() {
             programmingLanguage: byIdIn("programmingLanguage").value
         }
 
-        if (img.get('file') !== 'un          defined')
+        if (img.get('file') !== 'undefined')
             await axios.post(api + "attachment/upload", img, config)
                 .then(res => {
                     editData.attachmentId = res.data.body
                 })
                 .catch(() => {
                 })
+
         await axios.put(api + "category/update/" + teacherCategoryId.id, editData, config)
             .then(() => {
                 openEditModal();
@@ -96,8 +99,7 @@ export default function Marketplace() {
                 toast.success("Category muvaffaqiyatli qo'shildi")
             })
             .catch(() => {
-            })
-
+            });
     }
 
     // delete
