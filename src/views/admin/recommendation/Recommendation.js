@@ -10,28 +10,67 @@ import {getCategory} from "../../../api/routers";
 
 function Recommendation() {
     const [categorySelect, setCategorySelect] = useState([]);
+    const [courseGet, setCourseGet] = useState([]);
+    const [courseIdIn, setCourseIdIn] = useState([]);
     const [addModal, setAddModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
 
     useEffect(() => {
-        getCategory(setCategorySelect)
+        getCategory(setCategorySelect);
+        getCourse();
     }, []);
 
     const openAddModal = () => setAddModal(!addModal);
+    const openEditModal = () => setEditModal(!editModal);
 
-    // addCoin
-    const addCoin = () => {
+    // getCourse
+    const getCourse = () => {
+        axios.get(api + "offerCourse", config)
+            .then(res => setCourseGet(res.data.body))
+            .catch(() => {
+                toast.error("The recommendation score is not included!!!")
+            })
+    }
+
+    // addCourse
+    const addCourse = () => {
         let courseId = byIdIn("courseId").value;
         let coin = byIdIn("coin").value;
         if (courseId !== "undefined" && coin !== "undefined") {
-            let coinAdd = new FormData();
-            coinAdd.set("courseId", courseId);
-            coinAdd.set("coin", coin);
-            axios.post(api + "offerCourse", coinAdd, config)
-                .then(() => toast.success('coin muaffaqiyatli qushildi'))
+            let coinAddPlus = new FormData();
+            coinAddPlus.append("courseId", courseId);
+            coinAddPlus.append("coin", coin);
+            axios.post(api + "offerCourse", coinAddPlus, config)
+                .then(() => {
+                    toast.success('coin muaffaqiyatli qushildi');
+                    getCourse();
+                })
                 .catch(() => toast.error('malumotlar tugri tuldirilmagan'));
             openAddModal();
         } else toast.warning('barcha malumotlar tuldirilmagan!');
     }
+
+    // editCourse
+    const editCourse = () => {
+        let id = courseIdIn.ID;
+        let coin = byIdIn("coin").value;
+        if (id !== "undefined" && coin !== "undefined") {
+            let coinEdit = new FormData();
+            coinEdit.append("id", id);
+            coinEdit.append("coin", coin);
+            axios.post(api + "offerCourse/" + courseIdIn.ID, coinEdit, config)
+                .then(() => {
+                    toast.success('coin muaffaqiyatli taxrirlandi');
+                    getCourse();
+                })
+                .catch(() => {
+                    toast.error('malumotlar tugri tuldirilmagan');
+                    console.log(coinEdit)
+                });
+            openEditModal();
+        } else toast.warning('barcha malumotlar tuldirilmagan!');
+    }
+    console.log(courseIdIn.ID)
 
     return (<>
         <ToastContainer/>
@@ -39,7 +78,7 @@ function Recommendation() {
         <Modal isOpen={addModal} centered size="lg">
             <ModalHeader toggle={openAddModal} className="techer__modal-head">Add Recommendation</ModalHeader>
             <ModalBody className="techer__modal-body">
-                <Input type="number" placeholder="coin"/>
+                <Input type="number" id="coin" placeholder="coin"/>
                 <select id="courseId" className="form-select">
                     <option selected disabled>courseId select</option>
                     {categorySelect && categorySelect.map((item, i) =>
@@ -53,7 +92,30 @@ function Recommendation() {
                     colorScheme="facebook"
                     boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px">Close</Button>
                 <Button
-                    // onClick={addCoin}
+                    onClick={addCourse}
+                    colorScheme="green"
+                    boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px">Save</Button>
+            </ModalFooter>
+        </Modal>
+        {/*editCourseModal*/}
+        <Modal isOpen={editModal} centered size="lg">
+            <ModalHeader toggle={openEditModal} className="techer__modal-head">Edit Recommendation</ModalHeader>
+            <ModalBody className="techer__modal-body">
+                <Input type="number" id="coin" placeholder="coin" defaultValue={courseIdIn["COIN "]}/>
+                <select id="courseId" className="form-select">
+                    <option selected disabled>{courseIdIn["CATEGORY "]}</option>
+                    {/*{categorySelect && categorySelect.map((item, i) =>*/}
+                    {/*    <option key={i} value={item.id}>{item.name}</option>*/}
+                    {/*)}*/}
+                </select>
+            </ModalBody>
+            <ModalFooter className="techer__modal-footer">
+                <Button
+                    onClick={openEditModal}
+                    colorScheme="facebook"
+                    boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px">Close</Button>
+                <Button
+                    onClick={editCourse}
                     colorScheme="green"
                     boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px">Save</Button>
             </ModalFooter>
@@ -74,18 +136,29 @@ function Recommendation() {
                     boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px">Add</Button>
             </Text>
             <Row className="pt-3">
-                <Col className="col-12 col-md-6">
-                    <Text
-                        display="flex"
-                        justifyContent="space-between"
-                        boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
-                        borderRadius="20px"
-                        mb="15px"
-                        p="20px">
-                        Java
-                        <Icon as={MdEdit} w="20px" h="20px" cursor="pointer"/>
-                    </Text>
-                </Col>
+                {courseGet && courseGet.map((item, i) =>
+                    <Col key={i} className="col-12 col-md-6">
+                        <Text
+                            display="flex"
+                            justifyContent="space-between"
+                            boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
+                            borderRadius="20px"
+                            mb="15px"
+                            p="20px">
+                            {/*{item.CATEGORY}: {item.COIN}*/}
+                            <p>{`${item['CATEGORY ']}: ${item['COIN ']}`}</p>
+                            <Icon
+                                onClick={() => {
+                                    setCourseIdIn(item);
+                                    openEditModal();
+                                }}
+                                as={MdEdit}
+                                w="20px"
+                                h="20px"
+                                cursor="pointer"/>
+                        </Text>
+                    </Col>
+                )}
             </Row>
         </Card>
     </>);
