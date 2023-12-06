@@ -187,7 +187,7 @@ export default function NFT(props) {
                                 Category</ModalHeader>
                             <ModalBody className="group__modal-body">
                                 <Input type="file" id="categoryImg"/>
-                                <Input type="text" id="categoryTitle" placeholder="name"/>
+                                <Input type="text" id="categoryTitle" placeholder="name" value={categoryIdIn.name}/>
                             </ModalBody>
                             <ModalFooter>
                                 <Button onClick={openEditModal} color="dark" outline>Back</Button>
