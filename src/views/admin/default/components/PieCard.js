@@ -29,6 +29,7 @@ export default function Conversion(props) {
         "0px 18px 40px rgba(112, 144, 176, 0.12)",
         "unset"
     );
+
     return (
         <Card p='20px' align='center' direction='column' w='100%' {...rest}>
             <Flex
